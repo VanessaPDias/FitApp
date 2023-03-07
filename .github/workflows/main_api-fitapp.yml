@@ -28,6 +28,15 @@ jobs:
         env:
           host: "api-fitapp.azurewebsites.net"
 
+      - name: Substitute String
+        uses: bluwy/substitute-string-action@v2
+        with:
+          _input-file: 'api/configuracoes.js'
+          localhost: 'samplehost'
+          fitapp_user: 'sampleuser'
+          4542: '11111111'
+          db_fitapp: 'sample_db'
+
       - name: npm install, build, and test
         run: |
           cd api
