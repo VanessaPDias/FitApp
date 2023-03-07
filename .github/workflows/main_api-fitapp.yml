@@ -27,28 +27,15 @@ jobs:
           files: 'api/swagger.json'
         env:
           host: "api-fitapp.azurewebsites.net"
-
-      - name: Replace database host
-        uses: MathieuSoysal/replace-string-in-file@v1.0.0
+      
+      - name: Replace multiple strings in files
+        uses: flcdrg/replace-multiple-action@v1.0.143
         with:
-          file: 'api/configuracoes.js'
-          old-string: 'localhost'
-          new-string: 'db-fitapp.mysql.database.azure.com'
-          
-      - name: Replace database user
-        uses: MathieuSoysal/replace-string-in-file@v1.0.0
-        with:
-          file: 'api/configuracoes.js'
-          old-string: 'fitapp_user'
-          new-string: 'db_fitapp_admin'
-          
-      - name: Replace database password
-        uses: MathieuSoysal/replace-string-in-file@v1.0.0
-        with:
-          file: 'api/configuracoes.js'
-          old-string: '4542'
-          new-string: 'zK8a8bDU7C5D'
-          
+          # Globbing pattern to match files to search
+          files: 'api/configuracoes.js'
+          # JSON array of strings to find and replacements
+          find: '[{ "find": "localhost", "replace": "db-fitapp.mysql.database.azure.com" }, { "find": "fitapp_user", "replace": "db_fitapp_admin" },  { "find": "4542", "replace": "zK8a8bDU7C5D" }]'
+      
       - name: npm install, build, and test
         run: |
           cd api
