@@ -28,21 +28,21 @@ jobs:
         env:
           host: "api-fitapp.azurewebsites.net"
 
-      - name: Simple replace string in file
+      - name: Replace database host
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
           file: 'api/configuracoes.js'
           old-string: 'localhost'
           new-string: 'db-fitapp.mysql.database.azure.com'
           
-      - name: Simple replace string in file
+      - name: Replace database user
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
           file: 'api/configuracoes.js'
           old-string: 'fitapp_user'
           new-string: 'db_fitapp_admin'
           
-      - name: Simple replace string in file
+      - name: Replace database password
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
           file: 'api/configuracoes.js'
