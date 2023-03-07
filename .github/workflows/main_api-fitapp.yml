@@ -28,15 +28,13 @@ jobs:
         env:
           host: "api-fitapp.azurewebsites.net"
 
-      - name: Substitute String
-        uses: bluwy/substitute-string-action@v2
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v3
         with:
-          _input-file: 'api/configuracoes.js'
-          localhost: 'samplehost'
-          fitapp_user: 'sampleuser'
-          4542: '11111111'
-          db_fitapp: 'sample_db'
-
+          include: 'api/configuracoes.js'
+          find: 'localhost'
+          replace: 'banana'
+          
       - name: npm install, build, and test
         run: |
           cd api
