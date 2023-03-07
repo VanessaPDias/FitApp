@@ -33,7 +33,21 @@ jobs:
         with:
           file: 'api/configuracoes.js'
           old-string: 'localhost'
-          new-string: 'banana'
+          new-string: 'db-fitapp.mysql.database.azure.com'
+          
+      - name: Simple replace string in file
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
+        with:
+          file: 'api/configuracoes.js'
+          old-string: 'fitapp_user'
+          new-string: 'db_fitapp_admin'
+          
+      - name: Simple replace string in file
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
+        with:
+          file: 'api/configuracoes.js'
+          old-string: '4542'
+          new-string: 'zK8a8bDU7C5D'
           
       - name: npm install, build, and test
         run: |
