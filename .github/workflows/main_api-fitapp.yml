@@ -28,12 +28,12 @@ jobs:
         env:
           host: "api-fitapp.azurewebsites.net"
 
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@v3
+      - name: Simple replace string in file
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          include: 'api/configuracoes.js'
-          find: 'localhost'
-          replace: 'banana'
+          file: 'api/configuracoes.js'
+          old-string: 'localhost'
+          new-string: 'banana'
           
       - name: npm install, build, and test
         run: |
