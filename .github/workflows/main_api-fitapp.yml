@@ -35,6 +35,8 @@ jobs:
           files: 'api/configuracoes.js'
           # JSON array of strings to find and replacements
           find: '[{ "find": "localhost", "replace": "db-fitapp.mysql.database.azure.com" }, { "find": "fitapp_user", "replace": "db_fitapp_admin" },  { "find": "4542", "replace": "zK8a8bDU7C5D" }]'
+          prefix: ''
+          suffix: ''
       
       - name: npm install, build, and test
         run: |
