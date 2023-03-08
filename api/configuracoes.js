@@ -1,8 +1,9 @@
 const baseDeDados = {
-    host: 'localhost',
-    user: 'fitapp_user',
-    password: '4542',
-    database: 'db_fitapp'
+    host: 'db-fitapp.mysql.database.azure.com',
+    user: 'db_fitapp_admin',
+    password: 'zK8a8bDU7C5D',
+    database: 'db_fitapp',
+    certificado: '/DigiCertGlobalRootCA.crt.pem'
 };
 
 module.exports = baseDeDados

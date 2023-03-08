@@ -1,4 +1,5 @@
 const mySql = require('mysql2/promise');
+const fs = require('fs');
 const bluebird = require('bluebird');
 const configuracoes = require('./configuracoes');
 
@@ -8,6 +9,9 @@ async function abrirConexao () {
         user: configuracoes.user,
         password: configuracoes.password,
         database: configuracoes.database,
+        ssl: {
+            ca: fs.readFileSync(__dirname + configuracoes.certificado),
+        },
         Promise: bluebird
     });
 

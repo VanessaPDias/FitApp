@@ -1,9 +1,9 @@
-CREATE DATABASE  IF NOT EXISTS `db_fitapp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `db_fitapp` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 USE `db_fitapp`;
 
-CREATE USER IF NOT EXISTS 'fitapp_user'@'localhost' IDENTIFIED BY '4542';
-GRANT ALL PRIVILEGES ON `db_fitapp`.* TO 'fitapp_user'@'localhost';
+CREATE USER IF NOT EXISTS 'fitapp_user'@'db-fitapp.mysql.database.azure.com' IDENTIFIED BY '4542';
+GRANT ALL PRIVILEGES ON `db_fitapp`.* TO 'fitapp_user'@'db-fitapp.mysql.database.azure.com';
 FLUSH PRIVILEGES; 
 
 CREATE TABLE  IF NOT EXISTS `usuarios` (

@@ -4,7 +4,6 @@ const servidor = require('./servidor');
 const autenticacaoMiddleware = require('./middlewares/autenticacaoMiddleware');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
-const tratamentoDeErrosMiddleware = require('./middlewares/tratamentoDeErrosMiddleware')
 const esqueciMinhaSenhaController = require('./controllers/esqueciMinhaSenhaController');
 const loginController = require('./controllers/loginController');
 const usuariosController = require('./controllers/usuariosController');
@@ -116,10 +115,6 @@ servidor.app.get('/assinante/dietas', autorizacao.autorizar(model.perfil.assinan
 servidor.app.get('/assinante/dietas/:idDieta', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDietaPorId));
 servidor.app.get('/assinante/treinos', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarTreinos));
 servidor.app.get('/assinante/treino/:idTreino', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarTreinoPorId));
-
-
-
-// servidor.app.use(tratamentoDeErrosMiddleware.tratarErros);
 
 async function tratarErros(req, res, action) {
     try {
