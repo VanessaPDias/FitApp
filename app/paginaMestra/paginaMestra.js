@@ -17,13 +17,15 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     //encontra o titulo da pagina mestra e concatena o titulo que veio como parametro na funcao
     paginaMestraHtml.querySelector("title").innerHTML = "FitApp - " + titulo;
 
-    const usuario = seguranca.pegarUsuarioDoToken();
 
     // adiciona o nome do usuario no cabeçalho
-    paginaMestraHtml.querySelector("#cabecalho-nome").innerHTML = usuario.nome;
+    paginaMestraHtml.querySelector("#cabecalho-nome").innerHTML = seguranca.pegarNomeDoUsuario();
 
-    if (seguranca.pegarImagemDoUsuario()) {
-    paginaMestraHtml.querySelector("#cabecalho-imagem-perfil").src = `${configuracoes.urlDaApi}/` + usuario.imagem;
+    
+    const imagem = seguranca.pegarImagemDoUsuario();
+
+    if (imagem) {
+    paginaMestraHtml.querySelector("#cabecalho-imagem-perfil").src = `${configuracoes.urlDaApi}/` + imagem;
     }
 
     //coloca o conteudo da pagina interna dentro da tag <main> da pagina mestra
@@ -36,6 +38,8 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     document.documentElement.innerHTML = paginaMestraHtml.documentElement.innerHTML;    
 
     document.querySelector("#cabecalho-sair").onclick = fazerLogout;
+
+    const usuario = seguranca.pegarUsuarioDoToken();
 
     configurarPaginaMestraPorPerfil(usuario.perfil);
 }
