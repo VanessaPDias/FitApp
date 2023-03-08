@@ -1,6 +1,8 @@
 const sendGrid = require('@sendgrid/mail');
 
 function enviar(para, assunto, texto) {
+    console.log('CHAVESENDGRID:' + process.env.SENDGRID_API_KEY);
+    
     sendGrid.setApiKey(process.env.SENDGRID_API_KEY);
     let mensagem = {
         to: para,
@@ -9,15 +11,15 @@ function enviar(para, assunto, texto) {
         html: texto        
     };
 
-    // sendGrid
-    // .send(mensagem)
-    // .then(() => {}, error => {
-    //     console.error(error);
+    sendGrid
+    .send(mensagem)
+    .then(() => {}, error => {
+        console.error(error);
 
-    //     if(error.response) {
-    //         console.error(error.response.body)
-    //     }
-    // });
+        if(error.response) {
+            console.error(error.response.body)
+        }
+    });
 }
 
 module.exports = {
