@@ -55,6 +55,7 @@ async function cadastrarAssinante(req, res) {
         repositorioDeMensagens.salvarMensagem(new Mensagem.Mensagem(admin.idUsuario, admin.login, nutriEncontrado.idNutri, nutriEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
         repositorioDeMensagens.salvarMensagem(new Mensagem.Mensagem(admin.idUsuario, admin.login, personalEncontrado.idPersonal, personalEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
        
+
         res.send({
             idAssinante: novoAssinante.idAssinante
         });
