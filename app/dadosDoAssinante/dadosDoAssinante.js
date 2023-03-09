@@ -52,10 +52,10 @@ async function buscarDadosDoAssinante(idAssinante) {
         document.querySelector("#nome-assinante").innerHTML = resposta.nome;
         document.querySelector("#email-assinante").innerHTML = resposta.email;
         document.querySelector("#status-assinante").innerHTML = status;
-        document.querySelector("#nome-plano").innerHTML = resposta.nomePlano;
-        document.querySelector("#valor-plano").innerHTML = resposta.valor;
-        document.querySelector("#data-inicio").innerHTML = new Date(resposta.dataInicio).toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' });
-        document.querySelector("#data-fim").innerHTML = new Date(resposta.dataFim).toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' });
+        // document.querySelector("#nome-plano").innerHTML = resposta.nomePlano;
+        // document.querySelector("#valor-plano").innerHTML = resposta.valor;
+        // document.querySelector("#data-inicio").innerHTML = new Date(resposta.dataInicio).toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' });
+        // document.querySelector("#data-fim").innerHTML = new Date(resposta.dataFim).toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' });
 
 
     } catch (error) {
