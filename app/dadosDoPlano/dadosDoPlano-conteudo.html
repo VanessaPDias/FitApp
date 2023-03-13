@@ -1,0 +1,75 @@
+<div>
+    <div class="row py-2">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body row">
+                    <h6 style="color:  #FED233;" class="card-title pb-2">Dados do Plano</h6>
+
+                    <form class="row" id="formulario-perfil">
+                        <div class="col-md-6 pt-3">
+                            <label class="form-label fw-semibold" for="nome-plano">Nome</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="text" id="nome-plano" name="nome-plano" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-3">
+                            <label class="form-label fw-semibold" for="valor-plano">Valor</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="number" id="valor-plano" name="valor-plano" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-3">
+                            <label class="form-label fw-semibold" for="status-plano">Status</label>
+                            <div class="input-group input-group-sm">
+                                <select class="form-select" id="status-plano" required>
+                                    <option value="false">Ativo</option>
+                                    <option value="true">Inativo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-3">
+                            <label class="form-label fw-semibold" for="duracao-plano">Duração</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="number" id="duracao-plano" name="duracao-plano">
+                            </div>
+                        </div>
+                        <div class="col-12 pt-3">
+                            <label class="form-label fw-semibold" for="descricao-plano">Descricão</label>
+                            <div class="input-group input-group-sm">
+                                <textarea class="form-control" aria-label="With textarea" id="descricao-plano"
+                                    required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 pt-3 text-end">
+                            <a href="../planos/planos.html" class="btn btn-light"
+                                style="background-color: #FED233;">Voltar</a>
+
+                            <button type="submit" id="btn-alterar-dados-do-plano" class="btn btn-light"
+                                style="background-color: #FED233;">Alterar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="modal-salvar-alteracao" tabindex="-1" aria-labelledby="modal-salvar-alteracao-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-salvar-alteracao-label">Alterar Plano</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja alterar o plano?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-do-plano" type="button" class="btn btn-light"
+                    style="background-color: #FED233;">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>

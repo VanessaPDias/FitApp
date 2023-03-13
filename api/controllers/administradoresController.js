@@ -97,7 +97,8 @@ async function alterarDadosDoPlano(req, res) {
         return;
     }
 
-    await repositorioDePlanos.salvarAlteracaoDeDados(req.params.idPlano, req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.bloqueado);
+    const bloqueado = req.body.bloqueado == 'true' ? true : false;
+    await repositorioDePlanos.salvarAlteracaoDeDados(req.params.idPlano, req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, bloqueado);
 
     res.send();
 

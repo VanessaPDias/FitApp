@@ -56,7 +56,7 @@ function configurarPaginaMestraPorPerfil(perfil) {
             home: "/dashboard/dashboard.html",
             menuLateral: [
                 { nome: "Início", icone: "bi-house-door", link: "/dashboard/dashboard.html" },
-                { nome: "Medidas", icone: "bi-rulers", link: "/medidas/medidas.html" },
+                { nome: "Medidas", icone: "bi-universal-access", link: "/medidas/medidas.html" },
                 { nome: "Relatórios", icone: "bi-clipboard-data", link: "/historicoDeMedidasAssinante/historicoDeMedidasAssinante.html" }
             ],
             menuCabecalho: [
@@ -68,6 +68,10 @@ function configurarPaginaMestraPorPerfil(perfil) {
             home: "/assinantes/assinantes.html",
             menuLateral: [
                 { nome: "Assinantes", icone: "bi-people", link: "/assinantes/assinantes.html" },
+                { nome: "Nutricionistas", icone: "bi-people", link: "/assinantes/assinantes.html" },
+                { nome: "Personal Trainers", icone: "bi-people", link: "/assinantes/assinantes.html" },
+                { nome: "Planos", icone: "bi-card-checklist", link: "/planos/planos.html" },
+                { nome: "Mensagens", icone: "bi-envelope", link: "/assinantes/assinantes.html" },
             ]
         }
     ];
