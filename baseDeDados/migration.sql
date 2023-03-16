@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `db_fitapp` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `db_fitapp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 USE `db_fitapp`;
 
-CREATE USER IF NOT EXISTS 'fitapp_user'@'db-fitapp.mysql.database.azure.com' IDENTIFIED BY '4542';
-GRANT ALL PRIVILEGES ON `db_fitapp`.* TO 'fitapp_user'@'db-fitapp.mysql.database.azure.com';
-FLUSH PRIVILEGES; 
+-- CREATE USER IF NOT EXISTS 'fitapp_user'@'db-fitapp.mysql.database.azure.com' IDENTIFIED BY '4542';
+-- GRANT ALL PRIVILEGES ON `db_fitapp`.* TO 'fitapp_user'@'db-fitapp.mysql.database.azure.com';
+-- FLUSH PRIVILEGES; 
 
 CREATE TABLE  IF NOT EXISTS `usuarios` (
   `idUsuario` varchar(36) NOT NULL, 
@@ -25,6 +25,7 @@ CREATE TABLE  IF NOT EXISTS `nutricionistas` (
   `telefone` varchar(36) NOT NULL,
   `registroProfissional` varchar(30) NOT NULL,
   `sobreMim` varchar(256) DEFAULT NULL,
+  `cadastroConfirmado` int NOT NULL,
   PRIMARY KEY (`idNutri`),
   CONSTRAINT `fk_nutricionista_idUsuario` FOREIGN KEY (`idNutri`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -36,6 +37,7 @@ CREATE TABLE  IF NOT EXISTS `personal_trainers` (
   `telefone` varchar(36) NOT NULL,
   `registroProfissional` varchar(30) NOT NULL,
   `sobreMim` varchar(256) DEFAULT NULL,
+   `cadastroConfirmado` int NOT NULL,
   PRIMARY KEY (`idPersonal`),
   CONSTRAINT `fk_personal_idUsuario` FOREIGN KEY (`idPersonal`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

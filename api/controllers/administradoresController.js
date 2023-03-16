@@ -1,5 +1,3 @@
-const Nutricionista = require('../model/nutricionista');
-const Personal = require('../model/personalTrainer');
 const Plano = require('../model/plano');
 const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
@@ -15,7 +13,7 @@ async function cadastrarPlano(req, res) {
     // #swagger.description = 'endpoint para cadastrar um Plano.'
 
     const novoPlano = new Plano.Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao);
-    
+
     const planoEncontrado = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(novoPlano.idPlano, novoPlano.nome);
 
     if (!planoEncontrado) {
@@ -38,8 +36,8 @@ async function buscarPlanos(req, res) {
 
     const planos = await repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
 
-    if (!planos || planos <= 0) {
-        res.status(400).send({ erro: "Plano não encontrado" });
+    if (!planos || planos.length <= 0) {
+        res.send([]);
         return;
     }
 
@@ -104,38 +102,24 @@ async function alterarDadosDoPlano(req, res) {
 
 }
 
-// O administrador cadastra Nutricionista
-async function cadastrarNutricionista(req, res) {
-    // #swagger.tags = ['Administrador']
-    // #swagger.description = 'endpoint para cadastrar Nutricionista.'
-
-    const novoNutricionista = new Nutricionista.Nutricionista(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
-    
-    const nutriEncontrado = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(novoNutricionista.idNutri, novoNutricionista.email);
-
-    if (!nutriEncontrado) {
-
-        await repositorioDeNutricionistas.criarNutricionista(novoNutricionista);
-
-        servicoDeEmail.enviar(novoNutricionista.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoNutricionista.nome, novoNutricionista.usuario.senha));
-
-        res.send({
-            idNutri: novoNutricionista.idNutri
-        });
-    } else {
-        res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
-    }
-}
-
-// O administrador buscar todos os nutricionistas ou filtra pelo nome
+// O administrador buscar todos nutricionistas cadastrados ou por filtro
 async function buscarNutricionistas(req, res) {
     // #swagger.tags = ['Administrador']
-    // #swagger.description = 'endpoint para buscar Nutricionistas cadastrados - todos ou por nome.'
+    // #swagger.description = 'endpoint para buscar Nutricionistas cadastrados ou por filtro.'
 
-    const nutricionistas = await repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome);
+    let bloqueado;
+
+    if (req.query.bloqueado == 'true') {
+        bloqueado = true;
+    } else if (req.query.bloqueado == 'false') {
+        bloqueado = false;
+    }
+
+
+    const nutricionistas = await repositorioDeNutricionistas.buscarNutricionistasPorFiltro(req.query.nome, bloqueado, req.query.cadastroConfirmado);
 
     if (!nutricionistas || nutricionistas.length <= 0) {
-        res.status(400).send({ erro: "Nutricionista não encontrado" });
+        res.send([]);
         return;
     }
 
@@ -144,8 +128,7 @@ async function buscarNutricionistas(req, res) {
             idNutri: nutri.idNutri,
             nome: nutri.nome,
             email: nutri.email,
-            telefone: nutri.telefone,
-            registro: nutri.registro,
+            cadastroConfirmado: nutri.cadastroConfirmado,
             bloqueado: Boolean(nutri.bloqueado)
         }
     }));
@@ -168,10 +151,11 @@ async function buscarNutriPorId(req, res) {
         nome: nutriEncontrado.nome,
         email: nutriEncontrado.email,
         telefone: nutriEncontrado.telefone,
-        registro: nutriEncontrado.registroProfissional,
+        registroProfissional: nutriEncontrado.registroProfissional,
         sobreMim: nutriEncontrado.sobreMim,
         imagem: nutriEncontrado.imagem,
-        bloqueado: Boolean(nutriEncontrado.bloqueado)
+        bloqueado: Boolean(nutriEncontrado.bloqueado),
+        cadastroConfirmado: nutriEncontrado.cadastroConfirmado
     });
 }
 
@@ -187,46 +171,16 @@ async function alterarDadosDoNutricionista(req, res) {
         return;
     }
 
-    const nutriComMesmoEmail = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(req.params.idNutri, req.body.email);
+    const bloqueado = req.body.bloqueado == 'true' ? true : false;
 
-    if (nutriComMesmoEmail) {
-        res.status(400).send({ erro: "Já existe Nutricionista cadastrado com esse email" });
-        return;
-    }
-
-    await repositorioDeNutricionistas.salvarAlteracaoDeDados(
+    await repositorioDeNutricionistas.salvarAlteracaoDeCadastro(
         req.params.idNutri,
-        req.body.nome,
-        req.body.email,
-        req.body.telefone,
         req.body.registroProfissional,
-        req.body.bloqueado
+        bloqueado,
+        req.body.cadastroConfirmado
     );
 
     res.send();
-}
-
-// O administrador cadastra personal trainer
-async function cadastrarPersonal(req, res) {
-    // #swagger.tags = ['Administrador']
-    // #swagger.description = 'endpoint para cadastrar Personal Trainer.'
-
-    const novoPersonal = new Personal.PersonalTrainer(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
-
-    const personalEncontrado = await repositorioDePersonalTrainers.verificarSePersonalJaTemCadastro(novoPersonal.idPersonal, novoPersonal.email);
-
-    if (!personalEncontrado) {
-
-        await repositorioDePersonalTrainers.criarPersonal(novoPersonal);
-
-        servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoPersonal.usuario.senha));
-
-        res.send({
-            idPersonal: novoPersonal.idPersonal
-        });
-    } else {
-        res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
-    }
 }
 
 // O administrador busca todos os personal trainers ou filtra por nome
@@ -234,10 +188,18 @@ async function buscarPersonalTrainers(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar Personal Trainer - todos ou por nome.'
 
-    const personalTrainers = await repositorioDePersonalTrainers.buscarPersonalTrainersPorFiltro(req.query.nome);
+    let bloqueado;
+
+    if (req.query.bloqueado == 'true') {
+        bloqueado = true;
+    } else if (req.query.bloqueado == 'false') {
+        bloqueado = false;
+    }
+
+    const personalTrainers = await repositorioDePersonalTrainers.buscarPersonalTrainersPorFiltro(req.query.nome, bloqueado, req.query.cadastroConfirmado);
 
     if (!personalTrainers || personalTrainers.length <= 0) {
-        res.status(400).send({ erro: "Personal Trainer não encontrado" });
+        res.send([]);
         return;
     }
 
@@ -246,8 +208,7 @@ async function buscarPersonalTrainers(req, res) {
             idPersonal: personal.idPersonal,
             nome: personal.nome,
             email: personal.email,
-            telefone: personal.telefone,
-            registro: personal.registro,
+            cadastroConfirmado: personal.cadastroConfirmado,
             bloqueado: Boolean(personal.bloqueado)
         }
     }));
@@ -270,10 +231,11 @@ async function buscarPersonalPorId(req, res) {
         nome: personalEncontrado.nome,
         email: personalEncontrado.email,
         telefone: personalEncontrado.telefone,
-        registro: personalEncontrado.registroProfissional,
+        registroProfissional: personalEncontrado.registroProfissional,
         sobreMim: personalEncontrado.sobreMim,
         imagem: personalEncontrado.imagem,
-        bloqueado: Boolean(personalEncontrado.bloqueado) 
+        bloqueado: Boolean(personalEncontrado.bloqueado),
+        cadastroConfirmado: personalEncontrado.cadastroConfirmado
     })
 }
 
@@ -289,20 +251,13 @@ async function alterarDadosDoPersonal(req, res) {
         return;
     }
 
-    const personalComMesmoEmail = await repositorioDePersonalTrainers.verificarSePersonalJaTemCadastro(req.params.idPersonal, req.body.email);
+    const bloqueado = req.body.bloqueado == 'true' ? true : false;
 
-    if (personalComMesmoEmail) {
-        res.status(400).send({ erro: "Já existe Personal Trainer cadastrado com esse email" });
-        return;
-    }
-
-    await repositorioDePersonalTrainers.salvarAlteracaoDeDados(
+    await repositorioDePersonalTrainers.salvarAlteracaoDeCadastro(
         req.params.idPersonal,
-        req.body.nome,
-        req.body.email,
-        req.body.telefone,
         req.body.registroProfissional,
-        req.body.bloqueado
+        bloqueado,
+        req.body.cadastroConfirmado
     );
 
     res.send();
@@ -347,7 +302,7 @@ async function buscarAssinantePorId(req, res) {
         idAssinante: assinanteEncontrado.idAssinante,
         nome: assinanteEncontrado.nome,
         email: assinanteEncontrado.email,
-        usuarioBloqueado: Boolean(assinanteEncontrado.usuarioBloqueado), 
+        usuarioBloqueado: Boolean(assinanteEncontrado.usuarioBloqueado),
         idAssinatura: assinanteEncontrado.idAssinatura,
         assinaturaBloqueada: Boolean(assinanteEncontrado.assinaturaBloqueada),
         dataInicio: assinanteEncontrado.dataInicio,
@@ -382,11 +337,9 @@ module.exports = {
     buscarPlanoPorId: buscarPlanoPorId,
     alterarDadosDoPlano: alterarDadosDoPlano,
     cadastrarPlano: cadastrarPlano,
-    cadastrarNutricionista: cadastrarNutricionista,
     buscarNutricionistas: buscarNutricionistas,
     buscarNutriPorId: buscarNutriPorId,
     alterarDadosDoNutricionista: alterarDadosDoNutricionista,
-    cadastrarPersonal: cadastrarPersonal,
     buscarPersonalTrainers: buscarPersonalTrainers,
     buscarPersonalPorId: buscarPersonalPorId,
     alterarDadosDoPersonal: alterarDadosDoPersonal,

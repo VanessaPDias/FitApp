@@ -31,12 +31,22 @@ function autenticar (req, res, next) {
         return;
     }
 
-    if(req.url.startsWith("/nutricionistas") && req.method == "GET") {
+    if(req.url == "/nutricionistas" && req.method == "GET") {
         next();
         return;
     }
 
-    if(req.url.startsWith("/personalTrainers") && req.method == "GET") {
+    if(req.url == "/nutricionistas" && req.method == "POST") {
+        next();
+        return;
+    }
+
+    if(req.url == "/personalTrainers" && req.method == "GET") {
+        next();
+        return;
+    }
+
+    if(req.url == "/personalTrainers" && req.method == "POST") {
         next();
         return;
     }

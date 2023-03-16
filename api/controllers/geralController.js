@@ -1,5 +1,7 @@
-const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const repositorioDePlanos = require('../repositorios/repositorioDePlanos');
+const Nutricionista = require('../model/nutricionista');
+const Personal = require('../model/personalTrainer');
+const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
 
 async function buscarPlanos(req, res) {
@@ -130,11 +132,58 @@ async function buscarPlanoPorId(req, res) {
     });
 }
 
+    
+async function cadastrarNutricionista(req, res) {
+    // #swagger.tags = ['geral']
+    // #swagger.description = 'endpoint para cadastrar Nutricionista.'
+
+    const novoNutricionista = new Nutricionista.Nutricionista(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
+    
+    const nutriEncontrado = await repositorioDeNutricionistas.verificarSeNutriJaTemCadastro(novoNutricionista.idNutri, novoNutricionista.email);
+
+    if (!nutriEncontrado) {
+
+        await repositorioDeNutricionistas.criarNutricionista(novoNutricionista);
+
+        //servicoDeEmail.enviar(novoNutricionista.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoNutricionista.nome, novoNutricionista.usuario.senha));
+
+        res.send({
+            idNutri: novoNutricionista.idNutri
+        });
+    } else {
+        res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
+    }
+}
+
+async function cadastrarPersonal(req, res) {
+    // #swagger.tags = ['Geral']
+    // #swagger.description = 'endpoint para cadastrar Personal Trainer.'
+
+    const novoPersonal = new Personal.PersonalTrainer(req.body.nome, req.body.email, req.body.telefone, req.body.registroProfissional);
+
+    const personalEncontrado = await repositorioDePersonalTrainers.verificarSePersonalJaTemCadastro(novoPersonal.idPersonal, novoPersonal.email);
+
+    if (!personalEncontrado) {
+
+        await repositorioDePersonalTrainers.criarPersonal(novoPersonal);
+
+        //servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoPersonal.usuario.senha));
+
+        res.send({
+            idPersonal: novoPersonal.idPersonal
+        });
+    } else {
+        res.status(400).send({ erro: "Esse e-mail já foi cadastrado" });
+    }
+}
+
 module.exports = {
     buscarPlanos: buscarPlanos,
     buscarNutricionistas: buscarNutricionistas,
     buscarPersonalTrainers: buscarPersonalTrainers,
     buscarNutriPorId: buscarNutriPorId,
     buscarPersonalPorId: buscarPersonalPorId,
-    buscarPlanoPorId: buscarPlanoPorId
+    buscarPlanoPorId: buscarPlanoPorId,
+    cadastrarNutricionista: cadastrarNutricionista,
+    cadastrarPersonal: cadastrarPersonal,
 }

@@ -36,9 +36,11 @@ servidor.app.post('/usuarios/imagem', async (req, res) => await tratarErros(req,
 servidor.app.get('/planos', async (req, res) => await tratarErros(req, res, geralController.buscarPlanos));
 servidor.app.get('/planos/:idPlano', async (req, res) => await tratarErros(req, res, geralController.buscarPlanoPorId));
 
+servidor.app.post('/nutricionistas', async (req, res) => await tratarErros(req, res, geralController.cadastrarNutricionista));
 servidor.app.get('/nutricionistas', async (req, res) => await tratarErros(req, res, geralController.buscarNutricionistas));
 servidor.app.get('/nutricionistas/:idNutri', async (req, res) => await tratarErros(req, res, geralController.buscarNutriPorId));
 
+servidor.app.post('/personalTrainers', async (req, res) => await tratarErros(req, res, geralController.cadastrarPersonal));
 servidor.app.get('/personalTrainers', async (req, res) => await tratarErros(req, res, geralController.buscarPersonalTrainers));
 servidor.app.get('/personalTrainers/:idPersonal', async (req, res) => await tratarErros(req, res, geralController.buscarPersonalPorId));
 
@@ -59,12 +61,12 @@ servidor.app.get('/admin/planos', autorizacao.autorizar(model.perfil.administrad
 servidor.app.get('/admin/planos/:idPlano', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarPlanoPorId));
 servidor.app.patch('/admin/planos/:idPlano', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.alterarDadosDoPlano));
 
-servidor.app.post('/admin/nutricionistas', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.cadastrarNutricionista));
+
 servidor.app.get('/admin/nutricionistas', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarNutricionistas));
 servidor.app.get('/admin/nutricionistas/:idNutri', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarNutriPorId));
 servidor.app.patch('/admin/nutricionistas/:idNutri', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.alterarDadosDoNutricionista));
 
-servidor.app.post('/admin/personalTrainers', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.cadastrarPersonal));
+
 servidor.app.get('/admin/personalTrainers', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarPersonalTrainers));
 servidor.app.get('/admin/personalTrainers/:idPersonal', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.buscarPersonalPorId));
 servidor.app.patch('/admin/personalTrainers/:idPersonal', autorizacao.autorizar(model.perfil.administrador), async (req, res) => await tratarErros(req, res, administradoresController.alterarDadosDoPersonal));

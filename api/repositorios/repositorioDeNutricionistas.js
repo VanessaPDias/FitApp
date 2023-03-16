@@ -10,7 +10,7 @@ async function buscarNutricionistasAtivos() {
                     usuario.imagem 
             from nutricionistas as nutri
                 inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario
-            where usuario.bloqueado = false`);
+            where usuario.bloqueado = false and nutri.cadastroConfirmado = true`);
 
         if (rows.length <= 0)
             return;
@@ -60,7 +60,8 @@ async function criarNutricionista(novoNutricionista) {
             novoNutricionista.nome,
             novoNutricionista.email,
             novoNutricionista.telefone,
-            novoNutricionista.registroProfissional
+            novoNutricionista.registroProfissional,
+            novoNutricionista.cadastroConfirmado
         ]
 
         await conexao.beginTransaction();
@@ -69,8 +70,8 @@ async function criarNutricionista(novoNutricionista) {
             `insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado) 
             values (?, ?, ?, ?, ?, ?);`, parametrosDoUsuario);
         await conexao.execute(
-            `insert into nutricionistas (idNutri, nome, email, telefone, registroProfissional) 
-            values (?, ?, ?, ?, ?);`, parametrosDoNutricionista);
+            `insert into nutricionistas (idNutri, nome, email, telefone, registroProfissional, cadastroConfirmado) 
+            values (?, ?, ?, ?, ?, ?);`, parametrosDoNutricionista);
 
         await conexao.commit();
 
@@ -79,29 +80,39 @@ async function criarNutricionista(novoNutricionista) {
     }
 }
 
-async function buscarNutricionistasPorFiltro(nome) {
+async function buscarNutricionistasPorFiltro(nome, bloqueado, cadastroConfirmado) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
-        if (!nome) {
-            const [rows, fields] = await conexao.execute(
-                `select nutri.idNutri, nutri.nome, nutri.email, nutri.telefone, nutri.registroProfissional, nutri.sobreMim,
-                        usuario.bloqueado 
-                from nutricionistas as nutri
-                inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario`);
+        let filtro = "";
+        let parametros = [];
 
-            return rows;
+        if(nome)
+        {
+            filtro += " and nutri.nome like ? ";
+            parametros.push(`%${nome}%`);
         }
 
-        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select nutri.idNutri, nutri.nome, nutri.email, nutri.telefone, nutri.registroProfissional, nutri.sobreMim,
+        if(bloqueado != undefined && bloqueado != null)
+        {
+            filtro += " and usuario.bloqueado = ? "
+            parametros.push(bloqueado);
+        }
+
+        if(cadastroConfirmado)
+        {
+            filtro += " and nutri.cadastroConfirmado = ? ";
+            parametros.push(cadastroConfirmado);
+        }
+
+        const [rows, fields] = await conexao.execute(
+            `select nutri.idNutri, nutri.nome, nutri.email, nutri.cadastroConfirmado,
                     usuario.bloqueado 
             from nutricionistas as nutri
-                inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario
-            where nutri.nome like ?`, [`%${nome}%`]);
+            inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario
+            where 1=1 ${filtro}`, parametros);
 
-        return rowsComFiltro;
-
+        return rows;
     } finally {
         await conexao.end();
     }
@@ -113,10 +124,10 @@ async function buscarNutriPorId(idNutri) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select nutri.idNutri, nutri.nome, nutri.email, nutri.telefone, nutri.registroProfissional, nutri.sobreMim,
+            `select nutri.idNutri, nutri.nome, nutri.email, nutri.telefone, nutri.registroProfissional, nutri.sobreMim, nutri.cadastroConfirmado,
                     usuario.imagem, usuario.bloqueado 
             from nutricionistas as nutri
-            inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario
+                inner join usuarios as usuario on nutri.idNutri = usuario.idUsuario
             where nutri.idNutri = ?`, [idNutri]);
 
         if (rows.length <= 0)
@@ -129,7 +140,7 @@ async function buscarNutriPorId(idNutri) {
     }
 }
 
-async function salvarAlteracaoDeDados(idNutri, nome, email, telefone, registroProfissional, bloqueado) {
+async function salvarAlteracaoDeCadastro(idNutri, registroProfissional, bloqueado, cadastroConfirmado) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
@@ -138,13 +149,13 @@ async function salvarAlteracaoDeDados(idNutri, nome, email, telefone, registroPr
 
         await conexao.execute(
             `update usuarios
-            set nome = ?, login = ?, bloqueado = ?
-            where idUsuario = ?`, [nome, email, bloqueado, idNutri]);
+            set bloqueado = ?
+            where idUsuario = ?`, [bloqueado, idNutri]);
 
         await conexao.execute(
             `update nutricionistas
-            set nome = ?, email = ?, telefone = ?, registroProfissional = ?
-            where idNutri = ?`, [nome, email, telefone, registroProfissional, idNutri]);
+            set registroProfissional = ?, cadastroConfirmado = ?
+            where idNutri = ?`, [registroProfissional, cadastroConfirmado, idNutri]);
 
         await conexao.commit();
 
@@ -218,7 +229,7 @@ async function buscarPacientesPorFiltro(idUsuario, nome) {
                         and dieta.data = (select max(dieta.data) data 
                     from  dietas as dieta 
                     where dieta.idNutri = ? and dieta.idAssinante = assinante.IdAssinante)
-            where assinante.idNutri = ? and assinante.nome like ?`, [idUsuario, idUsuario,`%${nome}%`]);
+            where assinante.idNutri = ? and assinante.nome like ?`, [idUsuario, idUsuario, `%${nome}%`]);
 
         return rowsComFiltro;
 
@@ -272,7 +283,7 @@ module.exports = {
     criarNutricionista: criarNutricionista,
     buscarNutricionistasPorFiltro: buscarNutricionistasPorFiltro,
     buscarNutriPorId: buscarNutriPorId,
-    salvarAlteracaoDeDados: salvarAlteracaoDeDados,
+    salvarAlteracaoDeCadastro: salvarAlteracaoDeCadastro,
     salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     salvarAlteracaoSobreMim: salvarAlteracaoSobreMim,
     buscarPacientesPorFiltro: buscarPacientesPorFiltro,

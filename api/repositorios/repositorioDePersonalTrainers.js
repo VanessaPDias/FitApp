@@ -9,7 +9,7 @@ async function buscarPersonalTrainersAtivos() {
                     usuario.imagem 
             from personal_trainers as personal
                 inner join usuarios as usuario on personal.idPersonal = usuario.idUsuario
-            where usuario.bloqueado = false`);
+            where usuario.bloqueado = false and personal.cadastroConfirmado = true`);
 
         if (rows.length <= 0)
             return;
@@ -59,7 +59,8 @@ async function criarPersonal(novoPersonal) {
             novoPersonal.nome,
             novoPersonal.email,
             novoPersonal.telefone,
-            novoPersonal.registroProfissional
+            novoPersonal.registroProfissional,
+            novoPersonal.cadastroConfirmado
         ]
 
         await conexao.beginTransaction();
@@ -68,8 +69,8 @@ async function criarPersonal(novoPersonal) {
             `insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado) 
             values (?, ?, ?, ?, ?, ?);`, parametrosDoUsuario);
         await conexao.execute(
-            `insert into personal_trainers (idPersonal, nome, email, telefone, registroProfissional) 
-            values (?, ?, ?, ?, ?);`, parametrosDoPersonal);
+            `insert into personal_trainers (idPersonal, nome, email, telefone, registroProfissional, cadastroConfirmado) 
+            values (?, ?, ?, ?, ?, ?);`, parametrosDoPersonal);
 
         await conexao.commit();
 
@@ -78,30 +79,39 @@ async function criarPersonal(novoPersonal) {
     }
 }
 
-async function buscarPersonalTrainersPorFiltro(nome) {
+async function buscarPersonalTrainersPorFiltro(nome, bloqueado, cadastroConfirmado) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
-        if (!nome) {
-            const [rows, fields] = await conexao.execute(
-                `select personal.idPersonal, personal.nome, personal.email, personal.telefone, personal.registroProfissional, personal.sobreMim,
-                        usuario.bloqueado 
-                from personal_trainers as personal
-                inner join usuarios as usuario on personal.idPersonal = usuario.idUsuario`);
 
-            return rows;
+        let filtro = "";
+        let parametros = [];
+
+        if (nome != undefined && nome != null) {
+            filtro += " and personal.nome like ? ";
+            parametros.push(`%${nome}%`);
         }
 
-        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select personal.idPersonal, personal.nome, personal.email, personal.telefone, personal.registroProfissional, personal.sobreMim,
+        if (bloqueado != undefined && bloqueado != null) {
+            filtro += " and usuario.bloqueado = ? "
+            parametros.push(bloqueado);
+        }
+
+        if (cadastroConfirmado != undefined && cadastroConfirmado != null) {
+            filtro += " and personal.cadastroConfirmado = ? ";
+            parametros.push(cadastroConfirmado);
+        }
+        const [rows, fields] = await conexao.execute(
+            `select personal.idPersonal, personal.nome, personal.email, personal.cadastroConfirmado,
                     usuario.bloqueado 
-                from personal_trainers as personal
+            from personal_trainers as personal
                 inner join usuarios as usuario on personal.idPersonal = usuario.idUsuario
-                where personal.nome like ?`, [`%${nome}%`]);
+            where 1=1 ${filtro}`, parametros);
 
-        return rowsComFiltro;
+        return rows;
+    }
 
-    } finally {
+    finally {
         await conexao.end();
     }
 }
@@ -111,7 +121,7 @@ async function buscarPersonalPorId(idPersonal) {
     try {
 
         const [rows, fields] = await conexao.execute(
-            `select personal.idPersonal, personal.nome, personal.email, personal.telefone, personal.registroProfissional, personal.sobreMim,
+            `select personal.idPersonal, personal.nome, personal.email, personal.telefone, personal.registroProfissional, personal.sobreMim, personal.cadastroConfirmado,
                     usuario.imagem, usuario.bloqueado 
             from personal_trainers as personal
                 inner join usuarios as usuario on personal.idPersonal = usuario.idUsuario
@@ -127,7 +137,7 @@ async function buscarPersonalPorId(idPersonal) {
     }
 }
 
-async function salvarAlteracaoDeDados(idPersonal, nome, email, telefone, registroProfissional, bloqueado) {
+async function salvarAlteracaoDeCadastro(idPersonal, registroProfissional, bloqueado, cadastroConfirmado) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
@@ -135,13 +145,13 @@ async function salvarAlteracaoDeDados(idPersonal, nome, email, telefone, registr
 
         await conexao.execute(
             `update usuarios
-            set nome = ?, login = ?, bloqueado = ?
-            where idUsuario = ?`, [nome, email, bloqueado, idPersonal]);
+            set bloqueado = ?
+            where idUsuario = ?`, [bloqueado, idPersonal]);
 
         await conexao.execute(
             `update personal_trainers
-            set nome = ?, email = ?, telefone = ?, registroProfissional = ?
-            where idPersonal = ?`, [nome, email, telefone, registroProfissional, idPersonal]);
+            set registroProfissional = ?, cadastroConfirmado = ?
+            where idPersonal = ?`, [registroProfissional, cadastroConfirmado, idPersonal]);
 
         await conexao.commit();
 
@@ -268,7 +278,7 @@ module.exports = {
     criarPersonal: criarPersonal,
     buscarPersonalTrainersPorFiltro: buscarPersonalTrainersPorFiltro,
     buscarPersonalPorId: buscarPersonalPorId,
-    salvarAlteracaoDeDados: salvarAlteracaoDeDados,
+    salvarAlteracaoDeCadastro: salvarAlteracaoDeCadastro,
     salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     salvarAlteracaoSobreMim: salvarAlteracaoSobreMim,
     buscarAlunosPorFiltro: buscarAlunosPorFiltro,

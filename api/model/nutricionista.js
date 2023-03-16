@@ -18,6 +18,7 @@ function Nutricionista(nome, email, telefone, registroProfissional) {
     }
 
     this.usuario = new Usuario.Usuario(nome, email, 'nutricionista');
+    this.usuario.bloqueado = true;
     this.idNutri = this.usuario.idUsuario;
     this.imagem = this.usuario.imagem;
     this.nome = nome;
@@ -25,6 +26,7 @@ function Nutricionista(nome, email, telefone, registroProfissional) {
     this.telefone = telefone;
     this.registroProfissional = registroProfissional;
     this.sobreMim = "";
+    this.cadastroConfirmado = 0;
     
 }
 
