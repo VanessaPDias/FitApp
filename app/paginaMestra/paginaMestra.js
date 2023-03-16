@@ -68,10 +68,10 @@ function configurarPaginaMestraPorPerfil(perfil) {
             home: "/assinantes/assinantes.html",
             menuLateral: [
                 { nome: "Assinantes", icone: "bi-people", link: "/assinantes/assinantes.html" },
-                // { nome: "Nutricionistas", icone: "bi-people", link: "/nutricionistas/nutricionistas.html" },
-                // { nome: "Personal Trainers", icone: "bi-people", link: "/personalTrainers/personalTrainers.html" },
-                // { nome: "Planos", icone: "bi-card-checklist", link: "/planos/planos.html" },
-                // { nome: "Mensagens", icone: "bi-envelope", link: "/mensagens/mensagens.html" },
+                { nome: "Nutricionistas", icone: "bi-people", link: "/nutricionistas/nutricionistas.html" },
+                { nome: "Personal Trainers", icone: "bi-people", link: "/personalTrainers/personalTrainers.html" },
+                { nome: "Planos", icone: "bi-card-checklist", link: "/planos/planos.html" },
+                { nome: "Mensagens", icone: "bi-envelope", link: "/mensagens/mensagens.html" },
             ]
         }
     ];
