@@ -35,6 +35,9 @@ async function entrar(evento) {
         if(usuario.perfil == "administrador") {
            window.location.href = "../assinantes/assinantes.html" 
         }
+        if(usuario.perfil == "nutricionista") {
+           window.location.href = "../pacientes/pacientes.html" 
+        }
 
     } catch (error) {
         erros.tratarErro(error);

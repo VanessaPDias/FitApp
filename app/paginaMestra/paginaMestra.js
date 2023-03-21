@@ -73,6 +73,17 @@ function configurarPaginaMestraPorPerfil(perfil) {
                 { nome: "Planos", icone: "bi-card-checklist", link: "/planos/planos.html" },
                 { nome: "Mensagens", icone: "bi-envelope", link: "/mensagens/mensagens.html" },
             ]
+        },
+        {
+            perfil: "nutricionista",
+            home: "/pacientes/pacientes.html",
+            menuLateral: [
+                { nome: "Pacientes", icone: "bi-people", link: "/pacientes/pacientes.html" },
+                { nome: "Mensagens", icone: "bi-envelope", link: "/mensagens/mensagens.html" }
+            ],
+            menuCabecalho: [
+                { nome: "Meu Perfil", icone: "bi-person", link: "../perfilNutricionista/perfil.html" },
+            ],
         }
     ];
 

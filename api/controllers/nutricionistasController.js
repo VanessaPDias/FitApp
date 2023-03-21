@@ -52,7 +52,7 @@ async function buscarPacientes(req, res) {
     const pacientes = await repositorioDeNutricionistas.buscarPacientesPorFiltro(req.usuario.idUsuario, req.query.nome);
 
     if (!pacientes || pacientes.length <= 0) {
-        res.status(404).send({ erro: "Paciente não encontrado" });
+        res.send([]);
         return;
     }
 
@@ -61,7 +61,6 @@ async function buscarPacientes(req, res) {
             idAssinante: paciente.idAssinante,
             nome: paciente.nome,
             objetivo: paciente.objetivo,
-
         }
     }));
 }
