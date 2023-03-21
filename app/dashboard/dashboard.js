@@ -30,6 +30,7 @@ async function buscarDadosDoPerfil() {
     }
 }
 
+
 function criarGrafico(ctx, medidas) {
     return new Chart(ctx, {
         options: {

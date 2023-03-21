@@ -1,10 +1,14 @@
 const Dieta = require('../model/dieta');
+const Idade = require('../model/idade');
 const Imc = require('../model/imc');
 const ItemDaDieta = require('../model/itemDaDieta');
 const Nutricionista = require('../model/nutricionista');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const repositorioDeMedidas = require('../repositorios/repositorioDeMedidas');
 const repositorioDeDietas = require('../repositorios/repositorioDeDietas');
+const servicoDeArquivosEstaticos = require('../servicos/servicoDeArquivosEstaticos');
+
+
 
 async function buscarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Nutricionista']
@@ -81,11 +85,11 @@ async function buscarPacientePorId(req, res) {
         return;
     }
 
-
     res.send({
+        imagem: !pacienteEncontrado.dados.imagem ? "" : servicoDeArquivosEstaticos.construirCaminhoParaImagem(pacienteEncontrado.dados.imagem),
         nome: pacienteEncontrado.dados.nome,
         objetivo: !pacienteEncontrado.dietas || pacienteEncontrado.dietas.length <= 0 ? null : pacienteEncontrado.dietas[0].objetivo,
-        dataNascimento: pacienteEncontrado.dados.dataNascimento,
+        dataNascimento: new Idade.Idade(pacienteEncontrado.dados.dataNascimento).valor,
         sexo: pacienteEncontrado.dados.idSexo,
         altura: !pacienteEncontrado.dados.altura ? 0 : pacienteEncontrado.dados.altura,
         dietas: !pacienteEncontrado.dietas ? [] : pacienteEncontrado.dietas,

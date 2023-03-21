@@ -10,7 +10,7 @@ header {
     background-color: white;
 }
 
-.medidas-dashboard {
+.medidas-dashboard, .medidas-paciente {
     color: #FED233;
     font-size: larger;
     font-weight: bolder;
