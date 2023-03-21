@@ -23,6 +23,8 @@ async function aoCarregarPagina() {
 
     await buscarDadosDoNutricionista(idNutri);
 
+    document.querySelector("#cadastro-confirmado-nutri").onchange = alterarStatus;
+
     document.querySelector("#btn-alterar-dados-do-nutricionista").onclick = alterarDadosDoNutricionista;
 
     mensagens.exibirMensagemAoCarregarAPagina();
@@ -52,6 +54,14 @@ async function buscarDadosDoNutricionista(idNutri) {
     }
 }
 
+async function alterarStatus (evento) {
+    if(evento.target.value == 1) {
+        document.querySelector("#status-nutri").value = false;
+    } else {
+        document.querySelector("#status-nutri").value = true;
+    }
+}
+
 async function alterarDadosDoNutricionista(evento) {
     const registroProfissional = document.querySelector("#registro-profissional-nutri").value;
     const status = document.querySelector("#status-nutri").value;
@@ -73,7 +83,7 @@ async function alterarDadosDoNutricionista(evento) {
 
 }
 
-async function confirmarAlteracao(evento) {
+async function confirmarAlteracao() {
     const token = seguranca.pegarToken();
 
     modal.hide();

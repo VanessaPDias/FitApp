@@ -180,6 +180,15 @@ async function alterarDadosDoNutricionista(req, res) {
         req.body.cadastroConfirmado
     );
 
+    if (req.body.cadastroConfirmado == 1) {
+        const senha = await repositorioDeNutricionistas.buscarSenha(nutriEncontrado.idNutri);
+        servicoDeEmail.enviar(nutriEncontrado.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(nutriEncontrado.nome, senha.senha));
+    }
+
+    if (req.body.cadastroConfirmado == 2) {
+        servicoDeEmail.enviar(nutriEncontrado.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeRecusaDeCadastro(nutriEncontrado.nome));
+    }
+
     res.send();
 }
 
@@ -259,6 +268,15 @@ async function alterarDadosDoPersonal(req, res) {
         bloqueado,
         req.body.cadastroConfirmado
     );
+
+    if (req.body.cadastroConfirmado == 1) {
+        const senha = await repositorioDePersonalTrainers.buscarSenha(personalEncontrado.idPersonal);
+        servicoDeEmail.enviar(personalEncontrado.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(personalEncontrado.nome, senha.senha));
+    }
+
+    if (req.body.cadastroConfirmado == 2) {
+        servicoDeEmail.enviar(personalEncontrado.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeRecusaDeCadastro(personalEncontrado.nome));
+    }
 
     res.send();
 }

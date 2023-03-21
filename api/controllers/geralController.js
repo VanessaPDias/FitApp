@@ -145,8 +145,6 @@ async function cadastrarNutricionista(req, res) {
 
         await repositorioDeNutricionistas.criarNutricionista(novoNutricionista);
 
-        //servicoDeEmail.enviar(novoNutricionista.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoNutricionista.nome, novoNutricionista.usuario.senha));
-
         res.send({
             idNutri: novoNutricionista.idNutri
         });
@@ -166,8 +164,6 @@ async function cadastrarPersonal(req, res) {
     if (!personalEncontrado) {
 
         await repositorioDePersonalTrainers.criarPersonal(novoPersonal);
-
-        //servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoPersonal.usuario.senha));
 
         res.send({
             idPersonal: novoPersonal.idPersonal

@@ -23,6 +23,8 @@ async function aoCarregarPagina() {
 
     await buscarDadosDoPersonal(idPersonal);
 
+    document.querySelector("#cadastro-confirmado-personal").onchange = alterarStatus;
+
     document.querySelector("#btn-alterar-dados-do-personal").onclick = alterarDadosDoPersonal;
 
     mensagens.exibirMensagemAoCarregarAPagina();
@@ -52,6 +54,15 @@ async function buscarDadosDoPersonal(idPersonal) {
     }
 }
 
+async function alterarStatus (evento) {
+    if(evento.target.value == 1) {
+        document.querySelector("#status-personal").value = false;
+    } else {
+        document.querySelector("#status-personal").value = true;
+    }
+}
+
+
 async function alterarDadosDoPersonal(evento) {
     const registroProfissional = document.querySelector("#registro-profissional-personal").value;
     const status = document.querySelector("#status-personal").value;
@@ -73,7 +84,7 @@ async function alterarDadosDoPersonal(evento) {
 
 }
 
-async function confirmarAlteracao(evento) {
+async function confirmarAlteracao() {
     const token = seguranca.pegarToken();
 
     modal.hide();

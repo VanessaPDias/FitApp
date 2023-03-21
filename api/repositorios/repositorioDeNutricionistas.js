@@ -164,6 +164,25 @@ async function salvarAlteracaoDeCadastro(idNutri, registroProfissional, bloquead
     }
 }
 
+async function buscarSenha(idNutri) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select senha
+            from usuarios 
+            where idusuario = ?`, [idNutri]);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows[0];
+
+    } finally {
+        await conexao.end();
+    }
+}
+
 async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, telefone) {
     const conexao = await baseDeDados.abrirConexao();
 
@@ -284,6 +303,7 @@ module.exports = {
     buscarNutricionistasPorFiltro: buscarNutricionistasPorFiltro,
     buscarNutriPorId: buscarNutriPorId,
     salvarAlteracaoDeCadastro: salvarAlteracaoDeCadastro,
+    buscarSenha: buscarSenha,
     salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     salvarAlteracaoSobreMim: salvarAlteracaoSobreMim,
     buscarPacientesPorFiltro: buscarPacientesPorFiltro,

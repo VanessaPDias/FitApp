@@ -23,9 +23,20 @@ function gerarNotificacaoNovoAssinante(nomeDestinatario, nomeAssinante) {
     Equipe FitApp`
 }
 
+function gerarMensagemDeRecusaDeCadastro(nome) {
+    return `Olá ${nome}, <br> 
+    Agradecemos o seu interesse em fazer parte da nossa equipe.<br>
+    Desculpe-nos mas, o seu cadastro não foi aprovado.<br>
+    Para mais informações, entre em contato conosco:<br>
+    admin@fitapp.com <br>
+    Atenciosamente, <br> 
+    Equipe FitApp`
+}
+
 
 module.exports = {
     gerarMensagemDeBoasVindas: gerarMensagemDeBoasVindas,
     gerarMensagemComNovaSenha:gerarMensagemComNovaSenha,
     gerarNotificacaoNovoAssinante: gerarNotificacaoNovoAssinante,
+    gerarMensagemDeRecusaDeCadastro: gerarMensagemDeRecusaDeCadastro
 }
