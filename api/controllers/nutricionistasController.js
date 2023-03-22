@@ -117,7 +117,7 @@ async function buscarMedidasDoPaciente(req, res) {
         return;
     }
 
-    const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.params.idAssinante);
+    let medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.params.idAssinante);
 
     let medidasAtuais;
 
@@ -127,8 +127,12 @@ async function buscarMedidasDoPaciente(req, res) {
             pescoco: 0,
             cintura: 0,
             quadril: 0
-        }
+        };
+
+        medidasOrdenadasPorData = new Array();
+
     } else {
+
         medidasAtuais = medidasOrdenadasPorData[0]
     }
 

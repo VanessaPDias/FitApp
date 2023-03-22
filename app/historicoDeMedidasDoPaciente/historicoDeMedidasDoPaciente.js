@@ -1,17 +1,26 @@
-import * as servicos from "./servicosDeHistoricoDeMedidasAssinante.js"
+import * as servicos from "./servicosDeHistoricoDeMedidasDoPaciente.js"
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 
 let chart;
+let idPaciente;
 
 seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
-    await paginaMestra.carregar("historicoDeMedidasAssinante/historicoDeMedidasAssinante-conteudo.html", "Histórico de Medidas");
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
+
+    idPaciente = params.idAssinante;
+
+    await paginaMestra.carregar("historicoDeMedidasDoPaciente/historicoDeMedidasDoPaciente-conteudo.html", "Histórico de Medidas do Paciente");
+
     await buscarMedidas();
+
     document.querySelector("#opcoes-medidas").onchange = buscarMedidas;
     document.querySelector("#data-inicio").onchange = buscarMedidas;
     document.querySelector("#data-fim").onchange = buscarMedidas;
@@ -20,7 +29,7 @@ async function aoCarregarPagina() {
 async function buscarMedidas() {
     try {
         const token = seguranca.pegarToken();
-        const resposta = await servicos.buscarDados(token);
+        const resposta = await servicos.buscarDados(token, idPaciente);
 
         criarRelatorio(resposta.historicoDeMedidas);
 

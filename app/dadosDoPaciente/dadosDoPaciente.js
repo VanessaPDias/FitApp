@@ -9,7 +9,6 @@ seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
-let modal;
 let idPaciente;
 
 async function aoCarregarPagina() {
@@ -22,6 +21,10 @@ async function aoCarregarPagina() {
     await paginaMestra.carregar("dadosDoPaciente/dadosDoPaciente-conteudo.html", "Dados do Paciente");
 
     await buscarDadosDoPaciente(idPaciente);
+
+   // document.querySelector("#btn-dieta-atual").onclick = buscarDietaAtual;
+    document.querySelector("#btn-medidas").onclick = buscarMedidas;
+  //  document.querySelector("#btn-nova-dieta").onclick = criarDieta;
 
     mensagens.exibirMensagemAoCarregarAPagina();
 }
@@ -71,5 +74,8 @@ async function buscarDadosDoPaciente(idAssinante) {
     } catch (error) {
         erros.tratarErro(error);
     }
+}
+function buscarMedidas() {
+    window.location.href = `../historicoDeMedidasDoPaciente/historicoDeMedidasDoPaciente.html?idAssinante=${idPaciente}`;
 }
 
