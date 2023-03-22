@@ -137,6 +137,7 @@ async function buscarMedidasDoPaciente(req, res) {
     }
 
     res.send({
+        nomePaciente: pacienteEncontrado.dados.nome,
         historicoDeMedidas: medidasOrdenadasPorData,
         medidasAtuais: medidasAtuais
     });

@@ -24,12 +24,16 @@ async function aoCarregarPagina() {
     document.querySelector("#opcoes-medidas").onchange = buscarMedidas;
     document.querySelector("#data-inicio").onchange = buscarMedidas;
     document.querySelector("#data-fim").onchange = buscarMedidas;
+
+    document.querySelector("#btn-voltar").onclick = irParaPaginaDeDadosDoPaciente;
 }
 
 async function buscarMedidas() {
     try {
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token, idPaciente);
+
+        document.querySelector("#nome-paciente").innerHTML = resposta.nomePaciente;
 
         criarRelatorio(resposta.historicoDeMedidas);
 
@@ -112,4 +116,8 @@ function criarGrafico(ctx, medidaEscolhida, medidas) {
     });
 
     return chart;
+}
+
+function irParaPaginaDeDadosDoPaciente() {
+    window.location.href = `../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}`;
 }

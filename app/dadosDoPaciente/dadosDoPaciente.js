@@ -23,7 +23,7 @@ async function aoCarregarPagina() {
     await buscarDadosDoPaciente(idPaciente);
 
    // document.querySelector("#btn-dieta-atual").onclick = buscarDietaAtual;
-    document.querySelector("#btn-medidas").onclick = buscarMedidas;
+    document.querySelector("#btn-medidas").onclick = irParaPaginaDeMedidas;
   //  document.querySelector("#btn-nova-dieta").onclick = criarDieta;
 
     mensagens.exibirMensagemAoCarregarAPagina();
@@ -75,7 +75,7 @@ async function buscarDadosDoPaciente(idAssinante) {
         erros.tratarErro(error);
     }
 }
-function buscarMedidas() {
+function irParaPaginaDeMedidas() {
     window.location.href = `../historicoDeMedidasDoPaciente/historicoDeMedidasDoPaciente.html?idAssinante=${idPaciente}`;
 }
 
