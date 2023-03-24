@@ -1,7 +1,19 @@
 import * as util from "../util/tratamentoDeRespostaApi.js";
 import * as configuracoes from "../configuracoes.js";
 
-export async function salvarDieta(token, idAssinante, nomeDieta, dataInicio, dataFim, objetivo, itens) {
+export async function buscarDadosDaDieta(token, idAssinante, idDieta){
+    const url = `${configuracoes.urlDaApi}/nutricionista/pacientes/${idAssinante}/dietas/${idDieta}`;
+
+    const resposta = await fetch(url, {
+        headers: {
+            authorization: "Bearer " + token
+        }
+    });
+
+    return util.tratarRespostaApi(resposta);
+}
+
+    export async function salvarDieta(token, idAssinante, nomeDieta, dataInicio, dataFim, objetivo, itens) {
     const url = `${configuracoes.urlDaApi}/nutricionista/pacientes/${idAssinante}/dietas`;
 
     const request = new Request(url, {
