@@ -212,6 +212,7 @@ async function alterarDieta(req, res) {
         return;
     }
 
+    await repositorioDeDietas.excluirItensDaDieta(req.params.idDieta);
     let itens = [];
 
     if (req.usuario.idUsuario == pacienteEncontrado.dados.idNutri) {

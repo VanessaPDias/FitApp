@@ -129,9 +129,25 @@ async function salvarAlteracoesDaDieta(idDieta, nomeDieta, dataInicio, dataFim, 
 
 }
 
+async function excluirItensDaDieta(idDieta) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+
+        await conexao.execute(
+            `delete from itens_dieta
+            where idDieta = ?`, [idDieta]);
+
+    }
+    finally {
+        await conexao.end();
+    }
+}
+
 module.exports = {
     buscarDietasPorFiltro: buscarDietasPorFiltro,
     buscarDietaPorId: buscarDietaPorId,
     salvarDieta: salvarDieta,
-    salvarAlteracoesDaDieta: salvarAlteracoesDaDieta
+    salvarAlteracoesDaDieta: salvarAlteracoesDaDieta,
+    excluirItensDaDieta: excluirItensDaDieta
 }

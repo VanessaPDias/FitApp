@@ -13,7 +13,8 @@ let token;
 let idPaciente;
 let nomePaciente;
 let idDieta;
-const itens = [];
+const dadosDaDieta = [];
+const itensDaDieta = [];
 
 async function aoCarregarPagina() {
     const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -24,7 +25,7 @@ async function aoCarregarPagina() {
     nomePaciente = params.nomeAssinante;
     idDieta = params.idDieta;
 
-    await paginaMestra.carregar("criarDieta/criarDieta-conteudo.html", "Nova Dieta");
+    await paginaMestra.carregar("criarDieta/criarDieta-conteudo.html", "Dieta");
 
     document.querySelector("#nome-paciente").innerHTML = nomePaciente;
 
@@ -40,7 +41,10 @@ async function aoCarregarPagina() {
     token = seguranca.pegarToken();
 
     if (idDieta) {
-        mostrarDadosDaDieta(await servicos.buscarDadosDaDieta(token, idPaciente, idDieta));
+        const resposta = await servicos.buscarDadosDaDieta(token, idPaciente, idDieta);
+        dadosDaDieta.push(resposta.dieta);
+        itensDaDieta.push(resposta.itensDaDieta);
+        mostrarDadosDaDieta(dadosDaDieta, itensDaDieta);
     }
 
     mensagens.exibirMensagemAoCarregarAPagina();
@@ -54,15 +58,15 @@ function inserirItem(evento) {
     document.querySelector(`#input-item-${refeicao}`).value = "";
 
 
-    itens.push({ refeicao: refeicao, descricao: descricaoDoItem });
+    itensDaDieta.push({ refeicao: refeicao, descricao: descricaoDoItem });
 
     document.querySelector(`#lista-itens-${refeicao}`).innerHTML = "";
 
-    itens.filter(item => item.refeicao == refeicao).forEach(elemento => {
+    itensDaDieta.filter(item => item.refeicao == refeicao).forEach(elemento => {
         document.querySelector(`#lista-itens-${refeicao}`).innerHTML = document.querySelector(`#lista-itens-${refeicao}`).innerHTML +
             `<li class="list-group-item mb-2 d-flex">
             ${elemento.descricao}
-        </li>`;
+        </li><i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer"></i>`;
     });
 }
 
@@ -80,7 +84,7 @@ async function gravarDieta(evento) {
     evento.preventDefault();
 
     try {
-        const resposta = await servicos.salvarDieta(token, idPaciente, nomeDieta, dataInicio, dataFim, objetivo, itens);
+        const resposta = await servicos.salvarDieta(token, idPaciente, nomeDieta, dataInicio, dataFim, objetivo, itensDaDieta);
         mensagens.mostrarMensagemDeSucesso("Dieta criada com sucesso!", true);
         window.location.href = `criarDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${resposta.idDieta}`;
     } catch (error) {
@@ -88,16 +92,16 @@ async function gravarDieta(evento) {
     }
 }
 
-function mostrarDadosDaDieta(dadosDaDieta) {
-    const dataInicio = formatarData(dadosDaDieta.dieta.dataInicio);
-    const dataFim = formatarData(dadosDaDieta.dieta.dataFim);
-    
-    document.querySelector("#nome-dieta").value = dadosDaDieta.dieta.nome;
+function mostrarDadosDaDieta(dadosDaDieta, itensDaDieta) {
+    const dataInicio = formatarData(dadosDaDieta[0].dataInicio);
+    const dataFim = formatarData(dadosDaDieta[0].dataFim);
+
+    document.querySelector("#nome-dieta").value = dadosDaDieta[0].nome;
     document.querySelector("#inicio-dieta").value = dataInicio;
     document.querySelector("#fim-dieta").value = dataFim;
-    document.querySelector("#objetivo-dieta").value = dadosDaDieta.dieta.objetivo;
+    document.querySelector("#objetivo-dieta").value = dadosDaDieta[0].objetivo;
 
-    dadosDaDieta.itensDaDieta.forEach(item => {
+    itensDaDieta[0].forEach(item => {
         document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
             `<li class="list-group-item mb-2 d-flex">
             ${item.descricao}
@@ -109,5 +113,7 @@ function formatarData(dataRecebida) {
     const data = new Date(dataRecebida);
     const zeroEsquerdaMes = (data.getMonth() + 1) < 10 ? '0' : '';
     const zeroEsquerdaDia = (data.getDate() + 1) < 10 ? '0' : '';
-    return  data.getFullYear() + '-' + zeroEsquerdaMes + (data.getMonth() + 1) + '-' + zeroEsquerdaDia + data.getDate();
+    return data.getFullYear() + '-' + zeroEsquerdaMes + (data.getMonth() + 1) + '-' + zeroEsquerdaDia + data.getDate();
 }
+
+//
