@@ -1,0 +1,209 @@
+<div>
+    <div class="row">
+        <h6><img class="me-2" src="/img/novaDieta.png" alt="" width="24" height="24">Criar Dieta</h6>
+        <h6>Paciente: <span class="fw-normal lh-base" id="nome-paciente"></span></h6>
+    </div>
+    <div class="row pb-3">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form class="row" id="formulario">
+                        <div class="col-md-6 pt-3">
+                            <label class="form-label fw-semibold" for="nome-dieta">Dieta</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="text" id="nome-dieta" name="nome-dieta" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3 pt-3">
+                            <label class="form-label fw-semibold" for="inicio-dieta">Ínicio</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="date" id="inicio-dieta" name="inicio-dieta" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3 pt-3">
+                            <label class="form-label fw-semibold" for="fim-dieta">Fim</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="date" id="fim-dieta" name="fim-dieta" required>
+                            </div>
+                        </div>
+                        <div class="col pt-3">
+                            <label class="form-label fw-semibold" for="objetivo-dieta">Objetivo</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="text" id="objetivo-dieta" name="objetivo-dieta"
+                                    required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pb-3">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link  active" id="refeicao-cafeDaManha" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-cafeDaManha-pane" type="button" role="tab"
+                                aria-controls="refeicao-cafeDaManha-pane" aria-selected="true">Café da Manhã</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link link-refeicao" id="refeicao-lancheDaManha" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-lancheDaManha-pane" type="button" role="tab"
+                                aria-controls="refeicao-lancheDaManha-pane" aria-selected="false">Lanche da
+                                Manhã</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="refeicao-almoco" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-almoco-pane" type="button" role="tab"
+                                aria-controls="refeicao-almoco-pane" aria-selected="false">Almoço</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="refeicao-lancheDaTarde" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-lancheDaTarde-pane" type="button" role="tab"
+                                aria-controls="refeicao-lancheDaTarde-pane" aria-selected="false">Lanche da
+                                Tarde</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="refeicao-jantar" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-jantar-pane" type="button" role="tab"
+                                aria-controls="refeicao-jantar-pane" aria-selected="false">Jantar</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="refeicao-lancheDaNoite" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-lancheDaNoite-pane" type="button" role="tab"
+                                aria-controls="refeicao-lancheDaNoite-pane" aria-selected="false">Lanche da
+                                Noite</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="refeicao-cafeDaManha-pane" role="tabpanel"
+                            aria-labelledby="refeicao-cafeDaManha" tabindex="0">
+
+                            <div class="input-group input-group-sm py-3">
+                                <input type="text" class="form-control fw-normal" id="input-item-cafeDaManha"
+                                    placeholder="Item..." aria-label="" aria-describedby="">
+                                <button class="btn btn-light" id="inserir-item-cafeDaManha" data-refeicao="cafeDaManha"
+                                    type="button" style="background-color: #FED233;"><i class="bi bi-plus"></i>
+                                    Itens</button>
+                            </div>
+                            <div>
+                                <ul class="list-group" id="lista-itens-cafeDaManha">
+
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="refeicao-lancheDaManha-pane" role="tabpanel"
+                            aria-labelledby="refeicao-lancheDaManha" tabindex="0">
+
+                            <div class="input-group input-group-sm py-3">
+                                <input type="text" class="form-control fw-normal" id="input-item-lancheDaManha"
+                                    placeholder="Item..." aria-label="" aria-describedby="">
+                                <button class="btn btn-light" id="inserir-item-lancheDaManha"
+                                    data-refeicao="lancheDaManha" type="button" style="background-color: #FED233;"><i
+                                        class="bi bi-plus"></i> Itens</button>
+                            </div>
+                            <div>
+                                <ul class="list-group" id="lista-itens-lancheDaManha">
+
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="refeicao-almoco-pane" role="tabpanel"
+                            aria-labelledby="refeicao-almoco" tabindex="0">
+
+                            <div class="input-group input-group-sm py-3">
+                                <input type="text" class="form-control fw-normal" id="input-item-almoco"
+                                    placeholder="Item..." aria-label="" aria-describedby="">
+                                <button class="btn btn-light" id="inserir-item-almoco" data-refeicao="almoco"
+                                    type="button" style="background-color: #FED233;"><i class="bi bi-plus"></i>
+                                    Itens</button>
+                            </div>
+                            <div>
+                                <ul class="list-group" id="lista-itens-almoco">
+
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="refeicao-lancheDaTarde-pane" role="tabpanel"
+                            aria-labelledby="refeicao-lancheDaTarde" tabindex="0">
+
+                            <div class="input-group input-group-sm py-3">
+                                <input type="text" class="form-control fw-normal" id="input-item-lancheDaTarde"
+                                    placeholder="Item..." aria-label="" aria-describedby="">
+                                <button class="btn btn-light" id="inserir-item-lancheDaTarde"
+                                    data-refeicao="lancheDaTarde" type="button" style="background-color: #FED233;"><i
+                                        class="bi bi-plus"></i> Itens</button>
+                            </div>
+                            <div>
+                                <ul class="list-group" id="lista-itens-lancheDaTarde">
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="refeicao-jantar-pane" role="tabpanel"
+                            aria-labelledby="refeicao-jantar" tabindex="0">
+
+                            <div class="input-group input-group-sm py-3">
+                                <input type="text" class="form-control fw-normal" id="input-item-jantar"
+                                    placeholder="Item..." aria-label="" aria-describedby="">
+                                <button class="btn btn-light" id="inserir-item-jantar" data-refeicao="jantar"
+                                    type="button" style="background-color: #FED233;"><i class="bi bi-plus"></i>
+                                    Itens</button>
+                            </div>
+                            <div>
+                                <ul class="list-group" id="lista-itens-jantar">
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="refeicao-lancheDaNoite-pane" role="tabpanel"
+                            aria-labelledby="refeicao-lancheDaNoite" tabindex="0">
+
+                            <div class="input-group input-group-sm py-3">
+                                <input type="text" class="form-control fw-normal" id="input-item-lancheDaNoite"
+                                    placeholder="Item..." aria-label="" aria-describedby="">
+                                <button class="btn btn-light" id="inserir-item-lancheDaNoite"
+                                    data-refeicao="lancheDaNoite" type="button" style="background-color: #FED233;"><i
+                                        class="bi bi-plus"></i> Itens</button>
+                            </div>
+                            <div>
+                                <ul class="list-group" id="lista-itens-lancheDaNoite">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col text-end">
+            <a href="../assinantes/assinantes.html" class="btn btn-light" style="background-color: #FED233;">Voltar</a>
+            <button class="btn btn-light" id="btn-salvar-dieta" style="background-color: #FED233;">Salvar</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal" id="modal-criar-dieta" tabindex="-1" aria-labelledby="modal-criar-dieta-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-criar-dieta-label">Refeição</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-#area-lateral, .list-group-item, .offcanvas {
+#area-lateral, a.list-group-item, .offcanvas {
     background-color: #FED233;
 }
 
@@ -26,4 +26,18 @@ header {
 
 a, input, select {
     cursor: pointer;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: var(--bs-nav-tabs-link-active-color);
+    background-color: #FED233;;
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: var(--bs-nav-pills-link-active-color);
+    background-color: #FED233;;
+}
+.nav-tabs .nav-link {
+    color: var(--bs-nav-pills-link-active-color);
 }

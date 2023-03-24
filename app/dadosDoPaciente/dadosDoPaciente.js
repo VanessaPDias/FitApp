@@ -10,6 +10,7 @@ seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 window.onload = aoCarregarPagina;
 
 let idPaciente;
+let nomePaciente;
 
 async function aoCarregarPagina() {
     const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -24,7 +25,7 @@ async function aoCarregarPagina() {
 
    // document.querySelector("#btn-dieta-atual").onclick = buscarDietaAtual;
     document.querySelector("#btn-medidas").onclick = irParaPaginaDeMedidas;
-  //  document.querySelector("#btn-nova-dieta").onclick = criarDieta;
+    document.querySelector("#btn-nova-dieta").onclick = irParaPaginaDeCriarDieta;
 
     mensagens.exibirMensagemAoCarregarAPagina();
 }
@@ -33,6 +34,8 @@ async function buscarDadosDoPaciente(idAssinante) {
     try {
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token, idAssinante);
+
+        nomePaciente = resposta.nome;
 
         if (resposta.imagem) {
             document.querySelector("#imagem-paciente").setAttribute("src", `${configuracoes.urlDaApi}/${resposta.imagem}`);
@@ -75,7 +78,12 @@ async function buscarDadosDoPaciente(idAssinante) {
         erros.tratarErro(error);
     }
 }
+
 function irParaPaginaDeMedidas() {
     window.location.href = `../historicoDeMedidasDoPaciente/historicoDeMedidasDoPaciente.html?idAssinante=${idPaciente}`;
+}
+
+function irParaPaginaDeCriarDieta() {
+    window.location.href = `../criarDieta/criarDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}`;
 }
 
