@@ -93,6 +93,7 @@ async function buscarPacientePorId(req, res) {
         sexo: pacienteEncontrado.dados.idSexo,
         altura: !pacienteEncontrado.dados.altura ? 0 : pacienteEncontrado.dados.altura,
         dietas: !pacienteEncontrado.dietas ? [] : pacienteEncontrado.dietas,
+        dietaAtual: !pacienteEncontrado.dietas ? [] : pacienteEncontrado.dietas[0],
         peso: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.peso,
         pescoco: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.pescoco,
         cintura: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.cintura,

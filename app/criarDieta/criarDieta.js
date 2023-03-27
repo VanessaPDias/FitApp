@@ -3,7 +3,6 @@ import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 import * as mensagens from "../util/mensagens.js";
-import * as configuracoes from "../configuracoes.js";
 
 seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
@@ -12,8 +11,6 @@ window.onload = aoCarregarPagina;
 let token;
 let idPaciente;
 let nomePaciente;
-let idDieta;
-const dadosDaDieta = [];
 const itensDaDieta = [];
 
 async function aoCarregarPagina() {
@@ -23,9 +20,8 @@ async function aoCarregarPagina() {
 
     idPaciente = params.idAssinante;
     nomePaciente = params.nomeAssinante;
-    idDieta = params.idDieta;
 
-    await paginaMestra.carregar("criarDieta/criarDieta-conteudo.html", "Dieta");
+    await paginaMestra.carregar("criarDieta/criarDieta-conteudo.html", "Criar Dieta");
 
     document.querySelector("#nome-paciente").innerHTML = nomePaciente;
 
@@ -37,15 +33,9 @@ async function aoCarregarPagina() {
     document.querySelector("#inserir-item-lancheDaNoite").onclick = inserirItem;
 
     document.querySelector("#btn-salvar-dieta").onclick = gravarDieta;
+    document.querySelector("#btn-voltar-para-dados-paciente").onclick = voltarParaDadosDoPaciente;
 
     token = seguranca.pegarToken();
-
-    if (idDieta) {
-        const resposta = await servicos.buscarDadosDaDieta(token, idPaciente, idDieta);
-        dadosDaDieta.push(resposta.dieta);
-        itensDaDieta.push(resposta.itensDaDieta);
-        mostrarDadosDaDieta(dadosDaDieta, itensDaDieta);
-    }
 
     mensagens.exibirMensagemAoCarregarAPagina();
 }
@@ -64,9 +54,9 @@ function inserirItem(evento) {
 
     itensDaDieta.filter(item => item.refeicao == refeicao).forEach(elemento => {
         document.querySelector(`#lista-itens-${refeicao}`).innerHTML = document.querySelector(`#lista-itens-${refeicao}`).innerHTML +
-            `<li class="list-group-item mb-2 d-flex">
-            ${elemento.descricao}
-        </li><i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer"></i>`;
+            `<li class="list-group-item mb-2 d-flex justify-content-between">
+            ${elemento.descricao}<i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer"></i>
+        </li>`;
     });
 }
 
@@ -86,34 +76,12 @@ async function gravarDieta(evento) {
     try {
         const resposta = await servicos.salvarDieta(token, idPaciente, nomeDieta, dataInicio, dataFim, objetivo, itensDaDieta);
         mensagens.mostrarMensagemDeSucesso("Dieta criada com sucesso!", true);
-        window.location.href = `criarDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${resposta.idDieta}`;
+        window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${resposta.idDieta}`;
     } catch (error) {
         erros.tratarErro(error);
     }
 }
 
-function mostrarDadosDaDieta(dadosDaDieta, itensDaDieta) {
-    const dataInicio = formatarData(dadosDaDieta[0].dataInicio);
-    const dataFim = formatarData(dadosDaDieta[0].dataFim);
-
-    document.querySelector("#nome-dieta").value = dadosDaDieta[0].nome;
-    document.querySelector("#inicio-dieta").value = dataInicio;
-    document.querySelector("#fim-dieta").value = dataFim;
-    document.querySelector("#objetivo-dieta").value = dadosDaDieta[0].objetivo;
-
-    itensDaDieta[0].forEach(item => {
-        document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
-            `<li class="list-group-item mb-2 d-flex">
-            ${item.descricao}
-        </li>`;
-    });
+function voltarParaDadosDoPaciente() {
+    window.location.href = `../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}`;
 }
-
-function formatarData(dataRecebida) {
-    const data = new Date(dataRecebida);
-    const zeroEsquerdaMes = (data.getMonth() + 1) < 10 ? '0' : '';
-    const zeroEsquerdaDia = (data.getDate() + 1) < 10 ? '0' : '';
-    return data.getFullYear() + '-' + zeroEsquerdaMes + (data.getMonth() + 1) + '-' + zeroEsquerdaDia + data.getDate();
-}
-
-//

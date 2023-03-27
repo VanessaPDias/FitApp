@@ -11,6 +11,7 @@ window.onload = aoCarregarPagina;
 
 let idPaciente;
 let nomePaciente;
+let idDietaAtual;
 
 async function aoCarregarPagina() {
     const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -23,7 +24,7 @@ async function aoCarregarPagina() {
 
     await buscarDadosDoPaciente(idPaciente);
 
-   // document.querySelector("#btn-dieta-atual").onclick = buscarDietaAtual;
+    document.querySelector("#btn-dieta-atual").onclick = irParaPaginaDeDadosDaDieta;
     document.querySelector("#btn-medidas").onclick = irParaPaginaDeMedidas;
     document.querySelector("#btn-nova-dieta").onclick = irParaPaginaDeCriarDieta;
 
@@ -36,6 +37,7 @@ async function buscarDadosDoPaciente(idAssinante) {
         const resposta = await servicos.buscarDados(token, idAssinante);
 
         nomePaciente = resposta.nome;
+        idDietaAtual = resposta.dietaAtual.idDieta;
 
         if (resposta.imagem) {
             document.querySelector("#imagem-paciente").setAttribute("src", `${configuracoes.urlDaApi}/${resposta.imagem}`);
@@ -54,14 +56,14 @@ async function buscarDadosDoPaciente(idAssinante) {
         document.querySelector("#lista-dietas").innerHTML = "";
 
         if (resposta.dietas.length > 0) {
-            resposta.forEach(dieta => {
+            resposta.dietas.forEach(dieta => {
 
                 document.querySelector("#lista-dietas").innerHTML = document.querySelector("#lista-dietas").innerHTML +
                     `<tr>
                         <td>${dieta.nome}</td>
-                        <td>${dieta.inicio}</td>
-                        <td>${dieta.fim}</td>
-                        <td><a href="../dadosDoAssinante/dadosDoAssinante.html?idAssinante=${dieta.idAssinante}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
+                        <td>${new Date(dieta.dataInicio).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
+                        <td>${new Date(dieta.dataFim).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
+                        <td><a href="../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${dieta.idDieta}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }
@@ -84,6 +86,11 @@ function irParaPaginaDeMedidas() {
 }
 
 function irParaPaginaDeCriarDieta() {
-    window.location.href = `../criarDieta/criarDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}`;
+        window.location.href = `../criarDieta/criarDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}`;
+}
+
+function irParaPaginaDeDadosDaDieta() {
+    window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDietaAtual}`;
+
 }
 

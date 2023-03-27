@@ -278,7 +278,7 @@ async function buscarPacientePorId(idAssinante) {
             order by data desc limit 1`, [idAssinante]);
 
         const [dietas, fieldsDietas] = await conexao.execute(
-            `select idDieta, dataInicio, dataFim, objetivo
+            `select idDieta, nome, dataInicio, dataFim, objetivo
             from dietas
             where idAssinante = ?
             order by data desc`, [idAssinante]);
