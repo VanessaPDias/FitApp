@@ -82,7 +82,7 @@ function configurarPaginaMestraPorPerfil(perfil) {
                 { nome: "Mensagens", icone: "bi-envelope", link: "/mensagens/mensagens.html" }
             ],
             menuCabecalho: [
-                { nome: "Meu Perfil", icone: "bi-person", link: "../perfilNutricionista/perfil.html" },
+                { nome: "Meu Perfil", icone: "bi-person", link: "../perfilNutricionista/perfilNutricionista.html" },
             ],
         }
     ];
