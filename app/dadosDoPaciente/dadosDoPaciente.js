@@ -37,7 +37,7 @@ async function buscarDadosDoPaciente(idAssinante) {
         const resposta = await servicos.buscarDados(token, idAssinante);
 
         nomePaciente = resposta.nome;
-        idDietaAtual = resposta.dietaAtual.idDieta;
+        
 
         if (resposta.imagem) {
             document.querySelector("#imagem-paciente").setAttribute("src", `${configuracoes.urlDaApi}/${resposta.imagem}`);
@@ -56,6 +56,7 @@ async function buscarDadosDoPaciente(idAssinante) {
         document.querySelector("#lista-dietas").innerHTML = "";
 
         if (resposta.dietas.length > 0) {
+            idDietaAtual = resposta.dietaAtual.idDieta;
             resposta.dietas.filter(dieta => dieta.idDieta != idDietaAtual).forEach(dieta => {
 
                 document.querySelector("#lista-dietas").innerHTML = document.querySelector("#lista-dietas").innerHTML +

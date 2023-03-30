@@ -29,17 +29,32 @@ async function aoCarregarPagina() {
 
     document.querySelector("#nome-paciente").innerHTML = nomePaciente;
 
+
+    if (dietaAtual == false) {
+
+        document.querySelector("#input-item-cafeDaManha").hidden = true;
+        document.querySelector("#input-item-lancheDaManha").hidden = true;
+        document.querySelector("#input-item-almoco").hidden = true;
+        document.querySelector("#input-item-lancheDatarde").hidden = true;
+        document.querySelector("#input-item-jantar").hidden = true;
+        document.querySelector("#input-item-lancheDaNoite").hidden = true;
+
+        document.querySelector("#inserir-item-cafeDaManha").hidden = true;
+        document.querySelector("#inserir-item-lancheDaManha").hidden = true;
+        document.querySelector("#inserir-item-almoco").hidden = true;
+        document.querySelector("#inserir-item-lancheDatarde").hidden = true;
+        document.querySelector("#inserir-item-jantar").hidden = true;
+        document.querySelector("#inserir-item-lancheDaNoite").hidden = true;
+
+        document.querySelector("#btn-alterar-dieta").hidden = true;
+    }
+
     document.querySelector("#inserir-item-cafeDaManha").onclick = inserirItem;
     document.querySelector("#inserir-item-lancheDaManha").onclick = inserirItem;
     document.querySelector("#inserir-item-almoco").onclick = inserirItem;
     document.querySelector("#inserir-item-lancheDatarde").onclick = inserirItem;
     document.querySelector("#inserir-item-jantar").onclick = inserirItem;
     document.querySelector("#inserir-item-lancheDaNoite").onclick = inserirItem;
-
-    if(dietaAtual == false) {
-        document.querySelector("#btn-alterar-dieta").hidden = true;
-    }
-
     document.querySelector("#btn-alterar-dieta").onclick = alterarDieta;
     document.querySelector("#btn-voltar-para-dados-paciente").onclick = voltarParaDadosDoPaciente;
 
@@ -55,20 +70,41 @@ async function buscarDadosDaDieta() {
     const dataInicio = formatarData(resposta.dieta.dataInicio);
     const dataFim = formatarData(resposta.dieta.dataFim);
 
-    document.querySelector("#nome-dieta").value = resposta.dieta.nome;
-    document.querySelector("#inicio-dieta").value = dataInicio;
-    document.querySelector("#fim-dieta").value = dataFim;
-    document.querySelector("#objetivo-dieta").value = resposta.dieta.objetivo;
+    const inputNomeDieta = document.querySelector("#nome-dieta");
+    const inputDataInicio = document.querySelector("#inicio-dieta");
+    const inputDataFim = document.querySelector("#fim-dieta");
+    const inputObjetivo = document.querySelector("#objetivo-dieta");
 
-    itensDaDieta.forEach(item => {
+    if (resposta.dieta.dietaAtual == true) {
+        inputNomeDieta.value = resposta.dieta.nome;
+        inputDataInicio.value = dataInicio;
+        inputDataFim.value = dataFim;
+        inputObjetivo.value = resposta.dieta.objetivo;
 
-        document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
-            `<li class="list-group-item mb-2 d-flex justify-content-between">
-            ${item.descricao}<i class="bi bi-trash3 btn-excluir-item" data-refeicao=${item.refeicao} data-descricao=${item.descricao} style= "cursor: pointer"></i>
-        </li>`;
-    });
+        itensDaDieta.forEach(item => {
+            document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
+                `<li class="list-group-item mb-2 d-flex justify-content-between">${item.descricao}
+                    <i class="bi bi-trash3 btn-excluir-item" data-refeicao=${item.refeicao} data-descricao=${item.descricao} style= "cursor: pointer"></i>
+                </li>`;
+        });
 
-    adicionarEventoExcluir()
+        adicionarEventoExcluir()
+    } else {
+        inputNomeDieta.setAttribute("disabled", "");
+        inputDataInicio.setAttribute("disabled", "");
+        inputDataFim.setAttribute("disabled", "");
+        inputObjetivo.setAttribute("disabled", "");
+
+        inputNomeDieta.value = resposta.dieta.nome;
+        inputDataInicio.value = dataInicio;
+        inputDataFim.value = dataFim;
+        inputObjetivo.value = resposta.dieta.objetivo;
+
+        itensDaDieta.forEach(item => {
+            document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
+                `<li class="list-group-item mb-2 d-flex justify-content-between">${item.descricao}</li>`;
+        });
+    }
 }
 
 function inserirItem(evento) {
@@ -76,7 +112,7 @@ function inserirItem(evento) {
 
     const descricaoDoItem = document.querySelector(`#input-item-${refeicao}`).value;
 
-    if(document.querySelector(`#input-item-${refeicao}`).value == "") {
+    if (document.querySelector(`#input-item-${refeicao}`).value == "") {
         mensagens.mostrarMensagemDeErro("Não é possível inserir item sem descricão!", false);
         return;
     }
@@ -158,18 +194,15 @@ function excluirItem(evento) {
     mostrarItensDaDieta();
 }
 
-function filtrarItens(item, refeicao, descricao)
-{
-    if(item.refeicao == refeicao)
-    {
-        if(item.descricao == descricao)
-        {
+function filtrarItens(item, refeicao, descricao) {
+    if (item.refeicao == refeicao) {
+        if (item.descricao == descricao) {
             return false;
         }
-        else{
+        else {
             return true;
         }
-    }else {
+    } else {
         return true;
     }
 }
