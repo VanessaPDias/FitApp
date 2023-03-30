@@ -56,14 +56,14 @@ async function buscarDadosDoPaciente(idAssinante) {
         document.querySelector("#lista-dietas").innerHTML = "";
 
         if (resposta.dietas.length > 0) {
-            resposta.dietas.forEach(dieta => {
+            resposta.dietas.filter(dieta => dieta.idDieta != idDietaAtual).forEach(dieta => {
 
                 document.querySelector("#lista-dietas").innerHTML = document.querySelector("#lista-dietas").innerHTML +
                     `<tr>
                         <td>${dieta.nome}</td>
                         <td>${new Date(dieta.dataInicio).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
                         <td>${new Date(dieta.dataFim).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
-                        <td><a href="../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${dieta.idDieta}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
+                        <td><a href="../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${dieta.idDieta}&dietaAtual=${dieta.dietaAtual}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }

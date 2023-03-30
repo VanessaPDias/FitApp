@@ -42,8 +42,14 @@ async function aoCarregarPagina() {
 
 function inserirItem(evento) {
     const refeicao = evento.target.dataset.refeicao;
+    
+    if(document.querySelector(`#input-item-${refeicao}`).value == "") {
+        mensagens.mostrarMensagemDeErro("Não é possível inserir item sem descricão!", false);
+        return;
+    }
 
     const descricaoDoItem = document.querySelector(`#input-item-${refeicao}`).value;
+
 
     document.querySelector(`#input-item-${refeicao}`).value = "";
 

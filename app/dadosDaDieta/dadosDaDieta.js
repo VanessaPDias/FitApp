@@ -3,7 +3,6 @@ import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 import * as mensagens from "../util/mensagens.js";
-import * as configuracoes from "../configuracoes.js";
 
 seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
@@ -12,6 +11,7 @@ window.onload = aoCarregarPagina;
 let token;
 let idPaciente;
 let nomePaciente;
+let dietaAtual;
 let idDieta;
 let itensDaDieta = [];
 
@@ -23,6 +23,7 @@ async function aoCarregarPagina() {
     idPaciente = params.idAssinante;
     nomePaciente = params.nomeAssinante;
     idDieta = params.idDieta;
+    dietaAtual = params.dietaAtual;
 
     await paginaMestra.carregar("dadosDaDieta/dadosDaDieta-conteudo.html", "Dados da Dieta");
 
@@ -35,6 +36,9 @@ async function aoCarregarPagina() {
     document.querySelector("#inserir-item-jantar").onclick = inserirItem;
     document.querySelector("#inserir-item-lancheDaNoite").onclick = inserirItem;
 
+    if(dietaAtual == false) {
+        document.querySelector("#btn-alterar-dieta").hidden = true;
+    }
 
     document.querySelector("#btn-alterar-dieta").onclick = alterarDieta;
     document.querySelector("#btn-voltar-para-dados-paciente").onclick = voltarParaDadosDoPaciente;
@@ -47,7 +51,7 @@ async function aoCarregarPagina() {
 async function buscarDadosDaDieta() {
     const resposta = await servicos.buscarDados(token, idPaciente, idDieta);
     itensDaDieta = resposta.itensDaDieta;
-    
+
     const dataInicio = formatarData(resposta.dieta.dataInicio);
     const dataFim = formatarData(resposta.dieta.dataFim);
 
@@ -60,15 +64,22 @@ async function buscarDadosDaDieta() {
 
         document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
             `<li class="list-group-item mb-2 d-flex justify-content-between">
-            ${item.descricao}<i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer"></i>
+            ${item.descricao}<i class="bi bi-trash3 btn-excluir-item" data-refeicao=${item.refeicao} data-descricao=${item.descricao} style= "cursor: pointer"></i>
         </li>`;
     });
+
+    adicionarEventoExcluir()
 }
 
 function inserirItem(evento) {
     const refeicao = evento.target.dataset.refeicao;
 
     const descricaoDoItem = document.querySelector(`#input-item-${refeicao}`).value;
+
+    if(document.querySelector(`#input-item-${refeicao}`).value == "") {
+        mensagens.mostrarMensagemDeErro("Não é possível inserir item sem descricão!", false);
+        return;
+    }
 
     document.querySelector(`#input-item-${refeicao}`).value = "";
 
@@ -93,7 +104,7 @@ async function alterarDieta(evento) {
     evento.preventDefault();
 
     try {
-        const resposta = await servicos.alterarDieta(token, idPaciente, idDieta, nomeDieta, dataInicio, dataFim, objetivo, itensDaDieta);
+        await servicos.alterarDieta(token, idPaciente, idDieta, nomeDieta, dataInicio, dataFim, objetivo, itensDaDieta);
         window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDieta}`;
         mensagens.mostrarMensagemDeSucesso("Dieta alterada com sucesso!", true);
     } catch (error) {
@@ -108,14 +119,16 @@ function mostrarItensDaDieta() {
     document.querySelector(`#lista-itens-lancheDaTarde`).innerHTML = "";
     document.querySelector(`#lista-itens-jantar`).innerHTML = "";
     document.querySelector(`#lista-itens-lancheDaNoite`).innerHTML = "";
-    
+
     itensDaDieta.forEach(item => {
 
         document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
             `<li class="list-group-item mb-2 d-flex justify-content-between">
-            ${item.descricao}<i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer"></i>
+            ${item.descricao}<i class="bi bi-trash3 btn-excluir-item" data-refeicao=${item.refeicao} data-descricao=${item.descricao} style= "cursor: pointer"></i>
         </li>`;
     });
+
+    adicionarEventoExcluir()
 }
 
 function formatarData(dataRecebida) {
@@ -127,4 +140,36 @@ function formatarData(dataRecebida) {
 
 function voltarParaDadosDoPaciente() {
     window.location.href = `../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}`;
+}
+
+function adicionarEventoExcluir() {
+    const listaBtnExcluir = document.querySelectorAll(".btn-excluir-item");
+    listaBtnExcluir.forEach(element => {
+        element.onclick = excluirItem;
+    });
+}
+
+function excluirItem(evento) {
+    const refeicao = evento.target.dataset.refeicao;
+    const descricao = evento.target.dataset.descricao;
+
+    itensDaDieta = itensDaDieta.filter(item => filtrarItens(item, refeicao, descricao));
+
+    mostrarItensDaDieta();
+}
+
+function filtrarItens(item, refeicao, descricao)
+{
+    if(item.refeicao == refeicao)
+    {
+        if(item.descricao == descricao)
+        {
+            return false;
+        }
+        else{
+            return true;
+        }
+    }else {
+        return true;
+    }
 }
