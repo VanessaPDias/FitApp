@@ -72,7 +72,9 @@ async function buscarMensagensEnviadas(idUsuario) {
                     mensagem.assunto, 
                     mensagem.texto, 
                     mensagem.idMensagemResposta,
-                    dest.login as emailDestinatario, rem.login as emailRemetente
+                    dest.login as emailDestinatario, 
+                    dest.nome as nomeDestinatario,
+                    rem.login as emailRemetente
             from mensagens as mensagem
                 inner join usuarios as dest on mensagem.idUsuarioDestinatario = dest.idUsuario
                 inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario

@@ -21,11 +21,11 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     // adiciona o nome do usuario no cabeçalho
     paginaMestraHtml.querySelector("#cabecalho-nome").innerHTML = seguranca.pegarNomeDoUsuario();
 
-    
+
     const imagem = seguranca.pegarImagemDoUsuario();
 
     if (imagem) {
-    paginaMestraHtml.querySelector("#cabecalho-imagem-perfil").src = `${configuracoes.urlDaApi}/` + imagem;
+        paginaMestraHtml.querySelector("#cabecalho-imagem-perfil").src = `${configuracoes.urlDaApi}/` + imagem;
     }
 
     //coloca o conteudo da pagina interna dentro da tag <main> da pagina mestra
@@ -35,7 +35,7 @@ export async function carregar(caminhoPaginaInterna, titulo) {
     document.documentElement.setAttribute("lang", "pt-BR");
 
     //substitui o conteudo html da pagina criada pelo conteudo da pagina mestra
-    document.documentElement.innerHTML = paginaMestraHtml.documentElement.innerHTML;    
+    document.documentElement.innerHTML = paginaMestraHtml.documentElement.innerHTML;
 
     document.querySelector("#cabecalho-sair").onclick = fazerLogout;
 
@@ -55,34 +55,34 @@ function configurarPaginaMestraPorPerfil(perfil) {
             perfil: "assinante",
             home: "/dashboard/dashboard.html",
             menuLateral: [
-                { nome: "Início", icone: "bi-house-door", link: "/dashboard/dashboard.html" },
-                { nome: "Medidas", icone: "bi-rulers", link: "/medidas/medidas.html" },
-                { nome: "Relatórios", icone: "bi-clipboard-data", link: "/historicoDeMedidasAssinante/historicoDeMedidasAssinante.html" }
+                { nome: "Início", icone: "bi-house-door", id: "#inicio", link: `/dashboard/dashboard.html#inicio` },
+                { nome: "Medidas", icone: "bi-rulers", id: "#medidas", link: "/medidas/medidas.html#medidas" },
+                { nome: "Relatórios", icone: "bi-clipboard-data", id: "#relatorios", link: "/historicoDeMedidasAssinante/historicoDeMedidasAssinante.html#relatorios" }
             ],
             menuCabecalho: [
-                { nome: "Meu Perfil", icone: "bi-person", link: "../perfilAssinante/perfil.html" },
+                { nome: "Meu Perfil", icone: "bi-person", id: "#meuPerfil", link: "../perfilAssinante/perfil.html#meuPerfil" },
             ],
         },
         {
             perfil: "administrador",
             home: "/assinantes/assinantes.html",
             menuLateral: [
-                { nome: "Assinantes", icone: "bi-people", link: "/assinantes/assinantes.html" },
-                { nome: "Nutricionistas", icone: "bi-people", link: "/nutricionistas/nutricionistas.html" },
-                { nome: "Personal Trainers", icone: "bi-people", link: "/personalTrainers/personalTrainers.html" },
-                { nome: "Planos", icone: "bi-card-checklist", link: "/planos/planos.html" },
-                { nome: "Mensagens", icone: "bi-envelope", link: "/mensagens/mensagens.html" },
+                { nome: "Assinantes", icone: "bi-people", id: "#assinantes", link: "/assinantes/assinantes.html#assinantes" },
+                { nome: "Nutricionistas", icone: "bi-people", id: "#nutricionistas", link: "/nutricionistas/nutricionistas.html#nutricionistas" },
+                { nome: "Personal Trainers", icone: "bi-people", id: "#personalTrainers", link: "/personalTrainers/personalTrainers.html#personalTrainers" },
+                { nome: "Planos", icone: "bi-card-checklist", id: "#planos", link: "/planos/planos.html#planos" },
+                { nome: "Mensagens", icone: "bi-envelope", id: "#mensagens", link: "/mensagens/mensagens.html#mensagens" },
             ]
         },
         {
             perfil: "nutricionista",
             home: "/pacientes/pacientes.html",
             menuLateral: [
-                { nome: "Pacientes", icone: "bi-people", link: "/pacientes/pacientes.html" },
-                { nome: "Mensagens", icone: "bi-envelope", link: "/mensagens/mensagens.html" }
+                { nome: "Pacientes", icone: "bi-people", id: "#pacientes", link: "/pacientes/pacientes.html#pacientes" },
+                { nome: "Mensagens", icone: "bi-envelope", id: "#mensagens", link: "/mensagens/mensagens.html#mensagens" }
             ],
             menuCabecalho: [
-                { nome: "Meu Perfil", icone: "bi-person", link: "../perfilNutricionista/perfilNutricionista.html" },
+                { nome: "Meu Perfil", icone: "bi-person", id: "#meuPerfil", link: "../perfilNutricionista/perfilNutricionista.html#meuPerfil" },
             ],
         }
     ];
@@ -112,20 +112,27 @@ function configurarPaginaMestraPorPerfil(perfil) {
     const menuLateral = document.querySelector("#menu-lateral");
     const menuLateralOffCanvas = document.querySelector("#menu-offCanvas");
 
-    configuracaoDoPerfil.menuLateral.forEach(item => {
-        const a = document.createElement("a");
-        a.href = item.link;
-        a.classList.add("list-group-item", "list-group-item-action", "border-0", "item-menu", "fw-semibold");
-        a.innerHTML = `<i class="bi ${item.icone} fs-4 me-2"></i>${item.nome}`;
+    const menuSelecionado = new URL(window.location.href).hash;
 
-        const aOffCanvas = document.createElement("a");
-        aOffCanvas.href = item.link;
-        aOffCanvas.classList.add("list-group-item", "list-group-item-action", "border-0", "item-menu", "fw-semibold");
-        aOffCanvas.innerHTML = `<i class="bi ${item.icone} fs-1 me-2"></i>${item.nome}`
+        configuracaoDoPerfil.menuLateral.forEach(item => {
+            const a = document.createElement("a");
+            a.href = item.link;
+            a.classList.add("list-group-item", "list-group-item-action", "lista-menu-lateral", "border-0", "item-menu", "fw-semibold");
+            a.innerHTML = `<i class="bi ${item.icone} fs-4 me-2"></i>${item.nome}`;
 
-        menuLateral.appendChild(a);
-        menuLateralOffCanvas.appendChild(aOffCanvas);
-    });
+            const aOffCanvas = document.createElement("a");
+            aOffCanvas.href = item.link;
+            aOffCanvas.classList.add("list-group-item", "list-group-item-action", "lista-menu-offcanvas", "border-0", "item-menu", "fw-semibold");
+            aOffCanvas.innerHTML = `<i class="bi ${item.icone} fs-1 me-2"></i>${item.nome}`
+
+            if(item.id == menuSelecionado) {
+                a.classList.add("active");
+                aLogoOffCanvas.classList.add("active");
+            }
+
+            menuLateral.appendChild(a);
+            menuLateralOffCanvas.appendChild(aOffCanvas);
+        });
 
     const menuCabecalho = document.querySelector("#menu-cabecalho");
 

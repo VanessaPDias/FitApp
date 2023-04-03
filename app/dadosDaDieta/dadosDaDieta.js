@@ -83,7 +83,7 @@ async function buscarDadosDaDieta() {
 
         itensDaDieta.forEach(item => {
             document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
-                `<li class="list-group-item mb-2 d-flex justify-content-between">${item.descricao}
+                `<li class="list-group-item mb-2 d-flex justify-content-between lista-itens-dieta">${item.descricao}
                     <i class="bi bi-trash3 btn-excluir-item" data-refeicao=${item.refeicao} data-descricao=${item.descricao} style= "cursor: pointer"></i>
                 </li>`;
         });
@@ -102,7 +102,7 @@ async function buscarDadosDaDieta() {
 
         itensDaDieta.forEach(item => {
             document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
-                `<li class="list-group-item mb-2 d-flex justify-content-between">${item.descricao}</li>`;
+                `<li class="list-group-item mb-2 d-flex justify-content-between lista-itens-dieta">${item.descricao}</li>`;
         });
     }
 }
@@ -159,7 +159,7 @@ function mostrarItensDaDieta() {
     itensDaDieta.forEach(item => {
 
         document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
-            `<li class="list-group-item mb-2 d-flex justify-content-between">
+            `<li class="list-group-item lista-itens-dieta mb-2 d-flex justify-content-between">
             ${item.descricao}<i class="bi bi-trash3 btn-excluir-item" data-refeicao=${item.refeicao} data-descricao=${item.descricao} style= "cursor: pointer"></i>
         </li>`;
     });

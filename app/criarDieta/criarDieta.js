@@ -60,7 +60,7 @@ function inserirItem(evento) {
 
     itensDaDieta.filter(item => item.refeicao == refeicao).forEach(elemento => {
         document.querySelector(`#lista-itens-${refeicao}`).innerHTML = document.querySelector(`#lista-itens-${refeicao}`).innerHTML +
-            `<li class="list-group-item mb-2 d-flex justify-content-between">
+            `<li class="list-group-item mb-2 d-flex justify-content-between lista-itens-dieta">
             ${elemento.descricao}<i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer"></i>
         </li>`;
     });

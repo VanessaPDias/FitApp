@@ -30,13 +30,13 @@ async function entrar(evento) {
         const usuario = seguranca.pegarUsuarioDoToken(resposta.token);
 
         if(usuario.perfil == "assinante") {
-           window.location.href = "../dashboard/dashboard.html" 
+           window.location.href = "../dashboard/dashboard.html#inicio" 
         }
         if(usuario.perfil == "administrador") {
-           window.location.href = "../assinantes/assinantes.html" 
+           window.location.href = "../assinantes/assinantes.html#assinantes" 
         }
         if(usuario.perfil == "nutricionista") {
-           window.location.href = "../pacientes/pacientes.html" 
+           window.location.href = "../pacientes/pacientes.html#pacientes" 
         }
 
     } catch (error) {

@@ -1,46 +1,91 @@
-#area-lateral, a.list-group-item, .offcanvas {
-    background-color: #FED233;
+:root {
+    --bs-amarelo-padrao: #FED233;
+    --bs-amarelo-active-hover: #c1a12b;
+    --bs-text-link-color: #212529;
+    --bs-cinza-body: #EDEDED;
+}
+
+.nav {
+    --bs-nav-link-hover-color: var(--bs-text-link-color)
+}
+
+.dropdown-menu {
+    --bs-dropdown-link-hover-bg: var(--bs-amarelo-active-hover);
+    --bs-dropdown-link-active-bg: var(--bs-amarelo-padrao);
+    --bs-dropdown-link-active-color: var(--bs-text-link-color);
+}
+
+
+.list-group {
+    --bs-list-group-color: var(--bs-text-link-color);
+    --bs-list-group-bg: var(--bs-amarelo-padrao);
+    --bs-list-group-action-hover-bg: var(--bs-amarelo-active-hover);
+    --bs-list-group-action-active-color: var(--bs-text-link-color);
+    --bs-list-group-action-active-bg: var(--bs-amarelo-padrao);
+    --bs-list-group-active-color: var(--bs-text-link-color);
+    --bs-list-group-active-bg: var(--bs-amarelo-active-hover);
+    --bs-list-group-active-border-color: var(--bs-amarelo-active-hover);
+
+}
+
+.btn-light {
+    --bs-btn-bg: var(--bs-amarelo-padrao);
+    --bs-btn-hover-bg: var(--bs-amarelo-active-hover);
+    --bs-btn-active-bg: var(--bs-amarelo-active-hover);
 }
 
 body {
-    background-color: #EDEDED;
+    background-color: var(--bs-cinza-body);
 }
 
 header {
-    background-color: white;
+    background-color: var(--bs-white);
 }
 
-.medidas-dashboard, .medidas-paciente {
-    color: #FED233;
-    font-size: larger;
-    font-weight: bolder;
+#area-lateral,
+.offcanvas {
+    background-color: var(--bs-amarelo-padrao);
 }
 
-.list-group-item-action:focus, .list-group-item-action:hover {
-    background-color: #c1a12b;
+
+
+.list-group .lista-itens-dieta {
+    background-color: var(--bs-white);
 }
 
-.list-group-item-action:focus, .list-group-item-action:active {
-    background-color: #c1a12b;
+thead {
+    background-color: var(--bs-amarelo-padrao);
 }
 
-a, input, select {
+.card-title {
+    color: var(--bs-amarelo-padrao);
+}
+
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active,
+.nav-link {
+    color: var(--bs-text-link-color);
+    background-color: #FED233;
+}
+
+
+a,
+input,
+select {
     cursor: pointer;
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    color: var(--bs-nav-tabs-link-active-color);
-    background-color: #FED233;;
-    border-color: var(--bs-nav-tabs-link-active-border-color);
+
+.table-responsive {
+    max-height: 250px;
+    
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: var(--bs-nav-pills-link-active-color);
-    background-color: #FED233;;
-}
-.nav-tabs .nav-link {
-    color: var(--bs-nav-pills-link-active-color);
-}
-.table-responsive {
-    max-height:250px;
-}
+
+/* .medidas-dashboard,
+.medidas-paciente {
+    color: #FED233;
+    font-size: larger;
+    font-weight: bolder;
+} */

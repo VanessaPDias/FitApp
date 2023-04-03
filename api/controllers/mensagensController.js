@@ -42,7 +42,7 @@ async function buscarMensagensRecebidas(req, res) {
     const mensagens = await repositorioDeMensagem.buscarMensagensRecebidas(req.usuario.idUsuario);
 
     if (!mensagens || mensagens.length <= 0) {
-        res.status(404).send({ erro: "Mensagens não encontrada" });
+        res.send([]);
         return;
     }
 
@@ -64,7 +64,7 @@ async function buscarMensagensEnviadas(req, res) {
     const mensagens = await repositorioDeMensagem.buscarMensagensEnviadas(req.usuario.idUsuario);
 
     if (!mensagens || mensagens.length <= 0) {
-        res.status(404).send({ erro: "Mensagens não encontrada" });
+        res.send([]);
         return;
     }
 
@@ -73,6 +73,7 @@ async function buscarMensagensEnviadas(req, res) {
             idMensagem: mensagem.idMensagem,
             remetente: mensagem.emailRemetente,
             destinatario: mensagem.emailDestinatario,
+            nomeDestinatario: mensagem.nomeDestinatario,
             data: mensagem.data,
             assunto: mensagem.assunto,
             texto: mensagem.texto
@@ -87,7 +88,7 @@ async function buscarMensagensExcluidas(req, res) {
     const mensagens = await repositorioDeMensagem.buscarMensagensExcluidas(req.usuario.idUsuario);
 
     if (!mensagens || mensagens.length <= 0) {
-        res.status(404).send({ erro: "Mensagens não encontrada" });
+        res.send([]);
         return;
     }
 

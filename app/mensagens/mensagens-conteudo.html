@@ -1,0 +1,81 @@
+<div>
+    <div class="row">
+        <h6><i class="bi bi-envelope me-1 fs-4"></i>Mensagens</h6>
+    </div>
+
+    <div class="row py-3">
+        <div class="col-12 col-sm-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h6 class="card-title">Menu</h6>
+                    <div class="list-group pt-3" style="height: 240px;">
+                        <button type="button" class="list-group-item list-group-item-action active"
+                            id="btn-mensagem-recebidas"><i class="bi bi-envelope-paper me-2"></i>Recebidas</button>
+                        <button type="button" class="list-group-item list-group-item-action"
+                            id="btn-mensagem-enviadas"><i class="bi bi-send me-2"></i>Enviadas</button>
+                        <button type="button" class="list-group-item list-group-item-action"
+                            id="btn-mensagem-excluidas"><i class="bi bi-trash3 me-2"></i>Excluídas</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-8 pt-3 pt-sm-0 ">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h6 class="card-title" id="tipo-de-mensagem"></h6>
+                    <div class="list-group pt-3" id="lista-mensagens" style="height: 240px; overflow-y: scroll;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col text-end">
+            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modal-nova-mensagem"><i
+                    class="bi bi-pencil-square me-2"></i>Nova Mensagem</button>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-nova-mensagem" tabindex="-1" aria-labelledby="modal-nova-mensagem-label"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modal-nova-mensagem-label">Nova Mensagem</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formulario">
+                        <div class="pt-3">
+                            <label class="form-label fw-semibold" for="form-destinatario">Para:</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="email" id="form-destinatario" name="para" required>
+                            </div>
+                        </div>
+
+                        <div class="pt-3">
+                            <label class="form-label fw-semibold" for="form-assunto">Assunto:</label>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="text" id="form-assunto" name="assunto" required>
+                            </div>
+                        </div>
+
+                        <div class="pt-3">
+                            <label class="form-label fw-semibold" for="texto">Mensagem:</label>
+                            <div class="input-group input-group-sm">
+                                <textarea class="form-control" aria-label="With textarea" id="form-texto"
+                                    style="height: 200px;" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-end pt-3"><button id="btn-enviar-mensagem" type="button"
+                                class="btn btn-light"><i class="bi bi-send me-2"></i>Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
