@@ -55,11 +55,11 @@ async function buscarNutricionistas() {
 
                 document.querySelector("#lista-nutricionistas").innerHTML = document.querySelector("#lista-nutricionistas").innerHTML +
                     `<tr>
-                        <td>${nutricionista.nome}</td>
-                        <td>${nutricionista.email}</td>
-                        <td>${status}</td>
-                        <td>${cadastroConfirmado}</td>
-                        <td><a href="../dadosDoNutricionista/dadosDoNutricionista.html?idNutri=${nutricionista.idNutri}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
+                        <td data-label="Nome">${nutricionista.nome}</td>
+                        <td data-label="Email">${nutricionista.email}</td>
+                        <td data-label="Status">${status}</td>
+                        <td data-label="Cadastro">${cadastroConfirmado}</td>
+                        <td data-label="Ver"><a href="../dadosDoNutricionista/dadosDoNutricionista.html?idNutri=${nutricionista.idNutri}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }

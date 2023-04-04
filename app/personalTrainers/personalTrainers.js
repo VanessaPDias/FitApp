@@ -55,11 +55,11 @@ async function buscarPersonalTrainers() {
 
                 document.querySelector("#lista-personal-trainers").innerHTML = document.querySelector("#lista-personal-trainers").innerHTML +
                     `<tr>
-                        <td>${personalTrainer.nome}</td>
-                        <td>${personalTrainer.email}</td>
-                        <td>${status}</td>
-                        <td>${cadastroConfirmado}</td>
-                        <td><a href="../dadosDoPersonal/dadosDoPersonal.html?idPersonal=${personalTrainer.idPersonal}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
+                        <td data-label="Nome">${personalTrainer.nome}</td>
+                        <td data-label="Email">${personalTrainer.email}</td>
+                        <td data-label="Status">${status}</td>
+                        <td data-label="Cadstro">${cadastroConfirmado}</td>
+                        <td data-label="Ver"><a href="../dadosDoPersonal/dadosDoPersonal.html?idPersonal=${personalTrainer.idPersonal}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }
