@@ -17,15 +17,22 @@
 
 
 .list-group {
-    --bs-list-group-color: var(--bs-text-link-color);
-    --bs-list-group-bg: var(--bs-amarelo-padrao);
-    --bs-list-group-action-hover-bg: var(--bs-amarelo-active-hover);
-    --bs-list-group-action-active-color: var(--bs-text-link-color);
-    --bs-list-group-action-active-bg: var(--bs-amarelo-padrao);
-    --bs-list-group-active-color: var(--bs-text-link-color);
-    --bs-list-group-active-bg: var(--bs-amarelo-active-hover);
-    --bs-list-group-active-border-color: var(--bs-amarelo-active-hover);
-
+    --bs-list-group-color: var(
+    --bs-text-link-color);
+    --bs-list-group-bg: var(
+    --bs-amarelo-padrao);
+    --bs-list-group-action-hover-bg: var(
+    --bs-amarelo-active-hover);
+    --bs-list-group-action-active-color: var(
+    --bs-text-link-color);
+    --bs-list-group-action-active-bg: var(
+    --bs-amarelo-padrao);
+    --bs-list-group-active-color: var(
+    --bs-text-link-color);
+    --bs-list-group-active-bg: var(
+    --bs-amarelo-active-hover);
+    --bs-list-group-active-border-color: var(
+    --bs-amarelo-active-hover);
 }
 
 .btn-light {
@@ -53,6 +60,12 @@ header {
     background-color: var(--bs-white);
 }
 
+.list-group.menu-mensagens {
+    background-color: var(--bs-white);
+}
+
+
+
 thead {
     background-color: var(--bs-amarelo-padrao);
 }
@@ -76,12 +89,10 @@ select {
     cursor: pointer;
 }
 
-
-/* .table-responsive {
-    max-height: 250px;
-    
-} */
-
+.card.card-historico-dietas {
+ height: 40%;
+ overflow-y: scroll;   
+} 
 
 /* .medidas-dashboard,
 .medidas-paciente {

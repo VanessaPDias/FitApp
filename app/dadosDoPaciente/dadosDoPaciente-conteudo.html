@@ -1,121 +1,120 @@
-<div>
-    <div class="row">
-        <div class="col-12 col-sm-5">
-            <div class="card shadow">
-                <div class="row card-body text-center">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <div>
-                                    <img src="/img/perfil-vazio.png" class="rounded-circle mx-auto d-block"
-                                        alt="imagem-paciente" id="imagem-paciente" width="142" height="142">
-                                </div>
-                                <div class="pt-3">
-                                    <span class="fs-5 fw-semibold" id="nome-paciente"></span>
-                                    <p>Objetivo: <span id="objetivo-paciente"></span></p>
-                                </div>
+<div class="row">
+    <div class="col-12 col-sm-5">
+        <div class="card shadow">
+            <div class="row card-body text-center">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <img src="/img/perfil-vazio.png" class="rounded-circle mx-auto d-block"
+                                    alt="imagem-paciente" id="imagem-paciente" width="142" height="142">
+                            </div>
+                            <div class="pt-3">
+                                <span class="fs-5 fw-semibold" id="nome-paciente"></span>
+                                <p>Objetivo: <span id="objetivo-paciente"></span></p>
                             </div>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col">
-                                <div class="row py-3">
-                                    <div class="col">
-                                        <img src="/img/grupo-de-idade.png" alt="" width="28" height="28">
-                                        <span class=" medidas-paciente"><span id="idade-paciente"></span>
-                                            anos</span>
-                                    </div>
-                                    <div class="col">
-                                        <img src="/img/height.png" alt="" width="28" height="28">
-                                        <span class="medidas-paciente"><span id="altura-paciente"></span>
-                                            cm</span>
-                                    </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="row py-3">
+                                <div class="col">
+                                    <img src="/img/grupo-de-idade.png" alt="" width="28" height="28">
+                                    <span class=" medidas-paciente"><span id="idade-paciente"></span>
+                                        anos</span>
                                 </div>
-                                <div class="row py-3">
-                                    <div class="col">
-                                        <img src="/img/weight-scale.png" alt="" width="28" height="28">
-                                        <span class="medidas-paciente"><span id="peso-paciente"></span>
-                                            kg</span>
-                                    </div>
-                                    <div class="col">
-                                        <img src="/img/pescoco.png" alt="" width="28" height="28">
-                                        <span class="medidas-paciente"><span id="pescoco-paciente"></span>
-                                            cm</span>
-                                    </div>
+                                <div class="col">
+                                    <img src="/img/height.png" alt="" width="28" height="28">
+                                    <span class="medidas-paciente"><span id="altura-paciente"></span>
+                                        cm</span>
                                 </div>
-                                <div class="row py-3">
-                                    <div class="col">
-                                        <img src="/img/cintura.png" alt="" width="28" height="28">
-                                        <span class="medidas-paciente"><span id="cintura-paciente"></span>
-                                            cm</span>
-                                    </div>
-                                    <div class="col">
-                                        <img src="/img/quadril.png" alt="" width="28" height="28">
-                                        <span class="medidas-paciente"><span id="quadril-paciente"></span>
-                                            cm</span>
-                                    </div>
+                            </div>
+                            <div class="row py-3">
+                                <div class="col">
+                                    <img src="/img/weight-scale.png" alt="" width="28" height="28">
+                                    <span class="medidas-paciente"><span id="peso-paciente"></span>
+                                        kg</span>
                                 </div>
-                                <div class="row py-3">
-                                    <span class="fs-4 fw-semibold">IMC</span>
-                                    <p class="medidas-paciente"> <span id="imc-paciente"></span> kg/m2
-                                    </p>
+                                <div class="col">
+                                    <img src="/img/pescoco.png" alt="" width="28" height="28">
+                                    <span class="medidas-paciente"><span id="pescoco-paciente"></span>
+                                        cm</span>
                                 </div>
+                            </div>
+                            <div class="row py-3">
+                                <div class="col">
+                                    <img src="/img/cintura.png" alt="" width="28" height="28">
+                                    <span class="medidas-paciente"><span id="cintura-paciente"></span>
+                                        cm</span>
+                                </div>
+                                <div class="col">
+                                    <img src="/img/quadril.png" alt="" width="28" height="28">
+                                    <span class="medidas-paciente"><span id="quadril-paciente"></span>
+                                        cm</span>
+                                </div>
+                            </div>
+                            <div class="row py-3">
+                                <span class="fs-4 fw-semibold">IMC</span>
+                                <p class="medidas-paciente"> <span id="imc-paciente"></span> kg/m2
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-7 mt-3 mt-sm-0">
-            <div class="card shadow h-50">
-                <div class="row card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Dieta</th>
-                                    <th scope="col">Ínicio</th>
-                                    <th scope="col">Fim</th>
-                                    <th scope="col">&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody id="lista-dietas">
+    </div>
+    <div class="col-12 col-sm-7 mt-3 mt-sm-0">
+        <div class="card card-historico-dietas shadow">
+            <div class="card-body ">
+                <table class="table table-sm table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Dieta</th>
+                            <th scope="col">Ínicio</th>
+                            <th scope="col">Fim</th>
+                            <th scope="col">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-dietas">
 
-                            </tbody>
-                        </table>
-                    </div>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="card shadow mt-3">
+            <div class="row card-body text-center ">
+                <div class="col">
+                    <img src="/img/dietaAtual.png" alt="" width="50" height="50">
+                </div>
+                <div class="col">
+                    <button class="btn btn-light btn-lg" type="button" id="btn-dieta-atual">Dieta
+                        Atual</button>
                 </div>
             </div>
-            <div class="card shadow mt-3">
-                <div class="row card-body text-center ">
-                    <div class="col">
-                        <img src="/img/dietaAtual.png" alt="" width="50" height="50">
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-light btn-lg" type="button"
-                            id="btn-dieta-atual">Dieta Atual</button>
-                    </div>
+        </div>
+
+        <div class="card shadow mt-2">
+            <div class="row card-body text-center">
+                <div class="col">
+                    <img src="/img/corpo.png" alt="" width="50" height="50">
+                </div>
+                <div class="col">
+                    <button class="btn btn-light btn-lg" type="button" id="btn-medidas">Medidas</button>
                 </div>
             </div>
-            <div class="card shadow mt-2">
-                <div class="row card-body text-center">
-                    <div class="col">
-                        <img src="/img/corpo.png" alt="" width="50" height="50">
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-light btn-lg" type="button"
-                            id="btn-medidas">Medidas</button>
-                    </div>
+        </div>
+
+        <div class="card shadow mt-2">
+            <div class="row card-body text-center">
+                <div class="col">
+                    <img src="/img/novaDieta.png" alt="" width="50" height="50">
                 </div>
-            </div>
-            <div class="card shadow mt-2">
-                <div class="row card-body text-center">
-                    <div class="col">
-                        <img src="/img/novaDieta.png" alt="" width="50" height="50">
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-light btn-lg"  type="button"
-                            id="btn-nova-dieta">Nova Dieta</button>
-                    </div>
+                <div class="col">
+                    <button class="btn btn-light btn-lg" type="button" id="btn-nova-dieta">Nova
+                        Dieta</button>
                 </div>
             </div>
         </div>
