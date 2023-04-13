@@ -1,17 +1,38 @@
-#home-container-banner-principal, #container-planos, #trabalhe-conosco-container-principal, footer {
-    background-color: #EDEDED;
+:root {
+    --bs-amarelo-padrao: #FED233;
+    --bs-amarelo-active-hover: #c1a12b;
+    --bs-text-link-color: #212529;
+    --bs-cinza-body: #EDEDED;
+    --bs-text-shadow: #454545 0.1em 0.1em 0.2em;
 }
 
-h3 > span {color: #FED233; text-shadow: #454545 0.1em 0.1em 0.2em;}
+#home-container-banner-principal,
+#home-container-planos,
+#trabalhe-conosco-container-principal,
+footer {
+    background-color: var(--bs-cinza-body);
+}
 
-#card-formulario {
-    background-color: #FED233;
+h3>span {
+    color: var(--bs-amarelo-padrao);
+    text-shadow: var(--bs-text-shadow);
+}
+
+#card-formulario,
+#card-header-plano {
+    background-color: var(--bs-amarelo-padrao);
+}
+
+.btn-light {
+    --bs-btn-bg: var(--bs-amarelo-padrao);
+    --bs-btn-hover-bg: var(--bs-amarelo-active-hover);
+    --bs-btn-active-bg: var(--bs-amarelo-active-hover);
 }
 
 .container-formulario {
     width: 90%;
-    
-} 
+
+}
 
 .btn-social {
     width: 45%;
@@ -19,32 +40,32 @@ h3 > span {color: #FED233; text-shadow: #454545 0.1em 0.1em 0.2em;}
 
 .formulario-dados {
     width: 90%;
-    
+
 }
 
-@media screen and (min-width: 576px) { 
+@media screen and (min-width: 576px) {
     .container-formulario {
         width: 90%;
     }
 }
 
-@media screen and (min-width: 768px) { 
+@media screen and (min-width: 768px) {
     .container-formulario {
         width: 50%;
     }
-    
+
 }
 
-@media screen and (min-width: 992px) { 
+@media screen and (min-width: 992px) {
     .container-formulario {
         width: 50%;
     }
 }
 
-@media screen and (min-width: 1200px) { 
+@media screen and (min-width: 1200px) {
     .container-formulario {
         padding-top: 20px;
         padding-bottom: 20px;
-      width: 30%;
+        width: 30%;
     }
 }
