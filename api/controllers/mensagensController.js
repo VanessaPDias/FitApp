@@ -49,7 +49,8 @@ async function buscarMensagensRecebidas(req, res) {
     res.send(mensagens.map(function (mensagem) {
         return {
             idMensagem: mensagem.idMensagem,
-            remetente: mensagem.emailRemetente,
+            emailRemetente: mensagem.emailRemetente,
+            nomeRemetente: mensagem.nomeRemetente,
             data: mensagem.data,
             assunto: mensagem.assunto,
             texto: mensagem.texto
@@ -95,7 +96,8 @@ async function buscarMensagensExcluidas(req, res) {
     res.send(mensagens.map(function (mensagem) {
         return {
             idMensagem: mensagem.idMensagem,
-            remetente: mensagem.emailRemetente,
+            emailRemetente: mensagem.emailRemetente,
+            nomeRemetente: mensagem.nomeRemetente,
             data: mensagem.data,
             assunto: mensagem.assunto,
             texto: mensagem.texto
@@ -121,8 +123,9 @@ async function buscarMensagemPorId(req, res) {
 
     res.send({
         idMensagem: mensagem.idMensagem,
-        remetente: mensagem.emailRemetente,
-        destinatario: mensagem.emailDestinatario,
+        emailRemetente: mensagem.emailRemetente,
+        nomeRemetente: mensagem.nomeRemetente,
+        emailDestinatario: mensagem.emailDestinatario,
         data: mensagem.data,
         assunto: mensagem.assunto,
         texto: mensagem.texto
@@ -167,7 +170,13 @@ async function responderMensagem(req, res) {
         return;
     }
 
-    const mensagemResposta = new Mensagem.Mensagem(req.usuario.idUsuario, req.usuario.email, mensagem.idUsuarioRemetente, mensagem.emailRemetente, mensagem.assunto, req.body.texto);
+    let assunto = mensagem.assunto;
+
+    if(!assunto.startsWith("RES:")){
+        assunto = `RES: ${assunto}`;
+    }    
+
+    const mensagemResposta = new Mensagem.Mensagem(req.usuario.idUsuario, req.usuario.email, mensagem.idUsuarioRemetente, mensagem.emailRemetente, assunto, req.body.texto);
 
     mensagem.idMensagemResposta = mensagemResposta.idMensagem;
 

@@ -54,17 +54,33 @@ header {
     background-color: var(--bs-amarelo-padrao);
 }
 
+#menu-mensagens .list-group-item {
+    background-color: var(--bs-white);
+    border-color: transparent;
+}
+
+#menu-mensagens .list-group-item.active, #menu-mensagens .list-group-item-action:hover {
+    background-color: var(--bs-amarelo-padrao);
+}
+
+#lista-mensagens {
+    height: 230px; 
+    overflow-y: scroll;
+}
+
+#lista-mensagens .list-group-item {
+    background-color: var(--bs-white);
+    border-bottom-color: var(--bs-cinza-body);
+}
+
+#lista-mensagens .list-group-item.active, #lista-mensagens .list-group-item-action:hover {
+    background-color: var(--bs-amarelo-padrao);
+}
 
 
 .list-group .lista-itens-dieta {
     background-color: var(--bs-white);
 }
-
-.list-group.menu-mensagens {
-    background-color: var(--bs-white);
-}
-
-
 
 thead {
     background-color: var(--bs-amarelo-padrao);
@@ -90,9 +106,9 @@ select {
 }
 
 .card.card-historico-dietas {
- height: 40%;
- overflow-y: scroll;   
-} 
+    height: 40%;
+    overflow-y: scroll;
+}
 
 /* .medidas-dashboard,
 .medidas-paciente {
@@ -132,5 +148,10 @@ select {
         float: left;
         font-weight: bold;
         font-size: 12px;
+    }
+
+    #lista-mensagens {
+        height: 400px; 
+        overflow-y: scroll;
     }
 }

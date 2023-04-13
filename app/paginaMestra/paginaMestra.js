@@ -39,6 +39,7 @@ export async function carregar(caminhoPaginaInterna, titulo) {
 
     document.querySelector("#cabecalho-sair").onclick = fazerLogout;
 
+
     const usuario = seguranca.pegarUsuarioDoToken();
 
     configurarPaginaMestraPorPerfil(usuario.perfil);
@@ -57,7 +58,8 @@ function configurarPaginaMestraPorPerfil(perfil) {
             menuLateral: [
                 { nome: "Início", icone: "bi-house-door", id: "#inicio", link: `/dashboard/dashboard.html#inicio` },
                 { nome: "Medidas", icone: "bi-rulers", id: "#medidas", link: "/medidas/medidas.html#medidas" },
-                { nome: "Relatórios", icone: "bi-clipboard-data", id: "#relatorios", link: "/historicoDeMedidasAssinante/historicoDeMedidasAssinante.html#relatorios" }
+                { nome: "Relatórios", icone: "bi-clipboard-data", id: "#relatorios", link: "/historicoDeMedidasAssinante/historicoDeMedidasAssinante.html#relatorios" },
+                { nome: "Mensagens", icone: "bi-envelope", id: "#mensagens", link: "/mensagens/mensagens.html#mensagens" }
             ],
             menuCabecalho: [
                 { nome: "Meu Perfil", icone: "bi-person", id: "#meuPerfil", link: "../perfilAssinante/perfil.html#meuPerfil" },
@@ -112,27 +114,35 @@ function configurarPaginaMestraPorPerfil(perfil) {
     const menuLateral = document.querySelector("#menu-lateral");
     const menuLateralOffCanvas = document.querySelector("#menu-offCanvas");
 
+
+
     const menuSelecionado = new URL(window.location.href).hash;
 
-        configuracaoDoPerfil.menuLateral.forEach(item => {
-            const a = document.createElement("a");
-            a.href = item.link;
-            a.classList.add("list-group-item", "list-group-item-action", "lista-menu-lateral", "border-0", "item-menu", "fw-semibold");
-            a.innerHTML = `<i class="bi ${item.icone} fs-4 me-2"></i>${item.nome}`;
+    configuracaoDoPerfil.menuLateral.forEach(item => {
+        const a = document.createElement("a");
+        a.href = item.link;
+        a.classList.add("list-group-item", "list-group-item-action", "lista-menu-lateral", "border-0", "item-menu", "fw-semibold");
+        a.innerHTML = `<i class="bi ${item.icone} fs-4 me-2"></i>${item.nome}`;
 
-            const aOffCanvas = document.createElement("a");
-            aOffCanvas.href = item.link;
-            aOffCanvas.classList.add("list-group-item", "list-group-item-action", "lista-menu-offcanvas", "border-0", "item-menu", "fw-semibold");
-            aOffCanvas.innerHTML = `<i class="bi ${item.icone} fs-1 me-2"></i>${item.nome}`
+        const aOffCanvas = document.createElement("a");
+        aOffCanvas.href = item.link;
+        aOffCanvas.classList.add("list-group-item", "list-group-item-action", "lista-menu-offcanvas", "border-0", "item-menu", "fw-semibold");
+        aOffCanvas.innerHTML = `<i class="bi ${item.icone} fs-1 me-2"></i>${item.nome}`
 
-            if(item.id == menuSelecionado) {
-                a.classList.add("active");
-                aLogoOffCanvas.classList.add("active");
-            }
+        if (item.id == menuSelecionado) {
+            a.classList.add("active");
+            aLogoOffCanvas.classList.add("active");
+        }
 
-            menuLateral.appendChild(a);
-            menuLateralOffCanvas.appendChild(aOffCanvas);
-        });
+        menuLateral.appendChild(a);
+        menuLateralOffCanvas.appendChild(aOffCanvas);
+    });
+
+    document.querySelectorAll("#menu-lateral .list-group-item").forEach(i => {
+        i.onclick = () => {
+            localStorage.removeItem("fitapp_tipo_mensagem");
+        }
+    });
 
     const menuCabecalho = document.querySelector("#menu-cabecalho");
 

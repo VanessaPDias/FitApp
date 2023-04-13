@@ -1,4 +1,4 @@
-import * as servicos from "./servicosDeMensagens.js"
+import * as servicos from "./servicosDeMensagens.js";
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
@@ -8,22 +8,51 @@ seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
-let modal;
+let modalExcluirMensagem;
+const chaveTipoDeMensagem = "fitapp_tipo_mensagem";
+let tipoDeMensagem;
+
+
 
 async function aoCarregarPagina() {
     await paginaMestra.carregar("mensagens/mensagens-conteudo.html", "Mensagens");
 
-    buscarMensagensRecebidas();
+    const valorDaChave = localStorage.getItem(chaveTipoDeMensagem);
+
+    if(!valorDaChave || valorDaChave == "Recebidas") {
+        buscarMensagensRecebidas()
+    }
+    if(valorDaChave == "Enviadas") {
+        buscarMensagensEnviadas()
+    }
+    if(valorDaChave == "Excluídas") {
+        buscarMensagensExcluidas()
+    }
+    
 
     document.querySelector("#btn-enviar-mensagem").onclick = enviarMensagem;
-    document.querySelector("#btn-mensagem-recebidas").onclick = buscarMensagensRecebidas;
-    document.querySelector("#btn-mensagem-enviadas").onclick = buscarMensagensEnviadas;
-    document.querySelector("#btn-mensagem-excluidas").onclick = buscarMensagensExcluidas;
+    document.querySelector("#btn-mensagens-recebidas").onclick = buscarMensagensRecebidas;
+    document.querySelector("#btn-mensagens-enviadas").onclick = buscarMensagensEnviadas;
+    document.querySelector("#btn-mensagens-excluidas").onclick = buscarMensagensExcluidas;
+    document.querySelector("#btn-confirmar-excluir-mensagem").onclick = excluirMensagem;
 
     mensagens.exibirMensagemAoCarregarAPagina();
 }
 
+function marcarLinkMenu(btn) {
+    const linksDoMenu = document.querySelectorAll("#menu-mensagens .list-group-item");
+
+    linksDoMenu.forEach(elemento => {
+        elemento.classList.remove("active");
+    })
+
+    btn.classList.add("active");
+    localStorage.removeItem(chaveTipoDeMensagem);
+    localStorage.setItem(chaveTipoDeMensagem, tipoDeMensagem);
+}
+
 async function enviarMensagem(evento) {
+
     const destinatario = document.querySelector("#form-destinatario").value;
     const assunto = document.querySelector("#form-assunto").value;
     const texto = document.querySelector("#form-texto").value;
@@ -49,10 +78,14 @@ async function enviarMensagem(evento) {
 
 async function buscarMensagensRecebidas() {
 
+    tipoDeMensagem = "Recebidas"
+
+    marcarLinkMenu(document.querySelector("#btn-mensagens-recebidas"));
+
     const token = seguranca.pegarToken();
 
     try {
-        mostarMensagens(await servicos.buscarRecebidas(token), "Recebidas");
+        listarMensagens(await servicos.buscarRecebidas(token), tipoDeMensagem);
 
     } catch (error) {
         erros.tratarErro(error);
@@ -61,10 +94,14 @@ async function buscarMensagensRecebidas() {
 
 async function buscarMensagensEnviadas() {
 
+    tipoDeMensagem = "Enviadas";
+
+    marcarLinkMenu(document.querySelector("#btn-mensagens-enviadas"));
+
     const token = seguranca.pegarToken();
 
     try {
-        mostarMensagens(await servicos.buscarEnviadas(token), "Enviadas");
+        listarMensagens(await servicos.buscarEnviadas(token), tipoDeMensagem);
 
     } catch (error) {
         erros.tratarErro(error);
@@ -73,35 +110,104 @@ async function buscarMensagensEnviadas() {
 
 async function buscarMensagensExcluidas() {
 
+    tipoDeMensagem = "Excluídas";
+
+    marcarLinkMenu(document.querySelector("#btn-mensagens-excluidas"));
+
     const token = seguranca.pegarToken();
 
     try {
-        mostarMensagens(await servicos.buscarExcluidas(token), "Excluídas");
+        listarMensagens(await servicos.buscarExcluidas(token), tipoDeMensagem);
 
     } catch (error) {
         erros.tratarErro(error);
     }
 }
 
-function mostarMensagens(listaDeMensagens, tipo) {
+function listarMensagens(listaDeMensagens, tipo) {
 
     document.querySelector("#lista-mensagens").innerHTML = "";
     document.querySelector("#tipo-de-mensagem").innerHTML = tipo;
 
     if (listaDeMensagens.length > 0) {
+
         listaDeMensagens.forEach(mensagem => {
-            document.querySelector(`#lista-mensagens`).innerHTML = document.querySelector(`#lista-mensagens`).innerHTML +
-                `<a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">${mensagem.nomeDestinatario}</h5>
-                            <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
+
+            if (tipo == "Recebidas") {
+                document.querySelector(`#lista-mensagens`).innerHTML = document.querySelector(`#lista-mensagens`).innerHTML +
+                    `<div class="list-group-item list-group-item-action" ">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="mb-1">${mensagem.nomeRemetente}</h6>
+                                <p class="mb-1">${mensagem.assunto}</p>
+                            </div>
+                            <div class="col text-end">
+                                <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
+                                <div class="row justify-content-between pt-2">
+                                    <div class="col-8"></div>
+                                    <div class="col-2 text-end">
+                                        <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}" class="col-2 text-end link-dark">
+                                            <i class="col bi bi-eye btn-ver-mensagem fs-5"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-2 text-end">
+                                        <a href="#" class="col-2 text-end link-dark">
+                                            <i class="col bi-trash3 btn-excluir-mensagem" data-idmensagem="${mensagem.idMensagem}"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-flex w-100 justify-content-between">
+                    </div>`;
+            }
+
+            if (tipo == "Enviadas") {
+                document.querySelector(`#lista-mensagens`).innerHTML = document.querySelector(`#lista-mensagens`).innerHTML +
+                    `<div class="list-group-item list-group-item-action" ">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="mb-1">${mensagem.nomeDestinatario}</h6>
+                                <p class="mb-1">${mensagem.assunto}</p>
+                            </div>
+                            <div class="col text-end">
+                                <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
+                                <div class="row justify-content-between pt-2">
+                                    <div class="col-10"></div>
+                                    <div class="col-2 text-end">
+                                        <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}" class="col-2 text-end link-dark"  data-tipomensagem="${tipo}">
+                                            <i class="col bi bi-eye btn-ver-mensagem fs-5"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+            if (tipo == "Excluídas") {
+                document.querySelector(`#lista-mensagens`).innerHTML = document.querySelector(`#lista-mensagens`).innerHTML +
+                    `<div class="list-group-item list-group-item-action" ">
+                    <div class="row">
+                        <div class="col">
+                            <h6 class="mb-1">${mensagem.nomeRemetente}</h6>
                             <p class="mb-1">${mensagem.assunto}</p>
-                            <i class="bi bi-trash3 btn-excluir-mensagem"  data-idmensagem="${mensagem.idMensagem}" style= "cursor: pointer"></i>
                         </div>
-                    </a>`;
+                        <div class="col text-end">
+                            <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
+                            <div class="row justify-content-between pt-2">
+                                <div class="col-10"></div>
+                                <div class="col-2 text-end"> 
+                                    <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}" class="col-2 text-end link-dark"  data-tipomensagem="${tipo}">
+                                        <i class="col bi bi-eye btn-ver-mensagem fs-5"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }
         });
+
+        adicionarEventoExcluir();
     }
     else {
         document.querySelector("#lista-mensagens").innerHTML = document.querySelector("#lista-mensagens").innerHTML +
@@ -110,4 +216,39 @@ function mostarMensagens(listaDeMensagens, tipo) {
                 </span>`;
     }
 }
+
+function adicionarEventoExcluir() {
+    const listaBtnExcluir = document.querySelectorAll(".btn-excluir-mensagem");
+    listaBtnExcluir.forEach(element => {
+        element.onclick = abrirModalConfirmarExcluir;
+    });
+}
+
+function abrirModalConfirmarExcluir(evento) {
+    document.querySelector("#btn-confirmar-excluir-mensagem").dataset.idmensagem = evento.target.dataset.idmensagem;
+
+    if (!modalExcluirMensagem) {
+        modalExcluirMensagem = new bootstrap.Modal("#modal-excluir-mensagem");
+    }
+    modalExcluirMensagem.show();
+}
+
+async function excluirMensagem(evento) {
+    const token = seguranca.pegarToken();
+    const idMensagem = evento.target.dataset.idmensagem;
+
+    if (!modalExcluirMensagem) {
+        modalExcluirMensagem = new bootstrap.Modal("#modal-excluir-mensagem");
+    }
+    modalExcluirMensagem.hide();
+
+    try {
+        await servicos.excluirMensagem(token, idMensagem);
+        mensagens.mostrarMensagemDeSucesso("Mensagem excluída com sucesso!", true);
+        window.location.reload();
+    } catch (error) {
+        erros.tratarErro(error);
+    }
+}
+
 
