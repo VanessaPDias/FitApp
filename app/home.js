@@ -12,21 +12,21 @@ async function aoCarregarPagina() {
         preencherCaixaPlanoHtml(plano);
     });
 
-    const carousel = new bootstrap.Carousel('#myCarousel')
+    const carousel = new bootstrap.Carousel('#myCarousel');
 }
 function preencherCaixaPlanoHtml(plano) {
     
     const planosAtivos = document.querySelector("#planos-ativos");
-    const planoModelo = document.querySelector("#plano-modelo");
+    const planoModelo = document.querySelector("#card-modelo-plano");
 
     const clonePlanoModeloHtml = planoModelo.firstElementChild.cloneNode(true);
 
     clonePlanoModeloHtml.style.display = "block";
 
-    clonePlanoModeloHtml.querySelector(".plano-modelo-nome").innerHTML = plano.nome;
-    clonePlanoModeloHtml.querySelector(".plano-modelo-valor").innerHTML = plano.valor;
-    clonePlanoModeloHtml.querySelector(".plano-modelo-descricao").innerHTML = plano.descricao;
-    clonePlanoModeloHtml.querySelector("a").href = `${plano.idPlano}`;
+    clonePlanoModeloHtml.querySelector(".card-modelo-nome").innerHTML = plano.nome;
+    clonePlanoModeloHtml.querySelector(".card-modelo-valor").innerHTML = plano.valor;
+    clonePlanoModeloHtml.querySelector(".card-modelo-descricao").innerHTML = plano.descricao;
+    clonePlanoModeloHtml.querySelector("a").href = `./assinatura/assinatura.html?idPlano=${plano.idPlano}`;
 
     planosAtivos.appendChild(clonePlanoModeloHtml);
 }

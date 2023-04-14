@@ -3,6 +3,7 @@ const Nutricionista = require('../model/nutricionista');
 const Personal = require('../model/personalTrainer');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
+const servicoDeArquivosEstaticos = require('../servicos/servicoDeArquivosEstaticos');
 
 async function buscarPlanos(req, res) {
     // #swagger.tags = ['Geral']
@@ -43,7 +44,7 @@ async function buscarNutricionistas(req, res) {
         return {
             idNutri: nutri.idNutri,
             nome: nutri.nome,
-            imagem: nutri.imagem,
+            imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(nutri.imagem),
             sobreMim: nutri.sobreMim
         }
     }));
@@ -65,7 +66,7 @@ async function buscarPersonalTrainers(req, res) {
         return {
             idPersonal: personal.idPersonal,
             nome: personal.nome,
-            imagem: personal.imagem,
+            imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(personal.imagem),
             sobreMim: personal.sobreMim
         }
     }));

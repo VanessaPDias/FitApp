@@ -8,7 +8,7 @@
 
 #home-container-banner-principal,
 #home-container-planos,
-#trabalhe-conosco-container-principal,
+#trabalhe-conosco-container-principal, #container-nutricionistas,
 footer {
     background-color: var(--bs-cinza-body);
 }
@@ -19,8 +19,13 @@ h3>span {
 }
 
 #card-formulario,
-#card-header-plano {
+#card-modelo-header {
     background-color: var(--bs-amarelo-padrao);
+}
+
+.form-check-input:checked{
+    background-color: var(--bs-amarelo-padrao);
+    border-color: var(--bs-amarelo-padrao);
 }
 
 .btn-light {
