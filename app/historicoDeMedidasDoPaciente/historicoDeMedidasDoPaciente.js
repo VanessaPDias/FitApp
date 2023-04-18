@@ -4,6 +4,7 @@ import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 
 let chart;
+const corChart = `#548CA8`;
 let idPaciente;
 
 seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
@@ -69,32 +70,32 @@ function criarGrafico(ctx, medidaEscolhida, medidas) {
             label: 'Peso',
             data: medidas.map(medida => medida.peso),
             borderWidth: 2,
-            borderColor: '#FED233',
-            backgroundColor: '#FED233',
+            borderColor: corChart,
+            backgroundColor: corChart,
         });
     } else if (medidaEscolhida == "pescoco") {
         datasets.push({
             label: 'Pescoço',
             data: medidas.map(medida => medida.pescoco),
             borderWidth: 2,
-            borderColor: '#FED233',
-            backgroundColor: '#FED233',
+            borderColor: corChart,
+            backgroundColor: corChart,
         });
     } else if (medidaEscolhida == "cintura") {
         datasets.push({
             label: 'Cintura',
             data: medidas.map(medida => medida.cintura),
             borderWidth: 2,
-            borderColor: '#FED233',
-            backgroundColor: '#FED233',
+            borderColor: corChart,
+            backgroundColor: corChart,
         });
     } else if (medidaEscolhida == "quadril") {
         datasets.push({
             label: 'Quadril',
             data: medidas.map(medida => medida.quadril),
             borderWidth: 2,
-            borderColor: '#FED233',
-            backgroundColor: '#FED233',
+            borderColor: corChart,
+            backgroundColor: corChart,
         });
     }
 
@@ -119,5 +120,5 @@ function criarGrafico(ctx, medidaEscolhida, medidas) {
 }
 
 function irParaPaginaDeDadosDoPaciente() {
-    window.location.href = `../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}`;
+    window.location.href = `../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}#pacientes`;
 }

@@ -41,7 +41,7 @@ async function buscarAssinantes() {
                         <td data-label="Nome">${assinante.nome}</td>
                         <td data-label="Email">${assinante.email}</td>
                         <td data-label="Status">${status}</td>
-                        <td data-label="Ver"><a href="../dadosDoAssinante/dadosDoAssinante.html?idAssinante=${assinante.idAssinante}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
+                        <td data-label="Ver"><a href="../dadosDoAssinante/dadosDoAssinante.html?idAssinante=${assinante.idAssinante}#assinantes" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }

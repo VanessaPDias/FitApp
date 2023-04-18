@@ -1,38 +1,68 @@
 :root {
-    --bs-amarelo-padrao: #FED233;
-    --bs-amarelo-active-hover: #c1a12b;
-    --bs-text-link-color: #212529;
-    --bs-cinza-body: #EDEDED;
-    --bs-text-shadow: #454545 0.1em 0.1em 0.2em;
+    --bs-madison-color: #334257;
+    --bs--cor-de-destaque: #476072;
+    --bs-cor-principal: #548CA8;
 }
 
-#home-container-banner-principal,
+body {
+    background-color: var(--bs-gray-200);
+}
+
+header,
+footer,
+#container-funcionalidades,
+#container-formulario-trabalhe-conosco,
+#container-nutricionistas-assinatura {
+    background-color: var(--bs-white);
+}
+
+.btn-header {
+    --bs-btn-hover-bg: var(--bs--cor-de-destaque);
+    --bs-btn-hover-border-color: var(--bs--cor-de-destaque);
+}
+
+.btn-site, .btn-card-plano, #btn-enviar-fromulario {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bs-cor-principal);
+    --bs-btn-border-color: var(--bs-cor-principal);
+    --bs-btn-hover-bg: var(--bs-fiord-color);
+    --bs-btn-hover-border-color: var(--bs-cor-principal);
+}
+
+#card-modelo-header {
+    color: var(--bs-white);
+    background-color: var(--bs-cor-principal);
+}
+
+.form-check-input:checked{
+    background-color: var(--bs-cor-principal);
+    border-color: var(--bs-fiord-color);
+}
+
+
+
+
+/* #home-container-banner-principal,
 #home-container-planos,
 #trabalhe-conosco-container-principal, #container-nutricionistas,
 footer {
     background-color: var(--bs-cinza-body);
 }
 
-h3>span {
-    color: var(--bs-amarelo-padrao);
-    text-shadow: var(--bs-text-shadow);
-}
+
 
 #card-formulario,
 #card-modelo-header {
     background-color: var(--bs-amarelo-padrao);
 }
 
-.form-check-input:checked{
-    background-color: var(--bs-amarelo-padrao);
-    border-color: var(--bs-amarelo-padrao);
-}
+
 
 .btn-light {
     --bs-btn-bg: var(--bs-amarelo-padrao);
     --bs-btn-hover-bg: var(--bs-amarelo-active-hover);
     --bs-btn-active-bg: var(--bs-amarelo-active-hover);
-}
+} */
 
 .container-formulario {
     width: 90%;

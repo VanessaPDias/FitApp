@@ -64,7 +64,7 @@ async function buscarDadosDoPaciente(idAssinante) {
                         <td data-label="Nome">${dieta.nome}</td>
                         <td data-label="Ínicio">${new Date(dieta.dataInicio).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
                         <td data-label="Fim">${new Date(dieta.dataFim).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
-                        <td data-label="Ver"><a href="../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${dieta.idDieta}&dietaAtual=${dieta.dietaAtual}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
+                        <td data-label="Ver"><a href="../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${dieta.idDieta}&dietaAtual=${dieta.dietaAtual}#pacientes" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }
@@ -83,15 +83,15 @@ async function buscarDadosDoPaciente(idAssinante) {
 }
 
 function irParaPaginaDeMedidas() {
-    window.location.href = `../historicoDeMedidasDoPaciente/historicoDeMedidasDoPaciente.html?idAssinante=${idPaciente}`;
+    window.location.href = `../historicoDeMedidasDoPaciente/historicoDeMedidasDoPaciente.html?idAssinante=${idPaciente}#pacientes`;
 }
 
 function irParaPaginaDeCriarDieta() {
-        window.location.href = `../criarDieta/criarDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}`;
+        window.location.href = `../criarDieta/criarDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}#pacientes`;
 }
 
 function irParaPaginaDeDadosDaDieta() {
-    window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDietaAtual}`;
+    window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDietaAtual}#pacientes`;
 
 }
 

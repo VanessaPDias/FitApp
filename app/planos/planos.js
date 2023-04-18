@@ -46,7 +46,7 @@ async function buscarPlanos() {
                         <td data-label="Valor">${plano.valor}</td>
                         <td data-label="Duração">${plano.duracao}</td>
                         <td data-label="Status">${status}</td>
-                        <td data-label="Ver"><a href="../dadosDoPlano/dadosDoPlano.html?idPlano=${plano.idPlano}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
+                        <td data-label="Ver"><a href="../dadosDoPlano/dadosDoPlano.html?idPlano=${plano.idPlano}#planos" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }

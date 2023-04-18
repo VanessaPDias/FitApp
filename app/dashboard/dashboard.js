@@ -45,8 +45,8 @@ function criarGrafico(ctx, medidas) {
                 label: 'Peso',
                 data: medidas.map(medida => medida.peso),
                 borderWidth: 2,
-                borderColor: '#FED233',
-                backgroundColor: '#FED233',
+                borderColor: '#548CA8',
+                backgroundColor: '#548CA8',
             }]
         }
     });

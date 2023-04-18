@@ -49,11 +49,11 @@ async function buscarMedidas() {
             resposta.historicoDeMedidas.forEach(medida => {
                 document.querySelector("#historico-medidas").innerHTML = document.querySelector("#historico-medidas").innerHTML +
                     `<tr>
-                        <td>${new Date(medida.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
-                        <td>${medida.peso} kg</td>
-                        <td>${medida.pescoco} cm</td>
-                        <td>${medida.cintura} cm</td>
-                        <td>${medida.quadril} cm</td>
+                        <td data-label="Data">${new Date(medida.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
+                        <td data-label="Peso">${medida.peso} kg</td>
+                        <td data-label="Pescoço">${medida.pescoco} cm</td>
+                        <td data-label="Cintura">${medida.cintura} cm</td>
+                        <td data-label="Quadril">${medida.quadril} cm</td>
                         <td><i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer" data-idmedida=${medida.idMedidas}></i></td>
                     </tr>`;
             });

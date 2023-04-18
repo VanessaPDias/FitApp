@@ -1,48 +1,11 @@
 :root {
-    --bs-amarelo-padrao: #FED233;
-    --bs-amarelo-active-hover: #c1a12b;
-    --bs-text-link-color: #212529;
-    --bs-cinza-body: #EDEDED;
-}
-
-.nav {
-    --bs-nav-link-hover-color: var(--bs-text-link-color)
-}
-
-.dropdown-menu {
-    --bs-dropdown-link-hover-bg: var(--bs-amarelo-active-hover);
-    --bs-dropdown-link-active-bg: var(--bs-amarelo-padrao);
-    --bs-dropdown-link-active-color: var(--bs-text-link-color);
-}
-
-
-.list-group {
-    --bs-list-group-color: var(
-    --bs-text-link-color);
-    --bs-list-group-bg: var(
-    --bs-amarelo-padrao);
-    --bs-list-group-action-hover-bg: var(
-    --bs-amarelo-active-hover);
-    --bs-list-group-action-active-color: var(
-    --bs-text-link-color);
-    --bs-list-group-action-active-bg: var(
-    --bs-amarelo-padrao);
-    --bs-list-group-active-color: var(
-    --bs-text-link-color);
-    --bs-list-group-active-bg: var(
-    --bs-amarelo-active-hover);
-    --bs-list-group-active-border-color: var(
-    --bs-amarelo-active-hover);
-}
-
-.btn-light {
-    --bs-btn-bg: var(--bs-amarelo-padrao);
-    --bs-btn-hover-bg: var(--bs-amarelo-active-hover);
-    --bs-btn-active-bg: var(--bs-amarelo-active-hover);
+    --bs-madison-color: #334257;
+    --bs-cor-de-destaque: #476072;
+    --bs-cor-principal: #548CA8;
 }
 
 body {
-    background-color: var(--bs-cinza-body);
+    background-color: var(--bs-gray-200);
 }
 
 header {
@@ -51,53 +14,15 @@ header {
 
 #area-lateral,
 .offcanvas {
-    background-color: var(--bs-amarelo-padrao);
+    background-color: var(--bs-cor-principal);
 }
 
-#menu-mensagens .list-group-item {
-    background-color: var(--bs-white);
-    border-color: transparent;
+#area-lateral .list-group-item span,
+#menu-offCanvas .list-group-item span,
+#offcanvas span,
+#logo-cabecalho span {
+    text-shadow: 2px 2px 10px #334257;
 }
-
-#menu-mensagens .list-group-item.active, #menu-mensagens .list-group-item-action:hover {
-    background-color: var(--bs-amarelo-padrao);
-}
-
-#lista-mensagens {
-    height: 230px; 
-    overflow-y: scroll;
-}
-
-#lista-mensagens .list-group-item {
-    background-color: var(--bs-white);
-    border-bottom-color: var(--bs-cinza-body);
-}
-
-#lista-mensagens .list-group-item.active, #lista-mensagens .list-group-item-action:hover {
-    background-color: var(--bs-amarelo-padrao);
-}
-
-
-.list-group .lista-itens-dieta {
-    background-color: var(--bs-white);
-}
-
-thead {
-    background-color: var(--bs-amarelo-padrao);
-}
-
-.card-title {
-    color: var(--bs-amarelo-padrao);
-}
-
-
-.nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active,
-.nav-link {
-    color: var(--bs-text-link-color);
-    background-color: #FED233;
-}
-
 
 a,
 input,
@@ -105,22 +30,110 @@ select {
     cursor: pointer;
 }
 
+.list-group {
+    --bs-list-group-color: var(--bs-white);
+    --bs-list-group-bg: var(--bs-cor-principal);
+    --bs-list-group-action-hover-color: var(--bs-white);
+    --bs-list-group-action-hover-bg: var(--bs-cor-de-destaque);
+    --bs-list-group-action-active-color: var(--bs-white);
+    --bs-list-group-action-active-bg: var(--bs-cor-de-destaque);
+    --bs-list-group-active-color: var(--bs-white);
+    --bs-list-group-active-bg: var(--bs-cor-de-destaque);
+    --bs-list-group-active-border-color: var(--bs-cor-de-destaque);
+}
+
+.card-dashboard-dados {
+    height: 88px;
+}
+
+#menu-mensagens .list-group-item {
+
+    --bs-list-group-color: #000;
+    --bs-list-group-bg: #fff;
+    --bs-list-group-action-color: #fff;
+    --bs-list-group-action-hover-color: #fff;
+    --bs-list-group-action-hover-bg: var(--bs-cor-de-destaque);
+    --bs-list-group-action-active-color: #fff;
+    --bs-list-group-action-active-bg: var(--bs-cor-de-destaque);
+    --bs-list-group-active-bg: var(--bs-cor-principal);
+    --bs-list-group-active-border-color: var(--bs-cor-de-destaque);
+
+}
+
+#lista-mensagens .list-group-item {
+    --bs-list-group-color: #000;
+    --bs-list-group-bg: #fff;
+    --bs-list-group-action-color: #fff;
+    --bs-list-group-action-hover-color: #fff;
+    --bs-list-group-action-hover-bg: var(--bs-cor-de-destaque);
+    --bs-list-group-action-active-color: #fff;
+    --bs-list-group-action-active-bg: var(--bs-cor-de-destaque);
+    --bs-list-group-active-bg: var(--bs-cor-de-destaque);
+    --bs-list-group-active-border-color: var(--bs-cor-de-destaque);
+}
+
+#lista-mensagens .list-group-item:hover i {
+    color: #fff;
+}
+
+.btn-app {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bs-cor-principal);
+    --bs-btn-border-color: var(--bs-cor-principal);
+    --bs-btn-hover-bg: var(--bs-cor-de-destaque);
+    --bs-btn-hover-border-color: var(--bs-cor-principal);
+}
+
+.btn-voltar {
+    --bs-btn-hover-bg: var(--bs-cor-de-destaque);
+    --bs-btn-hover-border-color: var(--bs-cor-principal);
+}
+
+#lista-mensagens {
+    height: 230px;
+    overflow-y: scroll;
+}
+
+.container-tab-assinantes {
+    height: 260px;
+    overflow-y: scroll;
+}
+
 .card.card-historico-dietas {
     height: 40%;
     overflow-y: scroll;
 }
 
-/* .medidas-dashboard,
-.medidas-paciente {
-    color: #FED233;
-    font-size: larger;
-    font-weight: bolder;
-} */
+.list-group .lista-itens-dieta {
+    color: #000;
+    background-color: #fff;
+}
 
-@media(max-width: 700px) {
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active,
+.nav-link {
+
+    background-color: var(--bs-cor-principal);
+}
+
+.nav-tabs {
+    --bs-nav-tabs-link-hover-border-color: var(--bs-cor-de-destaque);
+    --bs-nav-tabs-link-active-color: #fff;
+}
+
+.nav {
+    --bs-nav-link-color: #000;
+    --bs-nav-link-hover-color: #000;
+}
+
+
+
+@media(max-width: 768px) {
     .container-tab {
+        max-height: 640px;
         max-width: 100%;
-        overflow: scroll
+        overflow-y: scroll;
     }
 
     .tab-resp thead {
@@ -151,7 +164,7 @@ select {
     }
 
     #lista-mensagens {
-        height: 400px; 
+        height: 400px;
         overflow-y: scroll;
     }
 }

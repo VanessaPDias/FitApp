@@ -82,12 +82,12 @@ async function gravarDieta(evento) {
     try {
         const resposta = await servicos.salvarDieta(token, idPaciente, nomeDieta, dataInicio, dataFim, objetivo, itensDaDieta);
         mensagens.mostrarMensagemDeSucesso("Dieta criada com sucesso!", true);
-        window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${resposta.idDieta}`;
+        window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${resposta.idDieta}#pacientes`;
     } catch (error) {
         erros.tratarErro(error);
     }
 }
 
 function voltarParaDadosDoPaciente() {
-    window.location.href = `../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}`;
+    window.location.href = `../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}#pacientes`;
 }

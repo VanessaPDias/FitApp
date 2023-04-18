@@ -1,63 +1,62 @@
-<div>
-    <div class="row">
-        <h6><i class="bi bi-person me-1 fs-4"></i>Meu Perfil</h6>
-    </div>
+<div class="row">
+    <h6><i class="bi bi-person me-1 fs-4"></i>Meu Perfil</h6>
+</div>
 
-    <div class="row py-3">
-        <div class="col-12 col-sm-5">
-            <div class="card shadow">
-                <div class="card-body row">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <div>
-                                    <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block"
-                                        alt="imagem-perfil-usuario" id="imagem-perfil" width="142" height="142"
-                                        style="cursor: pointer;">
+<div class="row py-3">
+    <div class="col-12 col-sm-5">
+        <div class="card shadow">
+            <div class="card-body row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block"
+                                    alt="imagem-perfil-usuario" id="imagem-perfil" width="142" height="142"
+                                    style="cursor: pointer;">
 
-                                    <input class="d-none" type="file" id="input-imagem-perfil"
-                                        accept=".jpg,.png,.gif,.jpeg" />
-                                </div>
-                                <div class="pt-3 text-center">
-                                    <span id="email"></span>
-                                </div>
+                                <input class="d-none" type="file" id="input-imagem-perfil"
+                                    accept=".jpg,.png,.gif,.jpeg" />
+                            </div>
+                            <div class="pt-3 text-center">
+                                <span id="email"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <form id="formulario-perfil">
-                                <div class="pt-3">
-                                    <label class="form-label fw-semibold" for="registro-profissional">Registro
-                                        Profissional</label>
-                                    <div class="input-group input-group-sm">
-                                        <input class="form-control" type="text" id="registro-profissional"
-                                            name="registro-profissional" disabled>
-                                    </div>
+                    </div>
+                    <div class="row">
+                        <form id="formulario-perfil">
+                            <div class="pt-3">
+                                <label class="form-label fw-semibold" for="registro-profissional">Registro
+                                    Profissional</label>
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control" type="text" id="registro-profissional"
+                                        name="registro-profissional" disabled>
                                 </div>
-                                <div class="pt-3">
-                                    <label class="form-label fw-semibold" for="nome">Nome</label>
-                                    <div class="input-group input-group-sm">
-                                        <input class="form-control" type="text" id="nome" name="nome" required>
-                                    </div>
+                            </div>
+                            <div class="pt-3">
+                                <label class="form-label fw-semibold" for="nome">Nome</label>
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control" type="text" id="nome" name="nome" required>
                                 </div>
-                                <div class="pt-3">
-                                    <label class="form-label fw-semibold" for="telefone">Telefone</label>
-                                    <div class="input-group input-group-sm">
-                                        <input class="form-control" type="number" id="telefone" name="telefone"
-                                            required>
-                                    </div>
+                            </div>
+                            <div class="pt-3">
+                                <label class="form-label fw-semibold" for="telefone">Telefone</label>
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control" type="number" id="telefone" name="telefone" required>
                                 </div>
-                                <div class="pt-3 text-end">
-                                    <button type="submit" id="btn-salvar-dados-do-perfil"
-                                        class="btn btn-light">Salvar</button>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="pt-3 text-end">
+                                <button type="submit" id="btn-salvar-dados-do-perfil"
+                                    class="btn btn-outline-dark btn-app">Salvar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-7 pt-3 pt-sm-0">
-            <div class="row">
+    </div>
+    <div class="col-12 col-sm-7 pt-3 pt-sm-0">
+        <div class="row">
+            <div class="col">
                 <div class="card shadow">
                     <div class="card-body">
                         <h6 class="card-title">Alterar Senha</h6>
@@ -77,20 +76,24 @@
                                 </div>
                             </div>
                             <div class="pt-3 text-end">
-                                <button type="submit" id="btn-alterar-senha" class="btn btn-light">Alterar</button>
+                                <button type="submit" id="btn-alterar-senha"
+                                    class="btn btn-outline-dark btn-app">Alterar</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="row pt-3">
+        </div>
+        <div class="row pt-3">
+            <div class="col">
                 <div class="card shadow">
                     <div class="card-body">
                         <h6 class="card-title">Sobre Mim</h6>
                         <div class="form-floating">
                             <textarea class="form-control" id="texto-sobre-mim" style="height: 100px"></textarea>
                             <div class="pt-3 text-end">
-                                <button type="submit" id="btn-salvar-sobre-mim" class="btn btn-light">Salvar</button>
+                                <button type="submit" id="btn-salvar-sobre-mim"
+                                    class="btn btn-outline-dark btn-app">Salvar</button>
                             </div>
                         </div>
                     </div>
@@ -98,21 +101,25 @@
             </div>
         </div>
     </div>
+    <div class="text-end pt-3">
+            <a href="../pacientes/pacientes.html#pacientes" class="btn btn-outline-dark btn-voltar">Voltar</a>
+        </div>
+</div>
 
-    <div class="modal" id="modal-alterar-senha" tabindex="-1" aria-labelledby="modal-alterar-senha-label"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Alterar Senha</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Tem certeza que deseja alterar a senha?
-                </div>
-                <div class="modal-footer">
-                    <button id="btn-confirmar-alteracao-de-senha" type="button" class="btn btn-light">Sim</button>
-                </div>
+<div class="modal" id="modal-alterar-senha" tabindex="-1" aria-labelledby="modal-alterar-senha-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Alterar Senha</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja alterar a senha?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-de-senha" type="button"
+                    class="btn btn-outline-dark btn-app">Sim</button>
             </div>
         </div>
     </div>

@@ -33,7 +33,7 @@ async function buscarPacientes() {
                     `<tr>
                         <td data-label="Nome">${paciente.nome}</td>
                         <td data-label="Objetivo">${objetivo}</td>
-                        <td data-label="Ver"><a href="../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${paciente.idAssinante}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
+                        <td data-label="Ver"><a href="../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${paciente.idAssinante}#pacientes" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }

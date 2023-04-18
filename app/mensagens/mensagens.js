@@ -146,7 +146,7 @@ function listarMensagens(listaDeMensagens, tipo) {
                                 <div class="row justify-content-between pt-2">
                                     <div class="col-8"></div>
                                     <div class="col-2 text-end">
-                                        <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}" class="col-2 text-end link-dark">
+                                        <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}#mensagens" class="col-2 text-end link-dark">
                                             <i class="col bi bi-eye btn-ver-mensagem fs-5"></i>
                                         </a>
                                     </div>

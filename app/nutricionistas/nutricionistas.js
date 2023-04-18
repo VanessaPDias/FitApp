@@ -59,7 +59,7 @@ async function buscarNutricionistas() {
                         <td data-label="Email">${nutricionista.email}</td>
                         <td data-label="Status">${status}</td>
                         <td data-label="Cadastro">${cadastroConfirmado}</td>
-                        <td data-label="Ver"><a href="../dadosDoNutricionista/dadosDoNutricionista.html?idNutri=${nutricionista.idNutri}" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
+                        <td data-label="Ver"><a href="../dadosDoNutricionista/dadosDoNutricionista.html?idNutri=${nutricionista.idNutri}#nutricionistas" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>
                     </tr>`;
             });
         }

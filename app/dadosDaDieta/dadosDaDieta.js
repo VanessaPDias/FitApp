@@ -141,7 +141,7 @@ async function alterarDieta(evento) {
 
     try {
         await servicos.alterarDieta(token, idPaciente, idDieta, nomeDieta, dataInicio, dataFim, objetivo, itensDaDieta);
-        window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDieta}`;
+        window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDieta}#pacientes`;
         mensagens.mostrarMensagemDeSucesso("Dieta alterada com sucesso!", true);
     } catch (error) {
         erros.tratarErro(error);
@@ -175,7 +175,7 @@ function formatarData(dataRecebida) {
 }
 
 function voltarParaDadosDoPaciente() {
-    window.location.href = `../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}`;
+    window.location.href = `../dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}#pacientes`;
 }
 
 function adicionarEventoExcluir() {
