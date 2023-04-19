@@ -1,4 +1,4 @@
-import * as servicos from "./servicosDePerfilNutricionista.js"
+import * as servicos from "./servicosDePerfilPersonalTrainer.js";
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
@@ -12,7 +12,7 @@ window.onload = aoCarregarPagina;
 let modal;
 
 async function aoCarregarPagina() {
-    await paginaMestra.carregar("perfilNutricionista/perfilNutricionista-conteudo.html", "Meu Perfil");
+    await paginaMestra.carregar("perfilPersonalTrainer/perfilPersonalTrainer-conteudo.html", "Meu Perfil");
 
     document.querySelector("#imagem-perfil").onclick = alterarImagem;
     document.querySelector("#btn-salvar-dados-do-perfil").onclick = salvarDadosDoPerfil;
@@ -93,8 +93,7 @@ async function salvarNovaSenha() {
     try {
         await servicos.alterarSenha(token, senhaAtual.value, novaSenha.value);
         mensagens.mostrarMensagemDeSucesso("Senha alterada com sucesso!", true);
-        senhaAtual.value = "";
-        novaSenha.value = "";
+        window.location.reload();
     } catch (error) {
         erros.tratarErro(error);
     }

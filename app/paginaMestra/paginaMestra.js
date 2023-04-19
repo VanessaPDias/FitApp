@@ -86,6 +86,17 @@ function configurarPaginaMestraPorPerfil(perfil) {
             menuCabecalho: [
                 { nome: "Meu Perfil", icone: "bi-person", id: "#meuPerfil", link: "../perfilNutricionista/perfilNutricionista.html#meuPerfil" },
             ],
+        },
+        {
+            perfil: "personalTrainer",
+            home: "/alunos/alunos.html#alunos",
+            menuLateral: [
+                { nome: "Alunos", icone: "bi-people", id: "#alunos", link: "/alunos/alunos.html#alunos" },
+                { nome: "Mensagens", icone: "bi-envelope", id: "#mensagens", link: "/mensagens/mensagens.html#mensagens" }
+            ],
+            menuCabecalho: [
+                { nome: "Meu Perfil", icone: "bi-person", id: "#meuPerfil", link: "../perfilPersonalTrainer/perfilPersonalTrainer.html#meuPerfil" },
+            ],
         }
     ];
 

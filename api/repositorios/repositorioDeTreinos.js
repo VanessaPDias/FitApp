@@ -33,7 +33,7 @@ async function buscarTreinoPorId(idAssinante, idTreino) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select nome, objetivo, dataInicio, dataFim, data
+            `select nome, objetivo, dataInicio, dataFim, data, treinoAtual
             from treinos
             where idTreino = ? and idAssinante = ?`, [idTreino, idAssinante]);
 
@@ -67,14 +67,20 @@ async function salvarTreino(idAssinante, novoTreino) {
             novoTreino.nomeTreino,
             novoTreino.dataInicio,
             novoTreino.dataFim,
-            novoTreino.data
+            novoTreino.data,
+            novoTreino.treinoAtual
         ]
 
         await conexao.beginTransaction();
 
         await conexao.execute(
-            `insert into treinos (idAssinante, idTreino, idPersonal, objetivo, nome, dataInicio, dataFim, data)
-            values (?, ?, ?, ?, ?, ?, ?, ?)`, parametrosDoTreino);
+            `update treinos
+            set treinoAtual = ?
+            where idAssinante = ?`, [false, idAssinante]);
+
+        await conexao.execute(
+            `insert into treinos (idAssinante, idTreino, idPersonal, objetivo, nome, dataInicio, dataFim, data, treinoAtual)
+            values (?, ?, ?, ?, ?, ?, ?, ?, ?)`, parametrosDoTreino);
 
         novoTreino.exercicios.forEach(async exercicio => {
             const parametrosDoExercicio = [
@@ -130,9 +136,26 @@ async function salvarAlteracaoDoTreino(idTreino, nomeTreino, dataInicio, dataFim
 }
 
 
+async function excluirExerciciosDoTreino(idTreino) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+
+        await conexao.execute(
+            `delete from exercicios
+            where idTreino = ?`, [idTreino]);
+
+    }
+    finally {
+        await conexao.end();
+    }
+}
+
+
 module.exports = {
     buscarTreinosPorFiltro: buscarTreinosPorFiltro,
     buscarTreinoPorId: buscarTreinoPorId,
     salvarTreino: salvarTreino,
-    salvarAlteracaoDoTreino: salvarAlteracaoDoTreino
+    salvarAlteracaoDoTreino: salvarAlteracaoDoTreino,
+    excluirExerciciosDoTreino: excluirExerciciosDoTreino
 }

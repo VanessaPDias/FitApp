@@ -38,6 +38,9 @@ async function entrar(evento) {
         if(usuario.perfil == "nutricionista") {
            window.location.href = "../pacientes/pacientes.html#pacientes" 
         }
+        if(usuario.perfil == "personalTrainer") {
+           window.location.href = "../alunos/alunos.html#alunos" 
+        }
 
     } catch (error) {
         erros.tratarErro(error);

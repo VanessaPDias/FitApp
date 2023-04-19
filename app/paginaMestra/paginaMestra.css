@@ -12,6 +12,12 @@ header {
     background-color: var(--bs-white);
 }
 
+.dropdown-menu {
+    --bs-dropdown-link-hover-color: #fff;
+    --bs-dropdown-link-hover-bg: var(--bs-cor-de-destaque);
+    --bs-dropdown-link-active-bg:var(--bs-cor-principal);
+}
+
 #area-lateral,
 .offcanvas {
     background-color: var(--bs-cor-principal);
@@ -99,12 +105,13 @@ select {
     overflow-y: scroll;
 }
 
-.card.card-historico-dietas {
+.card.card-historico-dietas,
+.card.card-historico-treinos {
     height: 40%;
     overflow-y: scroll;
 }
 
-.list-group .lista-itens-dieta {
+.list-group .lista-itens-dieta, .list-group .lista-exercicios-treino {
     color: #000;
     background-color: #fff;
 }

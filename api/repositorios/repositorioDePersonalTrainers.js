@@ -279,7 +279,7 @@ async function buscarAlunoPorId(idAssinante) {
             order by data desc limit 1`, [idAssinante]);
 
         const [treinos, fieldsTreinos] = await conexao.execute(
-            `select idTreino, dataInicio, dataFim, objetivo
+            `select idTreino, nome, dataInicio, dataFim, objetivo, treinoAtual
             from treinos
             where idAssinante = ?
             order by data desc`, [idAssinante]);

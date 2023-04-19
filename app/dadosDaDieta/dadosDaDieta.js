@@ -64,6 +64,7 @@ async function aoCarregarPagina() {
 }
 
 async function buscarDadosDaDieta() {
+    
     const resposta = await servicos.buscarDados(token, idPaciente, idDieta);
     itensDaDieta = resposta.itensDaDieta;
 
@@ -141,7 +142,7 @@ async function alterarDieta(evento) {
 
     try {
         await servicos.alterarDieta(token, idPaciente, idDieta, nomeDieta, dataInicio, dataFim, objetivo, itensDaDieta);
-        window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDieta}#pacientes`;
+        window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDieta}&dietaAtual=true#pacientes`;
         mensagens.mostrarMensagemDeSucesso("Dieta alterada com sucesso!", true);
     } catch (error) {
         erros.tratarErro(error);

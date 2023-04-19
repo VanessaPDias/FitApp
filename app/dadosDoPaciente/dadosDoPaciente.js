@@ -12,6 +12,7 @@ window.onload = aoCarregarPagina;
 let idPaciente;
 let nomePaciente;
 let idDietaAtual;
+let dietaAtual
 
 async function aoCarregarPagina() {
     const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -57,6 +58,7 @@ async function buscarDadosDoPaciente(idAssinante) {
 
         if (resposta.dietas.length > 0) {
             idDietaAtual = resposta.dietaAtual.idDieta;
+            dietaAtual = resposta.dietaAtual.dietaAtual;
             resposta.dietas.filter(dieta => dieta.idDieta != idDietaAtual).forEach(dieta => {
 
                 document.querySelector("#lista-dietas").innerHTML = document.querySelector("#lista-dietas").innerHTML +
@@ -91,7 +93,11 @@ function irParaPaginaDeCriarDieta() {
 }
 
 function irParaPaginaDeDadosDaDieta() {
-    window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDietaAtual}#pacientes`;
+    if(!dietaAtual ) {
+        mensagens.mostrarMensagemDeErro("O Paciente ainda não tem Dieta!", false);
+        return;
+    }
+    window.location.href = `../dadosDaDieta/dadosDaDieta.html?idAssinante=${idPaciente}&nomeAssinante=${nomePaciente}&idDieta=${idDietaAtual}&dietaAtual=${dietaAtual}#pacientes`;
 
 }
 
