@@ -52,6 +52,16 @@ select {
     height: 88px;
 }
 
+.table {
+    --bs-table-hover-color: #fff;
+    --bs-table-hover-bg: var(--bs-cor-de-destaque);
+}
+
+#lista-assinantes tr:hover i, #lista-nutricionistas tr:hover i, #lista-personal-trainers tr:hover i, #lista-planos tr:hover i {
+    color: #fff;
+}
+
+
 #menu-mensagens .list-group-item {
 
     --bs-list-group-color: #000;

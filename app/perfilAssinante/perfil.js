@@ -79,7 +79,6 @@ async function salvarDadosDoPerfil(evento) {
 
 }
 
-
 async function alterarSenhaDeAcesso(evento) {
     const formulario = document.querySelector("#formulario-alterar-senha");
     if (formulario.checkValidity() == false) {

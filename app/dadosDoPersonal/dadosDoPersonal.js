@@ -62,11 +62,15 @@ async function alterarStatus (evento) {
     }
 }
 
-
 async function alterarDadosDoPersonal(evento) {
     const registroProfissional = document.querySelector("#registro-profissional-personal").value;
     const status = document.querySelector("#status-personal").value;
     const cadastro = document.querySelector("#cadastro-confirmado-personal").value;
+
+    const formulario = document.querySelector("#formulario");
+    if (formulario.checkValidity() == false) {
+        return false;
+    }
 
     evento.preventDefault();
 

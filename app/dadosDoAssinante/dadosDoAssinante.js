@@ -8,7 +8,6 @@ seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
-let modal;
 let idAssinante;
 let novoStatus;
 
@@ -47,8 +46,6 @@ async function buscarDadosDoAssinante(idAssinante) {
             novoStatus = false;
         }
 
-        btn.onclick = alterarStatus;
-
         document.querySelector("#nome-assinante").innerHTML = resposta.nome;
         document.querySelector("#email-assinante").innerHTML = resposta.email;
         document.querySelector("#status-assinante").innerHTML = status;
@@ -63,17 +60,8 @@ async function buscarDadosDoAssinante(idAssinante) {
     }
 }
 
-async function alterarStatus() {
-    if (!modal) {
-        modal = new bootstrap.Modal('#modal-alterar-status');
-    }
-    modal.show();
-}
-
 async function gravarNovoStatus() {
     const token = seguranca.pegarToken();
-
-    modal.hide();
 
     try {
         await servicos.alterarStatusDoAssinante(token, idAssinante, novoStatus);

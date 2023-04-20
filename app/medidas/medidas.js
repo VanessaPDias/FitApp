@@ -13,10 +13,15 @@ let modal;
 let idMedidas;
 
 async function aoCarregarPagina() {
+
     await paginaMestra.carregar("medidas/medidas-conteudo.html", "Medidas");
+
     await buscarMedidas();
+
     document.querySelector("#btn-salvar-medidas").onclick = inserirMedidas;
+    
     document.querySelector("#btn-confirmar-excluir-medidas").onclick = excluirMedidas;
+
     mensagens.exibirMensagemAoCarregarAPagina();
 
 }
@@ -49,12 +54,12 @@ async function buscarMedidas() {
             resposta.historicoDeMedidas.forEach(medida => {
                 document.querySelector("#historico-medidas").innerHTML = document.querySelector("#historico-medidas").innerHTML +
                     `<tr>
-                        <td data-label="Data">${new Date(medida.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
-                        <td data-label="Peso">${medida.peso} kg</td>
-                        <td data-label="Pescoço">${medida.pescoco} cm</td>
-                        <td data-label="Cintura">${medida.cintura} cm</td>
-                        <td data-label="Quadril">${medida.quadril} cm</td>
-                        <td><i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer" data-idmedida=${medida.idMedidas}></i></td>
+                        <td>${new Date(medida.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</td>
+                        <td>${medida.peso} kg</td>
+                        <td>${medida.pescoco} cm</td>
+                        <td>${medida.cintura} cm</td>
+                        <td>${medida.quadril} cm</td>
+                        <td><i class="bi bi-trash3 btn-excluir-medidas" data-bs-toggle="modal" data-bs-target="#modal-excluir-medidas" style= "cursor: pointer" data-idmedida=${medida.idMedidas}></i></td>
                     </tr>`;
             });
         }
@@ -64,13 +69,6 @@ async function buscarMedidas() {
     } catch (error) {
         erros.tratarErro(error);
     }
-}
-
-function adicionarEventoExcluir() {
-    const listaBtnExcluir = document.querySelectorAll(".btn-excluir-medidas");
-    listaBtnExcluir.forEach(element => {
-        element.onclick = confirmarExcluirMedidas;
-    });
 }
 
 async function inserirMedidas(evento) {
@@ -96,20 +94,19 @@ async function inserirMedidas(evento) {
     }
 }
 
-async function confirmarExcluirMedidas(evento) {
+function adicionarEventoExcluir() {
+    const listaBtnExcluir = document.querySelectorAll(".btn-excluir-medidas");
+    listaBtnExcluir.forEach(element => {
+        element.onclick = aoClicarNaLixeira;
+    });
+}
+
+async function aoClicarNaLixeira(evento) {
     idMedidas = evento.target.dataset.idmedida;
-    
-    if (!modal) {
-        modal = new bootstrap.Modal('#modal-excluir-medidas');
-    }
-    modal.show();
 }
 
 async function excluirMedidas() {
-   
     const token = seguranca.pegarToken();
-
-    modal.hide();
 
     try {
         await servicos.excluirMedidas(token, idMedidas);

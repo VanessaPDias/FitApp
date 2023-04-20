@@ -8,7 +8,6 @@ seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
-let modalExcluirMensagem;
 const chaveTipoDeMensagem = "fitapp_tipo_mensagem";
 let tipoDeMensagem;
 
@@ -220,27 +219,18 @@ function listarMensagens(listaDeMensagens, tipo) {
 function adicionarEventoExcluir() {
     const listaBtnExcluir = document.querySelectorAll(".btn-excluir-mensagem");
     listaBtnExcluir.forEach(element => {
-        element.onclick = abrirModalConfirmarExcluir;
+        element.addEventListener("show.bs.modal", abrirModalConfirmarExcluir);
     });
 }
 
 function abrirModalConfirmarExcluir(evento) {
     document.querySelector("#btn-confirmar-excluir-mensagem").dataset.idmensagem = evento.target.dataset.idmensagem;
 
-    if (!modalExcluirMensagem) {
-        modalExcluirMensagem = new bootstrap.Modal("#modal-excluir-mensagem");
-    }
-    modalExcluirMensagem.show();
 }
 
 async function excluirMensagem(evento) {
     const token = seguranca.pegarToken();
     const idMensagem = evento.target.dataset.idmensagem;
-
-    if (!modalExcluirMensagem) {
-        modalExcluirMensagem = new bootstrap.Modal("#modal-excluir-mensagem");
-    }
-    modalExcluirMensagem.hide();
 
     try {
         await servicos.excluirMensagem(token, idMensagem);

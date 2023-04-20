@@ -39,31 +39,6 @@ footer,
     border-color: var(--bs-fiord-color);
 }
 
-
-
-
-/* #home-container-banner-principal,
-#home-container-planos,
-#trabalhe-conosco-container-principal, #container-nutricionistas,
-footer {
-    background-color: var(--bs-cinza-body);
-}
-
-
-
-#card-formulario,
-#card-modelo-header {
-    background-color: var(--bs-amarelo-padrao);
-}
-
-
-
-.btn-light {
-    --bs-btn-bg: var(--bs-amarelo-padrao);
-    --bs-btn-hover-bg: var(--bs-amarelo-active-hover);
-    --bs-btn-active-bg: var(--bs-amarelo-active-hover);
-} */
-
 .container-formulario {
     width: 90%;
 

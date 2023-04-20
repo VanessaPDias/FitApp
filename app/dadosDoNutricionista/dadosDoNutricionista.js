@@ -67,6 +67,11 @@ async function alterarDadosDoNutricionista(evento) {
     const status = document.querySelector("#status-nutri").value;
     const cadastro = document.querySelector("#cadastro-confirmado-nutri").value;
 
+    const formulario = document.querySelector("#formulario");
+    if (formulario.checkValidity() == false) {
+        return false;
+    }
+
     evento.preventDefault();
 
     novosDados = {

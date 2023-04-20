@@ -60,6 +60,7 @@ async function alterarDadosDoPlano(evento) {
     }
 
     evento.preventDefault();
+    
     novosDados = {
         nome: nome,
         valor: valor,
