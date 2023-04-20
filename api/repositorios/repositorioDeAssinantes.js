@@ -37,7 +37,8 @@ async function criarAssinante(novoAssinante) {
             novoAssinante.nutricionista,
             novoAssinante.personalTrainer,
             novoAssinante.nome,
-            novoAssinante.email
+            novoAssinante.email,
+            novoAssinante.altura
         ]
 
         const parametrosDaAssinatura = [
@@ -55,8 +56,8 @@ async function criarAssinante(novoAssinante) {
             `insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado) 
             values (?, ?, ?, ?, ?, ?);`, parametrosDoUsuario);
         await conexao.execute(
-            `insert into assinantes (idAssinante, idNutri, idPersonal, nome, email) 
-            values (?, ?, ?, ?, ?);`, parametrosDoAssinante);
+            `insert into assinantes (idAssinante, idNutri, idPersonal, nome, email, altura) 
+            values (?, ?, ?, ?, ?, ?);`, parametrosDoAssinante);
         await conexao.execute(
             `insert into assinaturas (idAssinatura, idAssinante, idPlano, dataInicio, dataFim, bloqueado) 
             values (?, ?, ?, ?, ?, ?);`, parametrosDaAssinatura);

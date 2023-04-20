@@ -15,7 +15,7 @@ header {
 .dropdown-menu {
     --bs-dropdown-link-hover-color: #fff;
     --bs-dropdown-link-hover-bg: var(--bs-cor-de-destaque);
-    --bs-dropdown-link-active-bg:var(--bs-cor-principal);
+    --bs-dropdown-link-active-bg: var(--bs-cor-principal);
 }
 
 #area-lateral,
@@ -57,7 +57,10 @@ select {
     --bs-table-hover-bg: var(--bs-cor-de-destaque);
 }
 
-#lista-assinantes tr:hover i, #lista-nutricionistas tr:hover i, #lista-personal-trainers tr:hover i, #lista-planos tr:hover i {
+#lista-assinantes tr:hover i,
+#lista-nutricionistas tr:hover i,
+#lista-personal-trainers tr:hover i,
+#lista-planos tr:hover i, #lista-pacientes tr:hover i, #lista-alunos tr:hover i {
     color: #fff;
 }
 
@@ -121,7 +124,8 @@ select {
     overflow-y: scroll;
 }
 
-.list-group .lista-itens-dieta, .list-group .lista-exercicios-treino {
+.list-group .lista-itens-dieta,
+.list-group .lista-exercicios-treino {
     color: #000;
     background-color: #fff;
 }

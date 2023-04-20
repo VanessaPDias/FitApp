@@ -56,7 +56,7 @@ CREATE TABLE  IF NOT EXISTS `assinantes` (
   `email` varchar(128) NOT NULL,
   `dataNascimento` datetime DEFAULT NULL,
   `idSexo` int DEFAULT NULL,
-  `altura` int DEFAULT NULL,
+  `altura` int NOT NULL,
   PRIMARY KEY (`idAssinante`),
   KEY `fk_assinante_idNutricionista_idx` (`idNutri`),
   KEY `fk_assinante_idPersonal_idx` (`idPersonal`),
@@ -243,23 +243,25 @@ false
 )
 ON DUPLICATE KEY UPDATE idUsuario = '355049aa-1742-45d2-934d-278db5a6c224';
 
-INSERT into nutricionistas (idNutri, nome, email, telefone, registroProfissional)
+INSERT into nutricionistas (idNutri, nome, email, telefone, registroProfissional, cadastroConfirmado)
 values (
 'cdb6531c-0bc4-48b2-b317-dece78f5349e',
 'nutricionista',
 'nutri@fitapp.com',
 999999999,
-'crn123'
+'crn123',
+true
 )
 ON DUPLICATE KEY UPDATE idNutri = 'cdb6531c-0bc4-48b2-b317-dece78f5349e';
 
-INSERT into personal_trainers (idPersonal, nome, email, telefone, registroProfissional)
+INSERT into personal_trainers (idPersonal, nome, email, telefone, registroProfissional, cadastroConfirmado)
 values (
 '355049aa-1742-45d2-934d-278db5a6c224',
 'personal',
 'personal@fitapp.com',
 999999999,
-'cre123'
+'cre123',
+true
 )
 ON DUPLICATE KEY UPDATE idPersonal = '355049aa-1742-45d2-934d-278db5a6c224';
 
