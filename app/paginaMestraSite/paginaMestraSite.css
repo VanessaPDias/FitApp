@@ -16,17 +16,11 @@ footer,
     background-color: var(--bs-white);
 }
 
-.btn-header {
-    --bs-btn-hover-bg: var(--bs--cor-de-destaque);
-    --bs-btn-hover-border-color: var(--bs--cor-de-destaque);
-}
-
-.btn-site, .btn-card-plano, #btn-enviar-fromulario {
-    --bs-btn-color: var(--bs-white);
+.btn-padrao {
+    --bs-btn-color: #fff;
     --bs-btn-bg: var(--bs-cor-principal);
     --bs-btn-border-color: var(--bs-cor-principal);
-    --bs-btn-hover-bg: var(--bs-fiord-color);
-    --bs-btn-hover-border-color: var(--bs-cor-principal);
+    --bs-btn-hover-bg: var(--bs--cor-de-destaque);
 }
 
 #card-modelo-header {
@@ -34,7 +28,7 @@ footer,
     background-color: var(--bs-cor-principal);
 }
 
-.form-check-input:checked{
+.form-check-input:checked {
     background-color: var(--bs-cor-principal);
     border-color: var(--bs-fiord-color);
 }
