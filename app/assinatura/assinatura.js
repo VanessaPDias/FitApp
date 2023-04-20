@@ -8,7 +8,7 @@ window.onload = aoCarregarPagina;
 
 let idPlano;
 let idNutri;
-//let idPersonal;
+let idPersonal;
 
 async function aoCarregarPagina() {
 
@@ -17,8 +17,8 @@ async function aoCarregarPagina() {
     document.querySelector("#btn-finalizar-cadastro").onclick = finalizarCadastro;
     buscarPlanos();
     buscarNutricionistas();
-   // buscarPersonalTrainers();
-    
+    buscarPersonalTrainers();
+
     mensagens.exibirMensagemAoCarregarAPagina();
 }
 
@@ -31,7 +31,7 @@ async function buscarPlanos() {
 }
 
 function preencherCaixaPlanoHtml(plano) {
-    
+
     const planosAtivos = document.querySelector("#planos-ativos");
     const planoModelo = document.querySelector("#card-modelo-plano");
 
@@ -61,7 +61,7 @@ async function buscarNutricionistas() {
 }
 
 function preencherCaixaNutriHtml(nutri) {
-    
+
     const nutricionistasAtivos = document.querySelector("#nutricionistas-ativos");
     const cardModeloNutri = document.querySelector("#card-modelo-nutri");
 
@@ -69,7 +69,10 @@ function preencherCaixaNutriHtml(nutri) {
 
     cloneCardModeloNutriHtml.style.display = "block";
 
-    cloneCardModeloNutriHtml.querySelector(".card-modelo-imagem-nutri").src = `${configuracoes.urlDaApi}/${nutri.imagem}`;
+    if (!nutri.imagem.endsWith("null")) {
+        cloneCardModeloNutriHtml.querySelector(".card-modelo-imagem-nutri").src = `${configuracoes.urlDaApi}/${nutri.imagem}`;
+    }
+
     cloneCardModeloNutriHtml.querySelector(".card-modelo-nome-nutri").innerHTML = nutri.nome;
     cloneCardModeloNutriHtml.querySelector(".plano-modelo-descricao-nutri").innerHTML = nutri.sobreMim;
     cloneCardModeloNutriHtml.querySelector("input").id = `${nutri.idNutri}`;
@@ -82,36 +85,39 @@ function salvarIdNutri(evento) {
     idNutri = evento.target.id;
 }
 
-// async function buscarPersonalTrainers() {
-//     const personalTrainersAtivos = await servicos.buscarPersonalTrainersAtivos();
+async function buscarPersonalTrainers() {
+    const personalTrainersAtivos = await servicos.buscarPersonalTrainersAtivos();
 
-//     personalTrainersAtivos.forEach(personal => {
-//         preencherCaixaPersonalHtml(personal);
-//     });
-// }
+    personalTrainersAtivos.forEach(personal => {
+        preencherCaixaPersonalHtml(personal);
+    });
+}
 
-// function preencherCaixaPersonalHtml(personal) {
-    
-//     const personalTrainersAtivos = document.querySelector("#personal-trainers-ativos");
-//     const cardModeloPersonal = document.querySelector("#card-modelo-personal");
+function preencherCaixaPersonalHtml(personal) {
 
-//     const cloneCardModeloPersonalHtml = cardModeloPersonal.firstElementChild.cloneNode(true);
+    const personalTrainersAtivos = document.querySelector("#personal-trainers-ativos");
+    const cardModeloPersonal = document.querySelector("#card-modelo-personal");
 
-//     cloneCardModeloPersonalHtml.style.display = "block";
+    const cloneCardModeloPersonalHtml = cardModeloPersonal.firstElementChild.cloneNode(true);
 
-//     cloneCardModeloPersonalHtml.querySelector(".card-modelo-imagem-personal").src = `${configuracoes.urlDaApi}/${personal.imagem}`;
-//     cloneCardModeloPersonalHtml.querySelector(".card-modelo-nome-personal").innerHTML = personal.nome;
-//     cloneCardModeloPersonalHtml.querySelector(".plano-modelo-descricao-personal").innerHTML = personal.sobreMim;
-//     cloneCardModeloPersonalHtml.querySelector("input").id = `${personal.idPersonal}`;
-//     cloneCardModeloPersonalHtml.querySelector("input").onclick = salvarIdPersonal;
+    cloneCardModeloPersonalHtml.style.display = "block";
 
-//     personalTrainersAtivos.appendChild(cloneCardModeloPersonalHtml);
-// }
+    if (!personal.imagem.endsWith("null")) {
+        cloneCardModeloPersonalHtml.querySelector(".card-modelo-imagem-personal").src = `${configuracoes.urlDaApi}/${personal.imagem}`;
+    }
 
-// function salvarIdPersonal(evento) {
-//    idPersonal = evento.target.id;
-// }
+    cloneCardModeloPersonalHtml.querySelector(".card-modelo-nome-personal").innerHTML = personal.nome;
+    cloneCardModeloPersonalHtml.querySelector(".plano-modelo-descricao-personal").innerHTML = personal.sobreMim;
+    cloneCardModeloPersonalHtml.querySelector("input").id = `${personal.idPersonal}`;
+    cloneCardModeloPersonalHtml.querySelector("input").onclick = salvarIdPersonal;
+
+    personalTrainersAtivos.appendChild(cloneCardModeloPersonalHtml);
+}
+
+function salvarIdPersonal(evento) {
+    idPersonal = evento.target.id;
+}
 
 function finalizarCadastro() {
-    window.location.href = `../criarConta/criarConta.html?idPlano=${idPlano}&idNutri=${idNutri}`;
+    window.location.href = `../criarConta/criarConta.html?idPlano=${idPlano}&idNutri=${idNutri}&idPersonal=${idPersonal}`;
 }
