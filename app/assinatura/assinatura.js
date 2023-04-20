@@ -119,5 +119,20 @@ function salvarIdPersonal(evento) {
 }
 
 function finalizarCadastro() {
+    if(!idPlano) {
+        mensagens.mostrarMensagemDeErro("Selecione um Plano.", false);
+        return;
+    }
+
+    if(!idNutri) {
+        mensagens.mostrarMensagemDeErro("Selecione um Nutricionista.", false);
+        return;
+    }
+
+    if(!idPersonal) {
+        mensagens.mostrarMensagemDeErro("Selecione um Personal.", false);
+        return;
+    }
+    
     window.location.href = `../criarConta/criarConta.html?idPlano=${idPlano}&idNutri=${idNutri}&idPersonal=${idPersonal}`;
 }
