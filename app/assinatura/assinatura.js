@@ -1,5 +1,4 @@
 import * as servicos from "./servicosDeAssinatura.js";
-import * as erros from "../util/tratamentoDeErros.js";
 import * as configuracoes from "../configuracoes.js";
 import * as mensagens from "../util/mensagens.js";
 import * as paginaMestraSite from "../paginaMestraSite/paginaMestraSite.js";

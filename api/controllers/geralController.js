@@ -87,7 +87,7 @@ async function buscarNutriPorId(req, res) {
     res.send({
         idNutri: dadosDoNutri.idNutri,
         nome: dadosDoNutri.nome,
-        imagem: dadosDoNutri.imagem,
+        imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(dadosDoNutri.imagem),
         sobreMim: dadosDoNutri.sobreMim
     });
 }
@@ -107,7 +107,7 @@ async function buscarPersonalPorId(req, res) {
     res.send({
         idPersonal: dadosDoPersonal.idPersonal,
         nome: dadosDoPersonal.nome,
-       imagem: dadosDoPersonal.imagem,
+        imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(dadosDoPersonal.imagem),
         sobreMim: dadosDoPersonal.sobreMim
     });
 }

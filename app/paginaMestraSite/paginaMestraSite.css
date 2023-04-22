@@ -4,6 +4,7 @@
     --bs-cor-principal: #548CA8;
 }
 
+
 body {
     background-color: var(--bs-gray-200);
 }
@@ -14,6 +15,10 @@ footer,
 #container-formulario-trabalhe-conosco,
 #container-nutricionistas-assinatura {
     background-color: var(--bs-white);
+}
+
+#container-conteudo {
+    flex: 1 0 auto;
 }
 
 .btn-padrao {
@@ -33,43 +38,40 @@ footer,
     border-color: var(--bs-fiord-color);
 }
 
-.container-formulario {
+#container-login, #container-cadastro {
     width: 90%;
-
-}
-
-.btn-social {
-    width: 45%;
-}
-
-.formulario-dados {
-    width: 90%;
-
-}
-
-@media screen and (min-width: 576px) {
-    .container-formulario {
-        width: 90%;
-    }
 }
 
 @media screen and (min-width: 768px) {
-    .container-formulario {
+    #container-login {
         width: 50%;
     }
 
+    #container-cadastro {
+        width: 50%;
+    }
 }
 
 @media screen and (min-width: 992px) {
-    .container-formulario {
-        width: 50%;
+    #container-login {
+        width: 30%;
+    }
+
+    #container-cadastro {
+        width: 40%;
     }
 }
 
 @media screen and (min-width: 1200px) {
-    .container-formulario {
-        padding-top: 20px;
-        padding-bottom: 20px;
+    #container-login {
         width: 30%;
     }
+
+    #container-cadastro {
+        width: 40%;
+    }
 }
+
+
+
+

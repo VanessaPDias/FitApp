@@ -1,33 +1,37 @@
-<div class="container-fluid h-100 d-flex justify-content-center py-4">
-    <div class="container-formulario">
+<div class="container-fluid d-flex justify-content-center my-4">
+    <div id="container-login">
         <h3 class="fw-semibold lh-1">Entrar</h3>
-        <div class="card my-4" id="card-formulario">
+        <div class="card my-4 shadow">
             <div class="card-body text-center">
-                <!-- <div class="pb-3">
-                    <a href="#" class="btn-social btn btn-primary"><i class="bi bi-facebook"></i> Facebook</a>
-                    <a href="#" class="btn-social btn btn-danger"><i class="bi bi-google"></i> Google</a>
-                </div> -->
+                <div class="row text-center my-3">
+                    <div class="col">
+                        <a href="#" class="btn btn-outline-danger w-50 shadow-sm"><i class="bi bi-google me-2"></i>
+                            Google</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <form class="formulario-dados mx-auto" id="formulario">
+                        <p class="fs-6 text-danger text-start" id="erro"></p>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control shadow-sm" id="email" placeholder="name@exemplo.com" required>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control shadow-sm" id="senha" required>
+                            <label for="senha">Senha</label>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mx-auto">
+                            <div>
+                                <a href="../esqueciMinhaSenha/esqueciMinhaSenha.html" class="">Esqueci minha senha</a>
+                            </div>
+                            <div>
+                                <button class="btn btn-outline-dark btn-sm fw-bold mt-3 btn-padrao" id="btn-fazerLogin"
+                                    type="submit">Entrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-                <form class="formulario-dados mx-auto" id="formulario">
-                    <p class="fs-6 text-danger text-start" id="erro"></p>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="email" placeholder="name@exemplo.com" required>
-                        <label for="email">Email</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="senha" required>
-                        <label for="senha">Senha</label>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mx-auto">
-                        <div>
-                            <a href="../esqueciMinhaSenha/esqueciMinhaSenha.html" class="">Esqueci minha senha</a>
-                        </div>
-                        <div>
-                            <button class="btn btn-outline-dark btn-sm fw-bold mt-3 btn-site" id="btn-fazerLogin"
-                                type="submit">Entrar</button>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
