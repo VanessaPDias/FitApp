@@ -1,0 +1,112 @@
+<div class="row">
+    <h6><img src="../img/assinatura.png" class="me-1" alt="" width="24" height="24">Assinatura</h6>
+</div>
+
+<div class="row py-2">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 col-sm">
+                        <p class="fw-bolder">Plano</p>
+                        <p class="text-uppercase" id="nome-plano"></p>
+                    </div>
+                    <div class="col-6 col-sm">
+                        <p class="fw-bolder">Valor</p>
+                        <p id="valor-plano"></p>
+                    </div>
+                    <div class="col-12 col-sm">
+                        <p class="fw-bolder">Descrição</p>
+                        <p id="descricao-plano"></p>
+                    </div>
+                </div>
+                <hr class="my-3">
+                <div class="row">
+                    <div class="col">
+                        <p class="fw-bolder">Início</p>
+                        <p id="data-inicio"></p>
+                    </div>
+                    <div class="col">
+                        <p class="fw-bolder">Fim</p>
+                        <p id="data-fim"></p>
+                    </div>
+                    <div class="col">
+                        <p class="fw-bolder">Status</p>
+                        <p id="status-plano"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row py-2">
+    <div class="col text-end">
+        <button type="button" class="btn btn-outline-dark btn-app" data-bs-toggle="modal"
+            data-bs-target="#modal-alterar-plano" style="width: 86px;">Alterar</button>
+
+        <button type="button" class="btn btn-outline-dark btn-app ms-2 me-2" id="btn-cancelar-assinatura" data-bs-toggle="modal"
+            data-bs-target="#modal-cancelar-assinatura" style="width: 86px;">Cancelar</button>
+
+        <a href="../perfilAssinante/perfil.html" class="btn btn-outline-dark btn-voltar"
+            style="width: 86px;">Voltar</a>
+    </div>
+</div>
+
+<div class="modal" id="modal-alterar-plano" tabindex="-1" aria-labelledby="modal-alterar-plano-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-alterar-plano-label">Alterar Plano</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formulario">
+                    <div class="input-group input-group-sm">
+                        <select class="form-select" id="select-planos">
+
+                        </select>
+                    </div>
+                    <div class="pt-3">
+                        <label class="form-label fw-semibold" for="form-valor">Valor:</label>
+                        <div class="input-group input-group-sm">
+                            <input class="form-control" type="number" id="form-valor" name="valor" disabled>
+                        </div>
+                    </div>
+
+                    <div class="pt-3">
+                        <label class="form-label fw-semibold" for="form-descricao">Descrição:</label>
+                        <div class="input-group input-group-sm">
+                            <textarea class="form-control" type="text" id="form-descricao" name="descricao" disabled></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer pt-3">
+                        <button id="btn-confirmar-alteracao" type="button" class="btn btn-outline-dark btn-app"
+                            style="width: 86px;">Alterar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-cancelar-assinatura" tabindex="-1" aria-labelledby="modal-cancelar-assinatura-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-cancelar-assinatura-label">Alterar Status</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja cancelar a Assinatura?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-cancelamento" type="button"
+                    class="btn btn-outline-dark btn-app" style="width: 86px;">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -109,7 +109,6 @@ servidor.app.get('/assinante/perfil/personalTrainers/:idPersonal', autorizacao.a
 servidor.app.get('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarDadosDaAssinatura));
 servidor.app.delete('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.cancelarAssinatura));
 servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.alterarPlanoDaAssinatura));
-servidor.app.patch('/assinante/assinaturas/:idAssinatura', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.alterarPlanoDaAssinatura));
 servidor.app.post('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.inserirMedidas));
 servidor.app.get('/assinante/medidas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.buscarMedidas));
 servidor.app.delete('/assinante/medidas/:idMedidas', autorizacao.autorizar(model.perfil.assinante), async (req, res) => await tratarErros(req, res, assinantesController.excluirMedidas));

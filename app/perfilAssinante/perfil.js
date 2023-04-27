@@ -9,6 +9,9 @@ seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
+let idAssinatura;
+let idNutri;
+let idPersonal;
 let modal;
 async function aoCarregarPagina() {
     await paginaMestra.carregar("perfilAssinante/perfil-conteudo.html", "Perfil");
@@ -17,6 +20,7 @@ async function aoCarregarPagina() {
     document.querySelector("#btn-salvar-dados-do-perfil").onclick = salvarDadosDoPerfil;
     document.querySelector("#btn-alterar-senha").onclick = alterarSenhaDeAcesso;
     document.querySelector("#btn-confirmar-alteracao-de-senha").onclick = gravarNovaSenha;
+    document.querySelector("#btn-dados-assinatura").onclick = irParaPaginaDadosDaAssinatura;
 
     await buscarDadosDoPerfil();
 
@@ -31,6 +35,10 @@ async function buscarDadosDoPerfil() {
 
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token);
+
+        idAssinatura = resposta.idAssinatura;
+        idNutri = resposta.idNutri;
+        idPersonal = resposta.idPersonal;
 
         document.querySelector("#email").innerHTML = resposta.email;
         document.querySelector("#nome").value = resposta.nome;
@@ -125,4 +133,8 @@ async function gravarImagem() {
     } catch (error) {
         erros.tratarErro(error);
     }
+}
+
+function irParaPaginaDadosDaAssinatura() {
+    window.location.href = `../dadosDaAssinatura/dadosDaAssinatura.html?idAssinatura=${idAssinatura}`;
 }

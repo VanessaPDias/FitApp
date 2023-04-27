@@ -111,7 +111,7 @@ async function buscarDadosDoPerfilDoAssinantePorId(idUsuario) {
             from usuarios as usuario
                 inner join assinantes as assinante on usuario.idUsuario = assinante.idAssinante
                 inner join assinaturas as assinatura on usuario.idUsuario = assinatura.idAssinante
-            where usuario.idUsuario = ?`, [idUsuario]);
+            where assinatura.bloqueado = 0 and usuario.idUsuario = ?`, [idUsuario]);
 
         if (rows.length <= 0)
             return;

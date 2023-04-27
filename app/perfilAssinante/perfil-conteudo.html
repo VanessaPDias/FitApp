@@ -84,28 +84,141 @@
                             </div>
                         </div>
                         <div class="pt-3 text-end">
-                            <button type="submit" id="btn-alterar-senha" class="btn btn-outline-dark btn-app">Alterar</button>
+                            <button type="submit" id="btn-alterar-senha"
+                                class="btn btn-outline-dark btn-app">Alterar</button>
                         </div>
                     </form>
                 </div>
             </div>
+
+            <div class="card shadow mt-3">
+                <div class="row card-body text-center ">
+                    <div class="col">
+                        <img src="/img/assinatura.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-dark btn-lg btn-app" id="btn-dados-assinatura" type="button" style="width: 146px;">Assinatura</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mt-2">
+                <div class="row card-body text-center">
+                    <div class="col">
+                        <img src="/img/nutricionista.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-dark btn-lg btn-app" type="button" data-bs-toggle="modal"
+                            data-bs-target="#modal-dados-nutricionista" style="width: 146px;">Nutricionista</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mt-2">
+                <div class="row card-body text-center">
+                    <div class="col">
+                        <img src="/img/personal.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-dark btn-lg btn-app" type="button" data-bs-toggle="modal"
+                            data-bs-target="#modal-dados-personal" style="width: 146px;">Personal</button>
+                    </div>
+                </div>
+            </div>
+            <div class=" pt-3 text-end">
+                <a href="../dashboard/dashboard.html#inicio" class="btn btn-outline-dark btn-voltar">Voltar</a>
+
+            </div>
         </div>
     </div>
+</div>
 
-    <div class="modal" id="modal-alterar-senha" tabindex="-1" aria-labelledby="modal-alterar-senha-label"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Alterar Senha</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal" id="modal-alterar-senha" tabindex="-1" aria-labelledby="modal-alterar-senha-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Alterar Senha</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja alterar a senha?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-de-senha" type="button"
+                    class="btn btn-outline-dark btn-app">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-dados-assinatura" tabindex="-1" aria-labelledby="modal-alterar-senha-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Dados da Assinatura</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row modal-body">
+                <div class="col">
+                    <p class="fw-bolder">Plano</p>
+                    <p id="nome-plano"></p>
                 </div>
-                <div class="modal-body">
-                    Tem certeza que deseja alterar a senha?
+                <div class="col">
+                    <p class="fw-bolder">Valor</p>
+                    <p id="valor-plano"></p>
                 </div>
-                <div class="modal-footer">
-                    <button id="btn-confirmar-alteracao-de-senha" type="button" class="btn btn-outline-dark btn-app">Sim</button>
+                <div class="col">
+                    <p class="fw-bolder">Início</p>
+                    <p id="data-inicio"></p>
                 </div>
+                <div class="col">
+                    <p class="fw-bolder">Fim</p>
+                    <p id="data-fim"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-de-senha" type="button"
+                    class="btn btn-outline-dark btn-app">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-dados-nutricionista" tabindex="-1" aria-labelledby="modal-alterar-senha-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Alterar Senha</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                nutri
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-de-senha" type="button"
+                    class="btn btn-outline-dark btn-app">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-dados-personal" tabindex="-1" aria-labelledby="modal-alterar-senha-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Alterar Senha</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                personal
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-de-senha" type="button"
+                    class="btn btn-outline-dark btn-app">Sim</button>
             </div>
         </div>
     </div>
