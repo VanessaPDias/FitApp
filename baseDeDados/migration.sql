@@ -24,7 +24,7 @@ CREATE TABLE  IF NOT EXISTS `nutricionistas` (
   `email` varchar(128) NOT NULL,
   `telefone` varchar(36) NOT NULL,
   `registroProfissional` varchar(30) NOT NULL,
-  `sobreMim` varchar(256) DEFAULT NULL,
+  `sobreMim` varchar(356) DEFAULT NULL,
   `cadastroConfirmado` int NOT NULL,
   PRIMARY KEY (`idNutri`),
   CONSTRAINT `fk_nutricionista_idUsuario` FOREIGN KEY (`idNutri`) REFERENCES `usuarios` (`idUsuario`)
@@ -36,7 +36,7 @@ CREATE TABLE  IF NOT EXISTS `personal_trainers` (
   `email` varchar(128) NOT NULL,
   `telefone` varchar(36) NOT NULL,
   `registroProfissional` varchar(30) NOT NULL,
-  `sobreMim` varchar(256) DEFAULT NULL,
+  `sobreMim` varchar(356) DEFAULT NULL,
    `cadastroConfirmado` int NOT NULL,
   PRIMARY KEY (`idPersonal`),
   CONSTRAINT `fk_personal_idUsuario` FOREIGN KEY (`idPersonal`) REFERENCES `usuarios` (`idUsuario`)

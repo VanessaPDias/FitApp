@@ -35,10 +35,6 @@ async function buscarDadosDaAssinatura(idAssinatura) {
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token, idAssinatura);
 
-        // if(resposta.nome === "gratuito") {
-        //     document.querySelector("#btn-cancelar-assinatura").setAttribute("disabled", "");
-        // }
-
         let statusPlano;
         if (resposta.bloqueado == false) {
             statusPlano = "Ativo";

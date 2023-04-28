@@ -104,8 +104,8 @@ async function buscarDadosDoPerfil(req, res) {
         dataNascimento: dadosDoAssinante.dataNascimento,
         sexo: dadosDoAssinante.idSexo,
         altura: dadosDoAssinante.altura,
-        idNutri: dadosDoAssinante.nutricionista,
-        idPersonal: dadosDoAssinante.personalTrainer,
+        idNutri: dadosDoAssinante.idNutri,
+        idPersonal: dadosDoAssinante.idPersonal,
         idAssinatura: dadosDoAssinante.idAssinatura,
         idPlano: dadosDoAssinante.idPlano
     })
@@ -268,8 +268,10 @@ async function buscarDadosDoNutri(req, res) {
     }
 
     res.send({
-        imagem: dadosDoNutricionista.imagem,
+        imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(dadosDoNutricionista.imagem),
         nome: dadosDoNutricionista.nome,
+        registroProfissional: dadosDoNutricionista.registroProfissional,
+        email: dadosDoNutricionista.email,
         sobreMim: dadosDoNutricionista.sobreMim
     })
 }
@@ -287,8 +289,10 @@ async function buscarDadosDoPersonal(req, res) {
     }
 
     res.send({
-        imagem: dadosDoPersonal.imagem,
+        imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(dadosDoPersonal.imagem),
         nome: dadosDoPersonal.nome,
+        registroProfissional: dadosDoPersonal.registroProfissional,
+        email: dadosDoPersonal.email,
         sobreMim: dadosDoPersonal.sobreMim
     })
 }

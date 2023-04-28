@@ -21,6 +21,8 @@ async function aoCarregarPagina() {
     document.querySelector("#btn-alterar-senha").onclick = alterarSenhaDeAcesso;
     document.querySelector("#btn-confirmar-alteracao-de-senha").onclick = gravarNovaSenha;
     document.querySelector("#btn-dados-assinatura").onclick = irParaPaginaDadosDaAssinatura;
+    document.querySelector("#modal-dados-nutricionista").addEventListener("show.bs.modal", aoAbrirModalDadosDoNutricionista);
+    document.querySelector("#modal-dados-personal").addEventListener("show.bs.modal", aoAbrirModalDadosDoPersonal);
 
     await buscarDadosDoPerfil();
 
@@ -50,7 +52,7 @@ async function buscarDadosDoPerfil() {
             const data = new Date(resposta.dataNascimento);
             const zeroEsquerdaMes = (data.getMonth() + 1) < 10 ? '0' : '';
             const zeroEsquerdaDia = (data.getDate() + 1) < 10 ? '0' : '';
-            dataFormatada =  data.getFullYear() + '-' + zeroEsquerdaMes + (data.getMonth() + 1) + '-' + zeroEsquerdaDia + data.getDate();  
+            dataFormatada = data.getFullYear() + '-' + zeroEsquerdaMes + (data.getMonth() + 1) + '-' + zeroEsquerdaDia + data.getDate();
         }
         document.querySelector("#data-nascimento").value = dataFormatada;
         document.querySelector("#sexo").value = resposta.sexo;
@@ -137,4 +139,46 @@ async function gravarImagem() {
 
 function irParaPaginaDadosDaAssinatura() {
     window.location.href = `../dadosDaAssinatura/dadosDaAssinatura.html?idAssinatura=${idAssinatura}`;
+}
+
+async function aoAbrirModalDadosDoNutricionista() {
+
+    try {
+        const token = seguranca.pegarToken();
+
+        const dadosDoNutricionista = await servicos.buscarDadosNutri(token, idNutri);
+
+        if (!dadosDoNutricionista.imagem.endsWith("null")) {
+           document.querySelector("#imagem-nutricionista").src = `${configuracoes.urlDaApi}/${dadosDoNutricionista.imagem}`;
+        }
+
+        document.querySelector("#nome-nutricionista").innerHTML = dadosDoNutricionista.nome;
+        document.querySelector("#registro-profissional-nutricionista").innerHTML = dadosDoNutricionista.registroProfissional;
+        document.querySelector("#email-nutricionista").innerHTML = dadosDoNutricionista.email;
+        document.querySelector("#descricao-nutricionista").innerHTML = dadosDoNutricionista.sobreMim;
+    }
+    catch (error) {
+        erros.tratarErro(error);
+    }
+}
+
+async function aoAbrirModalDadosDoPersonal() {
+
+    try {
+        const token = seguranca.pegarToken();
+
+        const dadosDoPersonal = await servicos.buscarDadosPersonal(token, idPersonal);
+
+        if (!dadosDoPersonal.imagem.endsWith("null")) {
+           document.querySelector("#imagem-personal").src = `${configuracoes.urlDaApi}/${dadosDoPersonal.imagem}`;
+        }
+
+        document.querySelector("#nome-personal").innerHTML = dadosDoPersonal.nome;
+        document.querySelector("#registro-profissional-personal").innerHTML = dadosDoPersonal.registroProfissional;
+        document.querySelector("#email-personal").innerHTML = dadosDoPersonal.email;
+        document.querySelector("#descricao-personal").innerHTML = dadosDoPersonal.sobreMim;
+    }
+    catch (error) {
+        erros.tratarErro(error);
+    }
 }
