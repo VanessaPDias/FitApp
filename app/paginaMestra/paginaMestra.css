@@ -60,7 +60,7 @@ select {
 #lista-assinantes tr:hover i,
 #lista-nutricionistas tr:hover i,
 #lista-personal-trainers tr:hover i,
-#lista-planos tr:hover i, #lista-pacientes tr:hover i, #lista-alunos tr:hover i {
+#lista-planos tr:hover i, #lista-pacientes tr:hover i, #lista-alunos tr:hover i, #lista-dietas tr:hover i, #lista-treinos tr:hover i {
     color: #fff;
 }
 

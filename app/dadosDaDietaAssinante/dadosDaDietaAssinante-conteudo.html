@@ -1,0 +1,144 @@
+<div>
+    <div class="row">
+        <h6><img class="me-2" src="/img/novaDieta.png" alt="" width="24" height="24">Dados da Dieta</h6>
+    </div>
+    <div class="row pb-3">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 col-sm">
+                            <p class="fw-bolder">Dieta</p>
+                            <p class="text-uppercase" id="nome-dieta"></p>
+                        </div>
+                        <div class="col-6 col-sm">
+                            <p class="fw-bolder">Objetivo</p>
+                            <p class="text-uppercase" id="objetivo-dieta"></p>
+                        </div>
+                        <div class="col-6 col-sm">
+                            <p class="fw-bolder">Ínicio</p>
+                            <p id="inicio-dieta"></p>
+                        </div>
+                        <div class="col-6 col-sm">
+                            <p class="fw-bolder">Fim</p>
+                            <p id="fim-dieta"></p>
+                        </div>
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pb-3">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link  active" id="refeicao-cafeDaManha" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-cafeDaManha-pane" type="button" role="tab"
+                                aria-controls="refeicao-cafeDaManha-pane" aria-selected="true">Café da Manhã</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link link-refeicao" id="refeicao-lancheDaManha" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-lancheDaManha-pane" type="button" role="tab"
+                                aria-controls="refeicao-lancheDaManha-pane" aria-selected="false">Lanche da
+                                Manhã</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="refeicao-almoco" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-almoco-pane" type="button" role="tab"
+                                aria-controls="refeicao-almoco-pane" aria-selected="false">Almoço</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="refeicao-lancheDaTarde" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-lancheDaTarde-pane" type="button" role="tab"
+                                aria-controls="refeicao-lancheDaTarde-pane" aria-selected="false">Lanche da
+                                Tarde</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="refeicao-jantar" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-jantar-pane" type="button" role="tab"
+                                aria-controls="refeicao-jantar-pane" aria-selected="false">Jantar</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="refeicao-lancheDaNoite" data-bs-toggle="tab"
+                                data-bs-target="#refeicao-lancheDaNoite-pane" type="button" role="tab"
+                                aria-controls="refeicao-lancheDaNoite-pane" aria-selected="false">Lanche da
+                                Noite</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="refeicao-cafeDaManha-pane" role="tabpanel"
+                            aria-labelledby="refeicao-cafeDaManha" tabindex="0">
+                            <div class="py-3">
+                                <ul class="list-group" id="lista-itens-cafeDaManha">
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="refeicao-lancheDaManha-pane" role="tabpanel"
+                            aria-labelledby="refeicao-lancheDaManha" tabindex="0">
+
+                            <div class="py-3">
+                                <ul class="list-group" id="lista-itens-lancheDaManha">
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="refeicao-almoco-pane" role="tabpanel"
+                            aria-labelledby="refeicao-almoco" tabindex="0">
+
+                            <div class="py-3">
+                                <ul class="list-group" id="lista-itens-almoco">
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="refeicao-lancheDaTarde-pane" role="tabpanel"
+                            aria-labelledby="refeicao-lancheDaTarde" tabindex="0">
+
+                            <div class="py-3">
+                                <ul class="list-group" id="lista-itens-lancheDaTarde">
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="refeicao-jantar-pane" role="tabpanel"
+                            aria-labelledby="refeicao-jantar" tabindex="0">
+
+                            <div class="py-3">
+                                <ul class="list-group" id="lista-itens-jantar">
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="refeicao-lancheDaNoite-pane" role="tabpanel"
+                            aria-labelledby="refeicao-lancheDaNoite" tabindex="0">
+
+                            <div class="py-3">
+                                <ul class="list-group" id="lista-itens-lancheDaNoite">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col text-end">
+            <a href="../dashboard/dashboard.html#inicio" class="btn btn-outline-dark me-2 btn-voltar" style="width: 86px;">Voltar</a>
+            <button class="btn btn-outline-dark btn-app" id="btn-alterar-dieta" style="width: 86px;">Imprimir</button>
+        </div>
+    </div>
+
+</div>
+

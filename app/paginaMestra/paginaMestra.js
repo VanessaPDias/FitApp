@@ -57,6 +57,8 @@ function configurarPaginaMestraPorPerfil(perfil) {
             home: "/dashboard/dashboard.html#inicio",
             menuLateral: [
                 { nome: "Início", icone: "bi-house-door", id: "#inicio", link: `/dashboard/dashboard.html#inicio` },
+                { nome: "Dietas", icone: "bi-tags", id: "#dietas", link: `/historicoDeDietasDoAssinante/historicoDeDietasDoAssinante.html#dietas` },
+                { nome: "Treinos", icone: "bi-tags", id: "#treinos", link: `/historicoDeTreinosDoAssinante/historicoDeTreinosDoAssinante.html#treinos` },
                 { nome: "Medidas", icone: "bi-rulers", id: "#medidas", link: "/medidas/medidas.html#medidas" },
                 { nome: "Relatórios", icone: "bi-clipboard-data", id: "#relatorios", link: "/historicoDeMedidasAssinante/historicoDeMedidasAssinante.html#relatorios" },
                 { nome: "Mensagens", icone: "bi-envelope", id: "#mensagens", link: "/mensagens/mensagens.html#mensagens" }

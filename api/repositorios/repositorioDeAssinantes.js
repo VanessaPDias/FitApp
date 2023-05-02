@@ -89,10 +89,24 @@ async function buscarDadosDoDashboardDoAssinantePorId(idUsuario) {
             where idAssinante = ?
             order by data desc`, [idUsuario]);
 
+        const [dietas, fieldsDietas] = await conexao.execute(
+            `select idDieta, nome, dataInicio, dataFim, objetivo, dietaAtual
+            from dietas
+            where idAssinante = ?
+            order by data desc`, [idUsuario]);
+
+        const [treinos, fieldsTreinos] = await conexao.execute(
+            `select idTreino, nome, dataInicio, dataFim, objetivo, TreinoAtual
+            from treinos
+            where idAssinante = ?
+            order by data desc`, [idUsuario]);
+
         return {
             dados: rows[0],
             historicoDePeso: pesos,
-            pesoAtual: pesos[0]
+            pesoAtual: pesos[0],
+            dietas: dietas,
+            treinos: treinos
         }
 
     } finally {

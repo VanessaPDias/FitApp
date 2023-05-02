@@ -54,7 +54,7 @@ async function cadastrarAssinante(req, res) {
 
         repositorioDeMensagens.salvarMensagem(new Mensagem.Mensagem(admin.idUsuario, admin.login, nutriEncontrado.idNutri, nutriEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(nutriEncontrado.nome, novoAssinante.nome)));
         repositorioDeMensagens.salvarMensagem(new Mensagem.Mensagem(admin.idUsuario, admin.login, personalEncontrado.idPersonal, personalEncontrado.email, 'Novo Assinante', servicoDeMensagens.gerarNotificacaoNovoAssinante(personalEncontrado.nome, novoAssinante.nome)));
-       
+
 
         res.send({
             idAssinante: novoAssinante.idAssinante
@@ -82,9 +82,9 @@ async function buscarDadosDoDashboard(req, res) {
         idade: new Idade.Idade(dadosDoAssinante.dados.dataNascimento).valor,
         peso: peso,
         imc: new Imc.Imc(peso, altura).valor,
-        medidas: dadosDoAssinante.historicoDePeso
-        // idDieta: !dietaAtual ? 0 : dietaAtual.idDieta,
-        // idTreino: !treinoAtual ? 0 : treinoAtual.idTreino,
+        medidas: dadosDoAssinante.historicoDePeso,
+        dietaAtual: dadosDoAssinante.dietas && dadosDoAssinante.dietas.length > 0 ? dadosDoAssinante.dietas[0] : null,
+        treinoAtual: dadosDoAssinante.treinos && dadosDoAssinante.treinos.length > 0 ? dadosDoAssinante.treinos[0] : null
     })
 }
 
@@ -133,7 +133,7 @@ async function inserirMedidas(req, res) {
 
     await repositorioDeMedidas.salvarMedidas(req.usuario.idUsuario, medidas);
 
-    res.send({idMedidas: medidas.idMedidas});
+    res.send({ idMedidas: medidas.idMedidas });
 }
 
 //O Assinante busca historico de medidas
@@ -301,18 +301,18 @@ async function buscarDadosDoPersonal(req, res) {
 async function buscarDietas(req, res) {
     // #swagger.tags = ['Assinante']
     // #swagger.description = 'endpoint para buscar todas as dietas ou filtra por nome.'
-    
+
     const dietas = await repositorioDeDietas.buscarDietasPorFiltro(req.query.nome, req.usuario.idUsuario);
 
     if (dietas <= 0) {
-        res.status(404).send({ erro: "Dietas não encontrada" });
+        res.send([]);
         return;
     }
 
     res.send(dietas.map(function (dieta) {
         return {
             idDieta: dieta.idDieta,
-            nome: dieta.nomeDieta,
+            nome: dieta.nome,
             objetivo: dieta.objetivo,
             dataInicio: dieta.dataInicio,
             dataFim: dieta.dataFim
@@ -336,6 +336,8 @@ async function buscarDietaPorId(req, res) {
         idDieta: req.params.idDieta,
         nome: dadosDaDieta.dieta.nome,
         objetivo: dadosDaDieta.dieta.objetivo,
+        dataInicio: dadosDaDieta.dieta.dataInicio,
+        dataFim: dadosDaDieta.dieta.dataFim,
         itens: dadosDaDieta.itensDaDieta
     });
 }
@@ -348,7 +350,7 @@ async function buscarTreinos(req, res) {
     const treinos = await repositorioDeTreinos.buscarTreinosPorFiltro(req.query.nome, req.usuario.idUsuario);
 
     if (treinos <= 0) {
-        res.status(404).send({ erro: "Treinos não encontrado" });
+        res.send([]);
         return;
     }
 
