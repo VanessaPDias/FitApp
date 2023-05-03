@@ -1,8 +1,8 @@
 import * as util from "../util/tratamentoDeRespostaApi.js";
 import * as configuracoes from "../configuracoes.js";
 
-export async function buscarDietaPorId(token, idDieta) {
-    const url = `${configuracoes.urlDaApi}/assinante/dietas/${idDieta}`;
+export async function buscarTreinoPorId(token, idTreino) {
+    const url = `${configuracoes.urlDaApi}/assinante/treino/${idTreino}`;
 
     const resposta = await fetch(url, {
         headers: {

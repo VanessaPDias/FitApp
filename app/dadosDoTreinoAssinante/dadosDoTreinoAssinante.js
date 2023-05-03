@@ -1,4 +1,4 @@
-import * as servicos from "./servicosDeDadosDaDietaAssinante.js"
+import * as servicos from "./servicosDeDadosDoTreinoAssinante.js"
 import * as erros from "../util/tratamentoDeErros.js";
 import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
@@ -10,59 +10,60 @@ window.onload = aoCarregarPagina;
 
 let token;
 let nomeAssinante;
-let idDieta;
-let dadosDaDieta;
-let itensDaDieta = [];
+let idTreino;
+let dadosDoTreino;
+let exerciciosDoTreino = [];
 
 async function aoCarregarPagina() {
     const params = new Proxy(new URLSearchParams(window.location.search), {
         get: (searchParams, prop) => searchParams.get(prop),
     });
 
-    idDieta = params.idDieta;
+    idTreino = params.idTreino;
 
-    await paginaMestra.carregar("dadosDaDietaAssinante/dadosDaDietaAssinante-conteudo.html", "Dados da Dieta");
+    await paginaMestra.carregar("dadosDoTreinoAssinante/dadosDoTreinoAssinante-conteudo.html", "Dados do Treino");
 
-    document.querySelector("#btn-imprimir-dieta").onclick = imprimirDieta;
+    document.querySelector("#btn-imprimir-treino").onclick = imprimirTreino;
     token = seguranca.pegarToken();
     nomeAssinante = seguranca.pegarNomeDoUsuario();
-    buscarDadosDaDieta();
+    buscarDadosDoTreino();
     mensagens.exibirMensagemAoCarregarAPagina();
 }
 
-async function buscarDadosDaDieta() {
+async function buscarDadosDoTreino() {
 
     try {
-        dadosDaDieta = await servicos.buscarDietaPorId(token, idDieta);
-        itensDaDieta = dadosDaDieta.itens;
+        dadosDoTreino = await servicos.buscarTreinoPorId(token, idTreino);
+        exerciciosDoTreino = dadosDoTreino.exercicios;
 
-        document.querySelector("#nome-dieta").innerHTML = dadosDaDieta.nome;
-        document.querySelector("#objetivo-dieta").innerHTML = dadosDaDieta.objetivo;
-        document.querySelector("#inicio-dieta").innerHTML = new Date(dadosDaDieta.dataInicio).toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' });
-        document.querySelector("#fim-dieta").innerHTML = new Date(dadosDaDieta.dataFim).toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' });
+        document.querySelector("#nome-treino").innerHTML = dadosDoTreino.nome;
+        document.querySelector("#objetivo-treino").innerHTML = dadosDoTreino.objetivo;
+        document.querySelector("#inicio-treino").innerHTML = new Date(dadosDoTreino.dataInicio).toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' });
+        document.querySelector("#fim-treino").innerHTML = new Date(dadosDoTreino.dataFim).toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' });
 
-        mostrarItensDaDieta();
+        mostrarExerciciosDoTreino();
     } catch (error) {
         erros.tratarErro(error);
     }
 }
 
-function mostrarItensDaDieta() {
-    document.querySelector(`#lista-itens-cafeDaManha`).innerHTML = "";
-    document.querySelector(`#lista-itens-lancheDaManha`).innerHTML = "";
-    document.querySelector(`#lista-itens-almoco`).innerHTML = "";
-    document.querySelector(`#lista-itens-lancheDaTarde`).innerHTML = "";
-    document.querySelector(`#lista-itens-jantar`).innerHTML = "";
-    document.querySelector(`#lista-itens-lancheDaNoite`).innerHTML = "";
+function mostrarExerciciosDoTreino() {
+    document.querySelector(`#lista-exercicios-segunda`).innerHTML = "";
+    document.querySelector(`#lista-exercicios-terca`).innerHTML = "";
+    document.querySelector(`#lista-exercicios-quarta`).innerHTML = "";
+    document.querySelector(`#lista-exercicios-quinta`).innerHTML = "";
+    document.querySelector(`#lista-exercicios-sexta`).innerHTML = "";
+    document.querySelector(`#lista-exercicios-sabado`).innerHTML = "";
+    document.querySelector(`#lista-exercicios-domingo`).innerHTML = "";
 
-    itensDaDieta.forEach(item => {
+    exerciciosDoTreino.forEach(exercicio => {
 
-        document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
-            `<li class="list-group-item lista-itens-dieta"><i class="bi bi-arrow-right-short me-2"></i>${item.descricao}</li>`;
+        document.querySelector(`#lista-exercicios-${exercicio.diaDoTreino}`).innerHTML = document.querySelector(`#lista-exercicios-${exercicio.diaDoTreino}`).innerHTML +
+            `<li class="list-group-item lista-exercicios-treino mb-2"><i class="bi bi-arrow-right-short me-2"></i>${exercicio.descricao}</li>`;
     });
 }
 
-function imprimirDieta() {
+function imprimirTreino() {
 
     pdfMake.fonts = {
         Roboto: {
@@ -101,7 +102,7 @@ function imprimirDieta() {
                         bold: true,
                         margin: [0, 20, 0, 10],
                         text: [
-                            { text: 'Plano Nutricional', },
+                            { text: 'Plano de Treino', },
 
                         ],
                     }
@@ -114,15 +115,15 @@ function imprimirDieta() {
                     {
                         margin: [0, 10, 0, 20],
                         text: [
-                            { text: 'Paciente:  ', fontSize: 12, bold: true },
-                            { text: `${nomeAssinante}`},
+                            { text: 'Aluno:  ', fontSize: 12, bold: true },
+                            { text: `${nomeAssinante}` },
 
                         ],
                     }
                 ]
 
             },
-            //dados da dieta
+            //dados do treino
             {
                 stack: [
                     {
@@ -132,7 +133,7 @@ function imprimirDieta() {
                                 width: '*',
                                 text: [
                                     { text: 'Nome:  ', fontSize: 12, bold: true },
-                                    { text: `${dadosDaDieta.nome}` }
+                                    { text: `${dadosDoTreino.nome}` }
                                 ],
 
                             },
@@ -141,7 +142,7 @@ function imprimirDieta() {
                                 margin: [0, 5],
                                 text: [
                                     { text: 'Objetivo:  ', fontSize: 12, bold: true },
-                                    { text: `${dadosDaDieta.objetivo}` }
+                                    { text: `${dadosDoTreino.objetivo}` }
                                 ]
                             },
 
@@ -156,7 +157,7 @@ function imprimirDieta() {
                                 text: [
                                     { text: 'Ínicio:  ', fontSize: 12, bold: true },
                                     {
-                                        text: `${new Date(dadosDaDieta.dataInicio).
+                                        text: `${new Date(dadosDoTreino.dataInicio).
                                             toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}`
                                     },
                                 ],
@@ -168,7 +169,7 @@ function imprimirDieta() {
                                 text: [
                                     { text: 'Fim:  ', fontSize: 12, bold: true },
                                     {
-                                        text: `${new Date(dadosDaDieta.dataFim).toLocaleString('pt-BR',
+                                        text: `${new Date(dadosDoTreino.dataFim).toLocaleString('pt-BR',
                                             { day: 'numeric', month: 'numeric', year: 'numeric' })}`
                                     }
                                 ]
@@ -179,7 +180,7 @@ function imprimirDieta() {
 
                 ]
             },
-            //itens da dieta
+            //exercicios do treino
 
             {
                 stack: [
@@ -189,7 +190,7 @@ function imprimirDieta() {
                             widths: ['*'],
                             body: [
                                 [
-                                    { text: 'Café da Manhã', fontSize: 15, bold: true, color: 'white' }
+                                    { text: 'Segunda', fontSize: 15, bold: true, color: 'white' }
                                 ]
                             ]
                         },
@@ -199,7 +200,7 @@ function imprimirDieta() {
                         }
                     },
                     {
-                        ul: itensDaDieta.filter(item => item.refeicao == 'cafeDaManha').map(item => item.descricao)
+                        ul: exerciciosDoTreino.filter(exercicio => exercicio.diaDoTreino == 'segunda').map(exercicio => exercicio.descricao)
                     },
                 ]
 
@@ -212,7 +213,7 @@ function imprimirDieta() {
                             widths: ['*'],
                             body: [
                                 [
-                                    { text: 'Lanche da Manhã', fontSize: 15, bold: true, color: 'white' }
+                                    { text: 'Terça', fontSize: 15, bold: true, color: 'white' }
                                 ]
                             ]
                         },
@@ -222,7 +223,7 @@ function imprimirDieta() {
                         }
                     },
                     {
-                        ul: itensDaDieta.filter(item => item.refeicao == 'lancheDaManha').map(item => item.descricao)
+                        ul: exerciciosDoTreino.filter(exercicio => exercicio.diaDoTreino == 'terca').map(exercicio => exercicio.descricao)
                     },
                 ]
 
@@ -235,7 +236,7 @@ function imprimirDieta() {
                             widths: ['*'],
                             body: [
                                 [
-                                    { text: 'Almoço', fontSize: 15, bold: true, color: 'white' }
+                                    { text: 'Quarta', fontSize: 15, bold: true, color: 'white' }
                                 ]
                             ]
                         },
@@ -245,7 +246,7 @@ function imprimirDieta() {
                         }
                     },
                     {
-                        ul: itensDaDieta.filter(item => item.refeicao == 'almoco').map(item => item.descricao)
+                        ul: exerciciosDoTreino.filter(exercicio => exercicio.diaDoTreino == 'quarta').map(exercicio => exercicio.descricao)
                     },
                 ]
 
@@ -258,7 +259,7 @@ function imprimirDieta() {
                             widths: ['*'],
                             body: [
                                 [
-                                    { text: 'Lanche da Tarde', fontSize: 15, bold: true, color: 'white' }
+                                    { text: 'Quinta', fontSize: 15, bold: true, color: 'white' }
                                 ]
                             ]
                         },
@@ -268,7 +269,7 @@ function imprimirDieta() {
                         }
                     },
                     {
-                        ul: itensDaDieta.filter(item => item.refeicao == 'lancheDaTarde').map(item => item.descricao)
+                        ul: exerciciosDoTreino.filter(exercicio => exercicio.diaDoTreino == 'quinta').map(exercicio => exercicio.descricao)
                     },
                 ]
 
@@ -281,7 +282,7 @@ function imprimirDieta() {
                             widths: ['*'],
                             body: [
                                 [
-                                    { text: 'Jantar', fontSize: 15, bold: true, color: 'white' }
+                                    { text: 'Sexta', fontSize: 15, bold: true, color: 'white' }
                                 ]
                             ]
                         },
@@ -291,7 +292,7 @@ function imprimirDieta() {
                         }
                     },
                     {
-                        ul: itensDaDieta.filter(item => item.refeicao == 'jantar').map(item => item.descricao)
+                        ul: exerciciosDoTreino.filter(exercicio => exercicio.diaDoTreino == 'sexta').map(exercicio => exercicio.descricao)
                     },
                 ]
 
@@ -304,7 +305,7 @@ function imprimirDieta() {
                             widths: ['*'],
                             body: [
                                 [
-                                    { text: 'Lanche da Noite', fontSize: 15, bold: true, color: 'white' }
+                                    { text: 'Sábado', fontSize: 15, bold: true, color: 'white' }
                                 ]
                             ]
                         },
@@ -314,7 +315,30 @@ function imprimirDieta() {
                         }
                     },
                     {
-                        ul: itensDaDieta.filter(item => item.refeicao == 'lancheDaNoite').map(item => item.descricao)
+                        ul: exerciciosDoTreino.filter(exercicio => exercicio.diaDoTreino == 'sabado').map(exercicio => exercicio.descricao)
+                    },
+                ]
+
+            },
+            {
+                stack: [
+                    {
+                        margin: [0, 30, 0, 10],
+                        table: {
+                            widths: ['*'],
+                            body: [
+                                [
+                                    { text: 'Domingo', fontSize: 15, bold: true, color: 'white' }
+                                ]
+                            ]
+                        },
+                        layout: {
+                            defaultBorder: false,
+                            fillColor: '#548CA8',
+                        }
+                    },
+                    {
+                        ul: exerciciosDoTreino.filter(exercicio => exercicio.diaDoTreino == 'domingo').map(exercicio => exercicio.descricao)
                     },
                 ]
 

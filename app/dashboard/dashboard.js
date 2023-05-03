@@ -77,7 +77,7 @@ function irParaPaginaDeDadosDaDietaAssinante() {
 }
 
 function irParaPaginaDeDadosDoTreinoAssinante() {
-    if(!idDietaAtual ) {
+    if(!idTreinoAtual ) {
         mensagens.mostrarMensagemDeErro("Você ainda não tem Treino!", false);
         return;
     }

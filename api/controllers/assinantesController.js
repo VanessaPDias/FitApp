@@ -379,10 +379,13 @@ async function buscarTreinoPorId(req, res) {
 
     res.send({
         idTreino: req.params.idTreino,
-        nome: dadosDoTreino.nome,
-        objetivo: dadosDoTreino.objetivo,
+        nome: dadosDoTreino.treino.nome,
+        objetivo: dadosDoTreino.treino.objetivo,
+        dataInicio: dadosDoTreino.treino.dataInicio,
+        dataFim: dadosDoTreino.treino.dataFim,
         exercicios: dadosDoTreino.exercicios
     });
+    
 }
 
 
