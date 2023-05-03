@@ -34,7 +34,15 @@ async function buscarPlanos(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar planos - todos ou por nome.'
 
-    const planos = await repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
+    let bloqueado;
+
+    if (req.query.bloqueado == 'true') {
+        bloqueado = true;
+    } else if (req.query.bloqueado == 'false') {
+        bloqueado = false;
+    }
+
+    const planos = await repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome, bloqueado);
 
     if (!planos || planos.length <= 0) {
         res.send([]);
@@ -286,7 +294,15 @@ async function buscarAssinantes(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar assinantes cadastrados - todos ou por nome.'
 
-    const assinantes = await repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome);
+    let bloqueado;
+
+    if (req.query.bloqueado == 'true') {
+        bloqueado = true;
+    } else if (req.query.bloqueado == 'false') {
+        bloqueado = false;
+    }
+
+    const assinantes = await repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome, bloqueado);
 
     if (!assinantes || assinantes.length <= 0) {
         res.send([]);

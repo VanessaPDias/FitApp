@@ -197,28 +197,34 @@ async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, dataNascimento, i
     }
 }
 
-async function buscarAssinantePorFiltro(nome) {
+async function buscarAssinantePorFiltro(nome, bloqueado) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
-        if (!nome) {
-            const [rows, fields] = await conexao.execute(
-                `select assinante.idAssinante, assinante.nome, assinante.email,
-                        usuario.bloqueado 
-                from assinantes as assinante
-                inner join usuarios as usuario on assinante.idAssinante = usuario.idUsuario`);
+        let filtro = "";
+        let parametros = [];
 
-            return rows;
+        if(nome)
+        {
+            filtro += " and assinante.nome like ? ";
+            parametros.push(`%${nome}%`);
         }
 
-        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
+        if(bloqueado != undefined && bloqueado != null)
+        {
+            filtro += " and usuario.bloqueado = ? "
+            parametros.push(bloqueado);
+        }
+        
+        const [rows, fields] = await conexao.execute(
             `select assinante.idAssinante, assinante.nome, assinante.email,
                     usuario.bloqueado 
-                from assinantes as assinante
-                    inner join usuarios as usuario on assinante.idAssinante = usuario.idUsuario
-                where assinante.nome like ?`, [`%${nome}%`]);
+            from assinantes as assinante
+            inner join usuarios as usuario on assinante.idAssinante = usuario.idUsuario
+            where 1=1 ${filtro}`, parametros);
 
-        return rowsComFiltro;
+        return rows;
+        
 
     } finally {
         await conexao.end();
