@@ -41,24 +41,29 @@ async function criarPlano(novoPlano) {
     }
 }
 
-async function buscarPlanosPorFiltro(nome) {
+async function buscarPlanosPorFiltro(nome, bloqueado) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
-        if (!nome) {
-            const [rows, fields] = await conexao.execute(
-                `select idPlano, nome, valor, duracao, descricao, bloqueado 
-                from planos`);
+        let filtro = "";
+        let parametros = [];
 
-            return rows;
+        if (nome) {
+            filtro += " and nome like ? ";
+            parametros.push(`%${nome}%`);
         }
 
-        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select idPlano, nome, valor, duracao, descricao, bloqueado 
-            from planos 
-            where nome like ?`, [`%${nome}%`]);
+        if (bloqueado != undefined && bloqueado != null) {
+            filtro += " and bloqueado = ? "
+            parametros.push(bloqueado);
+        }
 
-        return rowsComFiltro;
+        const [rows, fields] = await conexao.execute(
+            `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            from planos
+            where 1=1 ${filtro}`, parametros);
+
+        return rows;
 
     } finally {
         await conexao.end();

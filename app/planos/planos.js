@@ -23,8 +23,11 @@ async function aoCarregarPagina() {
 
 async function buscarPlanos() {
     try {
+        const nome = document.querySelector("#input-nome-plano").value;
+        const status = document.querySelector("#input-select-status").value;
+
         const token = seguranca.pegarToken();
-        const resposta = await servicos.buscarDados(token, document.querySelector("#input-pesquisar").value);
+        const resposta = await servicos.buscarDados(token, nome, status);
 
         document.querySelector("#lista-planos").innerHTML = "";
 

@@ -1,8 +1,8 @@
 import * as util from "../util/tratamentoDeRespostaApi.js";
 import * as configuracoes from "../configuracoes.js";
 
-export async function buscarDados(token, nome) {
-    const url = `${configuracoes.urlDaApi}/admin/planos?nome=${nome}`;
+export async function buscarDados(token, nome, bloqueado) {
+    const url = `${configuracoes.urlDaApi}/admin/planos?nome=${nome}&bloqueado=${bloqueado}`;
 
     const resposta = await fetch(url, {
         headers: {
