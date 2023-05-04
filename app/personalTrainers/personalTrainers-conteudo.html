@@ -12,20 +12,20 @@
                             aria-label="pesquisar por nome">
                     </div>
                     <div class="col-5 col-sm-3">
-                        <select class="form-select form-select-sm" id="input-select-status"
-                            aria-label="select status do personal trainer">
-                            <option value="" selected>Status</option>
-                            <option value="true">Bloqueado</option>
-                            <option value="false">Desbloqueado</option>
-                        </select>
-                    </div>
-                    <div class="col-5 col-sm-3">
                         <select class="form-select form-select-sm" id="input-select-cadastro"
                             aria-label="select status de cadastro do personal trainer">
                             <option value="" selected>Cadastro</option>
                             <option value="1">Confirmado</option>
                             <option value="2">Recusado</option>
                             <option value="0">Pendente</option>
+                        </select>
+                    </div>
+                    <div class="col-5 col-sm-3">
+                        <select class="form-select form-select-sm" id="input-select-status"
+                            aria-label="select status do personal trainer">
+                            <option value="" selected>Status</option>
+                            <option value="true">Bloqueado</option>
+                            <option value="false">Desbloqueado</option>
                         </select>
                     </div>
 
@@ -48,8 +48,8 @@
                             <tr>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Email&nbsp;</th>
-                                <th scope="col">Status</th>
                                 <th scope="col">Cadastro</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">&nbsp;</th>
                             </tr>
                         </thead>
@@ -59,6 +59,11 @@
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-end mt-3">
+            <button id="btn-imprimir" class="btn btn-outline-dark btn-app" style="width: 86px;">Imprimir</button>
         </div>
     </div>
 </div>
