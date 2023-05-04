@@ -98,7 +98,7 @@ async function buscarAlunoPorId(req, res) {
         sexo: alunoEncontrado.dados.idSexo,
         altura: !alunoEncontrado.dados.altura ? 0 : alunoEncontrado.dados.altura,
         treinos: !alunoEncontrado.treinos ? [] : alunoEncontrado.treinos,
-        treinoAtual: !alunoEncontrado.treinos && alunoEncontrado.treinos.length > 0 ? alunoEncontrado.treinos[0]: null,
+        treinoAtual: alunoEncontrado.treinos && alunoEncontrado.treinos.length > 0 ? alunoEncontrado.treinos[0]: null,
         peso: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.peso,
         pescoco: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.pescoco,
         cintura: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.cintura,

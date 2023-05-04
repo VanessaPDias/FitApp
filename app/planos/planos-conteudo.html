@@ -53,55 +53,57 @@
         </div>
     </div>
     <div class="row py-3">
-        <div class="col text-end">
-            <button type="button" class="btn btn-outline-dark btn-app" id="btn-cadastrar-plano" data-bs-toggle="modal"
-                data-bs-target="#cadastrar-plano">Cadastrar</button>
-        </div>
+            <div class="text-end">
+                <button id="btn-imprimir" class="btn btn-outline-dark btn-app-padrao me-2">Imprimir</button>
+                <button type="button" class="btn btn-outline-dark btn-app-padrao" id="btn-cadastrar-plano"
+                    data-bs-toggle="modal" data-bs-target="#cadastrar-plano">Cadastrar</button>
+            </div>
     </div>
 
-    <div class="modal" id="cadastrar-plano">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Plano</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="formulario">
-                        <div class="pt-3">
-                            <label class="form-label fw-semibold" for="peso">Nome:</label>
-                            <div class="input-group input-group-sm">
-                                <input class="form-control" type="text" id="form-nome" name="nome" required>
-                            </div>
-                        </div>
 
-                        <div class="pt-3">
-                            <label class="form-label fw-semibold" for="valor">Valor:</label>
-                            <div class="input-group input-group-sm">
-                                <input class="form-control" type="number" id="form-valor" name="valor" required>
-                            </div>
+</div>
+<div class="modal" id="cadastrar-plano">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Plano</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formulario">
+                    <div class="pt-3">
+                        <label class="form-label fw-semibold" for="peso">Nome:</label>
+                        <div class="input-group input-group-sm">
+                            <input class="form-control" type="text" id="form-nome" name="nome" required>
                         </div>
+                    </div>
 
-                        <div class="pt-3">
-                            <label class="form-label fw-semibold" for="duracao">Duração:</label>
-                            <div class="input-group input-group-sm">
-                                <input class="form-control" type="number" id="form-duracao" name="duracao" required>
-                            </div>
+                    <div class="pt-3">
+                        <label class="form-label fw-semibold" for="valor">Valor:</label>
+                        <div class="input-group input-group-sm">
+                            <input class="form-control" type="number" id="form-valor" name="valor" required>
                         </div>
+                    </div>
 
-                        <div class="pt-3">
-                            <label class="form-label fw-semibold" for="descricao">Descrição:</label>
-                            <div class="input-group input-group-sm">
-                                <textarea class="form-control" aria-label="With textarea" id="form-descricao"
-                                    required></textarea>
-                            </div>
+                    <div class="pt-3">
+                        <label class="form-label fw-semibold" for="duracao">Duração:</label>
+                        <div class="input-group input-group-sm">
+                            <input class="form-control" type="number" id="form-duracao" name="duracao" required>
                         </div>
+                    </div>
 
-                        <div class="text-end pt-3">
-                            <button type="submit" id="btn-salvar-plano" class="btn btn-outline-dark btn-app">Salvar</button>
+                    <div class="pt-3">
+                        <label class="form-label fw-semibold" for="descricao">Descrição:</label>
+                        <div class="input-group input-group-sm">
+                            <textarea class="form-control" aria-label="With textarea" id="form-descricao"
+                                required></textarea>
                         </div>
-                    </form>
-                </div>
+                    </div>
+
+                    <div class="text-end pt-3">
+                        <button type="submit" id="btn-salvar-plano" class="btn btn-outline-dark btn-app-padrao">Salvar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

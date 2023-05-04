@@ -26,6 +26,13 @@ footer,
     --bs-btn-bg: var(--bs-cor-principal);
     --bs-btn-border-color: var(--bs-cor-principal);
     --bs-btn-hover-bg: var(--bs--cor-de-destaque);
+    width: 96px;
+}
+.btn-padrao-assinar {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--bs-cor-principal);
+    --bs-btn-border-color: var(--bs-cor-principal);
+    --bs-btn-hover-bg: var(--bs--cor-de-destaque);
 }
 
 #card-modelo-header {
@@ -38,7 +45,7 @@ footer,
     border-color: var(--bs-fiord-color);
 }
 
-#container-login, #container-cadastro {
+#container-login, #container-cadastro, #container-redefinir-senha {
     width: 90%;
 }
 
@@ -48,6 +55,10 @@ footer,
     }
 
     #container-cadastro {
+        width: 50%;
+    }
+
+    #container-redefinir-senha {
         width: 50%;
     }
 }
@@ -60,6 +71,10 @@ footer,
     #container-cadastro {
         width: 40%;
     }
+
+    #container-redefinir-senha {
+        width: 30%;
+    }
 }
 
 @media screen and (min-width: 1200px) {
@@ -69,6 +84,10 @@ footer,
 
     #container-cadastro {
         width: 40%;
+    }
+
+    #container-redefinir-senha {
+        width: 30%;
     }
 }
 

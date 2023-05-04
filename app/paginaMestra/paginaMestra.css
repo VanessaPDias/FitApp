@@ -103,9 +103,47 @@ select {
     --bs-btn-hover-border-color: var(--bs-cor-principal);
 }
 
+.btn-app-padrao {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bs-cor-principal);
+    --bs-btn-border-color: var(--bs-cor-principal);
+    --bs-btn-hover-bg: var(--bs-cor-de-destaque);
+    --bs-btn-hover-border-color: var(--bs-cor-principal);
+    width: 86px;
+}
+
+.btn-app-padrao-md {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bs-cor-principal);
+    --bs-btn-border-color: var(--bs-cor-principal);
+    --bs-btn-hover-bg: var(--bs-cor-de-destaque);
+    --bs-btn-hover-border-color: var(--bs-cor-principal);
+    width: 96px;
+}
+
+
+.btn-app-padrao-lg {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bs-cor-principal);
+    --bs-btn-border-color: var(--bs-cor-principal);
+    --bs-btn-hover-bg: var(--bs-cor-de-destaque);
+    --bs-btn-hover-border-color: var(--bs-cor-principal);
+    width: 146px;
+}
+
+.btn-app-padrao-xlg {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bs-cor-principal);
+    --bs-btn-border-color: var(--bs-cor-principal);
+    --bs-btn-hover-bg: var(--bs-cor-de-destaque);
+    --bs-btn-hover-border-color: var(--bs-cor-principal);
+    width: 200px;
+}
+
 .btn-voltar {
     --bs-btn-hover-bg: var(--bs-cor-de-destaque);
     --bs-btn-hover-border-color: var(--bs-cor-principal);
+    width: 86px;
 }
 
 #lista-mensagens {

@@ -151,7 +151,7 @@ function listarMensagens(listaDeMensagens, tipo) {
                                     </div>
                                     <div class="col-2 text-end">
                                         <a href="#" class="col-2 text-end link-dark">
-                                            <i class="col bi-trash3 btn-excluir-mensagem" data-idmensagem="${mensagem.idMensagem}"></i>
+                                            <i class="col bi-trash3 btn-excluir-mensagem" data-bs-toggle="modal" data-bs-target="#modal-excluir-mensagem" data-idmensagem="${mensagem.idMensagem}"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -219,13 +219,12 @@ function listarMensagens(listaDeMensagens, tipo) {
 function adicionarEventoExcluir() {
     const listaBtnExcluir = document.querySelectorAll(".btn-excluir-mensagem");
     listaBtnExcluir.forEach(element => {
-        element.addEventListener("show.bs.modal", abrirModalConfirmarExcluir);
+        element.onclick = aoClicarEmExcluir;
     });
 }
 
-function abrirModalConfirmarExcluir(evento) {
+function aoClicarEmExcluir(evento) {
     document.querySelector("#btn-confirmar-excluir-mensagem").dataset.idmensagem = evento.target.dataset.idmensagem;
-
 }
 
 async function excluirMensagem(evento) {
