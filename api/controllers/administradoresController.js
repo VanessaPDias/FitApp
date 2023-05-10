@@ -12,7 +12,7 @@ async function cadastrarPlano(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para cadastrar um Plano.'
 
-    const novoPlano = new Plano.Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao);
+    const novoPlano = new Plano.Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.dataLancamento);
 
     const planoEncontrado = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(novoPlano.idPlano, novoPlano.nome);
 
@@ -56,7 +56,8 @@ async function buscarPlanos(req, res) {
             valor: plano.valor,
             duracao: plano.duracao,
             bloqueado: Boolean(plano.bloqueado),
-            descricao: plano.descricao
+            descricao: plano.descricao,
+            publicado: plano.dataLancamento <= new Date() ? true : false
         }
 
     }))
@@ -81,6 +82,7 @@ async function buscarPlanoPorId(req, res) {
         duracao: planoEncontrado.duracao,
         descricao: planoEncontrado.descricao,
         bloqueado: Boolean(planoEncontrado.bloqueado),
+        dataLancamento: planoEncontrado.dataLancamento
     })
 }
 
@@ -104,7 +106,7 @@ async function alterarDadosDoPlano(req, res) {
     }
 
     const bloqueado = req.body.bloqueado == 'true' ? true : false;
-    await repositorioDePlanos.salvarAlteracaoDeDados(req.params.idPlano, req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, bloqueado);
+    await repositorioDePlanos.salvarAlteracaoDeDados(req.params.idPlano, req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, bloqueado, req.body.dataLancamento);
 
     res.send();
 

@@ -88,6 +88,7 @@ CREATE TABLE  IF NOT EXISTS `planos` (
   `duracao` int NOT NULL,
   `descricao` varchar(256) NOT NULL,
   `bloqueado` tinyint NOT NULL,
+  `dataLancamento` datetime NOT NULL,
   PRIMARY KEY (`idPlano`),
   UNIQUE KEY `nome_plano_UNIQUE` (`nome`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -210,16 +211,41 @@ false
 )
 ON DUPLICATE KEY UPDATE idUsuario = 'e7c17d74-f067-46ca-9734-1c232ba0ea18';
 
-insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento)
 values(
 '57408fdd-8ccc-441a-953f-555dec2005bc',
-'gratuito',
+'Gratuito',
 0,
 365,
-'experimente por 15 dias.',
-false
+'Use o FitApp de forma gratuita com as funcionalidades básicas.',
+false,
+'2023-01-01 00:00:00'
 )
 ON DUPLICATE KEY UPDATE idPlano = '57408fdd-8ccc-441a-953f-555dec2005bc';
+
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento)
+values(
+'a6b5723a-e550-4160-8588-0a7aee7b7e54',
+'Mensal',
+24.99,
+30,
+'Use todas as funcionalidades do FitApp pagando um pequeno valor mensal.',
+false,
+'2043-01-01 00:00:00'
+)
+ON DUPLICATE KEY UPDATE idPlano = 'a6b5723a-e550-4160-8588-0a7aee7b7e54';
+
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento)
+values(
+'28ba9d23-b9f4-41e2-ab7f-d108cf942e9d',
+'Anual',
+239.88,
+365,
+'Use todas as funcionalidades do FitApp e economize R$ 60,00 ao ano.',
+false,
+'2043-01-01 00:00:00'
+)
+ON DUPLICATE KEY UPDATE idPlano = '28ba9d23-b9f4-41e2-ab7f-d108cf942e9d';
 
 INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (

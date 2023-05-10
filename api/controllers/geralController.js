@@ -23,7 +23,8 @@ async function buscarPlanos(req, res) {
             nome: plano.nome,
             valor: plano.valor,
             duracao: plano.duracao,
-            descricao: plano.descricao
+            descricao: plano.descricao,
+            publicado: plano.dataLancamento <= new Date() ? true : false
         }
     }));
 }

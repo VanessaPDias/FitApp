@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-function Plano(nome, valor, duracao, descricao) {
+function Plano(nome, valor, duracao, descricao, dataLancamento) {
     if (!nome) {
         throw { mensagem: "Não é possível cadastrar Plano sem o nome", interna: true };
     }
@@ -17,16 +17,22 @@ function Plano(nome, valor, duracao, descricao) {
         throw { mensagem: "Não é possível cadastrar Plano sem descrição", interna: true };
     }
 
+    if (!dataLancamento) {
+        throw { mensagem: "Não é possível cadastrar Plano sem data de lançamento", interna: true };
+    }
+
     this.idPlano = crypto.randomUUID();
     this.nome = nome;
     this.valor = valor;
     this.duracao = duracao;
     this.descricao = descricao;
     this.bloqueado = false;
+    this.dataLancamento = dataLancamento;
 
 }
 
-function validarAlteracaoDoPlano(nome, valor, duracao, descricao, bloqueado) {
+
+function validarAlteracaoDoPlano(nome, valor, duracao, descricao, bloqueado, dataLancamento) {
 
     if (!nome) {
         throw { mensagem: "O nome do plano precisa ser definido", interna: true };
@@ -42,6 +48,10 @@ function validarAlteracaoDoPlano(nome, valor, duracao, descricao, bloqueado) {
 
     if (!descricao) {
         throw { mensagem: "A descricao do plano precisa ser definido", interna: true };
+    }
+
+    if (!dataLancamento) {
+        throw { mensagem: "A data de lançamento do plano precisa ser definida", interna: true };
     }
 
     if (typeof(bloqueado) != 'boolean') {

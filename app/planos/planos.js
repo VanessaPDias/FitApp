@@ -40,7 +40,7 @@ async function buscarPlanos() {
 
                 if (plano.bloqueado == false) {
                     status = "Ativo"
-                    
+
                 } else {
                     status = "Inativo"
                 }
@@ -75,6 +75,7 @@ async function cadastrarPlano(evento) {
     const valor = document.querySelector("#form-valor").value;
     const duracao = document.querySelector("#form-duracao").value;
     const descricao = document.querySelector("#form-descricao").value;
+    const dataLancamento = document.querySelector("#form-data-lancamento").value;
     const token = seguranca.pegarToken();
 
     const formulario = document.querySelector("#formulario");
@@ -85,7 +86,7 @@ async function cadastrarPlano(evento) {
     evento.preventDefault();
 
     try {
-        await servicos.salvarPlano(token, nome, valor, duracao, descricao);
+        await servicos.salvarPlano(token, nome, valor, duracao, descricao, dataLancamento);
         mensagens.mostrarMensagemDeSucesso("Plano Cadastrado com sucesso!", true);
         window.location.reload();
     } catch (error) {
@@ -95,24 +96,24 @@ async function cadastrarPlano(evento) {
 
 function imprimirListaDePlanos() {
     const linhas = [];
-  
-    linhas.push([{ text: 'Nome', style: 'tableHeader'}, { text: 'Valor', style: 'tableHeader'}, { text: 'Duração', style: 'tableHeader'}, { text: 'Status', style: 'tableHeader'}]);
+
+    linhas.push([{ text: 'Nome', style: 'tableHeader' }, { text: 'Valor', style: 'tableHeader' }, { text: 'Duração', style: 'tableHeader' }, { text: 'Status', style: 'tableHeader' }]);
 
     listaDePlanos.forEach(plano => {
         const colunas = [];
 
         Object.entries(plano).forEach(([nome, valor]) => {
-            if(nome == "idPlano"){
+            if (nome == "idPlano") {
                 return;
             }
-            if(nome == "descricao"){
+            if (nome == "descricao") {
                 return;
             }
-            
+
             if (nome == "bloqueado" && valor == false) {
                 valor = "Ativo"
-    
-            } else if(nome == "bloqueado" && valor == true){
+
+            } else if (nome == "bloqueado" && valor == true) {
                 valor = "Inativo"
             }
 
@@ -146,7 +147,7 @@ function imprimirListaDePlanos() {
                                 height: 42,
                             },
 
-                            { text: 'FitApp', style: 'header'},
+                            { text: 'FitApp', style: 'header' },
                         ]
                     }
                 ],
@@ -189,7 +190,7 @@ function imprimirListaDePlanos() {
                 fillColor: '#548CA8'
             }
         },
-        
+
     };
     pdfMake.createPdf(docDefinition).open();
 }

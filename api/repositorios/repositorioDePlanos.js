@@ -29,12 +29,13 @@ async function criarPlano(novoPlano) {
             novoPlano.valor,
             novoPlano.duracao,
             novoPlano.descricao,
-            novoPlano.bloqueado
+            novoPlano.bloqueado,
+            novoPlano.dataLancamento
         ]
 
         await conexao.execute(
-            `insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado) 
-            values (?, ?, ?, ?, ?, ?);`, parametrosDoPlano);
+            `insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento) 
+            values (?, ?, ?, ?, ?, ?, ?);`, parametrosDoPlano);
 
     } finally {
         await conexao.end();
@@ -59,7 +60,7 @@ async function buscarPlanosPorFiltro(nome, bloqueado) {
         }
 
         const [rows, fields] = await conexao.execute(
-            `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            `select idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento 
             from planos
             where 1=1 ${filtro}`, parametros);
 
@@ -76,7 +77,7 @@ async function buscarPlanoPorId(idPlano) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            `select idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento 
             from planos 
             where idPlano = ?`, [idPlano]);
 
@@ -90,14 +91,14 @@ async function buscarPlanoPorId(idPlano) {
     }
 }
 
-async function salvarAlteracaoDeDados(idPlano, nome, valor, duracao, descricao, bloqueado) {
+async function salvarAlteracaoDeDados(idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
         const [rows, fields] = await conexao.execute(
             `update planos
-            set nome = ?, valor = ?, duracao = ?,  descricao = ?,  bloqueado = ? 
-            where idPlano = ?`, [nome, valor, duracao, descricao, bloqueado, idPlano]);
+            set nome = ?, valor = ?, duracao = ?,  descricao = ?,  bloqueado = ?, dataLancamento = ? 
+            where idPlano = ?`, [nome, valor, duracao, descricao, bloqueado, dataLancamento, idPlano, ]);
 
 
     } finally {
@@ -112,9 +113,9 @@ async function buscarPlanosAtivos() {
     try {
 
         const [rows, fields] = await conexao.execute(
-            `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            `select idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento 
             from planos 
-            where bloqueado = false`);
+            where bloqueado = false order by valor`);
 
         if (rows.length <= 0)
             return;

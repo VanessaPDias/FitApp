@@ -51,6 +51,14 @@ footer,
     --bs-btn-hover-bg: var(--bs-cor-de-destaque);
 }
 
+a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+    color: var(--bs-white);
+    pointer-events: none;
+    background-color: var(--bs-cor-principal);
+    border-color: var(--bs-cor-principal);
+    opacity: var(--bs-btn-disabled-opacity);
+}
+
 #card-modelo-header {
     color: var(--bs-white);
     background-color: var(--bs-cor-principal);
