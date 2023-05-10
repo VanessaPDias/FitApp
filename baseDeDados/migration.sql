@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `db_fitapp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `db_fitapp`;
 
 USE `db_fitapp`;
 
@@ -24,7 +24,7 @@ CREATE TABLE  IF NOT EXISTS `nutricionistas` (
   `email` varchar(128) NOT NULL,
   `telefone` varchar(36) NOT NULL,
   `registroProfissional` varchar(30) NOT NULL,
-  `sobreMim` varchar(356) DEFAULT NULL,
+  `sobreMim` varchar(328) DEFAULT NULL,
   `cadastroConfirmado` int NOT NULL,
   PRIMARY KEY (`idNutri`),
   CONSTRAINT `fk_nutricionista_idUsuario` FOREIGN KEY (`idNutri`) REFERENCES `usuarios` (`idUsuario`)
@@ -36,7 +36,7 @@ CREATE TABLE  IF NOT EXISTS `personal_trainers` (
   `email` varchar(128) NOT NULL,
   `telefone` varchar(36) NOT NULL,
   `registroProfissional` varchar(30) NOT NULL,
-  `sobreMim` varchar(356) DEFAULT NULL,
+  `sobreMim` varchar(328) DEFAULT NULL,
    `cadastroConfirmado` int NOT NULL,
   PRIMARY KEY (`idPersonal`),
   CONSTRAINT `fk_personal_idUsuario` FOREIGN KEY (`idPersonal`) REFERENCES `usuarios` (`idUsuario`)
@@ -251,7 +251,7 @@ INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 'cdb6531c-0bc4-48b2-b317-dece78f5349e',
 'nutricionista',
-'nutricionista',
+'Adriana Farias',
 'nutri@fitapp.com',
 'nutri123',
 false
@@ -262,31 +262,39 @@ INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 '355049aa-1742-45d2-934d-278db5a6c224',
 'personalTrainer',
-'personal',
+'Fábio Rodrigues',
 'personal@fitapp.com',
 'personal123',
 false
 )
 ON DUPLICATE KEY UPDATE idUsuario = '355049aa-1742-45d2-934d-278db5a6c224';
 
-INSERT into nutricionistas (idNutri, nome, email, telefone, registroProfissional, cadastroConfirmado)
+INSERT into nutricionistas (idNutri, nome, email, telefone, registroProfissional, sobreMim, cadastroConfirmado)
 values (
 'cdb6531c-0bc4-48b2-b317-dece78f5349e',
-'nutricionista',
+'Adriana Farias',
 'nutri@fitapp.com',
 999999999,
 'crn123',
+'Oi, sou a Adriana Farias, atuo principalmente com Emagrecimento e Reeducação Alimentar, 
+buscando sempre contribuir para que meus pacientes encontrem 
+o equilíbrio que os levem a melhorar sua autoestima e 
+principalmente a ter uma vida mais leve e saudável.',
 true
 )
 ON DUPLICATE KEY UPDATE idNutri = 'cdb6531c-0bc4-48b2-b317-dece78f5349e';
 
-INSERT into personal_trainers (idPersonal, nome, email, telefone, registroProfissional, cadastroConfirmado)
+INSERT into personal_trainers (idPersonal, nome, email, telefone, registroProfissional, sobreMim, cadastroConfirmado)
 values (
 '355049aa-1742-45d2-934d-278db5a6c224',
-'personal',
+'Fábio Rodrigues',
 'personal@fitapp.com',
 999999999,
 'cre123',
+'Sou o Fábio Rodrigues, Personal Trainer com 6 anos de experiencia. 
+Irei ajuda-lo(a) a atingir os seus objetivos de forma segura e mais rápido possível. 
+O meu trabalho será definir um método de treino adequado para o seu objetivo, 
+para as suas capacidades físicas, disponibilidade temporal.',
 true
 )
 ON DUPLICATE KEY UPDATE idPersonal = '355049aa-1742-45d2-934d-278db5a6c224';

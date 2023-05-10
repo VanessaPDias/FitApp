@@ -25,11 +25,17 @@ async function buscarPlanos() {
     const planosAtivos = await servicos.buscarPlanosAtivos();
 
     planosAtivos.forEach(plano => {
-        preencherCaixaPlanoHtml(plano);
+        if(plano.publicado == true) {
+            preencherCaixaPlanoPublicado(plano);
+       } 
+
+       if(plano.publicado == false) {
+           preencherCaixaPlanoNaoPublicado(plano);
+       }
     });
 }
 
-function preencherCaixaPlanoHtml(plano) {
+function preencherCaixaPlanoPublicado(plano) {
 
     const planosAtivos = document.querySelector("#planos-ativos");
     const planoModelo = document.querySelector("#card-modelo-plano");
@@ -43,6 +49,23 @@ function preencherCaixaPlanoHtml(plano) {
     clonePlanoModeloHtml.querySelector(".card-modelo-plano-descricao").innerHTML = plano.descricao;
     clonePlanoModeloHtml.querySelector("input").id = `${plano.idPlano}`;
     clonePlanoModeloHtml.querySelector("input").onclick = salvarIdPlano;
+
+    planosAtivos.appendChild(clonePlanoModeloHtml);
+}
+
+function preencherCaixaPlanoNaoPublicado(plano) {
+
+    const planosAtivos = document.querySelector("#planos-ativos");
+    const planoModelo = document.querySelector("#card-modelo-plano");
+
+    const clonePlanoModeloHtml = planoModelo.firstElementChild.cloneNode(true);
+
+    clonePlanoModeloHtml.style.display = "block";
+
+    clonePlanoModeloHtml.querySelector(".card-modelo-plano-nome").innerHTML = plano.nome;
+    clonePlanoModeloHtml.querySelector(".card-modelo-plano-valor").innerHTML = plano.valor;
+    clonePlanoModeloHtml.querySelector(".card-modelo-plano-descricao").innerHTML = plano.descricao;
+    clonePlanoModeloHtml.querySelector("input").disabled = true;
 
     planosAtivos.appendChild(clonePlanoModeloHtml);
 }
