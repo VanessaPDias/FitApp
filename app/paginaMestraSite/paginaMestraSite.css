@@ -1,6 +1,6 @@
 :root {
     --bs-madison-color: #334257;
-    --bs--cor-de-destaque: #476072;
+    --bs-cor-de-destaque: #476072;
     --bs-cor-principal: #548CA8;
 }
 
@@ -12,6 +12,7 @@ body {
 header,
 footer,
 #container-funcionalidades,
+#home-container-planos,
 #container-formulario-trabalhe-conosco,
 #container-nutricionistas-assinatura {
     background-color: var(--bs-white);
@@ -21,18 +22,33 @@ footer,
     flex: 1 0 auto;
 }
 
+#container-principal {
+    min-height: 55rem;
+}
+
+#trabalhe-conosco-container-principal {
+    min-height: 50rem;
+}
+
+.texto-justificado {
+    text-align: justify; 
+    text-justify: inter-word
+}
+
+
 .btn-padrao {
     --bs-btn-color: #fff;
     --bs-btn-bg: var(--bs-cor-principal);
     --bs-btn-border-color: var(--bs-cor-principal);
-    --bs-btn-hover-bg: var(--bs--cor-de-destaque);
+    --bs-btn-hover-bg: var(--bs-cor-de-destaque);
     width: 96px;
 }
+
 .btn-padrao-assinar {
     --bs-btn-color: #fff;
     --bs-btn-bg: var(--bs-cor-principal);
     --bs-btn-border-color: var(--bs-cor-principal);
-    --bs-btn-hover-bg: var(--bs--cor-de-destaque);
+    --bs-btn-hover-bg: var(--bs-cor-de-destaque);
 }
 
 #card-modelo-header {
@@ -45,11 +61,45 @@ footer,
     border-color: var(--bs-fiord-color);
 }
 
-#container-login, #container-cadastro, #container-redefinir-senha {
+#container-login,
+#container-cadastro,
+#container-redefinir-senha {
     width: 90%;
 }
 
+.accordion {
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-button {
+    color: var(--bs-white);
+    background-color: var(--bs-cor-principal);
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--bs-white);
+    background-color: var(--bs-cor-de-destaque);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-item {
+    background-color: var(--bs-gray-200);
+    border: var(--bs-accordion-border-width) solid var(--bs-gray-500);
+}
+
 @media screen and (min-width: 768px) {
+    #container-principal {
+        min-height: 30rem;
+    }
+
+    #trabalhe-conosco-container-principal {
+        min-height: 20rem;
+    }
+
     #container-login {
         width: 50%;
     }
@@ -64,6 +114,10 @@ footer,
 }
 
 @media screen and (min-width: 992px) {
+    #container-principal {
+        min-height: 30rem;
+    }
+
     #container-login {
         width: 30%;
     }
@@ -78,6 +132,10 @@ footer,
 }
 
 @media screen and (min-width: 1200px) {
+    #container-principal {
+        min-height: 38rem;
+    }
+
     #container-login {
         width: 30%;
     }
@@ -90,7 +148,3 @@ footer,
         width: 30%;
     }
 }
-
-
-
-
