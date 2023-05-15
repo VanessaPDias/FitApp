@@ -1,6 +1,14 @@
 <div>
     <div class="row">
-        <h6><img class="me-2" src="/img/novoTreino.png" alt="" width="24" height="24">Dados do Treino</h6>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a
+                        href="/historicoDeTreinosDoAssinante/historicoDeTreinosDoAssinante.html#treinos"><i
+                            class="bi bi-tags fs-4 me-1"></i>Treinos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dados do Treino<span
+                        id="breadcrumb-nome-treino"></span></li>
+            </ol>
+        </nav>
     </div>
     <div class="row pb-3">
         <div class="col">
@@ -146,8 +154,7 @@
 
     <div class="row">
         <div class="col text-end">
-            <a href="../dashboard/dashboard.html#inicio" class="btn btn-outline-dark me-2 btn-voltar"
-               >Voltar</a>
+            <button onclick="history.back()" class="btn btn-outline-dark me-2 btn-voltar">Voltar</button>
             <button class="btn btn-outline-dark btn-app-padrao" id="btn-imprimir-treino">Imprimir</button>
         </div>
     </div>

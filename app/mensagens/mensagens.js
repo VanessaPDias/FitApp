@@ -77,7 +77,9 @@ async function enviarMensagem(evento) {
 
 async function buscarMensagensRecebidas() {
 
-    tipoDeMensagem = "Recebidas"
+    tipoDeMensagem = "Recebidas";
+
+    document.querySelector("#breadcrumb-tipo-mensagem").innerHTML = ` / ${tipoDeMensagem}`;
 
     marcarLinkMenu(document.querySelector("#btn-mensagens-recebidas"));
 
@@ -95,6 +97,8 @@ async function buscarMensagensEnviadas() {
 
     tipoDeMensagem = "Enviadas";
 
+    document.querySelector("#breadcrumb-tipo-mensagem").innerHTML = ` / ${tipoDeMensagem}`;
+
     marcarLinkMenu(document.querySelector("#btn-mensagens-enviadas"));
 
     const token = seguranca.pegarToken();
@@ -111,6 +115,8 @@ async function buscarMensagensExcluidas() {
 
     tipoDeMensagem = "Excluídas";
 
+    document.querySelector("#breadcrumb-tipo-mensagem").innerHTML = ` / ${tipoDeMensagem}`;
+
     marcarLinkMenu(document.querySelector("#btn-mensagens-excluidas"));
 
     const token = seguranca.pegarToken();
@@ -126,7 +132,6 @@ async function buscarMensagensExcluidas() {
 function listarMensagens(listaDeMensagens, tipo) {
 
     document.querySelector("#lista-mensagens").innerHTML = "";
-    document.querySelector("#tipo-de-mensagem").innerHTML = tipo;
 
     if (listaDeMensagens.length > 0) {
 
@@ -173,7 +178,7 @@ function listarMensagens(listaDeMensagens, tipo) {
                                 <div class="row justify-content-between pt-2">
                                     <div class="col-10"></div>
                                     <div class="col-2 text-end">
-                                        <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}" class="col-2 text-end link-dark"  data-tipomensagem="${tipo}">
+                                        <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}#mensagens" class="col-2 text-end link-dark"  data-tipomensagem="${tipo}">
                                             <i class="col bi bi-eye btn-ver-mensagem fs-5"></i>
                                         </a>
                                     </div>
@@ -195,7 +200,7 @@ function listarMensagens(listaDeMensagens, tipo) {
                             <div class="row justify-content-between pt-2">
                                 <div class="col-10"></div>
                                 <div class="col-2 text-end"> 
-                                    <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}" class="col-2 text-end link-dark"  data-tipomensagem="${tipo}">
+                                    <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}#mensagens" class="col-2 text-end link-dark"  data-tipomensagem="${tipo}">
                                         <i class="col bi bi-eye btn-ver-mensagem fs-5"></i>
                                     </a>
                                 </div>

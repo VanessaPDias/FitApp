@@ -39,6 +39,7 @@ async function buscarDadosDoAluno(idAssinante) {
 
         nomeAluno = resposta.nome;
         
+        document.querySelector("#breadcrumb-nome-aluno").innerHTML = ` / ${resposta.nome}`;
 
         if (resposta.imagem) {
             document.querySelector("#imagem-aluno").setAttribute("src", `${configuracoes.urlDaApi}/${resposta.imagem}`);

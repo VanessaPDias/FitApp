@@ -37,6 +37,7 @@ async function buscarDadosDoNutricionista(idNutri) {
 
         document.querySelector("#btn-confirmar-alteracao").onclick = confirmarAlteracao;
 
+        document.querySelector("#breadcrumb-nome-nutri").innerHTML = ` / ${resposta.nome}`;
         document.querySelector("#nome-nutri").value = resposta.nome;
         document.querySelector("#email-nutri").value = resposta.email;
         document.querySelector("#telefone-nutri").value = resposta.telefone;

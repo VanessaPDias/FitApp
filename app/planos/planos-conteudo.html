@@ -1,6 +1,10 @@
 <div>
     <div class="row">
-        <h6><i class="bi bi-card-checklist fs-4 me-1"></i>Planos</h6>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"><i class="bi bi-card-checklist fs-4 me-2"></i>Planos</li>
+            </ol>
+        </nav>
     </div>
 
     <div class="row py-3">
@@ -53,11 +57,11 @@
         </div>
     </div>
     <div class="row py-3">
-            <div class="text-end">
-                <button id="btn-imprimir" class="btn btn-outline-dark btn-app-padrao me-2">Imprimir</button>
-                <button type="button" class="btn btn-outline-dark btn-app-padrao" id="btn-cadastrar-plano"
-                    data-bs-toggle="modal" data-bs-target="#cadastrar-plano">Salvar</button>
-            </div>
+        <div class="text-end">
+            <button id="btn-imprimir" class="btn btn-outline-dark btn-app-padrao me-2">Imprimir</button>
+            <button type="button" class="btn btn-outline-dark btn-app-padrao" id="btn-cadastrar-plano"
+                data-bs-toggle="modal" data-bs-target="#cadastrar-plano">Salvar</button>
+        </div>
     </div>
 
 
@@ -95,7 +99,8 @@
                     <div class="pt-3">
                         <label class="form-label fw-semibold" for="data-lancamento">Data Lançamento:</label>
                         <div class="input-group input-group-sm">
-                            <input class="form-control" type="date" id="form-data-lancamento" name="data-lancamento" required>
+                            <input class="form-control" type="date" id="form-data-lancamento" name="data-lancamento"
+                                required>
                         </div>
                     </div>
 
@@ -108,7 +113,8 @@
                     </div>
 
                     <div class="text-end pt-3">
-                        <button type="submit" id="btn-salvar-plano" class="btn btn-outline-dark btn-app-padrao">Salvar</button>
+                        <button type="submit" id="btn-salvar-plano"
+                            class="btn btn-outline-dark btn-app-padrao">Salvar</button>
                     </div>
                 </form>
             </div>

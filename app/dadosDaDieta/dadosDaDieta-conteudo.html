@@ -1,7 +1,13 @@
 <div>
     <div class="row">
-        <h6><img class="me-2" src="/img/novaDieta.png" alt="" width="24" height="24">Dados da Dieta</h6>
-        <h6>Paciente: <span class="fw-normal lh-base" id="nome-paciente"></span></h6>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/pacientes/pacientes.html#pacientes"><i class="bi bi-people fs-4 me-1"></i>Pacientes</a></li>
+                <li class="breadcrumb-item" id="breadcrumb-dados-paciente"></li>
+                <li class="breadcrumb-item active" aria-current="page">Dados da Dieta<span id="nome-paciente"></span>
+                </li>
+            </ol>
+        </nav>
     </div>
     <div class="row pb-3">
         <div class="col">
@@ -84,8 +90,8 @@
                             <div class="input-group input-group-sm py-3">
                                 <input type="text" class="form-control fw-normal" id="input-item-cafeDaManha"
                                     placeholder="Item..." aria-label="" aria-describedby="">
-                                <button class="btn btn-outline-dark btn-app-padrao-md" id="inserir-item-cafeDaManha" data-refeicao="cafeDaManha"
-                                    type="button"><i class="bi bi-plus"></i>
+                                <button class="btn btn-outline-dark btn-app-padrao-md" id="inserir-item-cafeDaManha"
+                                    data-refeicao="cafeDaManha" type="button"><i class="bi bi-plus"></i>
                                     Itens</button>
                             </div>
                             <div>
@@ -103,8 +109,8 @@
                                 <input type="text" class="form-control fw-normal" id="input-item-lancheDaManha"
                                     placeholder="Item..." aria-label="" aria-describedby="">
                                 <button class="btn btn-outline-dark btn-app-padrao-md" id="inserir-item-lancheDaManha"
-                                    data-refeicao="lancheDaManha" type="button"><i
-                                        class="bi bi-plus"></i> Itens</button>
+                                    data-refeicao="lancheDaManha" type="button"><i class="bi bi-plus"></i>
+                                    Itens</button>
                             </div>
                             <div>
                                 <ul class="list-group" id="lista-itens-lancheDaManha">
@@ -119,8 +125,8 @@
                             <div class="input-group input-group-sm py-3">
                                 <input type="text" class="form-control fw-normal" id="input-item-almoco"
                                     placeholder="Item..." aria-label="" aria-describedby="">
-                                <button class="btn btn-outline-dark btn-app-padrao-md" id="inserir-item-almoco" data-refeicao="almoco"
-                                    type="button"><i class="bi bi-plus"></i>
+                                <button class="btn btn-outline-dark btn-app-padrao-md" id="inserir-item-almoco"
+                                    data-refeicao="almoco" type="button"><i class="bi bi-plus"></i>
                                     Itens</button>
                             </div>
                             <div>
@@ -137,8 +143,8 @@
                                 <input type="text" class="form-control fw-normal" id="input-item-lancheDaTarde"
                                     placeholder="Item..." aria-label="" aria-describedby="">
                                 <button class="btn btn-outline-dark btn-app-padrao-md" id="inserir-item-lancheDaTarde"
-                                    data-refeicao="lancheDaTarde" type="button"><i
-                                        class="bi bi-plus"></i> Itens</button>
+                                    data-refeicao="lancheDaTarde" type="button"><i class="bi bi-plus"></i>
+                                    Itens</button>
                             </div>
                             <div>
                                 <ul class="list-group" id="lista-itens-lancheDaTarde">
@@ -152,8 +158,8 @@
                             <div class="input-group input-group-sm py-3">
                                 <input type="text" class="form-control fw-normal" id="input-item-jantar"
                                     placeholder="Item..." aria-label="" aria-describedby="">
-                                <button class="btn btn-outline-dark btn-app-padrao-md" id="inserir-item-jantar" data-refeicao="jantar"
-                                    type="button"><i class="bi bi-plus"></i>
+                                <button class="btn btn-outline-dark btn-app-padrao-md" id="inserir-item-jantar"
+                                    data-refeicao="jantar" type="button"><i class="bi bi-plus"></i>
                                     Itens</button>
                             </div>
                             <div>
@@ -169,8 +175,8 @@
                                 <input type="text" class="form-control fw-normal" id="input-item-lancheDaNoite"
                                     placeholder="Item..." aria-label="" aria-describedby="" required>
                                 <button class="btn btn-outline-dark btn-app-padrao-md" id="inserir-item-lancheDaNoite"
-                                    data-refeicao="lancheDaNoite" type="button"><i
-                                        class="bi bi-plus"></i> Itens</button>
+                                    data-refeicao="lancheDaNoite" type="button"><i class="bi bi-plus"></i>
+                                    Itens</button>
                             </div>
                             <div>
                                 <ul class="list-group d-flex" id="lista-itens-lancheDaNoite">
@@ -192,4 +198,3 @@
     </div>
 
 </div>
-

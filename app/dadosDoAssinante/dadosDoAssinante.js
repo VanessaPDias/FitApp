@@ -46,6 +46,7 @@ async function buscarDadosDoAssinante(idAssinante) {
             novoStatus = false;
         }
 
+        document.querySelector("#breadcrumb-nome-assinante").innerHTML = ` / ${resposta.nome}`;
         document.querySelector("#nome-assinante").innerHTML = resposta.nome;
         document.querySelector("#email-assinante").innerHTML = resposta.email;
         document.querySelector("#status-assinante").innerHTML = status;

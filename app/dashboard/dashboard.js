@@ -72,7 +72,7 @@ function irParaPaginaDeDadosDaDietaAssinante() {
         mensagens.mostrarMensagemDeErro("Você ainda não tem Dieta!", false);
         return;
     }
-    window.location.href = `../dadosDaDietaAssinante/dadosDaDietaAssinante.html?idDieta=${idDietaAtual}`;
+    window.location.href = `../dadosDaDietaAssinante/dadosDaDietaAssinante.html?idDieta=${idDietaAtual}#dietas`;
 
 }
 
@@ -81,6 +81,6 @@ function irParaPaginaDeDadosDoTreinoAssinante() {
         mensagens.mostrarMensagemDeErro("Você ainda não tem Treino!", false);
         return;
     }
-    window.location.href = `../dadosDoTreinoAssinante/dadosDoTreinoAssinante.html?idTreino=${idTreinoAtual}`;
+    window.location.href = `../dadosDoTreinoAssinante/dadosDoTreinoAssinante.html?idTreino=${idTreinoAtual}#treinos`;
 
 }

@@ -1,50 +1,51 @@
 <div>
     <div class="row">
-        <h6><i class="bi bi-people fs-4 me-1"></i>Assinantes</h6>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/assinantes/assinantes.html#assinantes"><i class="bi bi-people fs-4 me-2"></i>Assinantes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dados do Assinante<span
+                        id="breadcrumb-nome-assinante"></span></li>
+            </ol>
+        </nav>
     </div>
-    <div class="row py-2">
+    <div class="row py-3">
         <div class="col">
             <div class="card shadow">
-                <div class="card-body row">
-                    <h6 class="card-title pb-2">Dados do Assinante</h6>
-                    <div class="col">
-                        <p class="fw-bolder">Nome</p>
-                        <p id="nome-assinante"></p>
+                <div class="card-body">
+                    <div class="row py-2">
+                        <div class="col">
+                            <p class="fw-bolder">Nome</p>
+                            <p id="nome-assinante"></p>
+                        </div>
+                        <div class="col">
+                            <p class="fw-bolder">Email</p>
+                            <p id="email-assinante"></p>
+                        </div>
+                        <div class="col">
+                            <p class="fw-bolder">Status</p>
+                            <p id="status-assinante"></p>
+                        </div>
                     </div>
-                    <div class="col">
-                        <p class="fw-bolder">Email</p>
-                        <p id="email-assinante"></p>
+                    <hr>
+                    <div class="row py-2">
+                        <div class="col">
+                            <p class="fw-bolder">Plano</p>
+                            <p id="nome-plano"></p>
+                        </div>
+                        <div class="col">
+                            <p class="fw-bolder">Valor</p>
+                            <p id="valor-plano"></p>
+                        </div>
+                        <div class="col">
+                            <p class="fw-bolder">Início</p>
+                            <p id="data-inicio"></p>
+                        </div>
+                        <div class="col">
+                            <p class="fw-bolder">Fim</p>
+                            <p id="data-fim"></p>
+                        </div>
                     </div>
-                    <div class="col">
-                        <p class="fw-bolder">Status</p>
-                        <p id="status-assinante"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="row py-2">
-    <div class="col">
-        <div class="card shadow">
-            <div class="card-body row">
-                <h6 class="card-title pb-2">Dados do Plano</h6>
-                <div class="col">
-                    <p class="fw-bolder">Plano</p>
-                    <p id="nome-plano"></p>
-                </div>
-                <div class="col">
-                    <p class="fw-bolder">Valor</p>
-                    <p id="valor-plano"></p>
-                </div>
-                <div class="col">
-                    <p class="fw-bolder">Início</p>
-                    <p id="data-inicio"></p>
-                </div>
-                <div class="col">
-                    <p class="fw-bolder">Fim</p>
-                    <p id="data-fim"></p>
                 </div>
             </div>
         </div>
@@ -55,7 +56,8 @@
     <div class="col text-end">
         <a href="../assinantes/assinantes.html#assinantes" class="btn btn-outline-dark btn-voltar me-2">Voltar</a>
 
-        <button type="button" class="btn btn-outline-dark btn-app-padrao" id="btn-alterar-status" data-bs-toggle="modal" data-bs-target="#modal-alterar-status" style="width: 146px;"></button>
+        <button type="button" class="btn btn-outline-dark btn-app-padrao" id="btn-alterar-status" data-bs-toggle="modal"
+            data-bs-target="#modal-alterar-status" style="width: 146px;"></button>
     </div>
 </div>
 
@@ -71,9 +73,9 @@
                 Tem certeza que deseja alterar a o status?
             </div>
             <div class="modal-footer">
-                <button id="btn-confirmar-alteracao-status" type="button" class="btn btn-outline-dark btn-app-padrao">Sim</button>
+                <button id="btn-confirmar-alteracao-status" type="button"
+                    class="btn btn-outline-dark btn-app-padrao">Sim</button>
             </div>
         </div>
     </div>
 </div>
-

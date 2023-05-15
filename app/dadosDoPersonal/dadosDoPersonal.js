@@ -37,6 +37,7 @@ async function buscarDadosDoPersonal(idPersonal) {
 
         document.querySelector("#btn-confirmar-alteracao").onclick = confirmarAlteracao;
 
+        document.querySelector("#breadcrumb-nome-personal").innerHTML = ` / ${resposta.nome}`;
         document.querySelector("#nome-personal").value = resposta.nome;
         document.querySelector("#email-personal").value = resposta.email;
         document.querySelector("#telefone-personal").value = resposta.telefone;

@@ -1,14 +1,18 @@
 <div>
     <div class="row">
-        <h6><i class="bi bi-clipboard-data me-1 fs-4"></i>Relatórios</h6>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"><a><i
+                            class="bi bi-clipboard-data fs-4 me-1"></i>Relatórios</a></li>
+            </ol>
+        </nav>
     </div>
 
     <div class="row py-3">
         <div class="col">
             <div class="card shadow">
                 <div class="card-body row">
-                    <h6 class="card-title ">Filtro</h6>
-                    <div class="col-12 col-sm-4 py-3">
+                    <div class="col-12 col-sm-4">
                         <h6>Medida</h6>
                         <select class="form-select form-select-sm" name="opcoes-medidas" id="opcoes-medidas">
                             <option value="peso" selected>Peso</option>
@@ -17,13 +21,13 @@
                             <option value="quadril">Quadril</option>
                         </select>
                     </div>
-                    <div class="col-6 col-sm-4 py-3">
+                    <div class="col-6 col-sm-4">
                         <h6>De</h6>
                         <div class="input-group input-group-sm pb-3">
                             <input type="date" class="form-control" aria-label="data-inicio" id="data-inicio">
                         </div>
                     </div>
-                    <div class="col-6 col-sm-4 py-3">
+                    <div class="col-6 col-sm-4">
                         <h6>Até</h6>
                         <div class="input-group input-group-sm pb-3">
                             <input type="date" class="form-control" aria-label="data-fim" id="data-fim">

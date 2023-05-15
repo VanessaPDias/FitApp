@@ -22,6 +22,7 @@ async function aoCarregarPagina() {
     idPaciente = params.idAssinante;
 
     await paginaMestra.carregar("dadosDoPaciente/dadosDoPaciente-conteudo.html", "Dados do Paciente");
+    
 
     await buscarDadosDoPaciente(idPaciente);
 
@@ -38,12 +39,13 @@ async function buscarDadosDoPaciente(idAssinante) {
         const resposta = await servicos.buscarDados(token, idAssinante);
 
         nomePaciente = resposta.nome;
-        
+        document.querySelector("#breadcrumb-nome-paciente").innerHTML = ` / ${resposta.nome}`;
 
         if (resposta.imagem) {
             document.querySelector("#imagem-paciente").setAttribute("src", `${configuracoes.urlDaApi}/${resposta.imagem}`);
         }
 
+        
         document.querySelector("#nome-paciente").innerHTML = resposta.nome;
         document.querySelector("#objetivo-paciente").innerHTML = !resposta.objetivo ? "" : resposta.objetivo;
         document.querySelector("#idade-paciente").innerHTML = resposta.dataNascimento;

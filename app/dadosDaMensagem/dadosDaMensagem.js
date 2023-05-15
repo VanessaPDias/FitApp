@@ -29,15 +29,15 @@ async function aoCarregarPagina() {
     const tipoDeMensagem = localStorage.getItem("fitapp_tipo_mensagem");
 
     if(tipoDeMensagem == "Recebidas") {
-        document.querySelector("#tipo-de-mensagem").innerHTML = `<i class="bi bi-envelope-paper me-2"></i> Recebidas`
+        document.querySelector("#tipo-de-mensagem").innerHTML = `Recebidas`
     }
 
     if(tipoDeMensagem == "Enviadas") {
-        document.querySelector("#tipo-de-mensagem").innerHTML = `<i class="bi bi-send me-2 me-2"></i> Enviadas`
+        document.querySelector("#tipo-de-mensagem").innerHTML = `Enviadas`
     }
 
     if(tipoDeMensagem == "Excluídas") {
-        document.querySelector("#tipo-de-mensagem").innerHTML = `<i class="bi bi-trash3 me-2"></i> Excluídas`
+        document.querySelector("#tipo-de-mensagem").innerHTML = `Excluídas`
     }
 
     if(tipoDeMensagem !== "Recebidas") {

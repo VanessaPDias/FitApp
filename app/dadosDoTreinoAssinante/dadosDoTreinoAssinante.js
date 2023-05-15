@@ -24,9 +24,13 @@ async function aoCarregarPagina() {
     await paginaMestra.carregar("dadosDoTreinoAssinante/dadosDoTreinoAssinante-conteudo.html", "Dados do Treino");
 
     document.querySelector("#btn-imprimir-treino").onclick = imprimirTreino;
+
     token = seguranca.pegarToken();
+
     nomeAssinante = seguranca.pegarNomeDoUsuario();
+
     buscarDadosDoTreino();
+
     mensagens.exibirMensagemAoCarregarAPagina();
 }
 
@@ -35,6 +39,8 @@ async function buscarDadosDoTreino() {
     try {
         dadosDoTreino = await servicos.buscarTreinoPorId(token, idTreino);
         exerciciosDoTreino = dadosDoTreino.exercicios;
+
+        document.querySelector("#breadcrumb-nome-treino").innerHTML = ` / ${dadosDoTreino.nome}`;
 
         document.querySelector("#nome-treino").innerHTML = dadosDoTreino.nome;
         document.querySelector("#objetivo-treino").innerHTML = dadosDoTreino.objetivo;

@@ -1,8 +1,16 @@
 <div>
     <div class="row">
-        <h6><img class="me-2" src="/img/novaDieta.png" alt="" width="24" height="24">Dados da Dieta</h6>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a
+                        href="/historicoDeDietasDoAssinante/historicoDeDietasDoAssinante.html#dietas"><i
+                            class="bi bi-tags fs-4 me-1"></i>Dietas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dados da Dieta<span
+                        id="breadcrumb-nome-dieta"></span></li>
+            </ol>
+        </nav>
     </div>
-    <div class="row pb-3">
+    <div class="row py-3">
         <div class="col">
             <div class="card shadow">
                 <div class="card-body">
@@ -24,7 +32,7 @@
                             <p id="fim-dieta"></p>
                         </div>
                     </div>
-                        
+
                 </div>
             </div>
         </div>
@@ -135,10 +143,9 @@
 
     <div class="row">
         <div class="col text-end">
-            <a href="../dashboard/dashboard.html#inicio" class="btn btn-outline-dark me-2 btn-voltar">Voltar</a>
+            <button onclick="history.back()" class="btn btn-outline-dark me-2 btn-voltar">Voltar</button>
             <button class="btn btn-outline-dark btn-app-padrao" id="btn-imprimir-dieta">Imprimir</button>
         </div>
     </div>
 
 </div>
-

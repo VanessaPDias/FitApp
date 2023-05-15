@@ -1,14 +1,18 @@
 <div>
     <div class="row">
-        <h6><i class="bi bi-card-checklist fs-4 me-1"></i>Planos</h6>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/planos/planos.html#planos"><i class="bi bi-card-checklist fs-4 me-2"></i>Planos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dados do Plano<span
+                        id="breadcrumb-nome-plano"></span></li>
+            </ol>
+        </nav>
     </div>
     <div class="row py-2">
         <div class="col">
-            <div class="card shadow">
-                <div class="card-body row">
-                    <h6 class="card-title pb-2">Dados do Plano</h6>
-
-                    <form class="row" id="formulario-plano">
+            <form id="formulario-plano">
+                <div class="card shadow pb-3">
+                    <div class="card-body row">
                         <div class="col-md-6 pt-3">
                             <label class="form-label fw-semibold" for="nome-plano">Nome</label>
                             <div class="input-group input-group-sm">
@@ -39,7 +43,8 @@
                         <div class="col-md-4 pt-3">
                             <label class="form-label fw-semibold" for="data-lancamento-plano">Data de Lançamento</label>
                             <div class="input-group input-group-sm">
-                                <input class="form-control" type="date" id="data-lancamento-plano" name="data-lancamento-plano">
+                                <input class="form-control" type="date" id="data-lancamento-plano"
+                                    name="data-lancamento-plano">
                             </div>
                         </div>
                         <div class="col-12 pt-3">
@@ -49,16 +54,23 @@
                                     required></textarea>
                             </div>
                         </div>
-                        <div class="col-12 pt-3 text-end">
-                            <a href="../planos/planos.html#planos" class="btn btn-outline-dark me-2 btn-voltar">Voltar</a>
-
-                            <button type="submit" id="btn-alterar-dados-do-plano" class="btn btn-outline-dark btn-app-padrao">Alterar</button>
-                        </div>
-                    </form>
+                        
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col pt-3 text-end">
+                            <a href="../planos/planos.html#planos"
+                                class="btn btn-outline-dark me-2 btn-voltar">Voltar</a>
+
+                            <button type="submit" id="btn-alterar-dados-do-plano"
+                                class="btn btn-outline-dark btn-app-padrao">Alterar</button>
+                        </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 
@@ -74,7 +86,8 @@
                 Tem certeza que deseja alterar o plano?
             </div>
             <div class="modal-footer">
-                <button id="btn-confirmar-alteracao-do-plano" type="button" class="btn btn-outline-dark btn-app-padrao">Sim</button>
+                <button id="btn-confirmar-alteracao-do-plano" type="button"
+                    class="btn btn-outline-dark btn-app-padrao">Sim</button>
             </div>
         </div>
     </div>

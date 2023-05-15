@@ -23,7 +23,8 @@ async function aoCarregarPagina() {
 
     await paginaMestra.carregar("criarTreino/criarTreino-conteudo.html", "Criar Treino");
 
-    document.querySelector("#nome-aluno").innerHTML = nomeAluno;
+    document.querySelector("#breadcrumb-dados-aluno").innerHTML = `<a href="/dadosDoAluno/dadosDoAluno.html?idAssinante=${idAluno}#alunos">Dados do Aluno</a>`;
+    document.querySelector("#nome-aluno").innerHTML = ` / ${nomeAluno}`;
 
     document.querySelector("#inserir-exercicio-segunda").onclick = inserirExercicio;
     document.querySelector("#inserir-exercicio-terca").onclick = inserirExercicio;
@@ -79,7 +80,7 @@ function mostrarExerciciosDoTreino() {
         </li>`;
     });
 
-    adicionarEventoExcluir()
+    adicionarEventoExcluir();
 }
 
 
