@@ -132,7 +132,18 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
 }
 
 @media screen and (min-width: 992px) {
-    
+    #container-principal {
+        min-height: 26rem;
+    }
+
+    #img-banner-1, #img-banner-3 {
+        width: 16rem;
+        
+    }
+
+    #img-banner-2 {
+        width: 24rem;
+    }
 
     #container-login {
         width: 30%;
@@ -148,7 +159,18 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
 }
 
 @media screen and (min-width: 1200px) {
-    
+    #container-principal {
+        min-height: 33rem;
+    }
+
+    #img-banner-1, #img-banner-3 {
+        width: 20rem;
+        
+    }
+
+    #img-banner-2 {
+        width: 26rem;
+    }
 
     #container-login {
         width: 30%;
