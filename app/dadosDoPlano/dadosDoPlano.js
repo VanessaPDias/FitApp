@@ -44,6 +44,7 @@ async function buscarDadosDoPlano(idPlano) {
 
         document.querySelector("#btn-alterar-dados-do-plano").onclick = alterarDadosDoPlano;
 
+        document.querySelector("#breadcrumb-nome-plano").innerHTML = ` / ${resposta.nome}`;
         document.querySelector("#nome-plano").value = resposta.nome;
         document.querySelector("#valor-plano").value = resposta.valor;
         document.querySelector("#status-plano").value = resposta.bloqueado;

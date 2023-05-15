@@ -24,9 +24,13 @@ async function aoCarregarPagina() {
     await paginaMestra.carregar("dadosDaDietaAssinante/dadosDaDietaAssinante-conteudo.html", "Dados da Dieta");
 
     document.querySelector("#btn-imprimir-dieta").onclick = imprimirDieta;
+
     token = seguranca.pegarToken();
+
     nomeAssinante = seguranca.pegarNomeDoUsuario();
+
     buscarDadosDaDieta();
+
     mensagens.exibirMensagemAoCarregarAPagina();
 }
 
@@ -35,6 +39,8 @@ async function buscarDadosDaDieta() {
     try {
         dadosDaDieta = await servicos.buscarDietaPorId(token, idDieta);
         itensDaDieta = dadosDaDieta.itens;
+
+        document.querySelector("#breadcrumb-nome-dieta").innerHTML = ` / ${dadosDaDieta.nome}`;
 
         document.querySelector("#nome-dieta").innerHTML = dadosDaDieta.nome;
         document.querySelector("#objetivo-dieta").innerHTML = dadosDaDieta.objetivo;

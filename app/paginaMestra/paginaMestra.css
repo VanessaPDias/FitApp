@@ -36,6 +36,20 @@ select {
     cursor: pointer;
 }
 
+.breadcrumb-item.active {
+    color: var(--bs-dark);
+}
+
+a {
+    color: var(--bs-cor-principal);
+}
+a:active {
+    color: var(--bs-cor-principal);
+}
+a:hover {
+    color: var(--bs-cor-de-destaque);
+}
+
 .list-group {
     --bs-list-group-color: var(--bs-white);
     --bs-list-group-bg: var(--bs-cor-principal);

@@ -1,13 +1,19 @@
 <div>
     <div class="row">
-        <h6><i class="bi bi-people fs-4 me-1"></i>Personal Trainers</h6>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/personalTrainers/personalTrainers.html#personalTrainers"><i class="bi bi-people fs-4 me-2"></i>Personal
+                        Trainers</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dados do Personal Trainer<span
+                        id="breadcrumb-nome-personal"></span></li>
+            </ol>
+        </nav>
     </div>
-    <div class="row py-2">
+    <div class="row py-3">
         <div class="col">
-            <div class="card shadow">
-                <div class="card-body row">
-                    <h6 class="card-title pb-2">Dados do Personal Trainer</h6>
-                    <form class="row" id="formulario">
+            <form id="formulario">
+                <div class="card shadow pb-3">
+                    <div class="card-body row">
                         <div class="col-md-6 pt-3">
                             <label class="form-label fw-semibold" for="nome-personal">Nome</label>
                             <div class="input-group input-group-sm">
@@ -56,17 +62,23 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col pt-3 text-end">
-                            <a href="../personalTrainers/personalTrainers.html#personalTrainers" class="btn btn-outline-dark btn-voltar me-2">Voltar</a>
 
-                            <button type="submit" class="btn btn-outline-dark btn-app-padrao"
-                                id="btn-alterar-dados-do-personal">Alterar</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col pt-3 text-end">
+                        <a href="../personalTrainers/personalTrainers.html#personalTrainers"
+                            class="btn btn-outline-dark btn-voltar me-2">Voltar</a>
+
+                        <button type="submit" class="btn btn-outline-dark btn-app-padrao"
+                            id="btn-alterar-dados-do-personal">Alterar</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 
@@ -82,7 +94,8 @@
                 Tem certeza que deseja alterar?
             </div>
             <div class="modal-footer">
-                <button id="btn-confirmar-alteracao" type="button" class="btn btn-outline-dark btn-app-padrao">Sim</button>
+                <button id="btn-confirmar-alteracao" type="button"
+                    class="btn btn-outline-dark btn-app-padrao">Sim</button>
             </div>
         </div>
     </div>

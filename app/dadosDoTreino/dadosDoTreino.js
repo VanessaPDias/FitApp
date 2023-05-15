@@ -27,7 +27,8 @@ async function aoCarregarPagina() {
 
     await paginaMestra.carregar("dadosDoTreino/dadosDoTreino-conteudo.html", "Dados do Treino");
 
-    document.querySelector("#nome-aluno").innerHTML = nomeALuno;
+    document.querySelector("#breadcrumb-dados-aluno").innerHTML = `<a href="/dadosdoAluno/dadosdoAluno.html?idAssinante=${idAluno}#alunos">Dados do Aluno</a>`;
+    document.querySelector("#nome-aluno").innerHTML = ` / ${nomeALuno}`;
 
 
     if (treinoAtual == false) {

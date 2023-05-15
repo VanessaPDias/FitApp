@@ -20,6 +20,8 @@ async function aoCarregarPagina() {
 
     await paginaMestra.carregar("historicoDeMedidasDoPaciente/historicoDeMedidasDoPaciente-conteudo.html", "Histórico de Medidas do Paciente");
 
+    document.querySelector("#breadcrumb-dados-paciente").innerHTML = `<a href="/dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}#pacientes#pacientes">Dados do Paciente</a>`;
+    
     await buscarMedidas();
 
     document.querySelector("#opcoes-medidas").onchange = buscarMedidas;
@@ -33,8 +35,8 @@ async function buscarMedidas() {
     try {
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token, idPaciente);
-
-        document.querySelector("#nome-paciente").innerHTML = resposta.nomePaciente;
+       
+        document.querySelector("#nome-paciente").innerHTML = ` / ${resposta.nomePaciente}`;
 
         criarRelatorio(resposta.historicoDeMedidas);
 

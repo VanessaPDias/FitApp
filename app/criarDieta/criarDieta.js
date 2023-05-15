@@ -11,7 +11,7 @@ window.onload = aoCarregarPagina;
 let token;
 let idPaciente;
 let nomePaciente;
-const itensDaDieta = [];
+let itensDaDieta = [];
 
 async function aoCarregarPagina() {
     const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -23,12 +23,13 @@ async function aoCarregarPagina() {
 
     await paginaMestra.carregar("criarDieta/criarDieta-conteudo.html", "Criar Dieta");
 
-    document.querySelector("#nome-paciente").innerHTML = nomePaciente;
+    document.querySelector("#breadcrumb-dados-paciente").innerHTML = `<a href="/dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}#pacientes">Dados do Paciente</a>`;
+    document.querySelector("#nome-paciente").innerHTML = ` / ${nomePaciente}`;
 
     document.querySelector("#inserir-item-cafeDaManha").onclick = inserirItem;
     document.querySelector("#inserir-item-lancheDaManha").onclick = inserirItem;
     document.querySelector("#inserir-item-almoco").onclick = inserirItem;
-    document.querySelector("#inserir-item-lancheDatarde").onclick = inserirItem;
+    document.querySelector("#inserir-item-lancheDaTarde").onclick = inserirItem;
     document.querySelector("#inserir-item-jantar").onclick = inserirItem;
     document.querySelector("#inserir-item-lancheDaNoite").onclick = inserirItem;
 
@@ -56,15 +57,60 @@ function inserirItem(evento) {
 
     itensDaDieta.push({ refeicao: refeicao, descricao: descricaoDoItem });
 
-    document.querySelector(`#lista-itens-${refeicao}`).innerHTML = "";
+    mostrarItensDaDieta();
 
-    itensDaDieta.filter(item => item.refeicao == refeicao).forEach(elemento => {
-        document.querySelector(`#lista-itens-${refeicao}`).innerHTML = document.querySelector(`#lista-itens-${refeicao}`).innerHTML +
-            `<li class="list-group-item mb-2 d-flex justify-content-between lista-itens-dieta">
-            ${elemento.descricao}<i class="bi bi-trash3 btn-excluir-medidas" style= "cursor: pointer"></i>
+}
+
+function mostrarItensDaDieta() {
+    document.querySelector(`#lista-itens-cafeDaManha`).innerHTML = "";
+    document.querySelector(`#lista-itens-lancheDaManha`).innerHTML = "";
+    document.querySelector(`#lista-itens-almoco`).innerHTML = "";
+    document.querySelector(`#lista-itens-lancheDaTarde`).innerHTML = "";
+    document.querySelector(`#lista-itens-jantar`).innerHTML = "";
+    document.querySelector(`#lista-itens-lancheDaNoite`).innerHTML = "";
+
+
+    itensDaDieta.forEach(item => {
+
+        document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
+            `<li class="list-group-item lista-itens-dieta mb-2 d-flex justify-content-between">
+            ${item.refeicao}<i class="bi bi-trash3 btn-excluir-item" data-refeicao=${item.refeicao} data-descricao=${item.descricao} style= "cursor: pointer"></i>
         </li>`;
     });
+
+    adicionarEventoExcluir();
 }
+
+
+function adicionarEventoExcluir() {
+    const listaBtnExcluir = document.querySelectorAll(".btn-excluir-item");
+    listaBtnExcluir.forEach(element => {
+        element.onclick = excluirItem;
+    });
+}
+
+function excluirItem(evento) {
+    const refeicao = evento.target.dataset.refeicao;
+    const descricao = evento.target.dataset.descricao;
+
+    itensDaDieta = itensDaDieta.filter(item => filtrarItens(item, refeicao, descricao));
+
+    mostrarItensDaDieta();
+}
+
+function filtrarItens(item, refeicao, descricao) {
+    if (item.refeicao == refeicao) {
+        if (item.descricao == descricao) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    } else {
+        return true;
+    }
+}
+
 
 async function gravarDieta(evento) {
     const nomeDieta = document.querySelector("#nome-dieta").value;
@@ -78,7 +124,7 @@ async function gravarDieta(evento) {
     }
 
     evento.preventDefault();
-    
+
     try {
         const resposta = await servicos.salvarDieta(token, idPaciente, nomeDieta, dataInicio, dataFim, objetivo, itensDaDieta);
         mensagens.mostrarMensagemDeSucesso("Dieta criada com sucesso!", true);

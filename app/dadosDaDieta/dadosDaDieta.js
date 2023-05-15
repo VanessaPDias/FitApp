@@ -27,7 +27,8 @@ async function aoCarregarPagina() {
 
     await paginaMestra.carregar("dadosDaDieta/dadosDaDieta-conteudo.html", "Dados da Dieta");
 
-    document.querySelector("#nome-paciente").innerHTML = nomePaciente;
+    document.querySelector("#breadcrumb-dados-paciente").innerHTML = `<a href="/dadosDoPaciente/dadosDoPaciente.html?idAssinante=${idPaciente}#pacientes">Dados do Paciente</a>`;
+    document.querySelector("#nome-paciente").innerHTML = ` / ${nomePaciente}`;
 
 
     if (dietaAtual == false) {
@@ -125,7 +126,6 @@ function inserirItem(evento) {
 
     mostrarItensDaDieta();
 }
-
 
 async function alterarDieta(evento) {
     const nomeDieta = document.querySelector("#nome-dieta").value;
