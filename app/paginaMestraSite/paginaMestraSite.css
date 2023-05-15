@@ -23,7 +23,7 @@ footer,
 }
 
 #container-principal {
-    min-height: 45rem;
+    min-height: 43rem;
 }
 
 #trabalhe-conosco-container-principal {
@@ -100,9 +100,19 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
 }
 
 @media screen and (min-width: 768px) {
-    /* #container-principal {
-        min-height: 30rem;
-    } */
+    #container-principal {
+        min-height: 23rem;
+    }
+
+    #img-banner-1, #img-banner-3 {
+        width: 14rem;
+        
+    }
+
+    #img-banner-2 {
+        width: 20rem;
+    }
+
 
     #trabalhe-conosco-container-principal {
         min-height: 20rem;
@@ -122,9 +132,7 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
 }
 
 @media screen and (min-width: 992px) {
-    #container-principal {
-        min-height: 30rem;
-    }
+    
 
     #container-login {
         width: 30%;
@@ -140,9 +148,7 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
 }
 
 @media screen and (min-width: 1200px) {
-    #container-principal {
-        min-height: 38rem;
-    }
+    
 
     #container-login {
         width: 30%;
