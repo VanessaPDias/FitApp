@@ -31,6 +31,7 @@ function Dieta(idAssinante, idNutri, nomeDieta, dataInicio, dataFim, objetivo, i
     this.dataFim = new Date(dataFim);
     this.objetivo = objetivo;
     this.data = new Date();
+    this.dietaAtual = true;
     this.itens = [];
 
 

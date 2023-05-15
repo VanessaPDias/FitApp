@@ -1,0 +1,52 @@
+<div>
+    <div class="row">
+        <h6><img class="me-2" src="/img/corpo.png" alt="" width="24" height="24">Medidas</h6>
+        <h6 >Aluno: <span class="fw-normal lh-base" id="nome-aluno"></span></h6>
+    </div>
+
+    <div class="row py-3">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body row">
+                    <h6 class="card-title ">Filtro</h6>
+                    <div class="col-12 col-sm-4 py-3">
+                        <h6>Medida</h6>
+                        <select class="form-select form-select-sm" name="opcoes-medidas" id="opcoes-medidas">
+                            <option value="peso" selected>Peso</option>
+                            <option value="pescoco">Pescoço</option>
+                            <option value="cintura">Cintura</option>
+                            <option value="quadril">Quadril</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-sm-4 py-3">
+                        <h6>De</h6>
+                        <div class="input-group input-group-sm pb-3">
+                            <input type="date" class="form-control" aria-label="data-inicio" id="data-inicio">
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 py-3">
+                        <h6>Até</h6>
+                        <div class="input-group input-group-sm pb-3">
+                            <input type="date" class="form-control" aria-label="data-fim" id="data-fim">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col ">
+            <div class="card shadow">
+                <div class="card-body">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col text-end">
+            <button type="button" class="btn btn-outline-dark btn-voltar" id="btn-voltar">Voltar</button>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,13 @@
 const chaveToken = "fitapp_token";
 const chaveNomeUsuario = "fitapp_nome_usuario";
 const chaveImagemUsuario = "fitapp_imagem_usuario";
+import * as mensagens from "../util/mensagens.js";
 
 export function deslogarSeTokenEstiverExpirado(paginaParaRedirecionar) {
+
     if (!tokenValido()) {
         removerDadosDoUsuario();
+        mensagens.mostrarMensagemInformativa("Sua sessão expirou. Faça o login novamente.", true);
         window.location.href = paginaParaRedirecionar;
     }
 }

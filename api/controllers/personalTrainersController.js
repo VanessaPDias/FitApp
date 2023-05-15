@@ -1,10 +1,12 @@
 const Treino = require('../model/treino');
 const Imc = require('../model/imc');
+const Idade = require('../model/idade');
 const Exercicio = require('../model/exercicioDoTreino');
 const PersonalTrainer = require('../model/personalTrainer');
 const repositorioDeMedidas = require('../repositorios/repositorioDeMedidas');
 const repositorioDeTreinos = require('../repositorios/repositorioDeTreinos');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
+const servicoDeArquivosEstaticos = require('../servicos/servicoDeArquivosEstaticos');
 
 
 async function buscarDadosDoPerfil(req, res) {
@@ -57,8 +59,8 @@ async function buscarAlunos(req, res) {
     const alunos = await repositorioDePersonalTrainers.buscarAlunosPorFiltro(req.usuario.idUsuario, req.query.nome);
 
     if (!alunos || alunos.length <= 0) {
-        res.status(404).send({ erro: "Aluno não encontrado" });
-        return;
+       res.send([]);
+        return; 
     }
 
     res.send(alunos.map(function (aluno) {
@@ -89,19 +91,21 @@ async function buscarAlunoPorId(req, res) {
     }
 
     res.send({
+        imagem: !alunoEncontrado.dados.imagem ? "" : servicoDeArquivosEstaticos.construirCaminhoParaImagem(alunoEncontrado.dados.imagem),
         nome: alunoEncontrado.dados.nome,
-        objetivo: !alunoEncontrado.treinos || alunoEncontrado.treinos.length <= 0 ? null : alunoEncontrado.treinos[0].objetivo,
-        dataNascimento: alunoEncontrado.dados.dataNascimento,
+        objetivo: !alunoEncontrado.treinos && alunoEncontrado.treinos.length > 0 ? alunoEncontrado.treinos[0].objetivo : null,
+        dataNascimento: new Idade.Idade(alunoEncontrado.dados.dataNascimento).valor,
         sexo: alunoEncontrado.dados.idSexo,
         altura: !alunoEncontrado.dados.altura ? 0 : alunoEncontrado.dados.altura,
-        dietas: !alunoEncontrado.treinos ? [] : alunoEncontrado.treinos,
+        treinos: !alunoEncontrado.treinos ? [] : alunoEncontrado.treinos,
+        treinoAtual: alunoEncontrado.treinos && alunoEncontrado.treinos.length > 0 ? alunoEncontrado.treinos[0]: null,
         peso: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.peso,
         pescoco: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.pescoco,
         cintura: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.cintura,
         quadril: !alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.quadril,
         imc: new Imc.Imc(!alunoEncontrado.medidasAtuais ? 0 : alunoEncontrado.medidasAtuais.peso, alunoEncontrado.dados.altura).valor,
     });
-
+    
 }
 
 async function buscarMedidasDoAluno(req, res) {
@@ -120,7 +124,7 @@ async function buscarMedidasDoAluno(req, res) {
         return;
     }
 
-    const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.params.idAssinante);
+    let medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.params.idAssinante);
 
     let medidasAtuais;
 
@@ -130,12 +134,17 @@ async function buscarMedidasDoAluno(req, res) {
             pescoco: 0,
             cintura: 0,
             quadril: 0
-        }
+        };
+
+        medidasOrdenadasPorData = new Array();
+
     } else {
+
         medidasAtuais = medidasOrdenadasPorData[0]
     }
 
     res.send({
+        nomeAluno: alunoEncontrado.dados.nome,
         historicoDeMedidas: medidasOrdenadasPorData,
         medidasAtuais: medidasAtuais
     });
@@ -219,6 +228,7 @@ async function alterarTreino(req, res) {
         return;
     }
 
+    await repositorioDeTreinos.excluirExerciciosDoTreino(req.params.idTreino);
     let exercicios = [];
 
     if (req.usuario.idUsuario == alunoEncontrado.dados.idPersonal) {

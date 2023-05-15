@@ -43,13 +43,15 @@ async function buscarMensagensRecebidas(idUsuario) {
             `select mensagem.idMensagem, 
                     mensagem.data, 
                     mensagem.idUsuarioRemetente,
-                     mensagem.assunto, 
-                     mensagem.texto, 
-                     mensagem.idMensagemResposta,
-                    rem.login as emailRemetente
+                    mensagem.assunto, 
+                    mensagem.texto, 
+                    mensagem.idMensagemResposta,
+                    rem.login as emailRemetente,
+                    rem.nome as nomeRemetente
             from mensagens as mensagem
                 inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
-            where mensagem.idUsuarioDestinatario = ? and mensagem.excluidaDestinatario = false`, [idUsuario]);
+            where mensagem.idUsuarioDestinatario = ? and mensagem.excluidaDestinatario = false 
+            order by mensagem.data desc`, [idUsuario]);
 
         if (rows.length <= 0)
             return;
@@ -72,11 +74,14 @@ async function buscarMensagensEnviadas(idUsuario) {
                     mensagem.assunto, 
                     mensagem.texto, 
                     mensagem.idMensagemResposta,
-                    dest.login as emailDestinatario, rem.login as emailRemetente
+                    dest.login as emailDestinatario, 
+                    dest.nome as nomeDestinatario,
+                    rem.login as emailRemetente
             from mensagens as mensagem
                 inner join usuarios as dest on mensagem.idUsuarioDestinatario = dest.idUsuario
                 inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
-            where mensagem.idUsuarioRemetente = ? and mensagem.excluidaRemetente = false`, [idUsuario]);
+            where mensagem.idUsuarioRemetente = ? and mensagem.excluidaRemetente = false 
+            order by mensagem.data desc`, [idUsuario]);
 
         if (rows.length <= 0)
             return;
@@ -95,15 +100,17 @@ async function buscarMensagensExcluidas(idUsuario) {
     try {
         const [rows, fields] = await conexao.execute(
             `select mensagem.idMensagem, 
-                    mensagem.data, 
-                    mensagem.idUsuarioRemetente, 
-                    mensagem.assunto, 
-                    mensagem.texto, 
-                    mensagem.idMensagemResposta,
-                    rem.login as emailRemetente
+                mensagem.data, 
+                mensagem.idUsuarioRemetente,
+                mensagem.assunto, 
+                mensagem.texto, 
+                mensagem.idMensagemResposta,
+                rem.login as emailRemetente,
+                rem.nome as nomeRemetente
             from mensagens as mensagem
                 inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
-            where mensagem.idUsuarioRemetente = ? and mensagem.excluidaRemetente = true`, [idUsuario]);
+            where mensagem.idUsuarioDestinatario = ? and mensagem.excluidaDestinatario = true 
+            order by mensagem.data desc`, [idUsuario]);
 
         if (rows.length <= 0)
             return;
@@ -125,11 +132,14 @@ async function buscarMensagemPorId(idMensagem) {
                 mensagem.data, 
                 mensagem.idUsuarioRemetente, 
                 mensagem.idUsuarioDestinatario, 
-                mensagem.assunto, mensagem.texto, 
+                mensagem.assunto, 
+                mensagem.texto, 
                 mensagem.idMensagemResposta,
                 mensagem.excluidaRemetente,
                 mensagem.excluidaDestinatario,
-                dest.login as emailDestinatario, rem.login as emailRemetente
+                dest.login as emailDestinatario, 
+                rem.login as emailRemetente,
+                rem.nome as nomeRemetente
             from mensagens as mensagem
                 inner join usuarios as dest on mensagem.idUsuarioDestinatario = dest.idUsuario
                 inner join usuarios as rem on mensagem.idUsuarioRemetente = rem.idUsuario
@@ -151,8 +161,8 @@ async function excluirMensagem(idUsuario, idMensagem) {
     try {
         await conexao.execute(
             `UPDATE mensagens
-            SET excluidaRemetente = true
-            WHERE idUsuarioRemetente = ? and idMensagem = ?`, [idUsuario, idMensagem]);
+            SET excluidaDestinatario = true
+            WHERE idUsuarioDestinatario = ? and idMensagem = ?`, [idUsuario, idMensagem]);
 
     } finally {
         await conexao.end();

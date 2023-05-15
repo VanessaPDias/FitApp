@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="h-100">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/paginaMestraSite/paginaMestraSite.css">
 </head>
 
-<body class="h-100">
+<body class="d-flex flex-column h-100">
     <header class="container-fluid align-items-center border-bottom py-2">
         <!--mobile-->
         <div class="d-sm-none d-flex justify-content-between">
@@ -40,29 +40,27 @@
                 </a>
             </div>
 
-            <!-- <div>
+            <div>
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link link-dark fw-semibold" href="#">Sobre Nós</a>
+                        <a class="nav-link link-dark fw-semibold" href="/index.html#container-como-funciona">Como Funciona?</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark fw-semibold" href="#">Assinatura</a>
+                        <a class="nav-link link-dark fw-semibold" href="/assinatura/assinatura.html">Assinatura</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark fw-semibold" href="#">Contato</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-dark fw-semibold" href="/trabalheConosco/trabalheConosco.html">Trabalhe Conosco</a>
+                        <a class="nav-link link-dark fw-semibold" href="/trabalheConosco/trabalheConosco.html">Trabalhe
+                            Conosco</a>
                     </li>
                 </ul>
-            </div> -->
+            </div>
 
             <div class="d-flex">
                 <div class="me-2">
-                    <a href="/login/entrar.html" class="btn btn-outline-dark btn-sm fw-bold">Entrar</a>
+                    <a href="/login/entrar.html" class="btn btn-outline-dark btn-sm btn-padrao">Entrar</a>
                 </div>
                 <div>
-                    <a href="/criarConta/criarConta.html" class="btn btn-outline-dark btn-sm fw-bold">Cadastrar</a>
+                    <a href="/assinatura/assinatura.html" class="btn btn-outline-dark btn-sm  btn-padrao">Cadastrar</a>
                 </div>
             </div>
         </div>
@@ -80,21 +78,21 @@
 
                 <div class="list-group border-bottom pb-3">
                     <a href="/login/entrar.html"
-                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold">Entrar</a>
-                    <a href="/criarConta/criarConta.html"
-                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold">Cadastrar</a>
+                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold lista-menu-offcanvas">Entrar</a>
+                    <a href="/assinatura/assinatura.html"
+                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold lista-menu-offcanvas">Cadastrar</a>
                 </div>
 
-                <!-- <div class="list-group pt-3">
-                    <a href="#"
-                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold">Sobre Nós</a>
-                    <a href="#"
-                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold">Assinatura</a>
-                    <a href="#"
-                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold">Contato</a>
+                <div class="list-group pt-3">
+                    <a href="/index.html#container-como-funciona"
+                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold lista-menu-offcanvas">Como
+                        Funciona?</a>
+                    <a href="/assinatura/assinatura.html"
+                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold lista-menu-offcanvas">Assinatura</a>
                     <a href="/trabalheConosco/trabalheConosco.html"
-                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold">Trabalhe Conosco</a>
-                </div> -->
+                        class="list-group-item list-group-item-action border-0 item-menu fs-5 fw-semibold lista-menu-offcanvas">Trabalhe
+                        Conosco</a>
+                </div>
             </div>
         </div>
         <div class="toast-container position-fixed top-0 end-0 p-3">
@@ -116,17 +114,26 @@
                         aria-label="Close"></button>
                 </div>
             </div>
+            <div id="toast-informativo" class="toast align-items-center text-bg-primary border-0"
+                data-bs-animation="true" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div id="toast-body-informativo" class="toast-body">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
         </div>
-    </header>   
+    </header>
 
     <main id="container-conteudo">
 
     </main>
 
-    <footer>
-        <div class="container-fluid p-4">
+    <footer class="flex-shrink-0">
+        <div class="container-fluid p-3 border-top">
             <div class="row">
-                <div class="col-12 mb-3">
+                <div class="col-12 col-sm-7">
                     <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="/index.html"
                         aria-label="">
                         <img src="/img/dumbbell.png" width="40" height="32" class="d-block me-2" viewBox="0 0 118 94"
@@ -137,28 +144,30 @@
                             fill="currentColor"></path></img>
                         <span class="fs-5">FitApp</span>
                     </a>
-                    <p class="small">FitApp é uma ferramenta que consiste em planos de treino e alimentação
-                        totalmente personalizados.Tem como objetivo, aliar uma alimentação saudável à prática de
+                    <p class="small lh-sm texto-justificado" style="text-align: justify; text-justify: inter-word;">
+                        FitApp é uma ferramenta que consiste em planos de treino e alimentação
+                        totalmente personalizados. Tem como objetivo, aliar uma alimentação saudável à prática de
                         exercício físico de forma fácil, e também facilitar e motivar a qualidade de vida e bem-estar.
                     </p>
                 </div>
-                <!-- <div class="d-none d-sm-block col-lg-3"></div> -->
-                <!-- <div class="col-12 col-sm-3 mb-3">
-                    <h5>Links</h5>
+                <div class="col-12 col-sm-5 text-center pt-4">
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a class="link-primary text-decoration-none" href="#">Planos</a></li>
-                        <li class="mb-1"><a class="link-primary text-decoration-none" href="#">Dúvidas</a></li>
-                        <li class="mb-1"><a class="link-primary text-decoration-none" href="#">Blog</a></li>
+                        <li class="mb-1"><a class="link-dark text-decoration-none fw-semibold"
+                                href="/index.html">Home</a></li>
+                        <li class="mb-1"><a class="link-dark text-decoration-none fw-semibold"
+                                href="#container-como-funciona">Como Funciona?</a></li>
+                        <li class="mb-1"><a class="link-dark text-decoration-none fw-semibold"
+                                href="/assinatura/assinatura.html">Assinatura</a></li>
+                        <li class="mb-1"><a class="link-dark text-decoration-none fw-semibold"
+                                href="/trabalheConosco/trabalheConosco.html">Trabalhe Conosco</a></li>
+                        <li class="mb-1 fw-semibold">Se interessou ou tem dúvidas?</li>
+                        <li class="mb-1"><a class="link-dark"
+                                href="mailto:bemestar.fitapp@outlook.com">bemestar.fitapp@outlook.com</a></li>
                     </ul>
-                </div> -->
+                </div>
             </div>
         </div>
     </footer>
-
-
-
-
-
 </body>
 
 </html>

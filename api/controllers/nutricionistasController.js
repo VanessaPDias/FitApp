@@ -1,10 +1,14 @@
 const Dieta = require('../model/dieta');
+const Idade = require('../model/idade');
 const Imc = require('../model/imc');
 const ItemDaDieta = require('../model/itemDaDieta');
 const Nutricionista = require('../model/nutricionista');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const repositorioDeMedidas = require('../repositorios/repositorioDeMedidas');
 const repositorioDeDietas = require('../repositorios/repositorioDeDietas');
+const servicoDeArquivosEstaticos = require('../servicos/servicoDeArquivosEstaticos');
+
+
 
 async function buscarDadosDoPerfil(req, res) {
     // #swagger.tags = ['Nutricionista']
@@ -52,7 +56,7 @@ async function buscarPacientes(req, res) {
     const pacientes = await repositorioDeNutricionistas.buscarPacientesPorFiltro(req.usuario.idUsuario, req.query.nome);
 
     if (!pacientes || pacientes.length <= 0) {
-        res.status(404).send({ erro: "Paciente não encontrado" });
+        res.send([]);
         return;
     }
 
@@ -61,7 +65,6 @@ async function buscarPacientes(req, res) {
             idAssinante: paciente.idAssinante,
             nome: paciente.nome,
             objetivo: paciente.objetivo,
-
         }
     }));
 }
@@ -82,14 +85,15 @@ async function buscarPacientePorId(req, res) {
         return;
     }
 
-
     res.send({
+        imagem: !pacienteEncontrado.dados.imagem ? "" : servicoDeArquivosEstaticos.construirCaminhoParaImagem(pacienteEncontrado.dados.imagem),
         nome: pacienteEncontrado.dados.nome,
-        objetivo: !pacienteEncontrado.dietas || pacienteEncontrado.dietas.length <= 0 ? null : pacienteEncontrado.dietas[0].objetivo,
-        dataNascimento: pacienteEncontrado.dados.dataNascimento,
+        objetivo: !pacienteEncontrado.dietas && pacienteEncontrado.dietas.length > 0 ? pacienteEncontrado.dietas[0].objetivo : null,
+        dataNascimento: new Idade.Idade(pacienteEncontrado.dados.dataNascimento).valor,
         sexo: pacienteEncontrado.dados.idSexo,
         altura: !pacienteEncontrado.dados.altura ? 0 : pacienteEncontrado.dados.altura,
         dietas: !pacienteEncontrado.dietas ? [] : pacienteEncontrado.dietas,
+        dietaAtual: pacienteEncontrado.dietas && pacienteEncontrado.dietas.length > 0 ? pacienteEncontrado.dietas[0] : null,
         peso: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.peso,
         pescoco: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.pescoco,
         cintura: !pacienteEncontrado.medidasAtuais ? 0 : pacienteEncontrado.medidasAtuais.cintura,
@@ -114,7 +118,7 @@ async function buscarMedidasDoPaciente(req, res) {
         return;
     }
 
-    const medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.params.idAssinante);
+    let medidasOrdenadasPorData = await repositorioDeMedidas.buscarMedidas(req.params.idAssinante);
 
     let medidasAtuais;
 
@@ -124,12 +128,17 @@ async function buscarMedidasDoPaciente(req, res) {
             pescoco: 0,
             cintura: 0,
             quadril: 0
-        }
+        };
+
+        medidasOrdenadasPorData = new Array();
+
     } else {
+
         medidasAtuais = medidasOrdenadasPorData[0]
     }
 
     res.send({
+        nomePaciente: pacienteEncontrado.dados.nome,
         historicoDeMedidas: medidasOrdenadasPorData,
         medidasAtuais: medidasAtuais
     });
@@ -204,6 +213,7 @@ async function alterarDieta(req, res) {
         return;
     }
 
+    await repositorioDeDietas.excluirItensDaDieta(req.params.idDieta);
     let itens = [];
 
     if (req.usuario.idUsuario == pacienteEncontrado.dados.idNutri) {

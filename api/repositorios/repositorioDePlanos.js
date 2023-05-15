@@ -29,36 +29,42 @@ async function criarPlano(novoPlano) {
             novoPlano.valor,
             novoPlano.duracao,
             novoPlano.descricao,
-            novoPlano.bloqueado
+            novoPlano.bloqueado,
+            novoPlano.dataLancamento
         ]
 
         await conexao.execute(
-            `insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado) 
-            values (?, ?, ?, ?, ?, ?);`, parametrosDoPlano);
+            `insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento) 
+            values (?, ?, ?, ?, ?, ?, ?);`, parametrosDoPlano);
 
     } finally {
         await conexao.end();
     }
 }
 
-async function buscarPlanosPorFiltro(nome) {
+async function buscarPlanosPorFiltro(nome, bloqueado) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
-        if (!nome) {
-            const [rows, fields] = await conexao.execute(
-                `select idPlano, nome, valor, duracao, descricao, bloqueado 
-                from planos`);
+        let filtro = "";
+        let parametros = [];
 
-            return rows;
+        if (nome) {
+            filtro += " and nome like ? ";
+            parametros.push(`%${nome}%`);
         }
 
-        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select idPlano, nome, valor, duracao, descricao, bloqueado 
-            from planos 
-            where nome like ?`, [`%${nome}%`]);
+        if (bloqueado != undefined && bloqueado != null) {
+            filtro += " and bloqueado = ? "
+            parametros.push(bloqueado);
+        }
 
-        return rowsComFiltro;
+        const [rows, fields] = await conexao.execute(
+            `select idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento 
+            from planos
+            where 1=1 ${filtro}`, parametros);
+
+        return rows;
 
     } finally {
         await conexao.end();
@@ -71,7 +77,7 @@ async function buscarPlanoPorId(idPlano) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            `select idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento 
             from planos 
             where idPlano = ?`, [idPlano]);
 
@@ -85,14 +91,14 @@ async function buscarPlanoPorId(idPlano) {
     }
 }
 
-async function salvarAlteracaoDeDados(idPlano, nome, valor, duracao, descricao, bloqueado) {
+async function salvarAlteracaoDeDados(idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
         const [rows, fields] = await conexao.execute(
             `update planos
-            set nome = ?, valor = ?, duracao = ?,  descricao = ?,  bloqueado = ? 
-            where idPlano = ?`, [nome, valor, duracao, descricao, bloqueado, idPlano]);
+            set nome = ?, valor = ?, duracao = ?,  descricao = ?,  bloqueado = ?, dataLancamento = ? 
+            where idPlano = ?`, [nome, valor, duracao, descricao, bloqueado, dataLancamento, idPlano, ]);
 
 
     } finally {
@@ -107,9 +113,9 @@ async function buscarPlanosAtivos() {
     try {
 
         const [rows, fields] = await conexao.execute(
-            `select idPlano, nome, valor, duracao, descricao, bloqueado 
+            `select idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento 
             from planos 
-            where bloqueado = false`);
+            where bloqueado = false order by valor`);
 
         if (rows.length <= 0)
             return;

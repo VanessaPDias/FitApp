@@ -9,6 +9,9 @@ seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
+let idAssinatura;
+let idNutri;
+let idPersonal;
 let modal;
 async function aoCarregarPagina() {
     await paginaMestra.carregar("perfilAssinante/perfil-conteudo.html", "Perfil");
@@ -17,6 +20,9 @@ async function aoCarregarPagina() {
     document.querySelector("#btn-salvar-dados-do-perfil").onclick = salvarDadosDoPerfil;
     document.querySelector("#btn-alterar-senha").onclick = alterarSenhaDeAcesso;
     document.querySelector("#btn-confirmar-alteracao-de-senha").onclick = gravarNovaSenha;
+    document.querySelector("#btn-dados-assinatura").onclick = irParaPaginaDadosDaAssinatura;
+    document.querySelector("#modal-dados-nutricionista").addEventListener("show.bs.modal", aoAbrirModalDadosDoNutricionista);
+    document.querySelector("#modal-dados-personal").addEventListener("show.bs.modal", aoAbrirModalDadosDoPersonal);
 
     await buscarDadosDoPerfil();
 
@@ -32,6 +38,10 @@ async function buscarDadosDoPerfil() {
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token);
 
+        idAssinatura = resposta.idAssinatura;
+        idNutri = resposta.idNutri;
+        idPersonal = resposta.idPersonal;
+
         document.querySelector("#email").innerHTML = resposta.email;
         document.querySelector("#nome").value = resposta.nome;
 
@@ -42,7 +52,7 @@ async function buscarDadosDoPerfil() {
             const data = new Date(resposta.dataNascimento);
             const zeroEsquerdaMes = (data.getMonth() + 1) < 10 ? '0' : '';
             const zeroEsquerdaDia = (data.getDate() + 1) < 10 ? '0' : '';
-            dataFormatada =  data.getFullYear() + '-' + zeroEsquerdaMes + (data.getMonth() + 1) + '-' + zeroEsquerdaDia + data.getDate();  
+            dataFormatada = data.getFullYear() + '-' + zeroEsquerdaMes + (data.getMonth() + 1) + '-' + zeroEsquerdaDia + data.getDate();
         }
         document.querySelector("#data-nascimento").value = dataFormatada;
         document.querySelector("#sexo").value = resposta.sexo;
@@ -78,7 +88,6 @@ async function salvarDadosDoPerfil(evento) {
     }
 
 }
-
 
 async function alterarSenhaDeAcesso(evento) {
     const formulario = document.querySelector("#formulario-alterar-senha");
@@ -124,6 +133,52 @@ async function gravarImagem() {
         mensagens.mostrarMensagemDeSucesso("Imagem alterada com sucesso!", true);
         window.location.reload();
     } catch (error) {
+        erros.tratarErro(error);
+    }
+}
+
+function irParaPaginaDadosDaAssinatura() {
+    window.location.href = `../dadosDaAssinatura/dadosDaAssinatura.html?idAssinatura=${idAssinatura}`;
+}
+
+async function aoAbrirModalDadosDoNutricionista() {
+
+    try {
+        const token = seguranca.pegarToken();
+
+        const dadosDoNutricionista = await servicos.buscarDadosNutri(token, idNutri);
+
+        if (!dadosDoNutricionista.imagem.endsWith("null")) {
+           document.querySelector("#imagem-nutricionista").src = `${configuracoes.urlDaApi}/${dadosDoNutricionista.imagem}`;
+        }
+
+        document.querySelector("#nome-nutricionista").innerHTML = dadosDoNutricionista.nome;
+        document.querySelector("#registro-profissional-nutricionista").innerHTML = dadosDoNutricionista.registroProfissional;
+        document.querySelector("#email-nutricionista").innerHTML = dadosDoNutricionista.email;
+        document.querySelector("#descricao-nutricionista").innerHTML = dadosDoNutricionista.sobreMim;
+    }
+    catch (error) {
+        erros.tratarErro(error);
+    }
+}
+
+async function aoAbrirModalDadosDoPersonal() {
+
+    try {
+        const token = seguranca.pegarToken();
+
+        const dadosDoPersonal = await servicos.buscarDadosPersonal(token, idPersonal);
+
+        if (!dadosDoPersonal.imagem.endsWith("null")) {
+           document.querySelector("#imagem-personal").src = `${configuracoes.urlDaApi}/${dadosDoPersonal.imagem}`;
+        }
+
+        document.querySelector("#nome-personal").innerHTML = dadosDoPersonal.nome;
+        document.querySelector("#registro-profissional-personal").innerHTML = dadosDoPersonal.registroProfissional;
+        document.querySelector("#email-personal").innerHTML = dadosDoPersonal.email;
+        document.querySelector("#descricao-personal").innerHTML = dadosDoPersonal.sobreMim;
+    }
+    catch (error) {
         erros.tratarErro(error);
     }
 }

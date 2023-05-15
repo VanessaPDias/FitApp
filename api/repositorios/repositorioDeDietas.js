@@ -6,7 +6,7 @@ async function buscarDietasPorFiltro(nome, idAssinante) {
     try {
         if (!nome) {
             const [rows, fields] = await conexao.execute(
-                `select idDieta, nome, objetivo, dataInicio, dataFim, data 
+                `select idDieta, nome, objetivo, dataInicio, dataFim, data, dietaAtual
                 from dietas
                 where idAssinante = ?
                 order by data desc`, [idAssinante]);
@@ -15,7 +15,7 @@ async function buscarDietasPorFiltro(nome, idAssinante) {
         }
 
         const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
-            `select idDieta, nome, objetivo, dataInicio, dataFim, data  
+            `select idDieta, nome, objetivo, dataInicio, dataFim, data, dietaAtual  
             from dietas 
             where nome like ? and idAssinante = ?
             order by data desc`, [`%${nome}%`, idAssinante]);
@@ -33,7 +33,7 @@ async function buscarDietaPorId(idAssinante, idDieta) {
 
     try {
         const [rows, fields] = await conexao.execute(
-            `select nome, objetivo, dataInicio, dataFim, data
+            `select nome, objetivo, dataInicio, dataFim, data, dietaAtual
             from dietas
             where idDieta = ? and idAssinante = ?`, [idDieta, idAssinante]);
 
@@ -67,13 +67,20 @@ async function salvarDieta(idAssinante, novaDieta) {
             novaDieta.nomeDieta,
             novaDieta.dataInicio,
             novaDieta.dataFim,
-            novaDieta.data
+            novaDieta.data,
+            novaDieta.dietaAtual
         ]
 
         await conexao.beginTransaction();
+
         await conexao.execute(
-            `insert into dietas (idAssinante, idDieta, idNutri, objetivo, nome, dataInicio, dataFim, data)
-            values (?, ?, ?, ?, ?, ?, ?, ?)`, parametrosDaDieta);
+            `update dietas
+            set dietaAtual = ?
+            where idAssinante = ?`, [false, idAssinante]);
+
+        await conexao.execute(
+            `insert into dietas (idAssinante, idDieta, idNutri, objetivo, nome, dataInicio, dataFim, data, dietaAtual)
+            values (?, ?, ?, ?, ?, ?, ?, ?, ?)`, parametrosDaDieta);
 
 
         novaDieta.itens.forEach(async item => {
@@ -129,9 +136,25 @@ async function salvarAlteracoesDaDieta(idDieta, nomeDieta, dataInicio, dataFim, 
 
 }
 
+async function excluirItensDaDieta(idDieta) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+
+        await conexao.execute(
+            `delete from itens_dieta
+            where idDieta = ?`, [idDieta]);
+
+    }
+    finally {
+        await conexao.end();
+    }
+}
+
 module.exports = {
     buscarDietasPorFiltro: buscarDietasPorFiltro,
     buscarDietaPorId: buscarDietaPorId,
     salvarDieta: salvarDieta,
-    salvarAlteracoesDaDieta: salvarAlteracoesDaDieta
+    salvarAlteracoesDaDieta: salvarAlteracoesDaDieta,
+    excluirItensDaDieta: excluirItensDaDieta
 }

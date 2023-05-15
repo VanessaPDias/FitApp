@@ -1,9 +1,12 @@
 <div>
+    <div class="row">
+        <h6><i class="bi bi-people fs-4 me-1"></i>Assinantes</h6>
+    </div>
     <div class="row py-2">
         <div class="col">
             <div class="card shadow">
                 <div class="card-body row">
-                    <h6 style="color:  #FED233;" class="card-title pb-2">Dados do Assinante</h6>
+                    <h6 class="card-title pb-2">Dados do Assinante</h6>
                     <div class="col">
                         <p class="fw-bolder">Nome</p>
                         <p id="nome-assinante"></p>
@@ -22,11 +25,11 @@
     </div>
 </div>
 
-<!-- <div class="row py-2">
+<div class="row py-2">
     <div class="col">
         <div class="card shadow">
             <div class="card-body row">
-                <h6 style="color:  #FED233;" class="card-title pb-2">Dados do Plano</h6>
+                <h6 class="card-title pb-2">Dados do Plano</h6>
                 <div class="col">
                     <p class="fw-bolder">Plano</p>
                     <p id="nome-plano"></p>
@@ -46,13 +49,13 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
-<div class="row">
+<div class="row py-2">
     <div class="col text-end">
-        <a href="../assinantes/assinantes.html" class="btn btn-light" style="background-color: #FED233;">Voltar</a>
+        <a href="../assinantes/assinantes.html#assinantes" class="btn btn-outline-dark btn-voltar me-2">Voltar</a>
 
-        <button type="button" class="btn btn-light" id="btn-alterar-status" style="background-color: #FED233;"></button>
+        <button type="button" class="btn btn-outline-dark btn-app-padrao" id="btn-alterar-status" data-bs-toggle="modal" data-bs-target="#modal-alterar-status" style="width: 146px;"></button>
     </div>
 </div>
 
@@ -68,8 +71,7 @@
                 Tem certeza que deseja alterar a o status?
             </div>
             <div class="modal-footer">
-                <button id="btn-confirmar-alteracao-status" type="button" class="btn btn-light"
-                    style="background-color: #FED233;">Sim</button>
+                <button id="btn-confirmar-alteracao-status" type="button" class="btn btn-outline-dark btn-app-padrao">Sim</button>
             </div>
         </div>
     </div>

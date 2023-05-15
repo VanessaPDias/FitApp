@@ -4,13 +4,14 @@ import * as seguranca from "../seguranca/seguranca.js";
 import * as paginaMestra from "../paginaMestra/paginaMestra.js";
 
 let chart;
+const corChart = `#548CA8`;
 
 seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
 window.onload = aoCarregarPagina;
 
 async function aoCarregarPagina() {
-    await paginaMestra.carregar("historicoDeMedidasAssinante/historicoDeMedidasAssinante-conteudo.html", "historicoDeMedidas");
+    await paginaMestra.carregar("historicoDeMedidasAssinante/historicoDeMedidasAssinante-conteudo.html", "Histórico de Medidas");
     await buscarMedidas();
     document.querySelector("#opcoes-medidas").onchange = buscarMedidas;
     document.querySelector("#data-inicio").onchange = buscarMedidas;
@@ -56,32 +57,32 @@ function criarGrafico(ctx, medidaEscolhida, medidas) {
             label: 'Peso',
             data: medidas.map(medida => medida.peso),
             borderWidth: 2,
-            borderColor: '#FED233',
-            backgroundColor: '#FED233',
+            borderColor: corChart,
+            backgroundColor: corChart,
         });
     } else if (medidaEscolhida == "pescoco") {
         datasets.push({
             label: 'Pescoço',
             data: medidas.map(medida => medida.pescoco),
             borderWidth: 2,
-            borderColor: '#FED233',
-            backgroundColor: '#FED233',
+            borderColor: corChart,
+            backgroundColor: corChart,
         });
     } else if (medidaEscolhida == "cintura") {
         datasets.push({
             label: 'Cintura',
             data: medidas.map(medida => medida.cintura),
             borderWidth: 2,
-            borderColor: '#FED233',
-            backgroundColor: '#FED233',
+            borderColor: corChart,
+            backgroundColor: corChart,
         });
     } else if (medidaEscolhida == "quadril") {
         datasets.push({
             label: 'Quadril',
             data: medidas.map(medida => medida.quadril),
             borderWidth: 2,
-            borderColor: '#FED233',
-            backgroundColor: '#FED233',
+            borderColor: corChart,
+            backgroundColor: corChart,
         });
     }
 

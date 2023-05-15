@@ -1,10 +1,13 @@
-<!-- <div>
+<div>
+    <div class="row">
+        <h6><i class="bi bi-people fs-4 me-1"></i>Nutricionistas</h6>
+    </div>
     <div class="row py-2">
         <div class="col">
             <div class="card shadow">
                 <div class="card-body row">
-                    <h6 style="color:  #FED233;" class="card-title pb-2">Dados do Nutricionista</h6>
-                    <form class="row">
+                    <h6 class="card-title pb-2">Dados do Nutricionista</h6>
+                    <form class="row" id="formulario">
                         <div class="col-md-6 pt-3">
                             <label class="form-label fw-semibold" for="nome-nutri">Nome</label>
                             <div class="input-group input-group-sm">
@@ -33,6 +36,16 @@
                             </div>
                         </div>
                         <div class="col-md-6 pt-3">
+                            <label class="form-label fw-semibold" for="cadastro-confirmado-nutri">Cadastro</label>
+                            <div class="input-group input-group-sm">
+                                <select class="form-select" id="cadastro-confirmado-nutri">
+                                    <option value="0">Pendente</option>
+                                    <option value="1">Confirmado</option>
+                                    <option value="2">Recusado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-3">
                             <label class="form-label fw-semibold" for="status-nutri">Status</label>
                             <div class="input-group input-group-sm">
                                 <select class="form-select" id="status-nutri">
@@ -41,22 +54,11 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6 pt-3">
-                            <label class="form-label fw-semibold" for="cadastro-confirmado-nutri">Cadastro</label>
-                            <div class="input-group input-group-sm">
-                                <select class="form-select" id="cadastro-confirmado-nutri">
-                                    <option value="">Pendente</option>
-                                    <option value="1">Confirmado</option>
-                                    <option value="2">Recusado</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="col pt-3 text-end">
-                            <a href="../nutricionistas/nutricionistas.html" class="btn btn-light"
-                                style="background-color: #FED233;">Voltar</a>
+                            <a href="../nutricionistas/nutricionistas.html#nutricionistas" class="btn btn-outline-dark btn-voltar me-2">Voltar</a>
 
-                            <button type="button" class="btn btn-light" id="btn-alterar-dados-do-nutricionista"
-                                style="background-color: #FED233;">Alterar</button>
+                            <button type="submit" class="btn btn-outline-dark btn-app-padrao"
+                                id="btn-alterar-dados-do-nutricionista">Alterar</button>
                         </div>
                     </form>
                 </div>
@@ -78,9 +80,8 @@
                 Tem certeza que deseja alterar?
             </div>
             <div class="modal-footer">
-                <button id="btn-confirmar-alteracao" type="button" class="btn btn-light"
-                    style="background-color: #FED233;">Sim</button>
+                <button id="btn-confirmar-alteracao" type="button" class="btn btn-outline-dark btn-app-padrao">Sim</button>
             </div>
         </div>
     </div>
-</div> -->
+</div>

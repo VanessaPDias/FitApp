@@ -47,11 +47,18 @@ async function cancelarAssinatura(idUsuario, idAssinatura) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
-
+        await conexao.beginTransaction();
         await conexao.execute(
             `update assinaturas
             set bloqueado = true
             where idAssinante = ? and idAssinatura = ?`, [idUsuario, idAssinatura]);
+
+        await conexao.execute(
+            `update usuarios
+            set bloqueado = true
+            where idUsuario = ?`, [idUsuario]);
+
+        await conexao.commit();
 
     } finally {
         await conexao.end();

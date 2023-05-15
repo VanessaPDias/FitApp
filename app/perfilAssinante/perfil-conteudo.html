@@ -56,8 +56,8 @@
                                     </div>
                                 </div>
                                 <div class="pt-3 text-end">
-                                    <button type="submit" id="btn-salvar-dados-do-perfil" class="btn btn-light"
-                                        style="background-color: #FED233;">Salvar</button>
+                                    <button type="submit" id="btn-salvar-dados-do-perfil"
+                                        class="btn btn-outline-dark btn-app-padrao">Salvar</button>
                                 </div>
                             </form>
                         </div>
@@ -68,7 +68,7 @@
         <div class="col-12 col-sm-7 pt-3 pt-sm-0">
             <div class="card shadow">
                 <div class="card-body">
-                    <h6 class="card-title" style="color:  #FED233;">Alterar Senha</h6>
+                    <h6 class="card-title">Alterar Senha</h6>
                     <form id="formulario-alterar-senha">
                         <div class="pt-3">
                             <label class="form-label fw-semibold" for="senha-atual">Senha Atual</label>
@@ -84,82 +84,141 @@
                             </div>
                         </div>
                         <div class="pt-3 text-end">
-                            <button type="submit" id="btn-alterar-senha" class="btn btn-light"
-                                style="background-color: #FED233;">Alterar</button>
+                            <button type="submit" id="btn-alterar-senha"
+                                class="btn btn-outline-dark btn-app-padrao">Alterar</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="modal" id="modal-alterar-senha" tabindex="-1" aria-labelledby="modal-alterar-senha-label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Alterar Senha</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Tem certeza que deseja alterar a senha?
-                </div>
-                <div class="modal-footer">
-                    <button id="btn-confirmar-alteracao-de-senha" type="button" class="btn btn-light" style="background-color: #FED233;">Sim</button>
+            <div class="card shadow mt-3">
+                <div class="row card-body text-center ">
+                    <div class="col">
+                        <img src="/img/assinatura.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-dark btn-lg btn-app-padrao-lg" id="btn-dados-assinatura" type="button"
+                            >Assinatura</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- <div>
-    <div>
-        <div>
-            <img id="imagem-perfil" src="#" height="32" width="32">
-            <span id="email"></span>
-        </div>
-        <div>
-            <form id="formulario-perfil">
-                <div>
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" required>
+            <div class="card shadow mt-2">
+                <div class="row card-body text-center">
+                    <div class="col">
+                        <img src="/img/nutricionista.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-dark btn-lg btn-app-padrao-lg" type="button" data-bs-toggle="modal"
+                            data-bs-target="#modal-dados-nutricionista">Nutricionista</button>
+                    </div>
                 </div>
-                <br>
-                <div>
-                    <label for="data-nascimento">Data de Nascimento</label>
-                    <input type="datetime" id="data-nascimento" name="data-nascimento">
+            </div>
+
+            <div class="card shadow mt-2">
+                <div class="row card-body text-center">
+                    <div class="col">
+                        <img src="/img/personal.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-dark btn-lg btn-app-padrao-lg" type="button" data-bs-toggle="modal"
+                            data-bs-target="#modal-dados-personal">Personal</button>
+                    </div>
                 </div>
-                <br>
-                <div>
-                    <label for="sexo">Sexo</label>
-                    <input type="text" id="sexo" name="sexo">
-                </div>
-                <br>
-                <div>
-                    <label for="altura">Altura</label>
-                    <input type="number" id="altura" name="altura">
-                </div>
-                <br>
-                <div>
-                    <button type="submit" id="btn-salvar-dados-perfil">Salvar</button>
-                </div>
-            </form>
+            </div>
+            <div class=" pt-3 text-end">
+                <a href="../dashboard/dashboard.html#inicio" class="btn btn-outline-dark btn-voltar">Voltar</a>
+
+            </div>
         </div>
     </div>
-    <div>
-        <form id="formulario-alterar-senha">
-            <h4>Alterar Senha</h4>
-            <div>
-                <label for="senha-atual">Senha Atual</label>
-                <input type="password" id="senha-atual" name="senha-atual" required>
+</div>
+
+<div class="modal" id="modal-alterar-senha" tabindex="-1" aria-labelledby="modal-alterar-senha-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Alterar Senha</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <br>
-            <div>
-                <label for="nova-senha">Nova Senha</label>
-                <input type="password" id="nova-senha" name="nova-senha" required>
+            <div class="modal-body">
+                Tem certeza que deseja alterar a senha?
             </div>
-            <br>
-            <div>
-                <button type="submit" id="btn-alterarSenha">Alterar</button>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-de-senha" type="button"
+                    class="btn btn-outline-dark btn-app-padrao">Sim</button>
             </div>
-        </form>
+        </div>
     </div>
-</div> -->
+</div>
+
+<div class="modal" id="modal-dados-nutricionista" tabindex="-1" aria-labelledby="modal-alterar-senha-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-alterar-senha-label">Dados do Nutricionista</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row modal-body justify-content-around">
+                <div class="card mb-4 rounded-3 shadow-sm w-75">
+                    <div class="pt-3 text-center">
+                        <img src="../img/perfil-vazio.png"
+                            class="rounded-circle mx-auto d-block" id="imagem-nutricionista" alt="imagem-nutricionista"
+                            width="142" height="142">
+                        <h5 class="pt-3 text-uppercase " id="nome-nutricionista"></h5>
+                        <small class="fw-semibold text-uppercase" id="registro-profissional-nutricionista"></small>
+                        <p class="fw-semibold" id="email-nutricionista"></p>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <div style="height: 160px;">
+                            <small id="descricao-nutricionista"></small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-de-senha" type="button"
+                    class="btn btn-outline-dark btn-app-padrao" data-bs-dismiss="modal">Voltar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-dados-personal" tabindex="-1" aria-labelledby="modal-dados-personal-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-dados-personal-label">Dados do Personal Trainer</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row modal-body justify-content-around">
+                <div class="card mb-4 rounded-3 shadow-sm w-75">
+                    <div class="pt-3 text-center">
+                        <img src="../img/perfil-vazio.png"
+                            class="rounded-circle mx-auto d-block" id="imagem-personal" alt="imagem-personal"
+                            width="142" height="142">
+                        <h5 class="pt-3 text-uppercase " id="nome-personal"></h5>
+                        <small class="fw-semibold text-uppercase" id="registro-profissional-personal"></small>
+                        <p class="fw-semibold" id="email-personal"></p>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <div style="height: 160px;">
+                            <small id="descricao-personal"></small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirmar-alteracao-de-senha" type="button"
+                    class="btn btn-outline-dark btn-app-padrao" data-bs-dismiss="modal">Voltar</button>
+            </div>
+        </div>
+    </div>
+</div>

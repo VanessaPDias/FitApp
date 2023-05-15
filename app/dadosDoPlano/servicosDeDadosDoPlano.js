@@ -24,7 +24,8 @@ export async function gravarAlteracoes(token, idPlano, novosDados) {
                 valor: novosDados.valor,
                 duracao: novosDados.duracao,
                 descricao: novosDados.descricao,
-                bloqueado: novosDados.bloqueado
+                bloqueado: novosDados.bloqueado,
+                dataLancamento: novosDados.dataLancamento
 
             }),
         headers: {

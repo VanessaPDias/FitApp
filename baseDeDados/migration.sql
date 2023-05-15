@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `db_fitapp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `db_fitapp`;
 
 USE `db_fitapp`;
 
@@ -24,7 +24,7 @@ CREATE TABLE  IF NOT EXISTS `nutricionistas` (
   `email` varchar(128) NOT NULL,
   `telefone` varchar(36) NOT NULL,
   `registroProfissional` varchar(30) NOT NULL,
-  `sobreMim` varchar(256) DEFAULT NULL,
+  `sobreMim` varchar(328) DEFAULT NULL,
   `cadastroConfirmado` int NOT NULL,
   PRIMARY KEY (`idNutri`),
   CONSTRAINT `fk_nutricionista_idUsuario` FOREIGN KEY (`idNutri`) REFERENCES `usuarios` (`idUsuario`)
@@ -36,7 +36,7 @@ CREATE TABLE  IF NOT EXISTS `personal_trainers` (
   `email` varchar(128) NOT NULL,
   `telefone` varchar(36) NOT NULL,
   `registroProfissional` varchar(30) NOT NULL,
-  `sobreMim` varchar(256) DEFAULT NULL,
+  `sobreMim` varchar(328) DEFAULT NULL,
    `cadastroConfirmado` int NOT NULL,
   PRIMARY KEY (`idPersonal`),
   CONSTRAINT `fk_personal_idUsuario` FOREIGN KEY (`idPersonal`) REFERENCES `usuarios` (`idUsuario`)
@@ -56,7 +56,7 @@ CREATE TABLE  IF NOT EXISTS `assinantes` (
   `email` varchar(128) NOT NULL,
   `dataNascimento` datetime DEFAULT NULL,
   `idSexo` int DEFAULT NULL,
-  `altura` int DEFAULT NULL,
+  `altura` int NOT NULL,
   PRIMARY KEY (`idAssinante`),
   KEY `fk_assinante_idNutricionista_idx` (`idNutri`),
   KEY `fk_assinante_idPersonal_idx` (`idPersonal`),
@@ -88,6 +88,7 @@ CREATE TABLE  IF NOT EXISTS `planos` (
   `duracao` int NOT NULL,
   `descricao` varchar(256) NOT NULL,
   `bloqueado` tinyint NOT NULL,
+  `dataLancamento` datetime NOT NULL,
   PRIMARY KEY (`idPlano`),
   UNIQUE KEY `nome_plano_UNIQUE` (`nome`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -115,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `dietas` (
   `dataInicio` DATETIME NOT NULL,
   `dataFim` DATETIME NOT NULL,
   `data` DATETIME NOT NULL,
+  `dietaAtual` tinyint NOT NULL,
   PRIMARY KEY (`idDieta`),
   INDEX `fk_dietas_idAssinante_idx` (`idAssinante` ASC) VISIBLE,
   INDEX `fk_dietas_idNutri_idx` (`idNutri` ASC) VISIBLE,
@@ -131,6 +133,7 @@ CREATE TABLE IF NOT EXISTS `treinos` (
   `dataInicio` DATETIME NOT NULL,
   `dataFim` DATETIME NOT NULL,
   `data` DATETIME NOT NULL,
+  `treinoAtual` tinyint NOT NULL,
   PRIMARY KEY (`idTreino`),
   INDEX `fk_treinos_idAssinante_idx` (`idAssinante` ASC) VISIBLE,
   INDEX `fk_treinos_idPersonal_idx` (`idPersonal` ASC) VISIBLE,
@@ -208,22 +211,47 @@ false
 )
 ON DUPLICATE KEY UPDATE idUsuario = 'e7c17d74-f067-46ca-9734-1c232ba0ea18';
 
-insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento)
 values(
 '57408fdd-8ccc-441a-953f-555dec2005bc',
-'gratuito',
+'Gratuito',
 0,
 365,
-'experimente por 15 dias.',
-false
+'Use o FitApp de forma gratuita com as funcionalidades básicas.',
+false,
+'2023-01-01 00:00:00'
 )
 ON DUPLICATE KEY UPDATE idPlano = '57408fdd-8ccc-441a-953f-555dec2005bc';
+
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento)
+values(
+'a6b5723a-e550-4160-8588-0a7aee7b7e54',
+'Mensal',
+24.99,
+30,
+'Use todas as funcionalidades do FitApp pagando um pequeno valor mensal.',
+false,
+'2043-01-01 00:00:00'
+)
+ON DUPLICATE KEY UPDATE idPlano = 'a6b5723a-e550-4160-8588-0a7aee7b7e54';
+
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento)
+values(
+'28ba9d23-b9f4-41e2-ab7f-d108cf942e9d',
+'Anual',
+239.88,
+365,
+'Use todas as funcionalidades do FitApp e economize R$ 60,00 ao ano.',
+false,
+'2043-01-01 00:00:00'
+)
+ON DUPLICATE KEY UPDATE idPlano = '28ba9d23-b9f4-41e2-ab7f-d108cf942e9d';
 
 INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 'cdb6531c-0bc4-48b2-b317-dece78f5349e',
 'nutricionista',
-'nutricionista',
+'Adriana Farias',
 'nutri@fitapp.com',
 'nutri123',
 false
@@ -234,30 +262,40 @@ INSERT into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
 values (
 '355049aa-1742-45d2-934d-278db5a6c224',
 'personalTrainer',
-'personal',
+'Fábio Rodrigues',
 'personal@fitapp.com',
 'personal123',
 false
 )
 ON DUPLICATE KEY UPDATE idUsuario = '355049aa-1742-45d2-934d-278db5a6c224';
 
-INSERT into nutricionistas (idNutri, nome, email, telefone, registroProfissional)
+INSERT into nutricionistas (idNutri, nome, email, telefone, registroProfissional, sobreMim, cadastroConfirmado)
 values (
 'cdb6531c-0bc4-48b2-b317-dece78f5349e',
-'nutricionista',
+'Adriana Farias',
 'nutri@fitapp.com',
 999999999,
-'crn123'
+'crn123',
+'Oi, sou a Adriana Farias, atuo principalmente com Emagrecimento e Reeducação Alimentar, 
+buscando sempre contribuir para que meus pacientes encontrem 
+o equilíbrio que os levem a melhorar sua autoestima e 
+principalmente a ter uma vida mais leve e saudável.',
+true
 )
 ON DUPLICATE KEY UPDATE idNutri = 'cdb6531c-0bc4-48b2-b317-dece78f5349e';
 
-INSERT into personal_trainers (idPersonal, nome, email, telefone, registroProfissional)
+INSERT into personal_trainers (idPersonal, nome, email, telefone, registroProfissional, sobreMim, cadastroConfirmado)
 values (
 '355049aa-1742-45d2-934d-278db5a6c224',
-'personal',
+'Fábio Rodrigues',
 'personal@fitapp.com',
 999999999,
-'cre123'
+'cre123',
+'Sou o Fábio Rodrigues, Personal Trainer com 6 anos de experiencia. 
+Irei ajuda-lo(a) a atingir os seus objetivos de forma segura e mais rápido possível. 
+O meu trabalho será definir um método de treino adequado para o seu objetivo, 
+para as suas capacidades físicas, disponibilidade temporal.',
+true
 )
 ON DUPLICATE KEY UPDATE idPersonal = '355049aa-1742-45d2-934d-278db5a6c224';
 

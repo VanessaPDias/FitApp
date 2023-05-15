@@ -37,7 +37,8 @@ async function criarAssinante(novoAssinante) {
             novoAssinante.nutricionista,
             novoAssinante.personalTrainer,
             novoAssinante.nome,
-            novoAssinante.email
+            novoAssinante.email,
+            novoAssinante.altura
         ]
 
         const parametrosDaAssinatura = [
@@ -55,8 +56,8 @@ async function criarAssinante(novoAssinante) {
             `insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado) 
             values (?, ?, ?, ?, ?, ?);`, parametrosDoUsuario);
         await conexao.execute(
-            `insert into assinantes (idAssinante, idNutri, idPersonal, nome, email) 
-            values (?, ?, ?, ?, ?);`, parametrosDoAssinante);
+            `insert into assinantes (idAssinante, idNutri, idPersonal, nome, email, altura) 
+            values (?, ?, ?, ?, ?, ?);`, parametrosDoAssinante);
         await conexao.execute(
             `insert into assinaturas (idAssinatura, idAssinante, idPlano, dataInicio, dataFim, bloqueado) 
             values (?, ?, ?, ?, ?, ?);`, parametrosDaAssinatura);
@@ -88,10 +89,24 @@ async function buscarDadosDoDashboardDoAssinantePorId(idUsuario) {
             where idAssinante = ?
             order by data desc`, [idUsuario]);
 
+        const [dietas, fieldsDietas] = await conexao.execute(
+            `select idDieta, nome, dataInicio, dataFim, objetivo, dietaAtual
+            from dietas
+            where idAssinante = ?
+            order by data desc`, [idUsuario]);
+
+        const [treinos, fieldsTreinos] = await conexao.execute(
+            `select idTreino, nome, dataInicio, dataFim, objetivo, TreinoAtual
+            from treinos
+            where idAssinante = ?
+            order by data desc`, [idUsuario]);
+
         return {
             dados: rows[0],
             historicoDePeso: pesos,
-            pesoAtual: pesos[0]
+            pesoAtual: pesos[0],
+            dietas: dietas,
+            treinos: treinos
         }
 
     } finally {
@@ -110,7 +125,7 @@ async function buscarDadosDoPerfilDoAssinantePorId(idUsuario) {
             from usuarios as usuario
                 inner join assinantes as assinante on usuario.idUsuario = assinante.idAssinante
                 inner join assinaturas as assinatura on usuario.idUsuario = assinatura.idAssinante
-            where usuario.idUsuario = ?`, [idUsuario]);
+            where assinatura.bloqueado = 0 and usuario.idUsuario = ?`, [idUsuario]);
 
         if (rows.length <= 0)
             return;
@@ -182,28 +197,34 @@ async function salvarAlteracaoDeDadosDoPerfil(idUsuario, nome, dataNascimento, i
     }
 }
 
-async function buscarAssinantePorFiltro(nome) {
+async function buscarAssinantePorFiltro(nome, bloqueado) {
     const conexao = await baseDeDados.abrirConexao();
 
     try {
-        if (!nome) {
-            const [rows, fields] = await conexao.execute(
-                `select assinante.idAssinante, assinante.nome, assinante.email,
-                        usuario.bloqueado 
-                from assinantes as assinante
-                inner join usuarios as usuario on assinante.idAssinante = usuario.idUsuario`);
+        let filtro = "";
+        let parametros = [];
 
-            return rows;
+        if(nome)
+        {
+            filtro += " and assinante.nome like ? ";
+            parametros.push(`%${nome}%`);
         }
 
-        const [rowsComFiltro, fieldsComFiltro] = await conexao.execute(
+        if(bloqueado != undefined && bloqueado != null)
+        {
+            filtro += " and usuario.bloqueado = ? "
+            parametros.push(bloqueado);
+        }
+        
+        const [rows, fields] = await conexao.execute(
             `select assinante.idAssinante, assinante.nome, assinante.email,
                     usuario.bloqueado 
-                from assinantes as assinante
-                    inner join usuarios as usuario on assinante.idAssinante = usuario.idUsuario
-                where assinante.nome like ?`, [`%${nome}%`]);
+            from assinantes as assinante
+            inner join usuarios as usuario on assinante.idAssinante = usuario.idUsuario
+            where 1=1 ${filtro}`, parametros);
 
-        return rowsComFiltro;
+        return rows;
+        
 
     } finally {
         await conexao.end();

@@ -75,3 +75,27 @@ export async function alterarSenha(token, senhaAtual, novaSenha) {
 
     return util.tratarRespostaApi(resposta);
 }
+
+export async function buscarDadosNutri(token, idNutri) {
+    const url = `${configuracoes.urlDaApi}/assinante/perfil/nutricionistas/${idNutri}`;
+
+    const resposta = await fetch(url, {
+        headers: {
+            authorization: "Bearer " + token
+        }
+    });
+
+    return util.tratarRespostaApi(resposta);
+}
+
+export async function buscarDadosPersonal(token, idPersonal) {
+    const url = `${configuracoes.urlDaApi}/assinante/perfil/personalTrainers/${idPersonal}`;
+
+    const resposta = await fetch(url, {
+        headers: {
+            authorization: "Bearer " + token
+        }
+    });
+
+    return util.tratarRespostaApi(resposta);
+}

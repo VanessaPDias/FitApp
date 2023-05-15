@@ -1,88 +1,103 @@
-// import * as servicos from "./servicosDeDadosDoPersonal.js"
-// import * as erros from "../util/tratamentoDeErros.js";
-// import * as seguranca from "../seguranca/seguranca.js";
-// import * as paginaMestra from "../paginaMestra/paginaMestra.js";
-// import * as mensagens from "../util/mensagens.js";
+import * as servicos from "./servicosDeDadosDoPersonal.js"
+import * as erros from "../util/tratamentoDeErros.js";
+import * as seguranca from "../seguranca/seguranca.js";
+import * as paginaMestra from "../paginaMestra/paginaMestra.js";
+import * as mensagens from "../util/mensagens.js";
 
-// seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
+seguranca.deslogarSeTokenEstiverExpirado("/login/entrar.html");
 
-// window.onload = aoCarregarPagina;
+window.onload = aoCarregarPagina;
 
-// let modal;
-// let idPersonal;
-// let novosDados;
+let modal;
+let idPersonal;
+let novosDados;
 
-// async function aoCarregarPagina() {
-//     const params = new Proxy(new URLSearchParams(window.location.search), {
-//         get: (searchParams, prop) => searchParams.get(prop),
-//     });
+async function aoCarregarPagina() {
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
 
-//     idPersonal = params.idPersonal;
+    idPersonal = params.idPersonal;
 
-//     await paginaMestra.carregar("dadosDoPersonal/dadosDoPersonal-conteudo.html", "Dados do Personal Trainer");
+    await paginaMestra.carregar("dadosDoPersonal/dadosDoPersonal-conteudo.html", "Dados do Personal Trainer");
 
-//     await buscarDadosDoPersonal(idPersonal);
+    await buscarDadosDoPersonal(idPersonal);
 
-//     document.querySelector("#btn-alterar-dados-do-personal").onclick = alterarDadosDoPersonal;
+    document.querySelector("#cadastro-confirmado-personal").onchange = alterarStatus;
 
-//     mensagens.exibirMensagemAoCarregarAPagina();
-// }
+    document.querySelector("#btn-alterar-dados-do-personal").onclick = alterarDadosDoPersonal;
 
-// async function buscarDadosDoPersonal(idPersonal) {
-//     try {
-//         const token = seguranca.pegarToken();
-//         const resposta = await servicos.buscarDados(token, idPersonal);
+    mensagens.exibirMensagemAoCarregarAPagina();
+}
 
-//         document.querySelector("#btn-confirmar-alteracao").onclick = confirmarAlteracao;
+async function buscarDadosDoPersonal(idPersonal) {
+    try {
+        const token = seguranca.pegarToken();
+        const resposta = await servicos.buscarDados(token, idPersonal);
 
-//         document.querySelector("#nome-personal").value = resposta.nome;
-//         document.querySelector("#email-personal").value = resposta.email;
-//         document.querySelector("#telefone-personal").value = resposta.telefone;
-//         document.querySelector("#registro-profissional-personal").value = resposta.registroProfissional;
-//         document.querySelector("#status-personal").value = resposta.bloqueado;
-//         document.querySelector("#cadastro-confirmado-personal").value = resposta.cadastroConfirmado;
+        document.querySelector("#btn-confirmar-alteracao").onclick = confirmarAlteracao;
 
-//         if(resposta.cadastroConfirmado == 1) {
-//             document.querySelector("#cadastro-confirmado-personal").setAttribute("disabled","");
-//         }
+        document.querySelector("#nome-personal").value = resposta.nome;
+        document.querySelector("#email-personal").value = resposta.email;
+        document.querySelector("#telefone-personal").value = resposta.telefone;
+        document.querySelector("#registro-profissional-personal").value = resposta.registroProfissional;
+        document.querySelector("#status-personal").value = resposta.bloqueado;
+        document.querySelector("#cadastro-confirmado-personal").value = resposta.cadastroConfirmado;
 
-
-//     } catch (error) {
-//         erros.tratarErro(error);
-//     }
-// }
-
-// async function alterarDadosDoPersonal(evento) {
-//     const registroProfissional = document.querySelector("#registro-profissional-personal").value;
-//     const status = document.querySelector("#status-personal").value;
-//     const cadastro = document.querySelector("#cadastro-confirmado-personal").value;
-
-//     evento.preventDefault();
-
-//     novosDados = {
-//         registroProfissional: registroProfissional,
-//         bloqueado: status,
-//         cadastroConfirmado: cadastro,
-//     };
-
-//     if (!modal) {
-//         modal = new bootstrap.Modal('#modal-alterar-dados');
-//     }
-//     modal.show();
+        if(resposta.cadastroConfirmado == 1) {
+            document.querySelector("#cadastro-confirmado-personal").setAttribute("disabled","");
+        }
 
 
-// }
+    } catch (error) {
+        erros.tratarErro(error);
+    }
+}
 
-// async function confirmarAlteracao(evento) {
-//     const token = seguranca.pegarToken();
+async function alterarStatus (evento) {
+    if(evento.target.value == 1) {
+        document.querySelector("#status-personal").value = false;
+    } else {
+        document.querySelector("#status-personal").value = true;
+    }
+}
 
-//     modal.hide();
+async function alterarDadosDoPersonal(evento) {
+    const registroProfissional = document.querySelector("#registro-profissional-personal").value;
+    const status = document.querySelector("#status-personal").value;
+    const cadastro = document.querySelector("#cadastro-confirmado-personal").value;
 
-//     try {
-//         await servicos.gravarAlteracoes(token, idPersonal, novosDados);
-//         mensagens.mostrarMensagemDeSucesso("Alterado com sucesso!", true);
-//         window.location.reload();
-//     } catch (error) {
-//         erros.tratarErro(error);
-//     }
-// }
+    const formulario = document.querySelector("#formulario");
+    if (formulario.checkValidity() == false) {
+        return false;
+    }
+
+    evento.preventDefault();
+
+    novosDados = {
+        registroProfissional: registroProfissional,
+        bloqueado: status,
+        cadastroConfirmado: cadastro,
+    };
+
+    if (!modal) {
+        modal = new bootstrap.Modal('#modal-alterar-dados');
+    }
+    modal.show();
+
+
+}
+
+async function confirmarAlteracao() {
+    const token = seguranca.pegarToken();
+
+    modal.hide();
+
+    try {
+        await servicos.gravarAlteracoes(token, idPersonal, novosDados);
+        mensagens.mostrarMensagemDeSucesso("Alterado com sucesso!", true);
+        window.location.reload();
+    } catch (error) {
+        erros.tratarErro(error);
+    }
+}

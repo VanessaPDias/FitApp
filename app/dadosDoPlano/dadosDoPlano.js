@@ -33,6 +33,15 @@ async function buscarDadosDoPlano(idPlano) {
         const token = seguranca.pegarToken();
         const resposta = await servicos.buscarDados(token, idPlano);
 
+        const dataFormatada = function () {
+            const data = new Date(resposta.dataLancamento);
+            const zeroEsquerdaMes = (data.getMonth() + 1) < 10 ? '0' : '';
+            const zeroEsquerdaDia = (data.getDate() + 1) < 10 ? '0' : '';
+
+            return data.getFullYear() + '-' + zeroEsquerdaMes + (data.getMonth() + 1) + '-' + zeroEsquerdaDia + data.getDate();
+        }
+        
+
         document.querySelector("#btn-alterar-dados-do-plano").onclick = alterarDadosDoPlano;
 
         document.querySelector("#nome-plano").value = resposta.nome;
@@ -40,6 +49,7 @@ async function buscarDadosDoPlano(idPlano) {
         document.querySelector("#status-plano").value = resposta.bloqueado;
         document.querySelector("#duracao-plano").value = resposta.duracao;
         document.querySelector("#descricao-plano").value = resposta.descricao;
+        document.querySelector("#data-lancamento-plano").value = dataFormatada();
 
 
     } catch (error) {
@@ -53,19 +63,22 @@ async function alterarDadosDoPlano(evento) {
     const status = document.querySelector("#status-plano").value;
     const duracao = document.querySelector("#duracao-plano").value;
     const descricao = document.querySelector("#descricao-plano").value;
+    const dataLancamento = document.querySelector("#data-lancamento-plano").value;
 
-    const formulario = document.querySelector("#formulario-perfil");
+    const formulario = document.querySelector("#formulario-plano");
     if (formulario.checkValidity() == false) {
         return false;
     }
 
     evento.preventDefault();
+    
     novosDados = {
         nome: nome,
         valor: valor,
         bloqueado: status,
         duracao: duracao,
-        descricao: descricao
+        descricao: descricao,
+        dataLancamento: dataLancamento
     };
 
     if (!modal) {

@@ -87,20 +87,24 @@ async function buscarPersonalTrainersPorFiltro(nome, bloqueado, cadastroConfirma
         let filtro = "";
         let parametros = [];
 
-        if (nome != undefined && nome != null) {
+        if(nome)
+        {
             filtro += " and personal.nome like ? ";
             parametros.push(`%${nome}%`);
         }
 
-        if (bloqueado != undefined && bloqueado != null) {
+        if(bloqueado != undefined && bloqueado != null)
+        {
             filtro += " and usuario.bloqueado = ? "
             parametros.push(bloqueado);
         }
 
-        if (cadastroConfirmado != undefined && cadastroConfirmado != null) {
+        if(cadastroConfirmado)
+        {
             filtro += " and personal.cadastroConfirmado = ? ";
             parametros.push(cadastroConfirmado);
         }
+
         const [rows, fields] = await conexao.execute(
             `select personal.idPersonal, personal.nome, personal.email, personal.cadastroConfirmado,
                     usuario.bloqueado 
@@ -154,6 +158,25 @@ async function salvarAlteracaoDeCadastro(idPersonal, registroProfissional, bloqu
             where idPersonal = ?`, [registroProfissional, cadastroConfirmado, idPersonal]);
 
         await conexao.commit();
+
+    } finally {
+        await conexao.end();
+    }
+}
+
+async function buscarSenha(idPersonal) {
+    const conexao = await baseDeDados.abrirConexao();
+
+    try {
+        const [rows, fields] = await conexao.execute(
+            `select senha
+            from usuarios 
+            where idusuario = ?`, [idPersonal]);
+
+        if (rows.length <= 0)
+            return;
+
+        return rows[0];
 
     } finally {
         await conexao.end();
@@ -256,7 +279,7 @@ async function buscarAlunoPorId(idAssinante) {
             order by data desc limit 1`, [idAssinante]);
 
         const [treinos, fieldsTreinos] = await conexao.execute(
-            `select idTreino, dataInicio, dataFim, objetivo
+            `select idTreino, nome, dataInicio, dataFim, objetivo, treinoAtual
             from treinos
             where idAssinante = ?
             order by data desc`, [idAssinante]);
@@ -279,6 +302,7 @@ module.exports = {
     buscarPersonalTrainersPorFiltro: buscarPersonalTrainersPorFiltro,
     buscarPersonalPorId: buscarPersonalPorId,
     salvarAlteracaoDeCadastro: salvarAlteracaoDeCadastro,
+    buscarSenha: buscarSenha,
     salvarAlteracaoDeDadosDoPerfil: salvarAlteracaoDeDadosDoPerfil,
     salvarAlteracaoSobreMim: salvarAlteracaoSobreMim,
     buscarAlunosPorFiltro: buscarAlunosPorFiltro,

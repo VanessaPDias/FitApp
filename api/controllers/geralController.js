@@ -3,6 +3,7 @@ const Nutricionista = require('../model/nutricionista');
 const Personal = require('../model/personalTrainer');
 const repositorioDeNutricionistas = require('../repositorios/repositorioDeNutricionistas');
 const repositorioDePersonalTrainers = require('../repositorios/repositorioDePersonalTrainers');
+const servicoDeArquivosEstaticos = require('../servicos/servicoDeArquivosEstaticos');
 
 async function buscarPlanos(req, res) {
     // #swagger.tags = ['Geral']
@@ -22,7 +23,8 @@ async function buscarPlanos(req, res) {
             nome: plano.nome,
             valor: plano.valor,
             duracao: plano.duracao,
-            descricao: plano.descricao
+            descricao: plano.descricao,
+            publicado: plano.dataLancamento <= new Date() ? true : false
         }
     }));
 }
@@ -43,7 +45,7 @@ async function buscarNutricionistas(req, res) {
         return {
             idNutri: nutri.idNutri,
             nome: nutri.nome,
-            imagem: nutri.imagem,
+            imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(nutri.imagem),
             sobreMim: nutri.sobreMim
         }
     }));
@@ -65,7 +67,7 @@ async function buscarPersonalTrainers(req, res) {
         return {
             idPersonal: personal.idPersonal,
             nome: personal.nome,
-            imagem: personal.imagem,
+            imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(personal.imagem),
             sobreMim: personal.sobreMim
         }
     }));
@@ -86,7 +88,7 @@ async function buscarNutriPorId(req, res) {
     res.send({
         idNutri: dadosDoNutri.idNutri,
         nome: dadosDoNutri.nome,
-        imagem: dadosDoNutri.imagem,
+        imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(dadosDoNutri.imagem),
         sobreMim: dadosDoNutri.sobreMim
     });
 }
@@ -106,7 +108,7 @@ async function buscarPersonalPorId(req, res) {
     res.send({
         idPersonal: dadosDoPersonal.idPersonal,
         nome: dadosDoPersonal.nome,
-       imagem: dadosDoPersonal.imagem,
+        imagem: servicoDeArquivosEstaticos.construirCaminhoParaImagem(dadosDoPersonal.imagem),
         sobreMim: dadosDoPersonal.sobreMim
     });
 }
@@ -145,8 +147,6 @@ async function cadastrarNutricionista(req, res) {
 
         await repositorioDeNutricionistas.criarNutricionista(novoNutricionista);
 
-        //servicoDeEmail.enviar(novoNutricionista.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoNutricionista.nome, novoNutricionista.usuario.senha));
-
         res.send({
             idNutri: novoNutricionista.idNutri
         });
@@ -166,8 +166,6 @@ async function cadastrarPersonal(req, res) {
     if (!personalEncontrado) {
 
         await repositorioDePersonalTrainers.criarPersonal(novoPersonal);
-
-        //servicoDeEmail.enviar(novoPersonal.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(novoPersonal.nome, novoPersonal.usuario.senha));
 
         res.send({
             idPersonal: novoPersonal.idPersonal

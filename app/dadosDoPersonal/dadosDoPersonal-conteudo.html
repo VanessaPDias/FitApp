@@ -1,27 +1,32 @@
-<!-- <div>
+<div>
+    <div class="row">
+        <h6><i class="bi bi-people fs-4 me-1"></i>Personal Trainers</h6>
+    </div>
     <div class="row py-2">
         <div class="col">
             <div class="card shadow">
                 <div class="card-body row">
-                    <h6 style="color:  #FED233;" class="card-title pb-2">Dados do Personal Trainer</h6>
-                    <form class="row">
+                    <h6 class="card-title pb-2">Dados do Personal Trainer</h6>
+                    <form class="row" id="formulario">
                         <div class="col-md-6 pt-3">
                             <label class="form-label fw-semibold" for="nome-personal">Nome</label>
                             <div class="input-group input-group-sm">
-                                <input class="form-control" type="text" id="nome-personal" name="nome-personal" disabled>
+                                <input class="form-control" type="text" id="nome-personal" name="nome-personal"
+                                    disabled>
                             </div>
                         </div>
                         <div class="col-md-6 pt-3">
                             <label class="form-label fw-semibold" for="email-personal">E-mail</label>
                             <div class="input-group input-group-sm">
-                                <input class="form-control" type="email" id="email-personal" name="email-personal" disabled>
+                                <input class="form-control" type="email" id="email-personal" name="email-personal"
+                                    disabled>
                             </div>
                         </div>
                         <div class="col-md-6 pt-3">
                             <label class="form-label fw-semibold" for="telefone-personal">Telefone</label>
                             <div class="input-group input-group-sm">
-                                <input class="form-control" type="number" id="telefone-personal" name="telefone-personal"
-                                    disabled>
+                                <input class="form-control" type="number" id="telefone-personal"
+                                    name="telefone-personal" disabled>
                             </div>
                         </div>
                         <div class="col-md-6 pt-3">
@@ -33,6 +38,16 @@
                             </div>
                         </div>
                         <div class="col-md-6 pt-3">
+                            <label class="form-label fw-semibold" for="cadastro-confirmado-personal">Cadastro</label>
+                            <div class="input-group input-group-sm">
+                                <select class="form-select" id="cadastro-confirmado-personal">
+                                    <option value="0">Pendente</option>
+                                    <option value="1">Confirmado</option>
+                                    <option value="2">Recusado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-3">
                             <label class="form-label fw-semibold" for="status-personal">Status</label>
                             <div class="input-group input-group-sm">
                                 <select class="form-select" id="status-personal">
@@ -41,22 +56,11 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6 pt-3">
-                            <label class="form-label fw-semibold" for="cadastro-confirmado-personal">Cadastro</label>
-                            <div class="input-group input-group-sm">
-                                <select class="form-select" id="cadastro-confirmado-personal">
-                                    <option value="">Pendente</option>
-                                    <option value="1">Confirmado</option>
-                                    <option value="2">Recusado</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="col pt-3 text-end">
-                            <a href="../personalTrainers/personalTrainers.html" class="btn btn-light"
-                                style="background-color: #FED233;">Voltar</a>
+                            <a href="../personalTrainers/personalTrainers.html#personalTrainers" class="btn btn-outline-dark btn-voltar me-2">Voltar</a>
 
-                            <button type="button" class="btn btn-light" id="btn-alterar-dados-do-personal"
-                                style="background-color: #FED233;">Alterar</button>
+                            <button type="submit" class="btn btn-outline-dark btn-app-padrao"
+                                id="btn-alterar-dados-do-personal">Alterar</button>
                         </div>
                     </form>
                 </div>
@@ -78,9 +82,8 @@
                 Tem certeza que deseja alterar?
             </div>
             <div class="modal-footer">
-                <button id="btn-confirmar-alteracao" type="button" class="btn btn-light"
-                    style="background-color: #FED233;">Sim</button>
+                <button id="btn-confirmar-alteracao" type="button" class="btn btn-outline-dark btn-app-padrao">Sim</button>
             </div>
         </div>
     </div>
-</div> -->
+</div>

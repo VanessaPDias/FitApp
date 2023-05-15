@@ -12,7 +12,7 @@ async function cadastrarPlano(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para cadastrar um Plano.'
 
-    const novoPlano = new Plano.Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao);
+    const novoPlano = new Plano.Plano(req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, req.body.dataLancamento);
 
     const planoEncontrado = await repositorioDePlanos.verificarSeJaExistePlanoCadastradoPeloNome(novoPlano.idPlano, novoPlano.nome);
 
@@ -34,7 +34,15 @@ async function buscarPlanos(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar planos - todos ou por nome.'
 
-    const planos = await repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome);
+    let bloqueado;
+
+    if (req.query.bloqueado == 'true') {
+        bloqueado = true;
+    } else if (req.query.bloqueado == 'false') {
+        bloqueado = false;
+    }
+
+    const planos = await repositorioDePlanos.buscarPlanosPorFiltro(req.query.nome, bloqueado);
 
     if (!planos || planos.length <= 0) {
         res.send([]);
@@ -48,7 +56,8 @@ async function buscarPlanos(req, res) {
             valor: plano.valor,
             duracao: plano.duracao,
             bloqueado: Boolean(plano.bloqueado),
-            descricao: plano.descricao
+            descricao: plano.descricao,
+            publicado: plano.dataLancamento <= new Date() ? true : false
         }
 
     }))
@@ -73,6 +82,7 @@ async function buscarPlanoPorId(req, res) {
         duracao: planoEncontrado.duracao,
         descricao: planoEncontrado.descricao,
         bloqueado: Boolean(planoEncontrado.bloqueado),
+        dataLancamento: planoEncontrado.dataLancamento
     })
 }
 
@@ -96,7 +106,7 @@ async function alterarDadosDoPlano(req, res) {
     }
 
     const bloqueado = req.body.bloqueado == 'true' ? true : false;
-    await repositorioDePlanos.salvarAlteracaoDeDados(req.params.idPlano, req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, bloqueado);
+    await repositorioDePlanos.salvarAlteracaoDeDados(req.params.idPlano, req.body.nome, req.body.valor, req.body.duracao, req.body.descricao, bloqueado, req.body.dataLancamento);
 
     res.send();
 
@@ -180,6 +190,15 @@ async function alterarDadosDoNutricionista(req, res) {
         req.body.cadastroConfirmado
     );
 
+    if (req.body.cadastroConfirmado == 1) {
+        const senha = await repositorioDeNutricionistas.buscarSenha(nutriEncontrado.idNutri);
+        servicoDeEmail.enviar(nutriEncontrado.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(nutriEncontrado.nome, senha.senha));
+    }
+
+    if (req.body.cadastroConfirmado == 2) {
+        servicoDeEmail.enviar(nutriEncontrado.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeRecusaDeCadastro(nutriEncontrado.nome));
+    }
+
     res.send();
 }
 
@@ -260,6 +279,15 @@ async function alterarDadosDoPersonal(req, res) {
         req.body.cadastroConfirmado
     );
 
+    if (req.body.cadastroConfirmado == 1) {
+        const senha = await repositorioDePersonalTrainers.buscarSenha(personalEncontrado.idPersonal);
+        servicoDeEmail.enviar(personalEncontrado.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeBoasVindas(personalEncontrado.nome, senha.senha));
+    }
+
+    if (req.body.cadastroConfirmado == 2) {
+        servicoDeEmail.enviar(personalEncontrado.email, 'Bem vindo ao FitApp', servicoDeMensagens.gerarMensagemDeRecusaDeCadastro(personalEncontrado.nome));
+    }
+
     res.send();
 }
 
@@ -268,7 +296,15 @@ async function buscarAssinantes(req, res) {
     // #swagger.tags = ['Administrador']
     // #swagger.description = 'endpoint para buscar assinantes cadastrados - todos ou por nome.'
 
-    const assinantes = await repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome);
+    let bloqueado;
+
+    if (req.query.bloqueado == 'true') {
+        bloqueado = true;
+    } else if (req.query.bloqueado == 'false') {
+        bloqueado = false;
+    }
+
+    const assinantes = await repositorioDeAssinantes.buscarAssinantePorFiltro(req.query.nome, bloqueado);
 
     if (!assinantes || assinantes.length <= 0) {
         res.send([]);

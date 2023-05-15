@@ -1,8 +1,8 @@
 import * as util from "../util/tratamentoDeRespostaApi.js";
 import * as configuracoes from "../configuracoes.js";
 
-export async function buscarDados(token, nome) {
-    const url = `${configuracoes.urlDaApi}/admin/planos?nome=${nome}`;
+export async function buscarDados(token, nome, bloqueado) {
+    const url = `${configuracoes.urlDaApi}/admin/planos?nome=${nome}&bloqueado=${bloqueado}`;
 
     const resposta = await fetch(url, {
         headers: {
@@ -13,7 +13,7 @@ export async function buscarDados(token, nome) {
     return util.tratarRespostaApi(resposta);
 }
 
-export async function salvarPlano(token, nome, valor, duracao, descricao) {
+export async function salvarPlano(token, nome, valor, duracao, descricao, dataLancamento) {
     const url = `${configuracoes.urlDaApi}/admin/planos`;
 
     const request = new Request(url, {
@@ -23,7 +23,8 @@ export async function salvarPlano(token, nome, valor, duracao, descricao) {
                 nome: nome,
                 valor: valor,
                 duracao: duracao,
-                descricao: descricao
+                descricao: descricao,
+                dataLancamento: dataLancamento
             }),
         headers: {
             authorization: "Bearer " + token,
