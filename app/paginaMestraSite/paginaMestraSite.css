@@ -22,12 +22,8 @@ footer,
     flex: 1 0 auto;
 }
 
-#container-principal {
+#container-principal, #trabalhe-conosco-container-principal {
     min-height: 43rem;
-}
-
-#trabalhe-conosco-container-principal {
-    min-height: 50rem;
 }
 
 .texto-justificado {
