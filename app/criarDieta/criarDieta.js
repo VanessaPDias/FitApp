@@ -78,7 +78,7 @@ async function gravarDieta(evento) {
     }
 
     evento.preventDefault();
-
+    
     try {
         const resposta = await servicos.salvarDieta(token, idPaciente, nomeDieta, dataInicio, dataFim, objetivo, itensDaDieta);
         mensagens.mostrarMensagemDeSucesso("Dieta criada com sucesso!", true);

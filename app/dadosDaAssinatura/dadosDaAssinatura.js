@@ -66,16 +66,19 @@ async function aoAbrirModalAlterarPlano() {
     planosAtivos.forEach(plano => {
         let option = '';
 
-        if (plano.idPlano == idDoPlanoDoAssinante) {
-            option = `<option value="${plano.idPlano}" selected>${plano.nome.toUpperCase()}</option>`;
+        if (plano.publicado == true) {
+            if (plano.idPlano == idDoPlanoDoAssinante) {
+                option = `<option value="${plano.idPlano}" selected>${plano.nome.toUpperCase()}</option>`;
 
-            document.querySelector("#form-valor").value = plano.valor;
-            document.querySelector("#form-descricao").value = plano.descricao;
-        } else {
-            option = `<option value="${plano.idPlano}">${plano.nome.toUpperCase()}</option>`;
+                document.querySelector("#form-valor").value = plano.valor;
+                document.querySelector("#form-descricao").value = plano.descricao;
+            } else {
+                option = `<option value="${plano.idPlano}">${plano.nome.toUpperCase()}</option>`;
+            }
+
+            selectPlanos.innerHTML = selectPlanos.innerHTML + option;
         }
 
-        selectPlanos.innerHTML = selectPlanos.innerHTML + option;
     });
 
     selectPlanos.onchange = preencherDadosPlano;
