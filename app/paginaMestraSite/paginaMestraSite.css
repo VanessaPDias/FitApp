@@ -23,7 +23,7 @@ footer,
 }
 
 #container-principal {
-    min-height: 55rem;
+    min-height: 35rem;
 }
 
 #trabalhe-conosco-container-principal {
@@ -100,9 +100,9 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
 }
 
 @media screen and (min-width: 768px) {
-    #container-principal {
+    /* #container-principal {
         min-height: 30rem;
-    }
+    } */
 
     #trabalhe-conosco-container-principal {
         min-height: 20rem;
