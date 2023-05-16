@@ -22,30 +22,11 @@ footer,
     flex: 1 0 auto;
 }
 
-#container-principal, #trabalhe-conosco-container-principal {
-    min-height: 43rem;
-}
-
-#container-login, #container-redefinir-senha {
-    min-height: 40rem;
-    width: 90%;
-}
-
-.card-criar-conta-resumo {
-    height: 8rem;
-}
-
-#card-modelo-nutricionista-body, #card-modelo-personal-body {
-    height: 160px;
-}
-
-
 
 .texto-justificado {
     text-align: justify; 
     text-justify: inter-word
 }
-
 
 .btn-padrao {
     --bs-btn-color: #fff;
@@ -80,9 +61,7 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
     border-color: var(--bs-fiord-color);
 }
 
-
-
-
+/* accordion */
 .accordion {
     --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
     --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
@@ -107,95 +86,87 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
     border: var(--bs-accordion-border-width) solid var(--bs-gray-500);
 }
 
-@media screen and (min-width: 768px) {
-    #container-principal{
+.card-criar-conta-resumo {
+    height: 8rem;
+}
+
+
+@media only screen and (max-width: 760px) {
+    #container-principal, #trabalhe-conosco-container-principal{
+        min-height: 43rem;
+    }
+
+    #card-modelo-nutricionista-body, #card-modelo-personal-body {
+        height: 10rem;
+    }
+
+    #container-login, #container-redefinir-senha {
+        min-height: 40rem;
+        width: 90%;
+    }
+
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 990px) {
+    #container-principal {
         min-height: 23rem;
     }
 
     #img-banner-1, #img-banner-3 {
         width: 14rem;
-        
     }
 
     #img-banner-2 {
         width: 20rem;
     }
-
 
     #trabalhe-conosco-container-principal {
         min-height: 20rem;
     }
 
     #card-modelo-nutricionista-body, #card-modelo-personal-body {
-        height: 200px;
+        height: 13rem;
     }
 
     #container-login {
         min-height: 26rem;
-        width: 60%;
+        width: 40%;
     }
 
     #container-redefinir-senha {
         min-height: 20rem;
-        width: 50%;
-    }
-
-    #container-cadastro {
-        width: 60%;
-    }
-
-}
-
-@media screen and (min-width: 992px) {
-    #container-principal {
-        min-height: 26rem;
-    }
-
-    #img-banner-1, #img-banner-3 {
-        width: 16rem;
-        
-    }
-
-    #img-banner-2 {
-        width: 24rem;
-    }
-
-    #card-modelo-nutricionista-body, #card-modelo-personal-body {
-        height: 160px;
-    }
-
-    #container-login {
-        min-height: 29rem;
-        width: 50%;
-    }
-
-    #container-cadastro {
-        width: 50%;
-    }
-
-    #container-redefinir-senha {
-        min-height: 26rem;
         width: 40%;
     }
+
+    #container-cadastro {
+        width: 55%;
+    }
+
+    
+
+    
 }
 
-@media screen and (min-width: 1200px) {
+@media only screen and (min-device-width: 992px) and (max-device-width: 1400px) {
     #container-principal {
         min-height: 33rem;
     }
 
     #img-banner-1, #img-banner-3 {
         width: 20rem;
-        
     }
 
     #img-banner-2 {
         width: 26rem;
     }
 
+    #card-modelo-nutricionista-body, #card-modelo-personal-body {
+        height: 10rem;
+    }
+
     #container-login {
-        min-height: 32rem;
-        width: 40%;
+        min-height: 26rem;
+        width: 30%;
     }
 
     #container-cadastro {
@@ -203,7 +174,7 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
     }
 
     #container-redefinir-senha {
-        min-height: 35rem;
+        min-height: 24rem;
         width: 30%;
     }
 }

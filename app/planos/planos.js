@@ -110,6 +110,10 @@ function imprimirListaDePlanos() {
                 return;
             }
 
+            if (nome == "publicado") {
+                return;
+            }
+
             if (nome == "bloqueado" && valor == false) {
                 valor = "Ativo"
 
@@ -152,6 +156,7 @@ function imprimirListaDePlanos() {
                     }
                 ],
             },
+            
             //lista
             {
                 stack: [
