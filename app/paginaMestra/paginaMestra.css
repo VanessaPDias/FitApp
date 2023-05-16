@@ -279,6 +279,10 @@ a:hover {
         overflow-y: scroll;
     }
 
+    #card-body-historico-medidas {
+        max-height: 32rem;
+        overflow-y: scroll;
+    }
 
     
 }
@@ -313,6 +317,11 @@ a:hover {
         overflow-y: scroll;
     }
 
+    #card-body-historico-medidas {
+        max-height: 10.5rem;
+        overflow-y: scroll;
+    }
+
   
 }
 
@@ -333,6 +342,11 @@ a:hover {
 
     #texto-mensagem {
         max-height: 10rem;
+        overflow-y: scroll;
+    }
+
+    #card-body-historico-medidas {
+        max-height: 13rem;
         overflow-y: scroll;
     }
 }
