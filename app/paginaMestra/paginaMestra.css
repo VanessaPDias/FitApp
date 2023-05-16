@@ -69,6 +69,16 @@ a:hover {
     height: auto;
 }
 
+#card-body-dados-dieta {
+    max-height: 28rem;
+    overflow-y: scroll;
+}
+
+#card-body-dados-treino {
+    max-height: 28rem;
+    overflow-y: scroll;
+}
+
 
 
 /* listas */
@@ -260,7 +270,6 @@ a:hover {
         overflow-y: scroll;
     }
 
-
     #card-body-conteudo-mensagem {
         min-height: 24rem;
     }
@@ -269,6 +278,9 @@ a:hover {
         max-height: 24rem;
         overflow-y: scroll;
     }
+
+
+    
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 990px) {
