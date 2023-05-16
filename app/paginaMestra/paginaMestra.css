@@ -245,8 +245,8 @@ a:hover {
         font-size: 12px;
     }
 
-    #card-body-lista-mensagens {
-        max-height: 32rem;
+    #card-body-lista-assinantes {
+        max-height: 21rem;
         overflow-y: scroll;
     }
 
@@ -254,6 +254,12 @@ a:hover {
         max-height: 25rem;
         overflow-y: scroll;
     }
+
+    #card-body-lista-mensagens {
+        max-height: 32rem;
+        overflow-y: scroll;
+    }
+
 
     #card-body-conteudo-mensagem {
         min-height: 28rem;
