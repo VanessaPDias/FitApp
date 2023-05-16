@@ -64,7 +64,7 @@ function mostrarItensDaDieta() {
     itensDaDieta.forEach(item => {
 
         document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
-            `<li class="list-group-item lista-itens-dieta"><i class="bi bi-arrow-right-short me-2"></i>${item.descricao}</li>`;
+            `<li class="list-group-item lista-itens-dieta"><i class="bi bi-dot me-2"></i>${item.descricao}</li>`;
     });
 }
 

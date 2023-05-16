@@ -65,7 +65,7 @@ function mostrarExerciciosDoTreino() {
     exerciciosDoTreino.forEach(exercicio => {
 
         document.querySelector(`#lista-exercicios-${exercicio.diaDoTreino}`).innerHTML = document.querySelector(`#lista-exercicios-${exercicio.diaDoTreino}`).innerHTML +
-            `<li class="list-group-item lista-exercicios-treino mb-2"><i class="bi bi-arrow-right-short me-2"></i>${exercicio.descricao}</li>`;
+            `<li class="list-group-item lista-exercicios-treino mb-2"><i class="bi bi-dot me-2"></i>${exercicio.descricao}</li>`;
     });
 }
 

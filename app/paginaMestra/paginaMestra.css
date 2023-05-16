@@ -36,6 +36,7 @@ select {
     cursor: pointer;
 }
 
+/* breadcrumb */
 .breadcrumb-item.active {
     color: var(--bs-dark);
 }
@@ -43,13 +44,34 @@ select {
 a {
     color: var(--bs-cor-principal);
 }
+
 a:active {
     color: var(--bs-cor-principal);
 }
+
 a:hover {
     color: var(--bs-cor-de-destaque);
 }
 
+
+/* cards */
+.card-dashboard-dados {
+    height: 88px;
+}
+
+.card.card-historico-dietas,
+.card.card-historico-treinos {
+    height: 40%;
+    overflow-y: scroll;
+}
+
+.card-modal-perfil-assinante-nutri-personal {
+    height: auto;
+}
+
+
+
+/* listas */
 .list-group {
     --bs-list-group-color: var(--bs-white);
     --bs-list-group-bg: var(--bs-cor-principal);
@@ -62,23 +84,24 @@ a:hover {
     --bs-list-group-active-border-color: var(--bs-cor-de-destaque);
 }
 
-.card-dashboard-dados {
-    height: 88px;
-}
-
-.table {
-    --bs-table-hover-color: #fff;
-    --bs-table-hover-bg: var(--bs-cor-de-destaque);
-}
-
 #lista-assinantes tr:hover i,
 #lista-nutricionistas tr:hover i,
 #lista-personal-trainers tr:hover i,
-#lista-planos tr:hover i, #lista-pacientes tr:hover i, #lista-alunos tr:hover i, #lista-dietas tr:hover i, #lista-treinos tr:hover i {
+#lista-planos tr:hover i,
+#lista-pacientes tr:hover i,
+#lista-alunos tr:hover i,
+#lista-dietas tr:hover i,
+#lista-treinos tr:hover i {
     color: #fff;
 }
 
+.list-group .lista-itens-dieta,
+.list-group .lista-exercicios-treino {
+    color: #000;
+    background-color: #fff;
+}
 
+/* mensagens */
 #menu-mensagens .list-group-item {
 
     --bs-list-group-color: #000;
@@ -109,6 +132,8 @@ a:hover {
     color: #fff;
 }
 
+
+/* botoes */
 .btn-app {
     --bs-btn-color: var(--bs-white);
     --bs-btn-bg: var(--bs-cor-principal);
@@ -135,7 +160,6 @@ a:hover {
     width: 96px;
 }
 
-
 .btn-app-padrao-lg {
     --bs-btn-color: var(--bs-white);
     --bs-btn-bg: var(--bs-cor-principal);
@@ -160,29 +184,16 @@ a:hover {
     width: 86px;
 }
 
-#lista-mensagens {
-    height: 230px;
-    overflow-y: scroll;
-}
 
-.container-tab-assinantes {
-    height: 260px;
-    overflow-y: scroll;
-}
-
-.card.card-historico-dietas,
-.card.card-historico-treinos {
-    height: 40%;
-    overflow-y: scroll;
-}
-
-.list-group .lista-itens-dieta,
-.list-group .lista-exercicios-treino {
-    color: #000;
-    background-color: #fff;
+/* tabs */
+.table {
+    --bs-table-hover-color: #fff;
+    --bs-table-hover-bg: var(--bs-cor-de-destaque);
 }
 
 
+
+/* navs */
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active,
 .nav-link {
@@ -200,11 +211,9 @@ a:hover {
     --bs-nav-link-hover-color: #000;
 }
 
-
-
-@media(max-width: 768px) {
+@media only screen and (max-width: 760px) {
     .container-tab {
-        max-height: 640px;
+        max-height: 32rem;
         max-width: 100%;
         overflow-y: scroll;
     }
@@ -236,8 +245,62 @@ a:hover {
         font-size: 12px;
     }
 
-    #lista-mensagens {
-        height: 400px;
+    #card-body-lista-mensagens {
+        max-height: 32rem;
+        overflow-y: scroll;
+    }
+
+    #card-body-conteudo-mensagem {
+        min-height: 28rem;
+    }
+
+    #texto-mensagem {
+        max-height: 26rem;
         overflow-y: scroll;
     }
 }
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 990px) {
+    .container-tab {
+        max-height: 11rem;
+        overflow-y: scroll;
+    }
+
+    #card-body-lista-mensagens {
+        max-height: 12rem;
+        overflow-y: scroll;
+    }
+
+    #card-body-conteudo-mensagem {
+        min-height: 10rem;
+    }
+
+    #texto-mensagem {
+        max-height: 8rem;
+        overflow-y: scroll;
+    }
+
+  
+}
+
+@media only screen and (min-device-width: 992px) and (max-device-width: 1400px) {
+    .container-tab {
+        max-height: 12rem;
+        overflow-y: scroll;
+    }
+
+    #card-body-lista-mensagens {
+        max-height: 18rem;
+        overflow-y: scroll;
+    }
+
+    #card-body-conteudo-mensagem {
+        min-height: 12rem;
+    }
+
+    #texto-mensagem {
+        max-height: 10rem;
+        overflow-y: scroll;
+    }
+}
+

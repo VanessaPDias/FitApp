@@ -139,24 +139,25 @@ function listarMensagens(listaDeMensagens, tipo) {
 
             if (tipo == "Recebidas") {
                 document.querySelector(`#lista-mensagens`).innerHTML = document.querySelector(`#lista-mensagens`).innerHTML +
-                    `<div class="list-group-item list-group-item-action" ">
+                    `<div class="list-group-item list-group-item-action">
                         <div class="row">
                             <div class="col">
                                 <h6 class="mb-1">${mensagem.nomeRemetente}</h6>
                                 <p class="mb-1">${mensagem.assunto}</p>
                             </div>
                             <div class="col text-end">
-                                <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
-                                <div class="row justify-content-between pt-2">
-                                    <div class="col-8"></div>
-                                    <div class="col-2 text-end">
-                                        <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}#mensagens" class="col-2 text-end link-dark">
-                                            <i class="col bi bi-eye btn-ver-mensagem fs-5"></i>
+                                <div class="row">
+                                    <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
+                                </div>
+                                <div class="row justify-content-end pt-2">
+                                    <div class="col-2">
+                                        <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}#mensagens" class="link-dark me-2">
+                                            <i class="bi bi-eye btn-ver-mensagem fs-5"></i>
                                         </a>
                                     </div>
-                                    <div class="col-2 text-end">
-                                        <a href="#" class="col-2 text-end link-dark">
-                                            <i class="col bi-trash3 btn-excluir-mensagem" data-bs-toggle="modal" data-bs-target="#modal-excluir-mensagem" data-idmensagem="${mensagem.idMensagem}"></i>
+                                    <div class="col-2">
+                                        <a href="#" class="link-dark">
+                                            <i class="bi-trash3 btn-excluir-mensagem" data-bs-toggle="modal" data-bs-target="#modal-excluir-mensagem" data-idmensagem="${mensagem.idMensagem}"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -167,21 +168,20 @@ function listarMensagens(listaDeMensagens, tipo) {
 
             if (tipo == "Enviadas") {
                 document.querySelector(`#lista-mensagens`).innerHTML = document.querySelector(`#lista-mensagens`).innerHTML +
-                    `<div class="list-group-item list-group-item-action" ">
+                    `<div class="list-group-item list-group-item-action">
                         <div class="row">
                             <div class="col">
                                 <h6 class="mb-1">${mensagem.nomeDestinatario}</h6>
                                 <p class="mb-1">${mensagem.assunto}</p>
                             </div>
                             <div class="col text-end">
-                                <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
-                                <div class="row justify-content-between pt-2">
-                                    <div class="col-10"></div>
-                                    <div class="col-2 text-end">
-                                        <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}#mensagens" class="col-2 text-end link-dark"  data-tipomensagem="${tipo}">
-                                            <i class="col bi bi-eye btn-ver-mensagem fs-5"></i>
-                                        </a>
-                                    </div>
+                                <div class="row">
+                                    <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
+                                </div>    
+                                <div class="row pt-2">
+                                    <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}#mensagens" class="link-dark"  data-tipomensagem="${tipo}">
+                                        <i class="bi bi-eye btn-ver-mensagem fs-5"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -189,21 +189,20 @@ function listarMensagens(listaDeMensagens, tipo) {
             }
             if (tipo == "Excluídas") {
                 document.querySelector(`#lista-mensagens`).innerHTML = document.querySelector(`#lista-mensagens`).innerHTML +
-                    `<div class="list-group-item list-group-item-action" ">
+                `<div class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col">
                             <h6 class="mb-1">${mensagem.nomeRemetente}</h6>
                             <p class="mb-1">${mensagem.assunto}</p>
                         </div>
                         <div class="col text-end">
-                            <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
-                            <div class="row justify-content-between pt-2">
-                                <div class="col-10"></div>
-                                <div class="col-2 text-end"> 
-                                    <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}#mensagens" class="col-2 text-end link-dark"  data-tipomensagem="${tipo}">
-                                        <i class="col bi bi-eye btn-ver-mensagem fs-5"></i>
-                                    </a>
-                                </div>
+                            <div class="row">
+                                <small class="text-body-secondary">${new Date(mensagem.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })}</small>
+                            </div>
+                            <div class="row pt-2">
+                                <a href="../dadosDaMensagem/dadosDaMensagem.html?idMensagem=${mensagem.idMensagem}#mensagens" class="link-dark"  data-tipomensagem="${tipo}">
+                                    <i class="bi bi-eye btn-ver-mensagem fs-5"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

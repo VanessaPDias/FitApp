@@ -7,24 +7,21 @@
                         id="breadcrumb-nome-personal"></span></li>
             </ol>
         </nav>
-        <h6 ></h6>
     </div>
 
     <div class="row py-3">
         <div class="col">
-            <div class="card shadow">
-                <div class="card-body">
+            <div class="card shadow"  >
+                <div class="card-body" >
                     <h6 id="assunto"></h6>
                     <div>
-                        <span class="md-2" id="remetente"></span>
+                        <span id="remetente"></span>
                     </div>
-                    <div class="row pt-2 px-2">
-                        <textarea class="p-3" name="texto-mensagem" id="texto-mensagem"
-                            style="height: 200px;"></textarea>
+                    <div class="row p-3" id="card-body-conteudo-mensagem">
+                        <textarea name="texto-mensagem" id="texto-mensagem"></textarea>
                     </div>
-                    <div class="d-flex w-100 justify-content-between pt-3">
-                        <a id="btn-responder-mensagem" data-bs-toggle="modal" data-bs-target="#modal-responder-mensagem"
-                           ><i class="bi bi-send me-2"></i>Responder</a>
+                    <div class="d-flex w-100 justify-content-between pt-2">
+                        <a id="btn-responder-mensagem" data-bs-toggle="modal" data-bs-target="#modal-responder-mensagem"><i class="bi bi-send me-2"></i>Responder</a>
                         <a id="btn-excluir-mensagem" data-bs-toggle="modal"
                             data-bs-target="#modal-excluir-mensagem"><i class="bi bi-trash3 me-2"></i>Excluir</a>
                     </div>
