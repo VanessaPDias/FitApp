@@ -246,7 +246,7 @@ a:hover {
     }
 
     #card-body-lista-assinantes {
-        max-height: 21rem;
+        max-height: 20rem;
         overflow-y: scroll;
     }
 
