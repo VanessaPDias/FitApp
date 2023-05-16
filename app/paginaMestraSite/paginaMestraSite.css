@@ -22,7 +22,7 @@ footer,
     flex: 1 0 auto;
 }
 
-#container-principal, #trabalhe-conosco-container-principal, #container-login {
+#container-principal, #trabalhe-conosco-container-principal, #container-login, #container-redefinir-senha {
     min-height: 43rem;
 }
 
@@ -74,7 +74,6 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
 }
 
 #container-login,
-#container-cadastro,
 #container-redefinir-senha {
     width: 90%;
 }
@@ -132,13 +131,15 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
         width: 60%;
     }
 
+    #container-redefinir-senha {
+        min-height: 20rem;
+        width: 50%;
+    }
+
     #container-cadastro {
         width: 60%;
     }
 
-    #container-redefinir-senha {
-        width: 50%;
-    }
 }
 
 @media screen and (min-width: 992px) {
@@ -165,11 +166,12 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
     }
 
     #container-cadastro {
-        width: 40%;
+        width: 50%;
     }
 
     #container-redefinir-senha {
-        width: 30%;
+        min-height: 26rem;
+        width: 40%;
     }
 }
 
@@ -197,6 +199,7 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
     }
 
     #container-redefinir-senha {
+        min-height: 35rem;
         width: 30%;
     }
 }

@@ -1,61 +1,65 @@
-<div class="container-fluid d-flex justify-content-center my-4">
-    <div id="container-cadastro">
-        <h3 class="fw-semibold lh-1">Criar conta</h3>
-        <div class="card shadow my-4">
-            <div class="card-body">
-                <div class="row row-cols-1 row-cols-md-3 g-3 text-center ">
-                    <div class="col">
-                        <h6>Plano</h6>
-                        <div class="card rounded-3 shadow-sm my-3 my-md-2 card-criar-conta-resumo">
-                            <div class="card-body">
-                                <h6 class="text-uppercase" id="card-plano-nome"></h6>
-                                <small class="fw-light">R$</small>
-                                <p class="card-title pricing-card-title fw-semibold" id="card-plano-valor"></span>
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row align-items-center" id="container-cadastro">
+        <div class="col pb-5">
+            <h3 class="fw-semibold lh-1 py-3">Criar conta</h3>
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row row-cols-1 row-cols-md-3 g-3 text-center ">
+                        <div class="col">
+                            <h6>Plano</h6>
+                            <div class="card rounded-3 shadow-sm my-3 my-md-2 card-criar-conta-resumo">
+                                <div class="card-body">
+                                    <h6 class="text-uppercase" id="card-plano-nome"></h6>
+                                    <small class="fw-light">R$</small>
+                                    <p class="card-title pricing-card-title fw-semibold" id="card-plano-valor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Nutricionista</h6>
+                            <div class="card rounded-3 shadow-sm my-3 my-md-2 card-criar-conta-resumo">
+                                <div class="card-body">
+                                    <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block"
+                                        id="card-nutri-imagem" alt="imagem-nutricionista" width="42" height="42">
+                                    <p class="text-uppercase mt-2" id="card-nutri-nome"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Personal Trainer</h6>
+                            <div class="card rounded-3 shadow-sm my-3 my-md-2 card-criar-conta-resumo">
+                                <div class="card-body">
+                                    <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block"
+                                        id="card-personal-imagem" alt="imagem-nutricionista" width="42" height="42">
+                                    <p class="text-uppercase mt-2" id="card-personal-nome"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <h6>Nutricionista</h6>
-                        <div class="card rounded-3 shadow-sm my-3 my-md-2 card-criar-conta-resumo">
-                            <div class="card-body">
-                                <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block" id="card-nutri-imagem"
-                                    alt="imagem-nutricionista" width="42" height="42">
-                                <p class="text-uppercase mt-2" id="card-nutri-nome"></p>
+                    <div class="row text-center my-3">
+                        <div class="col">
+                            <a href="#" class="btn btn-outline-danger w-50 shadow-sm"><i class="bi bi-google me-2"></i>
+                                Google</a>
+                        </div>
+                    </div>
+                    <div class="row text-end">
+                        <form class="formulario-dados mx-auto" id="formulario">
+                            <p class="fs-6 text-danger text-start" id="erro"></p>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control shadow-sm" id="nome" required>
+                                <label for="nome">Nome</label>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <h6>Personal Trainer</h6>
-                        <div class="card rounded-3 shadow-sm my-3 my-md-2 card-criar-conta-resumo">
-                            <div class="card-body">
-                                <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block" id="card-personal-imagem"
-                                    alt="imagem-nutricionista" width="42" height="42">
-                                <p class="text-uppercase mt-2" id="card-personal-nome"></p>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control shadow-sm" id="email" required>
+                                <label for="email">Email</label>
                             </div>
-                        </div>
+                            <button class="btn btn-outline-dark btn-sm mt-3 btn-padrao" id="btn-cadastrarAssinante"
+                                type="submit">Cadastrar</button>
+                        </form>
                     </div>
-                </div>
-                <div class="row text-center my-3">
-                    <div class="col">
-                        <a href="#" class="btn btn-outline-danger w-50 shadow-sm" ><i class="bi bi-google me-2"></i> Google</a>
-                    </div>
-                </div>
-                <div class="row text-end">
-                    <form class="formulario-dados mx-auto" id="formulario">
-                        <p class="fs-6 text-danger text-start" id="erro"></p>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control shadow-sm" id="nome" required>
-                            <label for="nome">Nome</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control shadow-sm" id="email" required>
-                            <label for="email">Email</label>
-                        </div>
-                        <button class="btn btn-outline-dark btn-sm mt-3 btn-padrao" id="btn-cadastrarAssinante"
-                            type="submit">Cadastrar</button>
-                    </form>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
