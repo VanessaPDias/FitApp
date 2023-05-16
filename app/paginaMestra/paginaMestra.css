@@ -213,7 +213,7 @@ a:hover {
 
 @media only screen and (max-width: 760px) {
     .container-tab {
-        max-height: 32rem;
+        max-height: 30rem;
         max-width: 100%;
         overflow-y: scroll;
     }
@@ -250,6 +250,11 @@ a:hover {
         overflow-y: scroll;
     }
 
+    #card-body-lista-planos {
+        max-height: 25rem;
+        overflow-y: scroll;
+    }
+
     #card-body-conteudo-mensagem {
         min-height: 28rem;
     }
@@ -262,6 +267,11 @@ a:hover {
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 990px) {
     .container-tab {
+        max-height: 11rem;
+        overflow-y: scroll;
+    }
+
+    #card-body-lista-planos {
         max-height: 11rem;
         overflow-y: scroll;
     }
