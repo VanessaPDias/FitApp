@@ -22,17 +22,24 @@ footer,
     flex: 1 0 auto;
 }
 
-#container-principal, #trabalhe-conosco-container-principal, #container-login, #container-redefinir-senha {
+#container-principal, #trabalhe-conosco-container-principal {
     min-height: 43rem;
+}
+
+#container-login, #container-redefinir-senha {
+    min-height: 40rem;
+    width: 90%;
+}
+
+.card-criar-conta-resumo {
+    height: 8rem;
 }
 
 #card-modelo-nutricionista-body, #card-modelo-personal-body {
     height: 160px;
 }
 
-.card-criar-conta-resumo {
-    height: 8rem;
-}
+
 
 .texto-justificado {
     text-align: justify; 
@@ -73,10 +80,7 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
     border-color: var(--bs-fiord-color);
 }
 
-#container-login,
-#container-redefinir-senha {
-    width: 90%;
-}
+
 
 
 .accordion {
@@ -162,7 +166,7 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
 
     #container-login {
         min-height: 29rem;
-        width: 40%;
+        width: 50%;
     }
 
     #container-cadastro {
@@ -191,7 +195,7 @@ a.btn.disabled, .btn:disabled, fieldset:disabled .btn {
 
     #container-login {
         min-height: 32rem;
-        width: 30%;
+        width: 40%;
     }
 
     #container-cadastro {
