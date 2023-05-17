@@ -1,141 +1,137 @@
-<div>
-    <div class="row">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="bi bi-person me-1 fs-4"></i>Meu Perfil</li>
-            </ol>
-        </nav>
-    </div>
+<div class="row">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><i class="bi bi-person me-1 fs-4"></i>Meu Perfil</li>
+        </ol>
+    </nav>
+</div>
 
-    <div class="row pb-3">
-        <!-- dados pessoais -->
-        <div class="col-12 col-sm-5">
-            <div class="card shadow">
-                <div class="card-body row">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <div>
-                                    <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block"
-                                        alt="imagem-perfil-usuario" id="imagem-perfil" width="142" height="142"
-                                        style="cursor: pointer;">
+<div class="row pb-3 g-3">
+    <!-- dados pessoais -->
+    <div class="col-12 col-sm-5">
+        <div class="card shadow">
+            <div class="card-body row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block"
+                                    alt="imagem-perfil-usuario" id="imagem-perfil" width="142" height="142"
+                                    style="cursor: pointer;">
 
-                                    <input class="d-none" type="file" id="input-imagem-perfil"
-                                        accept=".jpg,.png,.gif,.jpeg" />
-                                </div>
-                                <div class="pt-3 text-center">
-                                    <span id="email"></span>
-                                </div>
+                                <input class="d-none" type="file" id="input-imagem-perfil"
+                                    accept=".jpg,.png,.gif,.jpeg" />
+                            </div>
+                            <div class="pt-3 text-center">
+                                <span id="email"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <form id="formulario-perfil">
-                                <div class="pt-3">
-                                    <label class="form-label fw-semibold" for="nome">Nome</label>
-                                    <div class="input-group input-group-sm">
-                                        <input class="form-control" type="text" id="nome" name="nome" required>
-                                    </div>
+                    </div>
+                    <div class="row">
+                        <form id="formulario-perfil">
+                            <div class="pt-3">
+                                <label class="form-label fw-semibold" for="nome">Nome</label>
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control" type="text" id="nome" name="nome" required>
                                 </div>
-                                <div class="pt-3">
-                                    <label class="form-label fw-semibold" for="data-nascimento">Data de
-                                        Nascimento</label>
-                                    <div class="input-group input-group-sm">
-                                        <input class="form-control" type="date" id="data-nascimento"
-                                            name="data-nascimento">
-                                    </div>
+                            </div>
+                            <div class="pt-3">
+                                <label class="form-label fw-semibold" for="data-nascimento">Data de
+                                    Nascimento</label>
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control" type="date" id="data-nascimento" name="data-nascimento">
                                 </div>
-                                <div class="pt-3">
-                                    <label class="form-label fw-semibold" for="sexo">Sexo</label>
-                                    <div class="input-group input-group-sm">
-                                        <select class="form-select" id="sexo">
-                                            <option value="" selected>---</option>
-                                            <option value="1">Feminino</option>
-                                            <option value="2">Masculino</option>
-                                        </select>
-                                    </div>
+                            </div>
+                            <div class="pt-3">
+                                <label class="form-label fw-semibold" for="sexo">Sexo</label>
+                                <div class="input-group input-group-sm">
+                                    <select class="form-select" id="sexo">
+                                        <option value="" selected>---</option>
+                                        <option value="1">Feminino</option>
+                                        <option value="2">Masculino</option>
+                                    </select>
                                 </div>
-                                <div class="pt-3">
-                                    <label class="form-label fw-semibold" for="altura">Altura</label>
-                                    <div class="input-group input-group-sm">
-                                        <input class="form-control" type="number" id="altura" name="altura">
-                                    </div>
+                            </div>
+                            <div class="pt-3">
+                                <label class="form-label fw-semibold" for="altura">Altura <small>(cm)</small></label>
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control" type="number" id="altura" name="altura">
                                 </div>
-                                <div class="pt-3 text-end">
-                                    <button type="submit" id="btn-salvar-dados-do-perfil"
-                                        class="btn btn-outline-dark btn-app-padrao">Salvar</button>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="pt-3 text-end">
+                                <button type="submit" id="btn-salvar-dados-do-perfil"
+                                    class="btn btn-outline-dark btn-app-padrao">Salvar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-7 pt-3 pt-sm-0">
-            <!-- alterar senha -->
-            <div class="card shadow">
-                <div class="card-body">
-                    <h6 class="card-title">Alterar Senha</h6>
-                    <form id="formulario-alterar-senha">
-                        <div class="pt-3">
-                            <label class="form-label fw-semibold" for="senha-atual">Senha Atual</label>
-                            <div class="input-group input-group-sm">
-                                <input class="form-control" type="password" id="senha-atual" name="senha-atual"
-                                    required>
-                            </div>
+    </div>
+    <div class="col-12 col-sm-7 pt-3 pt-sm-0">
+        <!-- alterar senha -->
+        <div class="card shadow">
+            <div class="card-body">
+                <h6 class="card-title">Alterar Senha</h6>
+                <form id="formulario-alterar-senha">
+                    <div class="pt-3">
+                        <label class="form-label fw-semibold" for="senha-atual">Senha Atual</label>
+                        <div class="input-group input-group-sm">
+                            <input class="form-control" type="password" id="senha-atual" name="senha-atual" required>
                         </div>
-                        <div class="pt-3">
-                            <label class="form-label fw-semibold" for="nova-senha">Nova Senha</label>
-                            <div class="input-group input-group-sm">
-                                <input class="form-control" type="password" id="nova-senha" name="nova-senha" required>
-                            </div>
+                    </div>
+                    <div class="pt-3">
+                        <label class="form-label fw-semibold" for="nova-senha">Nova Senha</label>
+                        <div class="input-group input-group-sm">
+                            <input class="form-control" type="password" id="nova-senha" name="nova-senha" required>
                         </div>
-                        <div class="pt-3 text-end">
-                            <button type="submit" id="btn-alterar-senha"
-                                class="btn btn-outline-dark btn-app-padrao">Alterar</button>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="pt-3 text-end">
+                        <button type="submit" id="btn-alterar-senha"
+                            class="btn btn-outline-dark btn-app-padrao">Alterar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow mt-3">
+            <div class="row card-body text-center ">
+                <div class="col">
+                    <img src="/img/assinatura.png" alt="" width="50" height="50">
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-dark btn-lg btn-app-padrao-xlg" id="btn-dados-assinatura"
+                        type="button">Assinatura</button>
                 </div>
             </div>
+        </div>
 
-            <div class="card shadow mt-3">
-                <div class="row card-body text-center ">
-                    <div class="col">
-                        <img src="/img/assinatura.png" alt="" width="50" height="50">
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-outline-dark btn-lg btn-app-padrao-xlg" id="btn-dados-assinatura" type="button"
-                            >Assinatura</button>
-                    </div>
+        <div class="card shadow mt-2">
+            <div class="row card-body text-center">
+                <div class="col">
+                    <img src="/img/nutricionista.png" alt="" width="50" height="50">
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-dark btn-lg btn-app-padrao-xlg" type="button" data-bs-toggle="modal"
+                        data-bs-target="#modal-dados-nutricionista">Nutricionista</button>
                 </div>
             </div>
+        </div>
 
-            <div class="card shadow mt-2">
-                <div class="row card-body text-center">
-                    <div class="col">
-                        <img src="/img/nutricionista.png" alt="" width="50" height="50">
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-outline-dark btn-lg btn-app-padrao-xlg" type="button" data-bs-toggle="modal"
-                            data-bs-target="#modal-dados-nutricionista">Nutricionista</button>
-                    </div>
+        <div class="card shadow mt-2">
+            <div class="row card-body text-center">
+                <div class="col">
+                    <img src="/img/personal.png" alt="" width="50" height="50">
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-dark btn-lg btn-app-padrao-xlg" type="button" data-bs-toggle="modal"
+                        data-bs-target="#modal-dados-personal">Personal</button>
                 </div>
             </div>
+        </div>
+        <div class=" pt-3 text-end">
+            <a href="../dashboard/dashboard.html#inicio" class="btn btn-outline-dark btn-voltar">Voltar</a>
 
-            <div class="card shadow mt-2">
-                <div class="row card-body text-center">
-                    <div class="col">
-                        <img src="/img/personal.png" alt="" width="50" height="50">
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-outline-dark btn-lg btn-app-padrao-xlg" type="button" data-bs-toggle="modal"
-                            data-bs-target="#modal-dados-personal">Personal</button>
-                    </div>
-                </div>
-            </div>
-            <div class=" pt-3 text-end">
-                <a href="../dashboard/dashboard.html#inicio" class="btn btn-outline-dark btn-voltar">Voltar</a>
-
-            </div>
         </div>
     </div>
 </div>
@@ -170,9 +166,8 @@
             <div class="row modal-body justify-content-around">
                 <div class="card mb-4 rounded-3 shadow-sm w-75">
                     <div class="pt-3 text-center">
-                        <img src="../img/perfil-vazio.png"
-                            class="rounded-circle mx-auto d-block" id="imagem-nutricionista" alt="imagem-nutricionista"
-                            width="142" height="142">
+                        <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block"
+                            id="imagem-nutricionista" alt="imagem-nutricionista" width="142" height="142">
                         <h5 class="pt-3 text-uppercase " id="nome-nutricionista"></h5>
                         <small class="fw-semibold text-uppercase" id="registro-profissional-nutricionista"></small>
                         <p class="fw-semibold" id="email-nutricionista"></p>
@@ -187,8 +182,8 @@
 
             </div>
             <div class="modal-footer">
-                <button id="btn-confirmar-alteracao-de-senha" type="button"
-                    class="btn btn-outline-dark btn-app-padrao" data-bs-dismiss="modal">Voltar</button>
+                <button id="btn-confirmar-alteracao-de-senha" type="button" class="btn btn-outline-dark btn-app-padrao"
+                    data-bs-dismiss="modal">Voltar</button>
             </div>
         </div>
     </div>
@@ -205,9 +200,8 @@
             <div class="row modal-body justify-content-around">
                 <div class="card mb-4 rounded-3 shadow-sm w-75">
                     <div class="pt-3 text-center">
-                        <img src="../img/perfil-vazio.png"
-                            class="rounded-circle mx-auto d-block" id="imagem-personal" alt="imagem-personal"
-                            width="142" height="142">
+                        <img src="../img/perfil-vazio.png" class="rounded-circle mx-auto d-block" id="imagem-personal"
+                            alt="imagem-personal" width="142" height="142">
                         <h5 class="pt-3 text-uppercase " id="nome-personal"></h5>
                         <small class="fw-semibold text-uppercase" id="registro-profissional-personal"></small>
                         <p class="fw-semibold" id="email-personal"></p>
@@ -222,8 +216,8 @@
 
             </div>
             <div class="modal-footer">
-                <button id="btn-confirmar-alteracao-de-senha" type="button"
-                    class="btn btn-outline-dark btn-app-padrao" data-bs-dismiss="modal">Voltar</button>
+                <button id="btn-confirmar-alteracao-de-senha" type="button" class="btn btn-outline-dark btn-app-padrao"
+                    data-bs-dismiss="modal">Voltar</button>
             </div>
         </div>
     </div>

@@ -42,6 +42,7 @@ async function aoCarregarPagina() {
 }
 
 function inserirItem(evento) {
+    
     const refeicao = evento.target.dataset.refeicao;
     
     if(document.querySelector(`#input-item-${refeicao}`).value == "") {
@@ -74,7 +75,7 @@ function mostrarItensDaDieta() {
 
         document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML = document.querySelector(`#lista-itens-${item.refeicao}`).innerHTML +
             `<li class="list-group-item lista-itens-dieta mb-2 d-flex justify-content-between">
-            ${item.refeicao}<i class="bi bi-trash3 btn-excluir-item" data-refeicao=${item.refeicao} data-descricao=${item.descricao} style= "cursor: pointer"></i>
+            ${item.descricao}<i class="bi bi-trash3 btn-excluir-item" data-refeicao=${item.refeicao} data-descricao=${item.descricao} style= "cursor: pointer"></i>
         </li>`;
     });
 

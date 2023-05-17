@@ -9,30 +9,31 @@
             </ol>
         </nav>
     </div>
+    <!-- dados da dieta -->
     <div class="row pb-3">
         <div class="col">
             <div class="card shadow">
                 <div class="card-body">
                     <form class="row" id="formulario">
-                        <div class="col-md-6 pt-3">
+                        <div class="col-md-6 pt-3 pt-sm-0">
                             <label class="form-label fw-semibold" for="nome-dieta">Dieta</label>
                             <div class="input-group input-group-sm">
                                 <input class="form-control" type="text" id="nome-dieta" name="nome-dieta" required>
                             </div>
                         </div>
-                        <div class="col-md-3 pt-3">
+                        <div class="col-md-3 pt-3 pt-sm-0">
                             <label class="form-label fw-semibold" for="inicio-dieta">Ínicio</label>
                             <div class="input-group input-group-sm">
                                 <input class="form-control" type="date" id="inicio-dieta" name="inicio-dieta" required>
                             </div>
                         </div>
-                        <div class="col-md-3 pt-3">
+                        <div class="col-md-3 pt-3 pt-sm-0">
                             <label class="form-label fw-semibold" for="fim-dieta">Fim</label>
                             <div class="input-group input-group-sm">
                                 <input class="form-control" type="date" id="fim-dieta" name="fim-dieta" required>
                             </div>
                         </div>
-                        <div class="col pt-3">
+                        <div class="col pt-3 pt-sm-2">
                             <label class="form-label fw-semibold" for="objetivo-dieta">Objetivo</label>
                             <div class="input-group input-group-sm">
                                 <input class="form-control" type="text" id="objetivo-dieta" name="objetivo-dieta"
@@ -44,6 +45,7 @@
             </div>
         </div>
     </div>
+    <!-- itens da dieta -->
     <div class="row pb-3">
         <div class="col">
             <div class="card shadow">
@@ -192,8 +194,8 @@
 
     <div class="row">
         <div class="col text-end">
-            <button class="btn btn-outline-dark btn-voltar me-2" id="btn-voltar-para-dados-paciente">Voltar</button>
-            <button class="btn btn-outline-dark btn-app-padrao" id="btn-alterar-dieta">Alterar</button>
+            <button class="btn btn-outline-dark btn-app-padrao me-2" id="btn-alterar-dieta">Salvar</button>
+            <button class="btn btn-outline-dark btn-voltar" id="btn-voltar-para-dados-paciente">Voltar</button>
         </div>
     </div>
 
