@@ -93,7 +93,7 @@ async function buscarAlunoPorId(req, res) {
     res.send({
         imagem: !alunoEncontrado.dados.imagem ? "" : servicoDeArquivosEstaticos.construirCaminhoParaImagem(alunoEncontrado.dados.imagem),
         nome: alunoEncontrado.dados.nome,
-        objetivo: !alunoEncontrado.treinos && alunoEncontrado.treinos.length > 0 ? alunoEncontrado.treinos[0].objetivo : null,
+        objetivo: alunoEncontrado.treinos && alunoEncontrado.treinos.length > 0 ? alunoEncontrado.treinos[0].objetivo : null,
         dataNascimento: new Idade.Idade(alunoEncontrado.dados.dataNascimento).valor,
         sexo: alunoEncontrado.dados.idSexo,
         altura: !alunoEncontrado.dados.altura ? 0 : alunoEncontrado.dados.altura,

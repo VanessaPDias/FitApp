@@ -88,7 +88,7 @@ async function buscarPacientePorId(req, res) {
     res.send({
         imagem: !pacienteEncontrado.dados.imagem ? "" : servicoDeArquivosEstaticos.construirCaminhoParaImagem(pacienteEncontrado.dados.imagem),
         nome: pacienteEncontrado.dados.nome,
-        objetivo: !pacienteEncontrado.dietas && pacienteEncontrado.dietas.length > 0 ? pacienteEncontrado.dietas[0].objetivo : null,
+        objetivo: pacienteEncontrado.dietas && pacienteEncontrado.dietas.length > 0 ? pacienteEncontrado.dietas[0].objetivo : null,
         dataNascimento: new Idade.Idade(pacienteEncontrado.dados.dataNascimento).valor,
         sexo: pacienteEncontrado.dados.idSexo,
         altura: !pacienteEncontrado.dados.altura ? 0 : pacienteEncontrado.dados.altura,
