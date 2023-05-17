@@ -10,6 +10,8 @@ it('CU-G 02 - deve redefinir Senha de acesso', async () => {
     const email = `ana_teste_${crypto.randomUUID()}@fitapp.com`;
     const idNutri = await nutricionista.cadastrarNutri(token, "ana_teste", email, "99999999", "crm000");
 
+    await nutricionista.alterarDadosDoNutricionista(token, idNutri, "ana_teste_redefinir_senha", email,"000000000", "CRN 123",  true, 1);
+
     await spec()
         .post(`${configuracoes.urlDaApi}/esqueciMinhaSenha`)
         .withJson({

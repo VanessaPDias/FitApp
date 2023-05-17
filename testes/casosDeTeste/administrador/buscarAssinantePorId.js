@@ -10,7 +10,7 @@ const assinante = require('../../funcoes/assinante');
 it('CU-A 03 - o Admin deve buscar os dados do Assinante por Id', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias");
+    const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias", "2023-01-01 00:00:00");
 
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
 
@@ -33,7 +33,7 @@ it('CU-A 03 - o Admin deve buscar os dados do Assinante por Id', async () => {
 it('CU-A 03 - não encontra Assinante quando o Id não existe', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias");
+    const idPlano = await plano.cadastrarPlano(token, `Gratuito_${crypto.randomUUID()}`, 0, 15, "Experimente gratis por 15 dias", "2023-01-01 00:00:00");
 
     const idNutri = await nutricionista.cadastrarNutri(token, "ana", `ana_${crypto.randomUUID()}@fitapp.com`, "99999999", "BFUDbHJKd");
 

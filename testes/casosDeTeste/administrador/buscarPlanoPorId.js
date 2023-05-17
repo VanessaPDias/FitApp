@@ -8,7 +8,7 @@ it('CU-A 17 - deve ver os dados do Plano', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
     
     const nomePlano = `gratuito_${crypto.randomUUID()}`;
-    const idPlano = await plano.cadastrarPlano(token, nomePlano, 0, 15, "Experimente gratis por 15 dias");
+    const idPlano = await plano.cadastrarPlano(token, nomePlano, 0, 15, "Experimente gratis por 15 dias", "2023-01-01 00:00:00");
 
     await spec()
         .get(`${configuracoes.urlDaApi}/admin/planos/${idPlano}`)
@@ -26,7 +26,7 @@ it('CU-A 17 - não encontra plano quando o Id não existe', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
     
     const nomePlano = `gratuito_${crypto.randomUUID()}`;
-    const idPlano = await plano.cadastrarPlano(token, nomePlano, 0, 15, "Experimente gratis por 15 dias");
+    const idPlano = await plano.cadastrarPlano(token, nomePlano, 0, 15, "Experimente gratis por 15 dias", "2023-01-01 00:00:00");
 
     await spec()
         .get(`${configuracoes.urlDaApi}/admin/planos/${crypto.randomUUID()}`)

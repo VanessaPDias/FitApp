@@ -9,15 +9,15 @@ function enviar(para, assunto, texto) {
         html: texto        
     };
 
-    sendGrid
-    .send(mensagem)
-    .then(() => {}, error => {
-        console.error(error);
+    // sendGrid
+    // .send(mensagem)
+    // .then(() => {}, error => {
+    //     console.error(error);
 
-        if(error.response) {
-            console.error(error.response.body)
-        }
-    });
+    //     if(error.response) {
+    //         console.error(error.response.body)
+    //     }
+    // });
 }
 
 module.exports = {

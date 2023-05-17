@@ -7,30 +7,21 @@ const crypto = require('crypto');
 it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
+    const nome = `nutri_teste_${crypto.randomUUID()}`
     const email = `nutri_teste_${crypto.randomUUID()}@fitapp.com`
-    const idNutri = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, email, "99999999", "crm123");
+    const idNutri = await nutricionista.cadastrarNutri(token, nome, email, "99999999", "crm123");
 
     await spec()
         .get(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutri}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike(
             {
-                idNutri: idNutri,
+                "idNutri": idNutri,
             }
         )
         .expectStatus(200);
 
-    await spec()
-        .patch(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutri}`)
-        .withHeaders("Authorization", "Bearer " + token)
-        .withJson({
-            "nome": "Ana",
-            "email":email,
-            "telefone": "55 5555555",
-            "registroProfissional": "CRN 123",
-            "bloqueado": true
-        })
-        .expectStatus(200);
+    await nutricionista.alterarDadosDoNutricionista(token, idNutri, "Ana", email, "000000000", "CRN 123", false, 1);
 
     await spec()
         .get(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutri}`)
@@ -38,7 +29,7 @@ it('CU-A 08 - deve alterar os dados do Nutricionista', async () => {
         .expectJsonLike(
             {
                 idNutri: idNutri,
-                bloqueado: true
+                bloqueado: false
             }
         )
         .expectStatus(200);

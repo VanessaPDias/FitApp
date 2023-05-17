@@ -8,26 +8,20 @@ it('o sistema apresenta os Nutricionistas ativos', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
     const emailNutriBloqueado =  `nutri_teste_${crypto.randomUUID()}@fitapp.com`;
+    const emailNutriAtivo =  `nutri_teste_${crypto.randomUUID()}@fitapp.com`;
+    
     const idNutriBloqueado = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, emailNutriBloqueado, "99999999", "crn000");
-    const idNutriAtivo = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, `nutri_teste_${crypto.randomUUID()}@fitapp.com`, "555555555", "CRN 555");
+    const idNutriAtivo = await nutricionista.cadastrarNutri(token, `nutri_teste_${crypto.randomUUID()}`, emailNutriAtivo, "555555555", "CRN 555");
 
-    await spec()
-        .patch(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutriBloqueado}`)
-        .withHeaders("Authorization", "Bearer " + token)
-        .withJson({
-            "nome": "nutri_bloqueado",
-            "email": emailNutriBloqueado,
-            "telefone": "000000000",
-            "registroProfissional": "CRN 123",
-            "bloqueado": true
-        })
-        .expectStatus(200);
-
+    await nutricionista.alterarDadosDoNutricionista(token, idNutriBloqueado, "nutri_bloqueado", emailNutriBloqueado,"000000000", "CRN 123",  true, 1);
+    await nutricionista.alterarDadosDoNutricionista(token, idNutriAtivo, "nutri_Ativo", emailNutriBloqueado,"000000000", "CRN 123",  true, 1);
+    
     await spec()
         .get(`${configuracoes.urlDaApi}/nutricionistas`)
+        
         .expectJsonLike([
             {
-                idNutri: idNutriAtivo
+                "idNutri": idNutriAtivo
             }
         ])
         .expectStatus(200);

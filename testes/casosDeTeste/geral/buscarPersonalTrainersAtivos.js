@@ -7,28 +7,21 @@ const usuario = require('../../funcoes/usuario');
 it('o sistema apresenta os Personal Trainers ativos', async () => {
     const token = await usuario.gerarToken('admin@fitapp.com', 'admin123');
 
-    const emailPersonalBloqueado =  `nutri_Bloqueado_teste_${crypto.randomUUID()}@fitapp.com`;
+    const emailPersonalBloqueado =  `personal_teste_${crypto.randomUUID()}@fitapp.com`;
+    const emailPersonalAtivo =  `personal_teste_${crypto.randomUUID()}@fitapp.com`;
+    
     const idPersonalBloqueado = await personalTrainers.cadastrarPersonal(token, `personal_teste_${crypto.randomUUID()}`, emailPersonalBloqueado, "99999999", "crn000");
-    const idPersonalAtivo = await personalTrainers.cadastrarPersonal(token, `personal_teste_${crypto.randomUUID()}`, `personal_teste_${crypto.randomUUID()}@fitapp.com`, "555555555", "CRN 555");
+    const idPersonalAtivo = await personalTrainers.cadastrarPersonal(token, `personal_teste_${crypto.randomUUID()}`, emailPersonalAtivo, "555555555", "CRN 555");
 
-
-    await spec()
-        .patch(`${configuracoes.urlDaApi}/admin/personalTrainers/${idPersonalBloqueado}`)
-        .withHeaders("Authorization", "Bearer " + token)
-        .withJson({
-            "nome": "personal_bloqueado",
-            "email": emailPersonalBloqueado,
-            "telefone": "000000000",
-            "registroProfissional": "CRN 123",
-            "bloqueado": true
-        })
-        .expectStatus(200);
-
+    await personalTrainers.alterarDadosDoPersonal(token, idPersonalBloqueado, "personal_bloqueado", emailPersonalBloqueado,"000000000", "CRN 123",  true, 1);
+    await personalTrainers.alterarDadosDoPersonal(token, idPersonalAtivo, "personal_Ativo", emailPersonalBloqueado,"000000000", "CRN 123",  true, 1);
+    
     await spec()
         .get(`${configuracoes.urlDaApi}/personalTrainers`)
+        
         .expectJsonLike([
             {
-               idPersonal: idPersonalAtivo
+                "idPersonal": idPersonalAtivo
             }
         ])
         .expectStatus(200);

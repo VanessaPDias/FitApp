@@ -3,18 +3,32 @@ const configuracoes = require('../configuracoes');
 
 async function cadastrarNutri(token, nome, email, telefone, registroProfissional) {
     return await spec()
-        .post(`${configuracoes.urlDaApi}/admin/nutricionistas`)
+        .post(`${configuracoes.urlDaApi}/nutricionistas`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nome,
             "email": email,            
             "telefone": telefone,
-            "registroProfissional": registroProfissional
+            "registroProfissional": registroProfissional,
         })
         .returns("idNutri");
        
 }
 
+async function alterarDadosDoNutricionista(token, idNutri, nome, email, telefone, registroProfissional, bloqueado, cadastroConfirmado) {
+   await spec()
+        .patch(`${configuracoes.urlDaApi}/admin/nutricionistas/${idNutri}`)
+        .withHeaders("Authorization", "Bearer " + token)
+        .withJson({
+            "nome": nome,
+            "email": email,
+            "telefone": telefone,
+            "registroProfissional": registroProfissional,
+            "bloqueado": bloqueado,
+            "cadastroConfirmado": cadastroConfirmado
+        })
+        .expectStatus(200); 
+}
 
 
 
@@ -36,5 +50,6 @@ async function criarDieta(tokenNutri, idAssinante, nomeDieta, dataInicio, dataFi
 
 module.exports = {
     cadastrarNutri: cadastrarNutri,
+    alterarDadosDoNutricionista:alterarDadosDoNutricionista,
     criarDieta: criarDieta
 }

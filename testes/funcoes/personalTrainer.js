@@ -3,7 +3,7 @@ const configuracoes = require('../configuracoes');
 
 async function cadastrarPersonal(token, nome, email, telefone, registroProfissional) {
     return await spec()
-        .post(`${configuracoes.urlDaApi}/admin/personalTrainers`)
+        .post(`${configuracoes.urlDaApi}/personalTrainers`)
         .withHeaders("Authorization", "Bearer " + token)
         .withJson({
             "nome": nome,
@@ -15,7 +15,21 @@ async function cadastrarPersonal(token, nome, email, telefone, registroProfissio
        
 }
 
-
+async function alterarDadosDoPersonal(token, idPersonal, nome, email, telefone, registroProfissional, bloqueado, cadastroConfirmado) {
+    await spec()
+         .patch(`${configuracoes.urlDaApi}/admin/personalTrainers/${idPersonal}`)
+         .withHeaders("Authorization", "Bearer " + token)
+         .withJson({
+             "nome": nome,
+             "email": email,
+             "telefone": telefone,
+             "registroProfissional": registroProfissional,
+             "bloqueado": bloqueado,
+             "cadastroConfirmado": cadastroConfirmado
+         })
+         .expectStatus(200); 
+ }
+ 
 
 
 async function criarTreino(tokenPersonal, idAssinante, nomeTreino, dataInicio, dataFim, objetivo, exercicios) {
@@ -36,5 +50,6 @@ async function criarTreino(tokenPersonal, idAssinante, nomeTreino, dataInicio, d
 
 module.exports = {
     cadastrarPersonal: cadastrarPersonal,
+    alterarDadosDoPersonal: alterarDadosDoPersonal,
     criarTreino: criarTreino
 }

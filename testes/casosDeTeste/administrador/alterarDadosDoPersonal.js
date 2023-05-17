@@ -20,24 +20,16 @@ it('CU-A 13 - deve alterar dados do Personal', async () => {
         )
         .expectStatus(200);
 
-    await spec()
-        .patch(`${configuracoes.urlDaApi}/admin/personalTrainers/${idPersonal}`)
-        .withHeaders("Authorization", "Bearer " + token)
-        .withJson({
-            "nome": "Bruno",
-            "email": email,
-            "telefone": "55 555 55 55",
-            "registroProfissional": "CRN 123",
-            "bloqueado": true
-        })
-        .expectStatus(200);
+    await personal.alterarDadosDoPersonal(token, idPersonal, "João", email, "000000000", "CRN 123", false, 1);
+
 
     await spec()
         .get(`${configuracoes.urlDaApi}/admin/personalTrainers/${idPersonal}`)
         .withHeaders("Authorization", "Bearer " + token)
         .expectJsonLike(
             {
-                bloqueado: true
+                idPersonal: idPersonal,
+                bloqueado: false
             }
         )
         .expectStatus(200);
