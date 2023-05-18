@@ -1,33 +1,36 @@
-insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento)
 values(
 'idGratuito_teste',
 'gratuito_teste',
 0,
 15,
 'experimente por 15 dias.',
-false
+false,
+'2023-01-01 00:00:00'
 )
 ON DUPLICATE KEY UPDATE idPlano = 'idGratuito_teste';
 
-insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento)
 values(
 'idMensal_teste',
 'mensal_teste',
 100,
 30,
 'utilize por 30 dias.',
-false
+false,
+'2023-01-01 00:00:00'
 )
 ON DUPLICATE KEY UPDATE idPlano = 'idMensal_teste';
 
-insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado)
+insert into planos (idPlano, nome, valor, duracao, descricao, bloqueado, dataLancamento)
 values(
 'idAnual_teste',
 'anual_teste',
 250,
 365,
 'utilize por 365 dias.',
-false
+false,
+'2023-01-01 00:00:00'
 ) ON DUPLICATE KEY UPDATE idPlano = 'idAnual_teste';
 
 insert into usuarios (idUsuario, perfil, nome, login, senha, bloqueado)
@@ -80,49 +83,54 @@ values (
 false
 ) ON DUPLICATE KEY UPDATE idUsuario = 'idAssinanteAssinatura_teste';
 
-insert into nutricionistas (idNutri, nome, email, telefone, registroProfissional)
+insert into nutricionistas (idNutri, nome, email, telefone, registroProfissional, cadastroConfirmado)
 values (
 'idNutri_teste',
 'nutricionista_teste',
 'nutri_teste@fitapp.com',
 999999999,
-'crn123'
+'crn123',
+'1'
 ) ON DUPLICATE KEY UPDATE idNutri = 'idNutri_teste';
 
-insert into personal_trainers (idPersonal, nome, email, telefone, registroProfissional)
+insert into personal_trainers (idPersonal, nome, email, telefone, registroProfissional, cadastroConfirmado)
 values (
 'idPersonal_teste',
 'personal_teste',
 'personal_teste@fitapp.com',
 999999999,
-'cre123'
+'cre123',
+'1'
 ) ON DUPLICATE KEY UPDATE idPersonal = 'idPersonal_teste';
 
-insert into assinantes (idAssinante, idNutri, idPersonal, nome, email)
+insert into assinantes (idAssinante, idNutri, idPersonal, nome, email, altura)
 values (
 'idAssinante_teste',
 'idNutri_teste',
 'idPersonal_teste',
 'assinante_teste',
-'assinante_teste@fitapp.com'
+'assinante_teste@fitapp.com',
+'0'
 ) ON DUPLICATE KEY UPDATE idAssinante = 'idAssinante_teste';
 
-insert into assinantes (idAssinante, idNutri, idPersonal, nome, email)
+insert into assinantes (idAssinante, idNutri, idPersonal, nome, email, altura)
 values (
 'idAssinanteBloqueado_teste',
 'idNutri_teste',
 'idPersonal_teste',
 'assinanteBloqueado_teste',
-'assinantebloqueado_teste@fitapp.com'
+'assinantebloqueado_teste@fitapp.com',
+'0'
 ) ON DUPLICATE KEY UPDATE idAssinante = 'idAssinanteBloqueado_teste';
 
-insert into assinantes (idAssinante, idNutri, idPersonal, nome, email)
+insert into assinantes (idAssinante, idNutri, idPersonal, nome, email, altura)
 values (
 'idAssinanteAssinatura_teste',
 'idNutri_teste',
 'idPersonal_teste',
 'assinante_teste',
-'assinanteassinatura_teste@fitapp.com'
+'assinanteassinatura_teste@fitapp.com',
+'0'
 )ON DUPLICATE KEY UPDATE idAssinante = 'idAssinanteAssinatura_teste';
 
 insert into assinaturas (idAssinatura, idAssinante, idPlano, dataInicio, dataFim, bloqueado)

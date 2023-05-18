@@ -58,8 +58,8 @@ async function buscarPersonalTrainers() {
 
                 document.querySelector("#lista-personal-trainers").innerHTML = document.querySelector("#lista-personal-trainers").innerHTML +
                     `<tr>
-                        <td data-label="Nome">${personalTrainer.nome}</td>
-                        <td data-label="Email">${personalTrainer.email}</td>
+                        <td class="text-break" data-label="Nome">${personalTrainer.nome}</td>
+                        <td class="text-break" data-label="Email">${personalTrainer.email}</td>
                         <td data-label="Cadstro">${cadastroConfirmado}</td>
                         <td data-label="Status">${status}</td>
                         <td data-label="Ver"><a href="../dadosDoPersonal/dadosDoPersonal.html?idPersonal=${personalTrainer.idPersonal}#personalTrainers" class="text-decoration-none link-dark"><i class="bi bi-eye fs-4 me-2"></i></a></td>

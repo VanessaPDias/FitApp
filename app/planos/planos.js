@@ -47,7 +47,7 @@ async function buscarPlanos() {
 
                 document.querySelector("#lista-planos").innerHTML = document.querySelector("#lista-planos").innerHTML +
                     `<tr>
-                        <td data-label="Nome">${plano.nome}</td>
+                        <td class="text-break" data-label="Nome">${plano.nome}</td>
                         <td data-label="Valor">${plano.valor}</td>
                         <td data-label="Duração">${plano.duracao}</td>
                         <td data-label="Status">${status}</td>

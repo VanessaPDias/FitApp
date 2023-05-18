@@ -217,13 +217,11 @@ a:hover {
     --bs-nav-link-hover-color: #000;
 }
 
-#texto-sobre-mim {
-    height: 6.5rem;
-}
+
 
 @media only screen and (max-width: 760px) {
     .container-tab {
-        max-height: 24rem;
+        max-height: 31rem;
         overflow-y: scroll;
     }
 
@@ -255,12 +253,12 @@ a:hover {
     }
 
     #card-body-lista-assinantes {
-        max-height: 20rem;
+        max-height: 34rem;
         overflow-y: scroll;
     }
 
     #card-body-lista-planos {
-        max-height: 24rem;
+        max-height: 34rem;
         overflow-y: scroll;
     }
 
@@ -297,7 +295,7 @@ a:hover {
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 990px) {
     .container-tab {
-        max-height: 11rem;
+        max-height: 12rem;
         overflow-y: scroll;
     }
 
@@ -307,7 +305,7 @@ a:hover {
     }
 
     #card-body-lista-planos {
-        max-height: 11rem;
+        max-height: 12rem;
         overflow-y: scroll;
     }
 
@@ -338,9 +336,19 @@ a:hover {
    
 }
 
-@media only screen and (min-device-width: 992px) and (max-device-width: 1400px) {
+@media only screen and (min-device-width: 992px) {
     .container-tab {
-        max-height: 12rem;
+        max-height: 16rem;
+        overflow-y: scroll;
+    }
+
+    #card-body-lista-assinantes {
+        max-height: 16rem;
+        overflow-y: scroll;
+    }
+
+    #card-body-lista-planos {
+        max-height: 16rem;
         overflow-y: scroll;
     }
 
@@ -367,3 +375,4 @@ a:hover {
 
     
 }
+
