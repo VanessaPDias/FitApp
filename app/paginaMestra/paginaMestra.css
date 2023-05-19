@@ -373,6 +373,10 @@ a:hover {
         overflow-y: scroll;
     }
 
+    #texto-sobre-mim {
+        height: 8rem;
+    }
+
     
 }
 
