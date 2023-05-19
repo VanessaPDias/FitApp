@@ -21,6 +21,12 @@ function autenticar (req, res, next) {
         return;
     }
 
+    if (req.url == "/loginGoogle") {
+        next();
+        return;
+    }
+
+
     if(req.url == "/assinantes" && req.method == "POST") {
         next();
         return;

@@ -21,3 +21,23 @@ export async function fazerLogin(email, senha) {
 
     return util.tratarRespostaApi(resposta);
 }
+
+export async function fazerLoginGoogle(tokenGoogle) {
+    const url = `${configuracoes.urlDaApi}/loginGoogle`;
+
+    const request = new Request(url, {
+        method: 'POST',
+        body: JSON.stringify(
+            {
+                tokenGoogle: tokenGoogle
+            }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+
+    });
+
+    const resposta = await fetch(request);
+
+    return util.tratarRespostaApi(resposta);
+}

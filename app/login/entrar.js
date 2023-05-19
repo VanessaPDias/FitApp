@@ -9,6 +9,7 @@ window.onload = aoCarregarPagina;
 async function aoCarregarPagina() {
     await paginaMestraSite.carregar("login/entrar-conteudo.html", "Entrar");
     document.querySelector("#btn-fazerLogin").onclick = entrar;
+    document.querySelector("#btn-login-google").onclick = entrarComGoogle;
     mensagens.exibirMensagemAoCarregarAPagina();
 }
 
@@ -26,23 +27,51 @@ async function entrar(evento) {
     try {
         const resposta = await servicos.fazerLogin(email, senha);
         seguranca.gravarToken(resposta.token);
-        
+
         const usuario = seguranca.pegarUsuarioDoToken(resposta.token);
 
-        if(usuario.perfil == "assinante") {
-           window.location.href = "../dashboard/dashboard.html#inicio" 
+        if (usuario.perfil == "assinante") {
+            window.location.href = "../dashboard/dashboard.html#inicio"
         }
-        if(usuario.perfil == "administrador") {
-           window.location.href = "../assinantes/assinantes.html#assinantes" 
+        if (usuario.perfil == "administrador") {
+            window.location.href = "../assinantes/assinantes.html#assinantes"
         }
-        if(usuario.perfil == "nutricionista") {
-           window.location.href = "../pacientes/pacientes.html#pacientes" 
+        if (usuario.perfil == "nutricionista") {
+            window.location.href = "../pacientes/pacientes.html#pacientes"
         }
-        if(usuario.perfil == "personalTrainer") {
-           window.location.href = "../alunos/alunos.html#alunos" 
+        if (usuario.perfil == "personalTrainer") {
+            window.location.href = "../alunos/alunos.html#alunos"
         }
 
     } catch (error) {
         erros.tratarErro(error);
     }
+}
+
+function entrarComGoogle() {
+    var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+    var form = document.createElement('form');
+    form.setAttribute('method', 'GET');
+    form.setAttribute('action', oauth2Endpoint);
+
+    var params = {
+        'client_id': '228294881734-t18ukuse4ea3k9tm88ck7sb286kbs0h8.apps.googleusercontent.com',
+        'redirect_uri': 'http://localhost:5500/login/entrarGoogle.html',
+        'response_type': 'token',
+        'scope': 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/userinfo.email',
+        'include_granted_scopes': 'true',
+        'state': 'sample'
+    };
+
+    for (var p in params) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', p);
+        input.setAttribute('value', params[p]);
+        form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
 }
