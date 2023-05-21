@@ -57,7 +57,7 @@ function entrarComGoogle() {
 
     var params = {
         'client_id': '228294881734-t18ukuse4ea3k9tm88ck7sb286kbs0h8.apps.googleusercontent.com',
-        'redirect_uri': 'http://localhost:5500/login/entrarGoogle.html',
+        'redirect_uri': 'https://green-bay-0aa81ec03.2.azurestaticapps.net/login/entrarGoogle.html',
         'response_type': 'token',
         'scope': 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/userinfo.email',
         'include_granted_scopes': 'true',
